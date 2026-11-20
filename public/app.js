@@ -31,6 +31,7 @@ const state = {
   selectedColabId: 1,
   editPlanillaId: 1,
   planillaFilter: { search: '', filter: '' },
+  editDniAttachment: null, // { name, base64 }
   dniAttachment: null, // { name, base64 }
   filters: {
     search: '',
@@ -2493,6 +2494,34 @@ window.loadPlanillaForm = function (id) {
   const resBox = document.getElementById('edit-planilla-result-box');
   if (resBox) resBox.style.display = 'none';
 
+  // Actualizar estado del botón Subir / Actualizar PDF o Foto de DNI
+  state.editDniAttachment = null;
+  const editDniInput = document.getElementById('edit-dni-file-input');
+  if (editDniInput) editDniInput.value = '';
+  const editDniNew = document.getElementById('edit-dni-new-status');
+  if (editDniNew) { editDniNew.style.display = 'none'; editDniNew.textContent = ''; }
+
+  const fotoDni = c.documentos?.fotoDni || null;
+  const dniStatusEl = document.getElementById('edit-dni-current-status');
+  const dniVerBtn = document.getElementById('btn-edit-dni-ver-actual');
+  const dniUploadLabel = document.getElementById('btn-edit-dni-upload-label');
+
+  if (fotoDni && (fotoDni.fileName || fotoDni.driveUrl || fotoDni.localUrl)) {
+    const dniUrl = relDocUrl(fotoDni.localUrl, `/api/docs/dni/${c.id}`, fotoDni.driveUrl);
+    if (dniStatusEl) {
+      dniStatusEl.innerHTML = `Archivo actual: <strong>${escapeHtml(fotoDni.originalName || fotoDni.fileName || 'DNI en Drive')}</strong>`;
+    }
+    if (dniVerBtn) {
+      dniVerBtn.href = dniUrl;
+      dniVerBtn.style.display = 'inline-flex';
+    }
+    if (dniUploadLabel) dniUploadLabel.textContent = 'ACTUALIZAR FOTO / PDF DE DNI';
+  } else {
+    if (dniStatusEl) dniStatusEl.textContent = 'Sin foto o PDF de DNI cargado aún.';
+    if (dniVerBtn) dniVerBtn.style.display = 'none';
+    if (dniUploadLabel) dniUploadLabel.textContent = 'SUBIR PDF / FOTO DE DNI';
+  }
+
   document.querySelectorAll('.planilla-emp-item').forEach(btn => {
     const active = Number(btn.getAttribute('data-emp-id')) === c.id;
     btn.classList.toggle('is-selected', active);
@@ -2570,6 +2599,33 @@ function initPlanillaEditor() {
     loadPlanillaForm(state.editPlanillaId);
   });
 
+  // Manejo de archivo PDF / Foto de DNI dentro del modal de edición de planilla
+  const editDniInput = document.getElementById('edit-dni-file-input');
+  const editDniDropzone = document.getElementById('edit-dni-dropzone');
+  const editDniNewStatus = document.getElementById('edit-dni-new-status');
+
+  function handleEditDniFile(file) {
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      state.editDniAttachment = { name: file.name, base64: reader.result };
+      if (editDniNewStatus) {
+        editDniNewStatus.style.display = 'block';
+        editDniNewStatus.innerHTML = `<strong>Nuevo archivo listo para subir a Drive y Sheets:</strong> ${escapeHtml(file.name)} (${Math.round(file.size / 1024)} KB)`;
+      }
+    };
+    reader.readAsDataURL(file);
+  }
+
+  editDniInput?.addEventListener('change', e => handleEditDniFile(e.target.files[0]));
+  editDniDropzone?.addEventListener('dragover', e => { e.preventDefault(); editDniDropzone.classList.add('is-dragover'); });
+  editDniDropzone?.addEventListener('dragleave', () => editDniDropzone.classList.remove('is-dragover'));
+  editDniDropzone?.addEventListener('drop', e => {
+    e.preventDefault();
+    editDniDropzone.classList.remove('is-dragover');
+    if (e.dataTransfer.files[0]) handleEditDniFile(e.dataTransfer.files[0]);
+  });
+
   document.getElementById('btn-edit-ver-boveda')?.addEventListener('click', () => {
     const dlg = document.getElementById('planilla-edit-dialog');
     if (dlg && dlg.open) dlg.close();
@@ -2610,6 +2666,10 @@ function initPlanillaEditor() {
 
     const fd = new FormData(form);
     const payload = Object.fromEntries(fd.entries());
+    if (state.editDniAttachment) {
+      payload.fotoDniBase64 = state.editDniAttachment.base64;
+      payload.fotoDniName = state.editDniAttachment.name;
+    }
 
     try {
       const res = await fetch(apiUrl('/api/personal/actualizar'), {
@@ -2638,6 +2698,7 @@ function initPlanillaEditor() {
           <li>Condición Laboral: <strong>${escapeHtml(c.condicionLaboral)}</strong> • Estado: <strong>${escapeHtml(c.estado)}</strong> • Sueldo: <strong>${formatMoney(c.remuneracionActual)}</strong></li>
           <li>Google Sheet Maestro (1_PADRON_GENERAL): <strong>${sync.masterSynced ? `FILA ${sync.masterRow} ACTUALIZADA EN VIVO` : 'Guardado local'}</strong></li>
           <li>Google Sheet Histórico (Respuestas de formulario 1): <strong>${sync.historicalSynced ? `FILA ${sync.historicalRow} ACTUALIZADA EN VIVO` : 'Sin fila previa / local'}</strong></li>
+          ${data.dniUpdated ? `<li>Foto / PDF de DNI: <strong>ACTUALIZADO Y SUBIDO A DRIVE (${escapeHtml(c.documentos?.fotoDni?.fileName || 'OK')})</strong></li>` : ''}
           ${sync.errors?.length ? `<li style="color:#F59E0B;">Aviso Sync: ${escapeHtml(sync.errors.join(' | '))}</li>` : ''}
         </ul>
         <div style="display:flex; gap:8px; flex-wrap:wrap;">

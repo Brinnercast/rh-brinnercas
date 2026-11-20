@@ -1947,6 +1947,49 @@
         }
       },
       "condicionLaboral": "CONTRATO"
+    },
+    {
+      "id": 29,
+      "nombre": "CAMPOS TERRONES ALEJANDRA JEANNETT",
+      "dni": "73985615",
+      "tipoDocumento": "DNI",
+      "carpetaAdendas": "CAMPOS TERRONES",
+      "area": "Cocina",
+      "cargoContrato": "LANZADOR",
+      "cargoActual": "LANZADOR",
+      "condicionLaborable": "FULL TIME",
+      "condicionLaboral": "CONTRATO",
+      "domicilio": "Av. Floral 446 INT. 303D Urb. San Luis de California. Trujillo/Victor Larco H./La Libertad.",
+      "fechaNacimiento": "08/12/2001",
+      "edad": "",
+      "celular": "954138630",
+      "correo": "",
+      "banco": "BCP",
+      "numeroCuenta": "",
+      "carnetSanitario": "NO",
+      "contratoBase": {
+        "inicio": "01/11/2026",
+        "fin": "31/01/2027",
+        "remuneracion": 1600
+      },
+      "adendas": [],
+      "estado": "ACTIVO",
+      "remuneracionActual": 1600,
+      "vigenciaActualHasta": "31/01/2027",
+      "proximaAdenda": "1RA ADENDA",
+      "observaciones": "Ingreso registrado vía RH BRINNERCAS el 20/11/2026",
+      "documentos": {
+        "contrato": {
+          "fileName": "GRUPO GASTRONOMICO AURORA SAC - CONTRATO - CAMPOS TERRONES ALEJANDRA JEANNETT - 261101 - 270131 - 03.docx",
+          "localUrl": "/docs/contratos/GRUPO%20GASTRONOMICO%20AURORA%20SAC%20-%20CONTRATO%20-%20CAMPOS%20TERRONES%20ALEJANDRA%20JEANNETT%20-%20261101%20-%20270131%20-%2003.docx",
+          "driveId": "1C7b0gZTJpX8RRI-vzgu2HYSAv8PK0BTf",
+          "driveUrl": "https://drive.google.com/file/d/1C7b0gZTJpX8RRI-vzgu2HYSAv8PK0BTf/view"
+        },
+        "adendas": [],
+        "memorandums": [],
+        "liquidacion": null,
+        "fotoDni": null
+      }
     }
   ]
 }

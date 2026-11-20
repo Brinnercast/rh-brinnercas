@@ -5,3 +5,4 @@ cd /d "%~dp0"
 node "%~dp0publicar_cambios.js"
 echo.
 pause
+

@@ -362,7 +362,37 @@ async function actualizarPersonalExistente(idOrPayload, maybePayload) {
   colab.carnetSanitario = String(payload.carnetSanitario ?? colab.carnetSanitario ?? 'NO').trim();
   colab.observaciones = String(payload.observaciones ?? colab.observaciones ?? '').trim();
 
-  // Guardar Padrón local + skill + data-bundle.js
+  // Si se adjuntó nueva Foto o PDF de DNI al editar, guardarla localmente y subirla a Google Drive
+  let dniUpdated = false;
+  if (payload.fotoDniBase64 && payload.fotoDniName) {
+    try {
+      const base64Body = payload.fotoDniBase64.includes('base64,')
+        ? payload.fotoDniBase64.split('base64,')[1]
+        : payload.fotoDniBase64;
+      const ext = path.extname(payload.fotoDniName) || '.pdf';
+      const localDniName = `DNI_${newDni}_${newNombre.replace(/[^A-Z0-9]/g, '_')}${ext}`;
+      const localDniPath = path.join(DOCS_DIR, 'dni', localDniName);
+      fs.writeFileSync(localDniPath, Buffer.from(base64Body, 'base64'));
+
+      let driveDni = null;
+      if (manifest?.drive?.subfolders?.fotosDni?.id) {
+        driveDni = runCliSafe('gdrive', ['mutate', 'upload', localDniPath, '--parent', manifest.drive.subfolders.fotosDni.id, '--json']);
+      }
+      colab.documentos = colab.documentos || { contrato: null, adendas: [], memorandums: [], liquidacion: null, fotoDni: null };
+      colab.documentos.fotoDni = {
+        fileName: localDniName,
+        originalName: payload.fotoDniName,
+        localUrl: `/docs/dni/${encodeURIComponent(localDniName)}`,
+        driveId: driveDni?.id || colab.documentos.fotoDni?.driveId || null,
+        driveUrl: driveDni?.id ? `https://drive.google.com/file/d/${driveDni.id}/view` : (colab.documentos.fotoDni?.driveUrl || null)
+      };
+      dniUpdated = true;
+    } catch (e) {
+      console.warn('[WARN] Error subiendo/actualizando DNI en Drive:', e.message);
+    }
+  }
+
+  // Guardar Padrón local + skill
   padron.colaboradores[idx] = colab;
   guardarPadron(padron);
 
@@ -480,6 +510,7 @@ async function actualizarPersonalExistente(idOrPayload, maybePayload) {
 
   return {
     colaborador: colab,
+    dniUpdated,
     sheetSyncResult,
     masterSheetUrl: manifest?.sheets?.masterSheetUrl || `https://docs.google.com/spreadsheets/d/${masterId}/edit`,
     historicalSheetUrl: manifest?.sheets?.historicalSheetUrl || `https://docs.google.com/spreadsheets/d/${histId}/edit`

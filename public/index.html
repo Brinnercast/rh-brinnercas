@@ -1566,6 +1566,26 @@
           <textarea id="edit-obs" name="observaciones" rows="2" class="glass-textarea"></textarea>
         </div>
 
+        <!-- SUBIR O ACTUALIZAR PDF / FOTO DE DNI EN EDICIÓN DE PLANILLA -->
+        <div id="edit-dni-dropzone" class="dni-dropzone" style="margin-top:18px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;">
+            <div style="text-align:left;">
+              <strong id="edit-dni-heading" style="display:block; font-size:0.86rem; color:var(--hs-text-primary);">PDF / FOTO DE DNI DEL COLABORADOR</strong>
+              <span id="edit-dni-current-status" style="font-size:0.78rem; color:var(--hs-text-secondary);">Verificando archivo actual...</span>
+            </div>
+            <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
+              <a id="btn-edit-dni-ver-actual" href="#" target="_blank" rel="noopener" class="bw-btn-sm is-gold" style="display:none;">
+                VER FOTO / PDF ACTUAL
+              </a>
+              <label for="edit-dni-file-input" id="btn-edit-dni-upload-label" class="bw-btn-sm is-primary" style="cursor:pointer;">
+                SUBIR PDF / FOTO DE DNI
+              </label>
+              <input id="edit-dni-file-input" type="file" accept=".pdf,.jpg,.jpeg,.png,.webp" hidden />
+            </div>
+          </div>
+          <p id="edit-dni-new-status" style="margin-top:8px; font-size:0.78rem; color:var(--emerald-ok); display:none; text-align:left;"></p>
+        </div>
+
         <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:22px; align-items:center;">
           <div class="bw-scope" style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
             <button type="submit" id="btn-submit-editar-planilla" class="bw-btn bw-btn-4">
@@ -1590,7 +1610,7 @@
 
   <script src="assets/the-handsome/the-handsome-icons.js"></script>
   <script src="assets/button-web/button-web-icons.js"></script>
-  <script src="data-bundle.js?v=20261119f"></script>
-  <script src="app.js?v=20261119f"></script>
+  <script src="data-bundle.js?v=20261120a"></script>
+  <script src="app.js?v=20261120a"></script>
 </body>
 </html>

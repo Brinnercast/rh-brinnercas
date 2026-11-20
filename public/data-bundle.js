@@ -75,14 +75,14 @@ window.RH_EMBEDDED_DATA = {
       }
     },
     "resumen": {
-      "totalColaboradores": 28,
-      "activosCount": 10,
+      "totalColaboradores": 29,
+      "activosCount": 11,
       "cesadosCount": 13,
       "rxhApoyoCount": 5,
-      "totalNominaActiva": 20300,
+      "totalNominaActiva": 21900,
       "masaInicialFeb": 40880,
-      "ahorroMensual": 20580,
-      "porcentajeOptimizacion": 50.3,
+      "ahorroMensual": 18980,
+      "porcentajeOptimizacion": 46.4,
       "porArea": {
         "Administración": {
           "count": 1,
@@ -130,15 +130,16 @@ window.RH_EMBEDDED_DATA = {
           ]
         },
         "Cocina": {
-          "count": 1,
-          "total": 3500,
+          "count": 2,
+          "total": 5100,
           "colaboradores": [
-            "GUZMAN RODRIGUEZ GARY JOSIMAR"
+            "GUZMAN RODRIGUEZ GARY JOSIMAR",
+            "CAMPOS TERRONES ALEJANDRA JEANNETT"
           ]
         }
       },
       "porCondicionLaboral": {
-        "CONTRATO": 23,
+        "CONTRATO": 24,
         "RXH": 3,
         "OTROS": 2
       }
@@ -2119,6 +2120,49 @@ window.RH_EMBEDDED_DATA = {
             "driveUrl": "https://drive.google.com/file/d/1fRRjGAtamy14X06IecRLjhUEFMVXzDB1/view",
             "isImage": false
           }
+        }
+      },
+      {
+        "id": 29,
+        "nombre": "CAMPOS TERRONES ALEJANDRA JEANNETT",
+        "dni": "73985615",
+        "area": "Cocina",
+        "cargo": "LANZADOR",
+        "cargoContrato": "LANZADOR",
+        "condicionLaborable": "FULL TIME",
+        "condicionLaboral": "CONTRATO",
+        "sueldo": 1600,
+        "estado": "ACTIVO",
+        "estadoTexto": "Contrato Vigente",
+        "semaforo": "verde",
+        "fechaIngreso": "01/11/2026",
+        "finContratoBase": "31/01/2027",
+        "vigenciaHasta": "31/01/2027",
+        "fechaCese": null,
+        "modalidadCese": null,
+        "tiempoServicio": null,
+        "domicilio": "Av. Floral 446 INT. 303D Urb. San Luis de California. Trujillo/Victor Larco H./La Libertad.",
+        "celular": "954138630",
+        "correo": "No registrado",
+        "banco": "BCP",
+        "numeroCuenta": "No registrado",
+        "fechaNacimiento": "08/12/2001",
+        "edad": "N/A",
+        "carnetSanitario": "NO",
+        "adendas": [],
+        "proximaAdenda": "1RA ADENDA",
+        "observaciones": "Ingreso registrado vía RH BRINNERCAS el 20/11/2026",
+        "documentos": {
+          "contrato": {
+            "fileName": "GRUPO GASTRONOMICO AURORA SAC - CONTRATO - CAMPOS TERRONES ALEJANDRA JEANNETT - 261101 - 270131 - 03.docx",
+            "localUrl": "/docs/contratos/GRUPO%20GASTRONOMICO%20AURORA%20SAC%20-%20CONTRATO%20-%20CAMPOS%20TERRONES%20ALEJANDRA%20JEANNETT%20-%20261101%20-%20270131%20-%2003.docx",
+            "driveId": "1C7b0gZTJpX8RRI-vzgu2HYSAv8PK0BTf",
+            "driveUrl": "https://drive.google.com/file/d/1C7b0gZTJpX8RRI-vzgu2HYSAv8PK0BTf/view"
+          },
+          "adendas": [],
+          "memorandums": [],
+          "liquidacion": null,
+          "fotoDni": null
         }
       }
     ]
