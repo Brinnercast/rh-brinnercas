@@ -1,0 +1,833 @@
+/* ==========================================================================
+   BUTTON WEB UI KIT — Official Tokens & Interactive Component Library
+   Source PSD: _web_elements_psd__by_digitalconnection_d8wqkqf (2470x2108, 324 Layers)
+   Agent / Skill: button-web
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap');
+
+:root {
+  /* 1. OFFICIAL PSD COLOR PALETTE (324-Layer Exact Extraction) */
+  --bw-bg-canvas: #333333;
+  --bw-surface-dark: #3D3D3E;
+  --bw-surface-box: #434343;
+  --bw-surface-disabled: #39393A;
+  --bw-surface-slate: #515356;
+  --bw-surface-switch-off: #3C3C3D;
+
+  /* Primary Accent Orange */
+  --bw-orange: #FF6008;
+  --bw-orange-alt: #E95808;
+  --bw-orange-border: #BF4B0A;
+  --bw-orange-error-border: #A93D02;
+
+  /* Validation & Status Greens */
+  --bw-green-text: #81AC03;
+  --bw-green-border: #55642A;
+
+  /* Neutrals, Borders & Text */
+  --bw-white: #FFFFFF;
+  --bw-white-hover: #DDDDDD;
+  --bw-border-subtle: #454545;
+  --bw-border-input: #3B3A3A;
+  --bw-border-hover: #7C7C7C;
+  --bw-border-active-pill: #9D9D9D;
+  --bw-text-muted: #767676;
+  --bw-text-dim: #848484;
+  --bw-text-disabled: #666666;
+
+  /* 2. TYPOGRAPHY (Lato Bold System from PSD EngineData) */
+  --bw-font: 'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* 3. GEOMETRY & RADII */
+  --bw-radius-pill: 9999px;
+  --bw-radius-box: 0px;
+  --bw-radius-sm: 4px;
+  --bw-radius-tab: 8px;
+  --bw-transition: all 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Base Reset for Button Web Components */
+.bw-scope, .bw-scope *, .bw-scope *::before, .bw-scope *::after {
+  box-sizing: border-box;
+  font-family: var(--bw-font);
+  -webkit-font-smoothing: antialiased;
+}
+
+.bw-icon, [data-bw-icon] svg {
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   SECTION 1: PRIMARY PILL BUTTONS (4 Families + Hover States)
+   PSD Reference: Groups BUTTONS -> 1, 2, 3, 4 (502x102px -> scaled 1:2 to 250x52px)
+   ========================================================================== */
+.bw-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-width: 220px;
+  height: 52px;
+  padding: 0 32px;
+  border-radius: var(--bw-radius-pill);
+  font-family: var(--bw-font);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: var(--bw-transition);
+  user-select: none;
+  outline: none;
+}
+
+/* Size Modifiers */
+.bw-btn-sm { min-width: 140px; height: 40px; padding: 0 22px; font-size: 11.5px; }
+.bw-btn-lg { min-width: 250px; height: 56px; padding: 0 38px; font-size: 14px; }
+
+/* Variant 1: Dark Charcoal Ghost Pill (#333333 fill, #454545 border -> #7C7C7C hover) */
+.bw-btn-1, .bw-btn-dark-outline {
+  background: var(--bw-bg-canvas);
+  border: 2px solid var(--bw-border-subtle);
+  color: var(--bw-white);
+}
+.bw-btn-1:hover, .bw-btn-dark-outline:hover, .bw-btn-1.is-hover {
+  border-color: var(--bw-border-hover);
+  color: var(--bw-white);
+}
+
+/* Variant 2: Orange Outline Pill -> Solid Orange Hover */
+.bw-btn-2, .bw-btn-orange-outline {
+  background: var(--bw-bg-canvas);
+  border: 2px solid var(--bw-orange-border);
+  color: var(--bw-orange-alt);
+}
+.bw-btn-2:hover, .bw-btn-orange-outline:hover, .bw-btn-2.is-hover {
+  background: var(--bw-orange);
+  border-color: var(--bw-orange);
+  color: var(--bw-white);
+}
+
+/* Variant 3: Pure White Pill -> Soft Silver Hover (#FFFFFF -> #DDDDDD) */
+.bw-btn-3, .bw-btn-white {
+  background: var(--bw-white);
+  border: 2px solid var(--bw-white);
+  color: var(--bw-bg-canvas);
+}
+.bw-btn-3:hover, .bw-btn-white:hover, .bw-btn-3.is-hover {
+  background: var(--bw-white-hover);
+  border-color: var(--bw-white-hover);
+  color: var(--bw-bg-canvas);
+}
+
+/* Variant 4: Solid Orange Pill -> Orange Outline Hover (#FF6008 -> #333333 + #BF4B0A) */
+.bw-btn-4, .bw-btn-orange {
+  background: var(--bw-orange);
+  border: 2px solid var(--bw-orange);
+  color: var(--bw-white);
+}
+.bw-btn-4:hover, .bw-btn-orange:hover, .bw-btn-4.is-hover {
+  background: var(--bw-bg-canvas);
+  border-color: var(--bw-orange-border);
+  color: var(--bw-orange-alt);
+}
+
+/* ==========================================================================
+   SECTION 2: STATUS & VALIDATION INPUT/ALERT BOXES
+   PSD Reference: Groups ACTIVE, SUCCESS, ERROR, DISABLED (494x96px)
+   ========================================================================== */
+.bw-status-box {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 220px;
+  height: 50px;
+  padding: 0 22px;
+  border-radius: var(--bw-radius-box);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  background: var(--bw-surface-box);
+  border: 1.5px solid transparent;
+  color: var(--bw-white);
+  transition: var(--bw-transition);
+}
+.bw-status-active {
+  background: var(--bw-surface-box);
+  border-color: var(--bw-surface-box);
+  color: var(--bw-white);
+}
+.bw-status-success {
+  background: var(--bw-surface-box);
+  border-color: var(--bw-green-border);
+  color: var(--bw-green-text);
+}
+.bw-status-error {
+  background: var(--bw-surface-box);
+  border-color: var(--bw-orange-error-border);
+  color: var(--bw-orange-alt);
+}
+.bw-status-disabled {
+  background: var(--bw-surface-disabled);
+  border-color: var(--bw-surface-disabled);
+  color: var(--bw-text-muted);
+  cursor: not-allowed;
+}
+
+/* ==========================================================================
+   SECTION 3: COMPOSITE PILL INPUTS WITH ACTION BUTTON
+   PSD Reference: Groups SEARCH (idx:278) & BUTTON (idx:272) (1034x104px)
+   ========================================================================== */
+.bw-combo-pill {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 54px;
+  border-radius: var(--bw-radius-pill);
+  border: 1.5px solid var(--bw-border-subtle);
+  background: var(--bw-bg-canvas);
+  padding-left: 22px;
+  overflow: hidden;
+  transition: var(--bw-transition);
+}
+.bw-combo-pill:focus-within {
+  border-color: var(--bw-border-hover);
+}
+.bw-combo-pill .bw-combo-icon {
+  color: var(--bw-text-muted);
+  margin-right: 12px;
+  display: flex;
+  align-items: center;
+}
+.bw-combo-pill input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--bw-white);
+  font-family: var(--bw-font);
+  font-size: 14px;
+  font-weight: 700;
+}
+.bw-combo-pill input::placeholder {
+  color: var(--bw-text-muted);
+}
+.bw-combo-pill .bw-combo-btn {
+  height: calc(100% + 2px);
+  margin-right: -1px;
+  padding: 0 38px;
+  border-radius: var(--bw-radius-pill);
+  border: none;
+  background: var(--bw-orange);
+  color: var(--bw-white);
+  font-family: var(--bw-font);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: var(--bw-transition);
+}
+.bw-combo-pill .bw-combo-btn:hover {
+  background: var(--bw-orange-alt);
+}
+
+/* ==========================================================================
+   SECTION 4: SELECT BOX, PILL INPUTS, NUMBER SPINNER & HELP
+   PSD Reference: Groups BOX, SEARCH, BUTTON, X, BOX1, ?
+   ========================================================================== */
+.bw-select-box {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 220px;
+  height: 52px;
+  padding: 0 20px;
+  background: var(--bw-surface-box);
+  color: var(--bw-text-muted);
+  font-size: 13.5px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.bw-select-box select {
+  appearance: none;
+  background: transparent;
+  border: none;
+  color: var(--bw-white);
+  font-family: var(--bw-font);
+  font-size: 13.5px;
+  font-weight: 700;
+  width: 100%;
+  outline: none;
+  cursor: pointer;
+}
+
+.bw-pill-input {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 220px;
+  height: 52px;
+  padding: 0 22px;
+  border-radius: var(--bw-radius-pill);
+  border: 1.5px solid var(--bw-border-subtle);
+  background: var(--bw-bg-canvas);
+  color: var(--bw-white);
+  transition: var(--bw-transition);
+}
+.bw-pill-input:focus-within {
+  border-color: var(--bw-border-hover);
+}
+.bw-pill-input input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--bw-white);
+  font-family: var(--bw-font);
+  font-size: 13px;
+  font-weight: 700;
+}
+.bw-pill-input input::placeholder {
+  color: var(--bw-text-muted);
+}
+.bw-pill-input .bw-input-action {
+  background: none;
+  border: none;
+  color: var(--bw-white);
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+}
+
+.bw-spinner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 72px;
+  height: 52px;
+  padding: 0 12px 0 18px;
+  border: 1.5px solid var(--bw-border-subtle);
+  background: var(--bw-bg-canvas);
+  color: var(--bw-text-dim);
+  font-size: 15px;
+  font-weight: 700;
+}
+.bw-spinner-arrows {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.bw-spinner-arrows button {
+  background: none;
+  border: none;
+  color: var(--bw-text-dim);
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  display: flex;
+}
+.bw-spinner-arrows button:hover {
+  color: var(--bw-white);
+}
+
+.bw-help-circle {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1.5px solid var(--bw-border-subtle);
+  background: transparent;
+  color: var(--bw-text-dim);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--bw-transition);
+}
+.bw-help-circle:hover {
+  border-color: var(--bw-white);
+  color: var(--bw-white);
+}
+
+/* ==========================================================================
+   SECTION 5: SOCIAL MEDIA PILL BUTTONS (Filled Slate & Outlined)
+   PSD Reference: Group SOCIAL (FACEBOOK, TWITTER, GOOGLE - 496x78px)
+   ========================================================================== */
+.bw-btn-social {
+  display: inline-flex;
+  align-items: center;
+  min-width: 230px;
+  height: 42px;
+  padding: 0 28px;
+  border-radius: var(--bw-radius-pill);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--bw-white);
+  cursor: pointer;
+  transition: var(--bw-transition);
+}
+.bw-btn-social .bw-social-icon {
+  width: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.bw-btn-social-filled {
+  background: var(--bw-surface-slate);
+  border: 1.5px solid var(--bw-surface-slate);
+}
+.bw-btn-social-filled:hover {
+  background: var(--bw-orange);
+  border-color: var(--bw-orange);
+}
+.bw-btn-social-outline {
+  background: transparent;
+  border: 1.5px solid var(--bw-surface-slate);
+}
+.bw-btn-social-outline:hover {
+  border-color: var(--bw-white);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* ==========================================================================
+   SECTION 6: FILTER / STEP PILLS (ZEROTH..FOURTH) & PAGINATION
+   PSD Reference: Groups 0th..4th, numb, numb2
+   ========================================================================== */
+.bw-tag-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  padding: 0 22px;
+  border-radius: var(--bw-radius-pill);
+  border: 1.5px solid var(--bw-border-subtle);
+  background: transparent;
+  color: var(--bw-border-subtle);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: var(--bw-transition);
+}
+.bw-tag-pill:hover {
+  border-color: var(--bw-border-hover);
+  color: var(--bw-text-dim);
+}
+.bw-tag-pill.is-active {
+  border-color: var(--bw-border-active-pill);
+  color: var(--bw-orange-alt);
+}
+
+/* Boxed Pagination (numb2) */
+.bw-pagination-boxed {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.bw-page-box {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--bw-radius-sm);
+  border: 1.5px solid var(--bw-border-subtle);
+  background: transparent;
+  color: var(--bw-text-muted);
+  font-size: 12px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--bw-transition);
+}
+.bw-page-box:hover {
+  border-color: var(--bw-border-hover);
+  color: var(--bw-white);
+}
+.bw-page-box.is-active {
+  background: var(--bw-surface-slate);
+  border-color: var(--bw-surface-slate);
+  color: var(--bw-white);
+}
+
+/* Minimal Divided Pagination (numb) */
+.bw-pagination-minimal {
+  display: inline-flex;
+  align-items: center;
+}
+.bw-page-link {
+  padding: 4px 12px;
+  border-right: 1px solid var(--bw-border-subtle);
+  color: var(--bw-text-muted);
+  font-size: 12px;
+  font-weight: 700;
+  background: none;
+  border-top: none;
+  border-bottom: none;
+  border-left: none;
+  cursor: pointer;
+  transition: var(--bw-transition);
+}
+.bw-page-link:last-child {
+  border-right: none;
+}
+.bw-page-link.is-active, .bw-page-link:hover {
+  color: var(--bw-white);
+}
+
+/* Date & Time Badges */
+.bw-datetime-box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  height: 52px;
+  padding: 0 18px;
+  border: 1.5px solid var(--bw-border-subtle);
+  background: transparent;
+  color: var(--bw-text-dim);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   SECTION 7: NAVIGATION BARS (Checkout Stepper BAR1 & Folder Tabs BAR2)
+   PSD Reference: Groups BAR1 (idx:115), BAR2 (idx:107), CART BAR (idx:99)
+   ========================================================================== */
+.bw-stepper-bar {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 44px;
+  background: var(--bw-surface-dark);
+  border-radius: var(--bw-radius-pill);
+  overflow: hidden;
+}
+.bw-stepper-item {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--bw-radius-pill);
+  background: transparent;
+  border: none;
+  color: var(--bw-white);
+  font-family: var(--bw-font);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--bw-transition);
+}
+.bw-stepper-item.is-active {
+  background: var(--bw-surface-slate);
+}
+
+.bw-tabs-bar {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 46px;
+  background: var(--bw-surface-dark);
+  border-radius: var(--bw-radius-tab) var(--bw-radius-tab) 0 0;
+  border-bottom: 2px solid var(--bw-surface-slate);
+  overflow: hidden;
+}
+.bw-tab-item {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  color: var(--bw-white);
+  font-family: var(--bw-font);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--bw-transition);
+}
+.bw-tab-item.is-active {
+  background: var(--bw-surface-slate);
+  border-radius: var(--bw-radius-tab) var(--bw-radius-tab) 0 0;
+}
+
+/* Segmented Cart / Account Pill Bar */
+.bw-cart-bar {
+  display: inline-flex;
+  align-items: center;
+  height: 46px;
+  background: var(--bw-surface-dark);
+  border-radius: var(--bw-radius-pill);
+  overflow: hidden;
+}
+.bw-cart-bar-segment {
+  height: 100%;
+  padding: 0 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: var(--bw-radius-pill);
+  border: none;
+  background: transparent;
+  color: var(--bw-white);
+  font-family: var(--bw-font);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--bw-transition);
+}
+.bw-cart-bar-segment.is-orange {
+  background: var(--bw-orange);
+}
+
+/* ==========================================================================
+   SECTION 8: TOGGLE SWITCHES, CHECKBOXES & RADIO BUTTONS
+   PSD Reference: Groups CV1, CV2, checkbox, checked, radiobutton, selected
+   ========================================================================== */
+.bw-switch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: 56px;
+  height: 28px;
+  border-radius: var(--bw-radius-pill);
+  background: var(--bw-surface-switch-off);
+  padding: 2px;
+  cursor: pointer;
+  border: none;
+  transition: var(--bw-transition);
+}
+.bw-switch .bw-switch-thumb {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--bw-white);
+  transition: var(--bw-transition);
+}
+.bw-switch.is-on {
+  background: var(--bw-surface-slate);
+}
+.bw-switch.is-on .bw-switch-thumb {
+  transform: translateX(28px);
+}
+
+.bw-check-label, .bw-radio-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--bw-text-dim);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  user-select: none;
+}
+.bw-checkbox-box {
+  width: 22px;
+  height: 22px;
+  border-radius: 3px;
+  border: 1.5px solid var(--bw-border-subtle);
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: transparent;
+  transition: var(--bw-transition);
+}
+.bw-check-label.is-checked .bw-checkbox-box {
+  background: var(--bw-surface-slate);
+  border-color: var(--bw-surface-slate);
+  color: var(--bw-white);
+}
+
+.bw-radio-circle {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1.5px solid var(--bw-border-subtle);
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--bw-transition);
+}
+.bw-radio-circle::after {
+  content: '';
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: transparent;
+  transition: var(--bw-transition);
+}
+.bw-radio-label.is-selected .bw-radio-circle {
+  background: var(--bw-surface-slate);
+  border-color: var(--bw-surface-slate);
+}
+.bw-radio-label.is-selected .bw-radio-circle::after {
+  background: var(--bw-white);
+}
+
+/* ==========================================================================
+   SECTION 9: CAROUSEL ARROWS, RATINGS & GALLERY INDICATORS
+   PSD Reference: Group ICONS (prev, next, stars, circles1, circles2, slideshow)
+   ========================================================================== */
+.bw-nav-circle-lg {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  border: 2px solid var(--bw-border-subtle);
+  background: transparent;
+  color: var(--bw-border-subtle);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--bw-transition);
+}
+.bw-nav-circle-lg:hover {
+  border-color: var(--bw-white);
+  color: var(--bw-white);
+}
+
+.bw-nav-circle-md {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1.5px solid var(--bw-border-subtle);
+  background: transparent;
+  color: var(--bw-border-subtle);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--bw-transition);
+}
+.bw-nav-circle-md.is-active, .bw-nav-circle-md:hover {
+  border-color: var(--bw-white);
+  color: var(--bw-white);
+}
+.bw-nav-circle-md.is-orange {
+  border-color: var(--bw-orange-border);
+  color: var(--bw-orange-alt);
+}
+
+.bw-stars {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+.bw-stars .bw-star-filled { color: var(--bw-white); }
+.bw-stars .bw-star-empty { color: var(--bw-surface-slate); }
+
+.bw-dots {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.bw-dots-vertical {
+  flex-direction: column;
+}
+.bw-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--bw-white);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+.bw-dot.is-active {
+  width: 16px;
+  height: 16px;
+  background: transparent;
+  border: 1.5px solid var(--bw-white);
+}
+
+/* ==========================================================================
+   SECTION 10: E-COMMERCE FOOTER CTAs (CART, FAVORITES, BACK TO SHOPPING)
+   PSD Reference: Groups CART, CART2, FAVORITES, SHOPPING
+   ========================================================================== */
+.bw-btn-cart-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  min-width: 170px;
+  height: 46px;
+  padding: 0 28px;
+  border-radius: var(--bw-radius-pill);
+  border: 2px solid var(--bw-orange);
+  background: transparent;
+  color: var(--bw-orange-alt);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: var(--bw-transition);
+}
+.bw-btn-cart-outline:hover {
+  background: var(--bw-orange);
+  color: var(--bw-white);
+}
+
+.bw-btn-cart-solid {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  min-width: 170px;
+  height: 46px;
+  padding: 0 28px;
+  border-radius: var(--bw-radius-pill);
+  border: 2px solid var(--bw-orange);
+  background: var(--bw-orange);
+  color: var(--bw-white);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: var(--bw-transition);
+}
+.bw-btn-cart-solid:hover {
+  background: var(--bw-orange-alt);
+  border-color: var(--bw-orange-alt);
+}
+
+.bw-btn-ecommerce-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  min-width: 250px;
+  height: 54px;
+  padding: 0 32px;
+  border-radius: var(--bw-radius-pill);
+  border: 1.5px solid var(--bw-border-subtle);
+  background: transparent;
+  color: var(--bw-white);
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: var(--bw-transition);
+}
+.bw-btn-ecommerce-ghost:hover {
+  border-color: var(--bw-border-hover);
+  background: rgba(255, 255, 255, 0.03);
+}

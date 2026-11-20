@@ -1,0 +1,10 @@
+node_modules/
+.firebase/
+output/
+data/tmp_*.md
+data/append_*.json
+data/update_*.json
+*.log
+.DS_Store
+Thumbs.db
+

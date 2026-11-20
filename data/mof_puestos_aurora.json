@@ -1,0 +1,125 @@
+{
+  "empresa": "GRUPO GASTRONÓMICO AURORA S.A.C.",
+  "puestos": [
+    {
+      "id": "admin_general",
+      "puesto": "Administrador General",
+      "area": "Administración",
+      "superiorInmediato": "Gerencia General",
+      "mision": "Planificar, dirigir, coordinar y supervisar todas las operaciones operativas, financieras, legales y comerciales del restaurante, garantizando rentabilidad, excelencia en el servicio y cumplimiento normativo.",
+      "funciones": [
+        "Supervisar el cumplimiento de los estándares de calidad en cocina, salón y bar.",
+        "Gestionar la contratación, adendas, inducción y clima laboral del personal en coordinación con Gerencia.",
+        "Aprobar requerimientos de compras y controlar los costos de insumos y mermas.",
+        "Supervisar el cuadre diario de caja, ingresos, egresos y pagos a proveedores.",
+        "Representar a la empresa ante fiscalizaciones laborales, sanitarias y municipales."
+      ]
+    },
+    {
+      "id": "sub_jefe_cocina",
+      "puesto": "Sub Jefe de Cocina",
+      "area": "Cocina",
+      "superiorInmediato": "Chef Corporativo / Administrador",
+      "mision": "Liderar la brigada de cocina durante los turnos operativos, garantizando la consistencia en sabor, gramajes, tiempos de despacho y protocolos BPM.",
+      "funciones": [
+        "Asegurar la correcta mise en place de cada estación (calientes, fríos, parrilla).",
+        "Controlar la rotación PEPS de los alimentos y el correcto etiquetado y fechado.",
+        "Supervisar las temperaturas de refrigeración y cocción segura de carnes y mariscos.",
+        "Gestionar los pedidos diarios de reposición de insumos al área de Logística.",
+        "Capacitar a los ayudantes operarios y freidores en técnicas culinarias estandarizadas."
+      ]
+    },
+    {
+      "id": "jefe_mozos",
+      "puesto": "Jefe de Mozos",
+      "area": "Salón",
+      "superiorInmediato": "Administrador General",
+      "mision": "Organizar, dirigir y supervisar el servicio en salón, asegurando una experiencia gastronómica memorable para cada comensal bajo los estándares de elegancia de Aurora.",
+      "funciones": [
+        "Distribuir las estaciones de salón y asignar mesas al equipo de mozos antes del servicio.",
+        "Realizar el briefing diario repasando platos del día, sugerencias del sommelier y alérgenos.",
+        "Atender reclamos y situaciones especiales de clientes con diplomacia y resolución inmediata.",
+        "Verificar la correcta presentación personal, uniformes impecables y pulcritud de cubiertos/copas.",
+        "Coordinar con caja y cocina la fluidez en la comanda y tiempos de servicio."
+      ]
+    },
+    {
+      "id": "jefe_logistica",
+      "puesto": "Jefa de Logística",
+      "area": "Logística y Almacén",
+      "superiorInmediato": "Administrador General",
+      "mision": "Administrar el abastecimiento oportuno, almacenamiento seguro y custodia de insumos, bebidas y menaje, manteniendo los niveles óptimos de stock.",
+      "funciones": [
+        "Consolidar las hojas de requerimientos de Bar, Cocina, Salón y Carnes.",
+        "Negociar precios, plazos y condiciones con proveedores homologados.",
+        "Inspeccionar organolépticamente la frescura y calidad de productos perecibles al ingreso.",
+        "Registrar entradas y salidas en el sistema AuroraSync y realizar inventarios físicos semanales.",
+        "Monitorear alertas de stock mínimo para evitar roturas de abastecimiento."
+      ]
+    },
+    {
+      "id": "bartender",
+      "puesto": "Bartender",
+      "area": "Bar",
+      "superiorInmediato": "Administrador General",
+      "mision": "Diseñar, preparar y despachar coctelería de autor, clásica y bebidas en barra con técnica rigurosa, presentación sofisticada y control de costos.",
+      "funciones": [
+        "Elaborar cócteles de acuerdo con el recetario estandarizado y ficha de insumos.",
+        "Mantener la higiene, orden y desinfección total de la barra, cristalería y herramientas.",
+        "Monitorear el stock de licores, syrups, hielo y guarniciones para el turno.",
+        "Recomendar maridajes y cócteles según las preferencias de los clientes en barra.",
+        "Registrar mermas y botellas abiertas al cierre de cada jornada."
+      ]
+    },
+    {
+      "id": "cajera",
+      "puesto": "Cajera",
+      "area": "Caja",
+      "superiorInmediato": "Administrador General",
+      "mision": "Gestionar con exactitud y seguridad el cobro de cuentas, facturación electrónica, medios de pago y cuadre de caja chica.",
+      "funciones": [
+        "Emitir boletas, facturas y notas de crédito verificando comensales y propinas.",
+        "Controlar el flujo de efectivo, cobros POS (Visa, Mastercard, etc.) y billeteras digitales (Yape, Plin).",
+        "Efectuar el arqueo y cuadre de caja al cierre de turno con entrega de voucher y reporte.",
+        "Custodiar el fondo de sencillo y validar la autenticidad de billetes recibidos."
+      ]
+    },
+    {
+      "id": "mozo",
+      "puesto": "Mozo",
+      "area": "Salón",
+      "superiorInmediato": "Jefe de Mozos",
+      "mision": "Brindar una atención cordial, técnica y eficiente al comensal, dominando la carta, alérgenos y tiempos del servicio.",
+      "funciones": [
+        "Acondicionar mesas, montaje de vajilla y cristalería antes de la apertura.",
+        "Presentar la carta física o Flipbook 3D, sugiriendo platos de autor y maridajes.",
+        "Tomar comandas con precisión en sistema y retransmitir especificaciones de comensales a cocina.",
+        "Despejar platos vacíos y mantener la mesa limpia en todo momento sin invadir el espacio del cliente."
+      ]
+    },
+    {
+      "id": "ensaladero_atencion",
+      "puesto": "Ensaladero / Atención",
+      "area": "Cocina / Apoyo",
+      "superiorInmediato": "Sub Jefe de Cocina",
+      "mision": "Preparar y montar ensaladas, entradas frías y guarniciones con frescura y estética, apoyando en la limpieza de estaciones.",
+      "funciones": [
+        "Lavar, desinfectar y trozar vegetales y hojas verdes siguiendo la cadena de frío.",
+        "Emplatar entradas frías respetando el gramaje y la decoración aprobada en ficha técnica.",
+        "Mantener refrigeradores de insumos fríos limpios y ordenados."
+      ]
+    },
+    {
+      "id": "anfitriona",
+      "puesto": "Anfitriona",
+      "area": "Recepción / Salón",
+      "superiorInmediato": "Administrador General",
+      "mision": "Recibir y despedir a los clientes con calidez, gestionar el flujo de reservas y coordinar la asignación de mesas.",
+      "funciones": [
+        "Saludar al comensal, verificar reservaciones y acompañarlo elegantemente a su mesa.",
+        "Gestionar la lista de espera en horarios pico manteniendo informados a los clientes.",
+        "Entregar cartas de bienvenida y orientar a los visitantes sobre servicios adicionales."
+      ]
+    }
+  ]
+}

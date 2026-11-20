@@ -1,0 +1,2289 @@
+window.RH_EMBEDDED_DATA = {
+  "audit": {
+    "empresa": {
+      "razonSocial": "GRUPO GASTRONÓMICO AURORA S.A.C.",
+      "ruc": "20615117111",
+      "domicilio": "Av. Víctor Larco Herrera N.º 2164, Urb. San Andrés V Etapa, Distrito de Víctor Larco, Provincia de Trujillo, Departamento de La Libertad",
+      "representanteLegal": "CARBAJAL URQUIZO GLADYS VERÓNICA",
+      "dniRepresentante": "42892738",
+      "cargoRepresentante": "Gerente General",
+      "marcoLegal": "Artículo 63 del T.U.O. del Decreto Legislativo N.º 728 (Decreto Supremo N.º 003-97-TR) y normas complementarias",
+      "modalidadContrato": "Contrato Individual de Trabajo Sujeto a Modalidad por Inicio de Actividades"
+    },
+    "rutas": {
+      "baseAdendas": "C:\\Users\\brinn\\OneDrive\\AURORA 2025 - 2026\\ADENDAS",
+      "baseContratos": "C:\\Users\\brinn\\OneDrive\\AURORA 2025 - 2026\\CONTRATOS",
+      "excelContabilidad": "C:\\Users\\brinn\\OneDrive\\AURORA 2025 - 2026\\RESUMEN_PERSONAL_Y_ADENDAS_AURORA_2026.xlsx"
+    },
+    "manifest": {
+      "updatedAt": "2026-11-18T06:25:46.780Z",
+      "account": "admr.brinnercas@gmail.com",
+      "stats": {
+        "totalColaboradores": 27,
+        "contratos": 22,
+        "adendas": 43,
+        "dnis": 27,
+        "memos": 3,
+        "liquidaciones": 15
+      },
+      "drive": {
+        "rootFolder": {
+          "id": "1i_K5OJHe5vvnQTrMnwEm0e2CQIT4MGuT",
+          "name": "RH BRINNERCAS - GRUPO GASTRONOMICO AURORA SAC",
+          "url": "https://drive.google.com/drive/folders/1i_K5OJHe5vvnQTrMnwEm0e2CQIT4MGuT"
+        },
+        "subfolders": {
+          "contratos": {
+            "id": "1NrM4vQ8S8YBh1Gs5BiK9VcGib1DSgZ7V",
+            "name": "01_CONTRATOS_PERSONAL_PDF",
+            "url": "https://drive.google.com/drive/folders/1NrM4vQ8S8YBh1Gs5BiK9VcGib1DSgZ7V"
+          },
+          "adendas": {
+            "id": "1Li_ya6fsK_ipu7ZJmfQ3x4hDRg4krVKJ",
+            "name": "02_ADENDAS_MODALIDAD_DOCX",
+            "url": "https://drive.google.com/drive/folders/1Li_ya6fsK_ipu7ZJmfQ3x4hDRg4krVKJ"
+          },
+          "fotosDni": {
+            "id": "18iMe_-p5JAyd1HE3ToMvmkwp0O8B73qp",
+            "name": "03_FOTOS_DNI_IDENTIDAD_PDF",
+            "url": "https://drive.google.com/drive/folders/18iMe_-p5JAyd1HE3ToMvmkwp0O8B73qp"
+          },
+          "memosActas": {
+            "id": "10Yf4rxBWqkmyGDWMsNZk6_FoP93E_22_",
+            "name": "04_MEMORANDUMS_Y_ACTAS",
+            "url": "https://drive.google.com/drive/folders/10Yf4rxBWqkmyGDWMsNZk6_FoP93E_22_"
+          },
+          "liquidaciones": {
+            "id": "15wbYdD_0CoAezbCxo4Kio89O7yiAvSyJ",
+            "name": "05_LIQUIDACIONES_Y_BOLETAS",
+            "url": "https://drive.google.com/drive/folders/15wbYdD_0CoAezbCxo4Kio89O7yiAvSyJ"
+          },
+          "baseDatos": {
+            "id": "1AK8EUGRgkXQKK_xdkexG8E-qg0nJpFZo",
+            "name": "06_BASE_DATOS_SHEETS_Y_EXCEL",
+            "url": "https://drive.google.com/drive/folders/1AK8EUGRgkXQKK_xdkexG8E-qg0nJpFZo"
+          }
+        }
+      },
+      "sheets": {
+        "masterSheetId": "1SUJymC5eFiNERhbm-fg5KeCDWcLLTOiSV8NC9SYSwVk",
+        "masterSheetName": "BD_MAESTRA_RH_BRINNERCAS_AURORA_2026",
+        "masterSheetUrl": "https://docs.google.com/spreadsheets/d/1SUJymC5eFiNERhbm-fg5KeCDWcLLTOiSV8NC9SYSwVk/edit",
+        "historicalSheetId": "1Wrelu9FcxOF7g82u2n5sw8LegBMeI1wecNIUfh1EwWM",
+        "historicalSheetName": "REGISTRO DEL PERSONAL DE AURORA",
+        "historicalSheetUrl": "https://docs.google.com/spreadsheets/d/1Wrelu9FcxOF7g82u2n5sw8LegBMeI1wecNIUfh1EwWM/edit"
+      }
+    },
+    "resumen": {
+      "totalColaboradores": 28,
+      "activosCount": 10,
+      "cesadosCount": 13,
+      "rxhApoyoCount": 5,
+      "totalNominaActiva": 20300,
+      "masaInicialFeb": 40880,
+      "ahorroMensual": 20580,
+      "porcentajeOptimizacion": 50.3,
+      "porArea": {
+        "Administración": {
+          "count": 1,
+          "total": 3200,
+          "colaboradores": [
+            "CASTRO VASQUEZ WILMER BRINNER"
+          ]
+        },
+        "Salón": {
+          "count": 3,
+          "total": 5300,
+          "colaboradores": [
+            "RIOS PONCE DE LEON ROGER GABRIEL",
+            "BAZAN RODRIGUEZ ALAN IMANOL",
+            "ORBEGOSO CASSANO GEORGE ALDAIR"
+          ]
+        },
+        "Logística": {
+          "count": 1,
+          "total": 2000,
+          "colaboradores": [
+            "RODRIGUEZ CAPA NICOLE LALESHKA"
+          ]
+        },
+        "Bar": {
+          "count": 2,
+          "total": 3400,
+          "colaboradores": [
+            "PEÑA ULLILEN EDWIN SMITH",
+            "SANCHEZ VASQUEZ BRYAM ARMANDO"
+          ]
+        },
+        "Caja": {
+          "count": 1,
+          "total": 1500,
+          "colaboradores": [
+            "ABAD ALVAREZ XIOMARA SOLANGE"
+          ]
+        },
+        "Cocina / Salón": {
+          "count": 1,
+          "total": 1400,
+          "colaboradores": [
+            "ESQUIVEL RODRIGUEZ KARLA DAYAN"
+          ]
+        },
+        "Cocina": {
+          "count": 1,
+          "total": 3500,
+          "colaboradores": [
+            "GUZMAN RODRIGUEZ GARY JOSIMAR"
+          ]
+        }
+      },
+      "porCondicionLaboral": {
+        "CONTRATO": 23,
+        "RXH": 3,
+        "OTROS": 2
+      }
+    },
+    "colaboradores": [
+      {
+        "id": 1,
+        "nombre": "CASTRO VASQUEZ WILMER BRINNER",
+        "dni": "44031290",
+        "area": "Administración",
+        "cargo": "Administrador General",
+        "cargoContrato": "Administrador",
+        "condicionLaborable": "FULL TIME",
+        "condicionLaboral": "CONTRATO",
+        "sueldo": 3200,
+        "estado": "ACTIVO",
+        "estadoTexto": "Renovación Pendiente",
+        "semaforo": "naranja",
+        "fechaIngreso": "01/02/2026",
+        "finContratoBase": "30/04/2026",
+        "vigenciaHasta": "31/10/2026",
+        "fechaCese": null,
+        "modalidadCese": null,
+        "tiempoServicio": null,
+        "domicilio": "Mz. D Lt. 03 Ex Línea Férrea, Distrito de Moche, Provincia de Trujillo, Departamento de La Libertad",
+        "celular": "959756385",
+        "correo": "brinnercas@gmail.com",
+        "banco": "BBVA",
+        "numeroCuenta": "001102490201252517",
+        "fechaNacimiento": "25/12/1984",
+        "edad": "40",
+        "carnetSanitario": "NO",
+        "adendas": [
+          {
+            "numero": "1RA ADENDA",
+            "archivo": "1RA ADENDA DE CONTRATO CASTRO BRINNER.docx",
+            "firma": "30/04/2026",
+            "inicio": "01/05/2026",
+            "fin": "31/07/2026",
+            "remuneracion": 3200,
+            "concepto": "Prórroga de 3 meses"
+          },
+          {
+            "numero": "2DA ADENDA",
+            "archivo": "2DA ADENDA DE CONTRATO CASTRO BRINNER.docx",
+            "firma": "31/07/2026",
+            "inicio": "01/08/2026",
+            "fin": "31/10/2026",
+            "remuneracion": 3200,
+            "concepto": "Prórroga de 3 meses"
+          }
+        ],
+        "proximaAdenda": "3RA ADENDA",
+        "observaciones": "Colaborador activo con expediente auditado.",
+        "documentos": {
+          "contrato": {
+            "fileName": "GRUPO GASTRONOMICO AURORA SAC - CONTRATO - CASTRO VASQUEZ JIMMY JACK - 260201 - 260430 - 03.pdf",
+            "localUrl": "/docs/contratos/GRUPO%20GASTRONOMICO%20AURORA%20SAC%20-%20CONTRATO%20-%20CASTRO%20VASQUEZ%20JIMMY%20JACK%20-%20260201%20-%20260430%20-%2003.pdf",
+            "driveId": "1SKp2PkX8tCeKPhvGsN5-79Yn6ygQzuQg",
+            "driveUrl": "https://drive.google.com/file/d/1SKp2PkX8tCeKPhvGsN5-79Yn6ygQzuQg/view"
+          },
+          "adendas": [
+            {
+              "fileName": "1RA ADENDA DE CONTRATO CASTRO BRINNER.docx",
+              "localUrl": "/docs/adendas/1RA%20ADENDA%20DE%20CONTRATO%20CASTRO%20BRINNER.docx",
+              "driveId": "1Qm0C0la7OMr9OSkgY8Fxrytibz9X-Btz",
+              "driveUrl": "https://drive.google.com/file/d/1Qm0C0la7OMr9OSkgY8Fxrytibz9X-Btz/view"
+            },
+            {
+              "fileName": "2DA ADENDA DE CONTRATO CASTRO BRINNER.docx",
+              "localUrl": "/docs/adendas/2DA%20ADENDA%20DE%20CONTRATO%20CASTRO%20BRINNER.docx",
+              "driveId": "1IZysN1y_mhXbDpWp9siCVB1xErbUxqxs",
+              "driveUrl": "https://drive.google.com/file/d/1IZysN1y_mhXbDpWp9siCVB1xErbUxqxs/view"
+            },
+            {
+              "fileName": "3RA ADENDA DE CONTRATO CASTRO BRINNER.docx",
+              "localUrl": "/docs/adendas/3RA%20ADENDA%20DE%20CONTRATO%20CASTRO%20BRINNER.docx",
+              "driveId": "149Z4khaN1bChUJOZvtA874g7vjMT0BiK",
+              "driveUrl": "https://drive.google.com/file/d/149Z4khaN1bChUJOZvtA874g7vjMT0BiK/view"
+            }
+          ],
+          "memorandums": [],
+          "liquidacion": null,
+          "fotoDni": {
+            "fileName": "DNI_44031290_FOTOS_DNI_CASTRO_VASQUEZ_BRINNER.pdf",
+            "originalName": "FOTOS DNI CASTRO VASQUEZ BRINNER.pdf",
+            "localUrl": "/docs/dni/DNI_44031290_FOTOS_DNI_CASTRO_VASQUEZ_BRINNER.pdf",
+            "driveId": "1Pf_RIzlQhf7E9xJz8WuIn9hXeuyu1zg_",
+            "driveUrl": "https://drive.google.com/file/d/1Pf_RIzlQhf7E9xJz8WuIn9hXeuyu1zg_/view",
+            "isImage": false
+          }
+        }
+      },
+      {
+        "id": 2,
+        "nombre": "MINCHON ALVAREZ DIEGO LEONARDO",
+        "dni": "73709422",
+        "area": "Cocina",
+        "cargo": "Sub Jefe de Cocina",
+        "cargoContrato": "Jefe de Cocina",
+        "condicionLaborable": "FULL TIME",
+        "condicionLaboral": "CONTRATO",
+        "sueldo": 3000,
+        "estado": "CESADO",
+        "estadoTexto": "Cesado (31/10/2026)",
+        "semaforo": "gris",
+        "fechaIngreso": "01/02/2026",
+        "finContratoBase": "30/04/2026",
+        "vigenciaHasta": "31/10/2026",
+        "fechaCese": "31/10/2026",
+        "modalidadCese": "Término de 3ra Adenda (No Renovación)",
+        "tiempoServicio": "9 meses (01/02/2026 al 31/10/2026)",
+        "domicilio": "Jirón Zela 747 Barrio Chicago, Distrito de Trujillo, Provincia de Trujillo, Departamento de La Libertad",
+        "celular": "916768848",
+        "correo": "diego_armando2015_@hotmail.com",
+        "banco": "BBVA",
+        "numeroCuenta": "001108140263388769",
+        "fechaNacimiento": "16/08/2001",
+        "edad": "24",
+        "carnetSanitario": "SI",
+        "adendas": [
+          {
+            "numero": "1RA ADENDA",
+            "archivo": "1RA ADENDA DE CONTRATO MINCHON DIEGO.docx",
+            "firma": "30/04/2026",
+            "inicio": "01/05/2026",
+            "fin": "30/06/2026",
+            "remuneracion": 3800,
+            "concepto": "Prórroga 2 meses"
+          },
+          {
+            "numero": "2DA ADENDA",
+            "archivo": "2DA ADENDA DE CONTRATO MINCHON DIEGO.docx",
+            "firma": "30/06/2026",
+            "inicio": "01/07/2026",
+            "fin": "31/07/2026",
+            "remuneracion": 3000,
+            "concepto": "Ajuste cargo Sub Jefe de Cocina y remuneración a S/ 3,000"
+          },
+          {
+            "numero": "3RA ADENDA",
+            "archivo": "3RA ADENDA DE CONTRATO MINCHON DIEGO.docx",
+            "firma": "31/07/2026",
+            "inicio": "01/08/2026",
+            "fin": "31/10/2026",
+            "remuneracion": 3000,
+            "concepto": "Prórroga 3 meses"
+          }
+        ],
+        "proximaAdenda": "N/A",
+        "observaciones": "Cese de labores al 31/10/2026 tras culminar su 3ra adenda",
+        "documentos": {
+          "contrato": {
+            "fileName": "GRUPO GASTRONOMICO AURORA SAC - CONTRATO - MINCHON ALVAREZ DIEGO LEONARDO - 260201 - 260430 - 03.pdf",
+            "localUrl": "/docs/contratos/GRUPO%20GASTRONOMICO%20AURORA%20SAC%20-%20CONTRATO%20-%20MINCHON%20ALVAREZ%20DIEGO%20LEONARDO%20-%20260201%20-%20260430%20-%2003.pdf",
+            "driveId": "1VPy3GpXvEhpsA6zDWBa0MDtTgEOzMP3f",
+            "driveUrl": "https://drive.google.com/file/d/1VPy3GpXvEhpsA6zDWBa0MDtTgEOzMP3f/view"
+          },
+          "adendas": [
+            {
+              "fileName": "1RA ADENDA DE CONTRATO MINCHON DIEGO.docx",
+              "localUrl": "/docs/adendas/1RA%20ADENDA%20DE%20CONTRATO%20MINCHON%20DIEGO.docx",
+              "driveId": "1hsh7yuz1S7tYatS0jA1pO70SNuJ4j_Ql",
+              "driveUrl": "https://drive.google.com/file/d/1hsh7yuz1S7tYatS0jA1pO70SNuJ4j_Ql/view"
+            },
+            {
+              "fileName": "2DA ADENDA DE CONTRATO MINCHON DIEGO.docx",
+              "localUrl": "/docs/adendas/2DA%20ADENDA%20DE%20CONTRATO%20MINCHON%20DIEGO.docx",
+              "driveId": "1ozxw8K3c45lHEDMTL44nBJVqeGaUbl9B",
+              "driveUrl": "https://drive.google.com/file/d/1ozxw8K3c45lHEDMTL44nBJVqeGaUbl9B/view"
+            },
+            {
+              "fileName": "3RA ADENDA DE CONTRATO MINCHON DIEGO.docx",
+              "localUrl": "/docs/adendas/3RA%20ADENDA%20DE%20CONTRATO%20MINCHON%20DIEGO.docx",
+              "driveId": "1FLOBLUz5webjaTA5YqZmXw75Bx7I2aew",
+              "driveUrl": "https://drive.google.com/file/d/1FLOBLUz5webjaTA5YqZmXw75Bx7I2aew/view"
+            },
+            {
+              "fileName": "4TA ADENDA DE CONTRATO MINCHON DIEGO.docx",
+              "localUrl": "/docs/adendas/4TA%20ADENDA%20DE%20CONTRATO%20MINCHON%20DIEGO.docx",
+              "driveId": "1i0A8d572tB-GuqnSGcsI23rT5wlWZYCz",
+              "driveUrl": "https://drive.google.com/file/d/1i0A8d572tB-GuqnSGcsI23rT5wlWZYCz/view"
+            }
+          ],
+          "memorandums": [
+            {
+              "id": "1_GZhqcxWFIo-mDBdBVNJk0aqyIsJOdb5",
+              "name": "MEMORANDUM 001 - TARDANZAS REITERATIVAS - DIEGO MINCHON ALVAREZ.docx",
+              "localUrl": "/docs/memos/MEMORANDUM%20001%20-%20TARDANZAS%20REITERATIVAS%20-%20DIEGO%20MINCHON%20ALVAREZ.docx",
+              "driveUrl": "https://drive.google.com/file/d/1_GZhqcxWFIo-mDBdBVNJk0aqyIsJOdb5/view"
+            },
+            {
+              "id": "1CFxXGZWdV7jWVSjAjV4JLMClOaEMrPiR",
+              "name": "MEMORANDUM 002 - FALTAS INJUSTIFICADAS - DIEGO MINCHON ALVAREZ.docx",
+              "localUrl": "/docs/memos/MEMORANDUM%20002%20-%20FALTAS%20INJUSTIFICADAS%20-%20DIEGO%20MINCHON%20ALVAREZ.docx",
+              "driveUrl": "https://drive.google.com/file/d/1CFxXGZWdV7jWVSjAjV4JLMClOaEMrPiR/view"
+            },
+            {
+              "id": "183TjnyU_GsNxKz46LGJnkyddzUKNyuXv",
+              "name": "MEMORANDUM 002 v.1 - FALTAS INJUSTIFICADAS - DIEGO MINCHON ALVAREZ.docx",
+              "localUrl": "/docs/memos/MEMORANDUM%20002%20v.1%20-%20FALTAS%20INJUSTIFICADAS%20-%20DIEGO%20MINCHON%20ALVAREZ.docx",
+              "driveUrl": "https://drive.google.com/file/d/183TjnyU_GsNxKz46LGJnkyddzUKNyuXv/view"
+            }
+          ],
+          "liquidacion": {
+            "fileName": "LIQUIDACION_BBSS_73709422_MINCHON.html",
+            "localUrl": "/docs/liquidaciones/LIQUIDACION_BBSS_73709422_MINCHON.html",
+            "driveId": "1qVyD0jLFB00ww20T4Yj0VPgU7K-FnXAm",
+            "driveUrl": "https://drive.google.com/file/d/1qVyD0jLFB00ww20T4Yj0VPgU7K-FnXAm/view"
+          },
+          "fotoDni": {
+            "fileName": "DNI_73709422_FOTOS_DNI_MINCHON_ALVAREZ_DIEGO.pdf",
+            "originalName": "FOTOS DNI MINCHON ALVAREZ DIEGO.pdf",
+            "localUrl": "/docs/dni/DNI_73709422_FOTOS_DNI_MINCHON_ALVAREZ_DIEGO.pdf",
+            "driveId": "11gfmg4uWP5DSamPrWJhknuQsXTs8Lb-_",
+            "driveUrl": "https://drive.google.com/file/d/11gfmg4uWP5DSamPrWJhknuQsXTs8Lb-_/view",
+            "isImage": false
+          }
+        }
+      },
+      {
+        "id": 3,
+        "nombre": "RIOS PONCE DE LEON ROGER GABRIEL",
+        "dni": "47658476",
+        "area": "Salón",
+        "cargo": "Jefe de Mozos",
+        "cargoContrato": "Jefe de Mozos",
+        "condicionLaborable": "FULL TIME",
+        "condicionLaboral": "CONTRATO",
+        "sueldo": 2300,
+        "estado": "ACTIVO",
+        "estadoTexto": "Renovación Pendiente",
+        "semaforo": "naranja",
+        "fechaIngreso": "01/02/2026",
+        "finContratoBase": "30/04/2026",
+        "vigenciaHasta": "31/10/2026",
+        "fechaCese": null,
+        "modalidadCese": null,
+        "tiempoServicio": null,
+        "domicilio": "Calle Unión 350 Urbanización Palermo, Distrito de Trujillo, Provincia de Trujillo, Departamento de La Libertad",
+        "celular": "947538180",
+        "correo": "gabrielriosponcedeleon24@gmail.com",
+        "banco": "BCP",
+        "numeroCuenta": "57011463329074",
+        "fechaNacimiento": "24/02/1992",
+        "edad": "33",
+        "carnetSanitario": "NO",
+        "adendas": [
+          {
+            "numero": "1RA ADENDA",
+            "archivo": "1RA ADENDA DE CONTRATO RIOS ROGER.docx",
+            "firma": "30/04/2026",
+            "inicio": "01/05/2026",
+            "fin": "30/06/2026",
+            "remuneracion": 2500,
+            "concepto": "Prórroga 2 meses"
+          },
+          {
+            "numero": "2DA ADENDA",
+            "archivo": "2DA ADENDA DE CONTRATO RIOS ROGER.docx",
+            "firma": "30/06/2026",
+            "inicio": "01/07/2026",
+            "fin": "31/07/2026",
+            "remuneracion": 2300,
+            "concepto": "Ajuste de remuneración a S/ 2,300"
+          },
+          {
+            "numero": "3RA ADENDA",
+            "archivo": "3RA ADENDA DE CONTRATO RIOS ROGER.docx",
+            "firma": "31/07/2026",
+            "inicio": "01/08/2026",
+            "fin": "31/10/2026",
+            "remuneracion": 2300,
+            "concepto": "Prórroga 3 meses con salario actual"
+          }
+        ],
+        "proximaAdenda": "4TA ADENDA",
+        "observaciones": "Colaborador activo con expediente auditado.",
+        "documentos": {
+          "contrato": {
+            "fileName": "GRUPO GASTRONOMICO AURORA SAC - CONTRATO - RIOS PONCE DE LEON ROGER GABRIEL - 260201 - 260430 - 03.pdf",
+            "localUrl": "/docs/contratos/GRUPO%20GASTRONOMICO%20AURORA%20SAC%20-%20CONTRATO%20-%20RIOS%20PONCE%20DE%20LEON%20ROGER%20GABRIEL%20-%20260201%20-%20260430%20-%2003.pdf",
+            "driveId": "140OpHlI1Rt9aVirdGcnBLykoDYQiNw2Q",
+            "driveUrl": "https://drive.google.com/file/d/140OpHlI1Rt9aVirdGcnBLykoDYQiNw2Q/view"
+          },
+          "adendas": [
+            {
+              "fileName": "1RA ADENDA DE CONTRATO RIOS ROGER.docx",
+              "localUrl": "/docs/adendas/1RA%20ADENDA%20DE%20CONTRATO%20RIOS%20ROGER.docx",
+              "driveId": "12NbVDzrDv-nRSHjSklxV3i2dFoLglAhB",
+              "driveUrl": "https://drive.google.com/file/d/12NbVDzrDv-nRSHjSklxV3i2dFoLglAhB/view"
+            },
+            {
+              "fileName": "2DA ADENDA DE CONTRATO RIOS ROGER.docx",
+              "localUrl": "/docs/adendas/2DA%20ADENDA%20DE%20CONTRATO%20RIOS%20ROGER.docx",
+              "driveId": "1rPvrLsW0cweTgYJ6q43ooUw8t4pESzO2",
+              "driveUrl": "https://drive.google.com/file/d/1rPvrLsW0cweTgYJ6q43ooUw8t4pESzO2/view"
+            },
+            {
+              "fileName": "3RA ADENDA DE CONTRATO RIOS ROGER.docx",
+              "localUrl": "/docs/adendas/3RA%20ADENDA%20DE%20CONTRATO%20RIOS%20ROGER.docx",
+              "driveId": "1e3CDqi-PV90WO7eXd_fZwpPT2ZhREAQ7",
+              "driveUrl": "https://drive.google.com/file/d/1e3CDqi-PV90WO7eXd_fZwpPT2ZhREAQ7/view"
+            },
+            {
+              "fileName": "4TA ADENDA DE CONTRATO RIOS ROGER.docx",
+              "localUrl": "/docs/adendas/4TA%20ADENDA%20DE%20CONTRATO%20RIOS%20ROGER.docx",
+              "driveId": "1yYIyoeiUtNa2BXR-x5U1cAEI9Y4ruov6",
+              "driveUrl": "https://drive.google.com/file/d/1yYIyoeiUtNa2BXR-x5U1cAEI9Y4ruov6/view"
+            }
+          ],
+          "memorandums": [],
+          "liquidacion": null,
+          "fotoDni": {
+            "fileName": "DNI_47658476_FOTOS_DNI_RIOS_PONCE_DE_LEON_GABRIEL.pdf",
+            "originalName": "FOTOS DNI RIOS PONCE DE LEON GABRIEL.pdf",
+            "localUrl": "/docs/dni/DNI_47658476_FOTOS_DNI_RIOS_PONCE_DE_LEON_GABRIEL.pdf",
+            "driveId": "1chhmgIZsUYM9AbDhEbgsw9cOYHF5rLCw",
+            "driveUrl": "https://drive.google.com/file/d/1chhmgIZsUYM9AbDhEbgsw9cOYHF5rLCw/view",
+            "isImage": false
+          }
+        }
+      },
+      {
+        "id": 4,
+        "nombre": "RODRIGUEZ CAPA NICOLE LALESHKA",
+        "dni": "76766492",
+        "area": "Logística",
+        "cargo": "Jefa de Logística",
+        "cargoContrato": "Jefe de Logística",
+        "condicionLaborable": "FULL TIME",
+        "condicionLaboral": "CONTRATO",
+        "sueldo": 2000,
+        "estado": "ACTIVO",
+        "estadoTexto": "Renovación Pendiente",
+        "semaforo": "naranja",
+        "fechaIngreso": "01/02/2026",
+        "finContratoBase": "30/04/2026",
+        "vigenciaHasta": "31/10/2026",
+        "fechaCese": null,
+        "modalidadCese": null,
+        "tiempoServicio": null,
+        "domicilio": "Jirón Natividad 357A, Distrito de La Esperanza, Provincia de Trujillo, Departamento de La Libertad",
+        "celular": "945418636",
+        "correo": "laleshkarc07@gmail.com",
+        "banco": "BBVA",
+        "numeroCuenta": "001108140240704922",
+        "fechaNacimiento": "7/12/1999",
+        "edad": "25",
+        "carnetSanitario": "SI",
+        "adendas": [
+          {
+            "numero": "1RA ADENDA",
+            "archivo": "1RA ADENDA DE CONTRATO RODRIGUEZ NICOLE.docx",
+            "firma": "30/04/2026",
+            "inicio": "01/05/2026",
+            "fin": "31/07/2026",
+            "remuneracion": 2800,
+            "concepto": "Prórroga 3 meses"
+          },
+          {
+            "numero": "2DA ADENDA",
+            "archivo": "2DA ADENDA DE CONTRATO RODRIGUEZ NICOLE.docx",
+            "firma": "31/07/2026",
+            "inicio": "01/08/2026",
+            "fin": "31/10/2026",
+            "remuneracion": 2000,
+            "concepto": "Readecuación operativa y ajuste a S/ 2,000"
+          }
+        ],
+        "proximaAdenda": "3RA ADENDA",
+        "observaciones": "Colaborador activo con expediente auditado.",
+        "documentos": {
+          "contrato": {
+            "fileName": "GRUPO GASTRONOMICO AURORA SAC - CONTRATO - RODRIGUEZ CAPA NICOLE LALESHKA - 260201 - 260430 - 03.pdf",
+            "localUrl": "/docs/contratos/GRUPO%20GASTRONOMICO%20AURORA%20SAC%20-%20CONTRATO%20-%20RODRIGUEZ%20CAPA%20NICOLE%20LALESHKA%20-%20260201%20-%20260430%20-%2003.pdf",
+            "driveId": "1qEqMKN-BfcM2cXdft1noTYAF-ofV3nT1",
+            "driveUrl": "https://drive.google.com/file/d/1qEqMKN-BfcM2cXdft1noTYAF-ofV3nT1/view"
+          },
+          "adendas": [
+            {
+              "fileName": "1RA ADENDA DE CONTRATO RODRIGUEZ NICOLE.docx",
+              "localUrl": "/docs/adendas/1RA%20ADENDA%20DE%20CONTRATO%20RODRIGUEZ%20NICOLE.docx",
+              "driveId": "1VgVhULbr2tTnqAjuG3Zzv3RdchjceA3K",
+              "driveUrl": "https://drive.google.com/file/d/1VgVhULbr2tTnqAjuG3Zzv3RdchjceA3K/view"
+            },
+            {
+              "fileName": "2DA ADENDA DE CONTRATO RODRIGUEZ NICOLE.docx",
+              "localUrl": "/docs/adendas/2DA%20ADENDA%20DE%20CONTRATO%20RODRIGUEZ%20NICOLE.docx",
+              "driveId": "1fVdvwnpy-NYsDPrHMj0pealucK-GXo4G",
+              "driveUrl": "https://drive.google.com/file/d/1fVdvwnpy-NYsDPrHMj0pealucK-GXo4G/view"
+            },
+            {
+              "fileName": "3RA ADENDA DE CONTRATO RODRIGUEZ NICOLE.docx",
+              "localUrl": "/docs/adendas/3RA%20ADENDA%20DE%20CONTRATO%20RODRIGUEZ%20NICOLE.docx",
+              "driveId": "1GCuRb1vN7ZaKm4-7y37CWzX_MVcWhZJw",
+              "driveUrl": "https://drive.google.com/file/d/1GCuRb1vN7ZaKm4-7y37CWzX_MVcWhZJw/view"
+            }
+          ],
+          "memorandums": [],
+          "liquidacion": null,
+          "fotoDni": {
+            "fileName": "DNI_76766492_FOTO_DNI_NICOLE_RODRIGUEZ_CAPA.pdf",
+            "originalName": "FOTO DNI NICOLE RODRIGUEZ CAPA.pdf",
+            "localUrl": "/docs/dni/DNI_76766492_FOTO_DNI_NICOLE_RODRIGUEZ_CAPA.pdf",
+            "driveId": "1mcIjhS4Yz3Le6d0grXEd61TTBhAkxX6D",
+            "driveUrl": "https://drive.google.com/file/d/1mcIjhS4Yz3Le6d0grXEd61TTBhAkxX6D/view",
+            "isImage": false
+          }
+        }
+      },
+      {
+        "id": 5,
+        "nombre": "PEÑA ULLILEN EDWIN SMITH",
+        "dni": "74805963",
+        "area": "Bar",
+        "cargo": "Bartender",
+        "cargoContrato": "Bartender",
+        "condicionLaborable": "FULL TIME",
+        "condicionLaboral": "CONTRATO",
+        "sueldo": 1700,
+        "estado": "ACTIVO",
+        "estadoTexto": "Renovación Pendiente",
+        "semaforo": "naranja",
+        "fechaIngreso": "01/02/2026",
+        "finContratoBase": "30/04/2026",
+        "vigenciaHasta": "31/10/2026",
+        "fechaCese": null,
+        "modalidadCese": null,
+        "tiempoServicio": null,
+        "domicilio": "Avenida Alan García Villa Progreso Mz. 3A Lt. 7, Distrito de Huanchaco, Provincia de Trujillo, Departamento de La Libertad",
+        "celular": "927849153",
+        "correo": "edwim3889@gmail.com",
+        "banco": "BBVA",
+        "numeroCuenta": "001108140289732859",
+        "fechaNacimiento": "1/09/2002",
+        "edad": "23",
+        "carnetSanitario": "SI",
+        "adendas": [
+          {
+            "numero": "1RA ADENDA",
+            "archivo": "1RA ADENDA DE CONTRATO PEÑA EDWIN.docx",
+            "firma": "28/02/2026",
+            "inicio": "01/03/2026",
+            "fin": "30/04/2026",
+            "remuneracion": 1700,
+            "concepto": "Nivelación salarial a S/ 1,700"
+          },
+          {
+            "numero": "2DA ADENDA",
+            "archivo": "2DA ADENDA DE CONTRATO PEÑA EDWIN.docx",
+            "firma": "30/04/2026",
+            "inicio": "01/05/2026",
+            "fin": "31/07/2026",
+            "remuneracion": 1700,
+            "concepto": "Prórroga 3 meses"
+          },
+          {
+            "numero": "3RA ADENDA",
+            "archivo": "3RA ADENDA DE CONTRATO PEÑA EDWIN.docx",
+            "firma": "31/07/2026",
+            "inicio": "01/08/2026",
+            "fin": "31/10/2026",
+            "remuneracion": 1700,
+            "concepto": "Prórroga 3 meses"
+          }
+        ],
+        "proximaAdenda": "4TA ADENDA",
+        "observaciones": "Colaborador activo con expediente auditado.",
+        "documentos": {
+          "contrato": {
+            "fileName": "GRUPO GASTRONOMICO AURORA SAC - CONTRATO - PEÑA ULLILEN EDWIN SMITH - 260201 - 260430 - 03.pdf",
+            "localUrl": "/docs/contratos/GRUPO%20GASTRONOMICO%20AURORA%20SAC%20-%20CONTRATO%20-%20PE%C3%91A%20ULLILEN%20EDWIN%20SMITH%20-%20260201%20-%20260430%20-%2003.pdf",
+            "driveId": "1J0xCM9rGTSioy0HcSwC24sk5SoftSY1b",
+            "driveUrl": "https://drive.google.com/file/d/1J0xCM9rGTSioy0HcSwC24sk5SoftSY1b/view"
+          },
+          "adendas": [
+            {
+              "fileName": "1RA ADENDA DE CONTRATO PEÑA EDWIN.docx",
+              "localUrl": "/docs/adendas/1RA%20ADENDA%20DE%20CONTRATO%20PE%C3%91A%20EDWIN.docx",
+              "driveId": "1unQjhqoO6MmAGDdSZLx4q9_SkPZ4kTFR",
+              "driveUrl": "https://drive.google.com/file/d/1unQjhqoO6MmAGDdSZLx4q9_SkPZ4kTFR/view"
+            },
+            {
+              "fileName": "2DA ADENDA DE CONTRATO PEÑA EDWIN.docx",
+              "localUrl": "/docs/adendas/2DA%20ADENDA%20DE%20CONTRATO%20PE%C3%91A%20EDWIN.docx",
+              "driveId": "10AlvVlRk77FY3qPYXp5ZPdPYdaGq4mO0",
+              "driveUrl": "https://drive.google.com/file/d/10AlvVlRk77FY3qPYXp5ZPdPYdaGq4mO0/view"
+            },
+            {
+              "fileName": "3RA ADENDA DE CONTRATO PEÑA EDWIN.docx",
+              "localUrl": "/docs/adendas/3RA%20ADENDA%20DE%20CONTRATO%20PE%C3%91A%20EDWIN.docx",
+              "driveId": "1X0I7ZtyVpGnpLrIwyfCSsekoLuuLGEDs",
+              "driveUrl": "https://drive.google.com/file/d/1X0I7ZtyVpGnpLrIwyfCSsekoLuuLGEDs/view"
+            },
+            {
+              "fileName": "4TA ADENDA DE CONTRATO PEÑA EDWIN.docx",
+              "localUrl": "/docs/adendas/4TA%20ADENDA%20DE%20CONTRATO%20PE%C3%91A%20EDWIN.docx",
+              "driveId": "1fpvdxcs0F-Q7UB-1Oi_Wz9KiFlWKjFYE",
+              "driveUrl": "https://drive.google.com/file/d/1fpvdxcs0F-Q7UB-1Oi_Wz9KiFlWKjFYE/view"
+            }
+          ],
+          "memorandums": [],
+          "liquidacion": null,
+          "fotoDni": {
+            "fileName": "DNI_74805963_Dni_edwin_-_Edwin_Pe_a__Edwin_Pe_a_.pdf",
+            "originalName": "Dni edwin - Edwin Peña (Edwin Peña).pdf",
+            "localUrl": "/docs/dni/DNI_74805963_Dni_edwin_-_Edwin_Pe_a__Edwin_Pe_a_.pdf",
+            "driveId": "1NtFo1N5peccRkToKLApnxFVoOS6cpTau",
+            "driveUrl": "https://drive.google.com/file/d/1NtFo1N5peccRkToKLApnxFVoOS6cpTau/view",
+            "isImage": false
+          }
+        }
+      },
+      {
+        "id": 6,
+        "nombre": "SANCHEZ VASQUEZ BRYAM ARMANDO",
+        "dni": "70378576",
+        "area": "Bar",
+        "cargo": "Bartender",
+        "cargoContrato": "Bartender",
+        "condicionLaborable": "FULL TIME",
+        "condicionLaboral": "CONTRATO",
+        "sueldo": 1700,
+        "estado": "ACTIVO",
+        "estadoTexto": "Renovación Pendiente",
+        "semaforo": "naranja",
+        "fechaIngreso": "01/02/2026",
+        "finContratoBase": "30/04/2026",
+        "vigenciaHasta": "31/10/2026",
+        "fechaCese": null,
+        "modalidadCese": null,
+        "tiempoServicio": null,
+        "domicilio": "Avenida 24 de Abril 1001, Distrito de Florencia de Mora, Provincia de Trujillo, Departamento de La Libertad",
+        "celular": "967576133",
+        "correo": "virgog548@gmail.com",
+        "banco": "BBVA",
+        "numeroCuenta": "001108140289698790",
+        "fechaNacimiento": "24/08/2000",
+        "edad": "25",
+        "carnetSanitario": "SI",
+        "adendas": [
+          {
+            "numero": "1RA ADENDA",
+            "archivo": "1RA ADENDA DE CONTRATO SANCHEZ BRYAM.docx",
+            "firma": "28/02/2026",
+            "inicio": "01/03/2026",
+            "fin": "30/04/2026",
+            "remuneracion": 1700,
+            "concepto": "Nivelación salarial a S/ 1,700"
+          },
+          {
+            "numero": "2DA ADENDA",
+            "archivo": "2DA ADENDA DE CONTRATO SANCHEZ BRYAM.docx",
+            "firma": "30/04/2026",
+            "inicio": "01/05/2026",
+            "fin": "31/07/2026",
+            "remuneracion": 1700,
+            "concepto": "Prórroga 3 meses"
+          },
+          {
+            "numero": "3RA ADENDA",
+            "archivo": "3RA ADENDA DE CONTRATO SANCHEZ BRYAM.docx",
+            "firma": "31/07/2026",
+            "inicio": "01/08/2026",
+            "fin": "31/10/2026",
+            "remuneracion": 1700,
+            "concepto": "Prórroga 3 meses"
+          }
+        ],
+        "proximaAdenda": "4TA ADENDA",
+        "observaciones": "Colaborador activo con expediente auditado.",
+        "documentos": {
+          "contrato": {
+            "fileName": "GRUPO GASTRONOMICO AURORA SAC - CONTRATO - SANCHEZ VASQUEZ BRYAM ARMANDO - 260201 - 260430 - 03.pdf",
+            "localUrl": "/docs/contratos/GRUPO%20GASTRONOMICO%20AURORA%20SAC%20-%20CONTRATO%20-%20SANCHEZ%20VASQUEZ%20BRYAM%20ARMANDO%20-%20260201%20-%20260430%20-%2003.pdf",
+            "driveId": "1I8tMuWUapeLNIEm59Ya_b1DzKQ6XFcXb",
+            "driveUrl": "https://drive.google.com/file/d/1I8tMuWUapeLNIEm59Ya_b1DzKQ6XFcXb/view"
+          },
+          "adendas": [
+            {
+              "fileName": "1RA ADENDA DE CONTRATO SANCHEZ BRYAM.docx",
+              "localUrl": "/docs/adendas/1RA%20ADENDA%20DE%20CONTRATO%20SANCHEZ%20BRYAM.docx",
+              "driveId": "1Ml2_BUpwi4s_g84zGi7vZXhKqtVcZas6",
+              "driveUrl": "https://drive.google.com/file/d/1Ml2_BUpwi4s_g84zGi7vZXhKqtVcZas6/view"
+            },
+            {
+              "fileName": "2DA ADENDA DE CONTRATO SANCHEZ BRYAM.docx",
+              "localUrl": "/docs/adendas/2DA%20ADENDA%20DE%20CONTRATO%20SANCHEZ%20BRYAM.docx",
+              "driveId": "1TvHye46Pzro8lFMZbs8PeZl62OAQISzG",
+              "driveUrl": "https://drive.google.com/file/d/1TvHye46Pzro8lFMZbs8PeZl62OAQISzG/view"
+            },
+            {
+              "fileName": "3RA ADENDA DE CONTRATO SANCHEZ BRYAM.docx",
+              "localUrl": "/docs/adendas/3RA%20ADENDA%20DE%20CONTRATO%20SANCHEZ%20BRYAM.docx",
+              "driveId": "1ko1hsUPcuHbpCubRYNwpIjFqznK57P5_",
+              "driveUrl": "https://drive.google.com/file/d/1ko1hsUPcuHbpCubRYNwpIjFqznK57P5_/view"
+            },
+            {
+              "fileName": "4TA ADENDA DE CONTRATO SANCHEZ BRYAM.docx",
+              "localUrl": "/docs/adendas/4TA%20ADENDA%20DE%20CONTRATO%20SANCHEZ%20BRYAM.docx",
+              "driveId": "1uG_sQdrhYLGQKqtyJB0NehZGYbrTrkcG",
+              "driveUrl": "https://drive.google.com/file/d/1uG_sQdrhYLGQKqtyJB0NehZGYbrTrkcG/view"
+            }
+          ],
+          "memorandums": [],
+          "liquidacion": null,
+          "fotoDni": {
+            "fileName": "DNI_70378576_Dni_-_Bryam_Sanchez.pdf",
+            "originalName": "Dni - Bryam Sanchez.pdf",
+            "localUrl": "/docs/dni/DNI_70378576_Dni_-_Bryam_Sanchez.pdf",
+            "driveId": "18ovmKz3XF-tCl5iqkT98DrpNP97FG86U",
+            "driveUrl": "https://drive.google.com/file/d/18ovmKz3XF-tCl5iqkT98DrpNP97FG86U/view",
+            "isImage": false
+          }
+        }
+      },
+      {
+        "id": 7,
+        "nombre": "ABAD ALVAREZ XIOMARA SOLANGE",
+        "dni": "48306117",
+        "area": "Caja",
+        "cargo": "Cajera",
+        "cargoContrato": "Cajera",
+        "condicionLaborable": "FULL TIME",
+        "condicionLaboral": "CONTRATO",
+        "sueldo": 1500,
+        "estado": "ACTIVO",
+        "estadoTexto": "Renovación Pendiente",
+        "semaforo": "naranja",
+        "fechaIngreso": "01/02/2026",
+        "finContratoBase": "30/04/2026",
+        "vigenciaHasta": "31/10/2026",
+        "fechaCese": null,
+        "modalidadCese": null,
+        "tiempoServicio": null,
+        "domicilio": "Urbanización Rosas del Valle 1 Etapa Mz. E Lt. 15, Distrito de Trujillo, Provincia de Trujillo, Departamento de La Libertad",
+        "celular": "943474368",
+        "correo": "xiomisag@hotmail.com",
+        "banco": "BBVA",
+        "numeroCuenta": "001109000200595680",
+        "fechaNacimiento": "23/03/1994",
+        "edad": "31",
+        "carnetSanitario": "NO",
+        "adendas": [
+          {
+            "numero": "1RA ADENDA",
+            "archivo": "1RA ADENDA DE CONTRATO ABAD XIOMARA.docx",
+            "firma": "30/04/2026",
+            "inicio": "01/05/2026",
+            "fin": "31/07/2026",
+            "remuneracion": 1500,
+            "concepto": "Prórroga 3 meses"
+          },
+          {
+            "numero": "2DA ADENDA",
+            "archivo": "2DA ADENDA DE CONTRATO ABAD XIOMARA.docx",
+            "firma": "31/07/2026",
+            "inicio": "01/08/2026",
+            "fin": "31/10/2026",
+            "remuneracion": 1500,
+            "concepto": "Prórroga 3 meses"
+          }
+        ],
+        "proximaAdenda": "3RA ADENDA",
+        "observaciones": "Colaborador activo con expediente auditado.",
+        "documentos": {
+          "contrato": {
+            "fileName": "GRUPO GASTRONOMICO AURORA SAC - CONTRATO - ABAD ALVAREZ XIOMARA SOLANGE - 260201 - 260430 - 03.pdf",
+            "localUrl": "/docs/contratos/GRUPO%20GASTRONOMICO%20AURORA%20SAC%20-%20CONTRATO%20-%20ABAD%20ALVAREZ%20XIOMARA%20SOLANGE%20-%20260201%20-%20260430%20-%2003.pdf",
+            "driveId": "1r-0Uh5Gn17tKaA5q6W3dFY1qf0OSunMj",
+            "driveUrl": "https://drive.google.com/file/d/1r-0Uh5Gn17tKaA5q6W3dFY1qf0OSunMj/view"
+          },
+          "adendas": [
+            {
+              "fileName": "1RA ADENDA DE CONTRATO ABAD XIOMARA.docx",
+              "localUrl": "/docs/adendas/1RA%20ADENDA%20DE%20CONTRATO%20ABAD%20XIOMARA.docx",
+              "driveId": "117KaBda5VpANueifPngeThPTl9BPT4Xd",
+              "driveUrl": "https://drive.google.com/file/d/117KaBda5VpANueifPngeThPTl9BPT4Xd/view"
+            },
+            {
+              "fileName": "2DA ADENDA DE CONTRATO ABAD XIOMARA.docx",
+              "localUrl": "/docs/adendas/2DA%20ADENDA%20DE%20CONTRATO%20ABAD%20XIOMARA.docx",
+              "driveId": "1zGhllguTzEWPqxnAj5if1pAXvRl-64rq",
+              "driveUrl": "https://drive.google.com/file/d/1zGhllguTzEWPqxnAj5if1pAXvRl-64rq/view"
+            },
+            {
+              "fileName": "3RA ADENDA DE CONTRATO ABAD XIOMARA.docx",
+              "localUrl": "/docs/adendas/3RA%20ADENDA%20DE%20CONTRATO%20ABAD%20XIOMARA.docx",
+              "driveId": "11y8RDQzmTaMFFf-d-kbh3EMwCy0jIRXN",
+              "driveUrl": "https://drive.google.com/file/d/11y8RDQzmTaMFFf-d-kbh3EMwCy0jIRXN/view"
+            }
+          ],
+          "memorandums": [],
+          "liquidacion": null,
+          "fotoDni": {
+            "fileName": "DNI_48306117_Solange_-_xiomara_abad_alvarez.pdf",
+            "originalName": "Solange - xiomara abad alvarez.pdf",
+            "localUrl": "/docs/dni/DNI_48306117_Solange_-_xiomara_abad_alvarez.pdf",
+            "driveId": "1S0pnisnhWBCeKkXwinmdvl3LYM0UUbHt",
+            "driveUrl": "https://drive.google.com/file/d/1S0pnisnhWBCeKkXwinmdvl3LYM0UUbHt/view",
+            "isImage": false
+          }
+        }
+      },
+      {
+        "id": 8,
+        "nombre": "BAZAN RODRIGUEZ ALAN IMANOL",
+        "dni": "60877846",
+        "area": "Salón",
+        "cargo": "Mozo",
+        "cargoContrato": "Ayudante de Mozo",
+        "condicionLaborable": "FULL TIME",
+        "condicionLaboral": "CONTRATO",
+        "sueldo": 1500,
+        "estado": "ACTIVO",
+        "estadoTexto": "Renovación Pendiente",
+        "semaforo": "naranja",
+        "fechaIngreso": "12/02/2026",
+        "finContratoBase": "11/05/2026",
+        "vigenciaHasta": "31/10/2026",
+        "fechaCese": null,
+        "modalidadCese": null,
+        "tiempoServicio": null,
+        "domicilio": "Calle Fermín Tangüis 490 Urbanización Chimú Mz. J1 Lt. 13, Distrito de Trujillo, Provincia de Trujillo, Departamento de La Libertad",
+        "celular": "996073090",
+        "correo": "micaminoninja.br@gmail.com",
+        "banco": "BCP INT",
+        "numeroCuenta": "00257010655745604604",
+        "fechaNacimiento": "18/10/2006",
+        "edad": "19",
+        "carnetSanitario": "NO",
+        "adendas": [
+          {
+            "numero": "1RA ADENDA",
+            "archivo": "1RA ADENDA DE CONTRATO BAZAN ALAN.docx",
+            "firma": "30/04/2026",
+            "inicio": "01/05/2026",
+            "fin": "31/07/2026",
+            "remuneracion": 1500,
+            "concepto": "Ascenso a Mozo y aumento a S/ 1,500"
+          },
+          {
+            "numero": "2DA ADENDA",
+            "archivo": "2DA ADENDA DE CONTRATO BAZAN ALAN.docx",
+            "firma": "31/07/2026",
+            "inicio": "01/08/2026",
+            "fin": "31/10/2026",
+            "remuneracion": 1500,
+            "concepto": "Prórroga 3 meses"
+          }
+        ],
+        "proximaAdenda": "3RA ADENDA",
+        "observaciones": "Colaborador activo con expediente auditado.",
+        "documentos": {
+          "contrato": {
+            "fileName": "GRUPO GASTRONOMICO AURORA SAC - CONTRATO - BAZAN RODRIGUEZ ALAN IMANOL - 260212 - 260511 - 03.pdf",
+            "localUrl": "/docs/contratos/GRUPO%20GASTRONOMICO%20AURORA%20SAC%20-%20CONTRATO%20-%20BAZAN%20RODRIGUEZ%20ALAN%20IMANOL%20-%20260212%20-%20260511%20-%2003.pdf",
+            "driveId": "1ptxXNbPId4dYqeaWU6_ZQxcXJV1W-1GI",
+            "driveUrl": "https://drive.google.com/file/d/1ptxXNbPId4dYqeaWU6_ZQxcXJV1W-1GI/view"
+          },
+          "adendas": [
+            {
+              "fileName": "1RA ADENDA DE CONTRATO BAZAN ALAN.docx",
+              "localUrl": "/docs/adendas/1RA%20ADENDA%20DE%20CONTRATO%20BAZAN%20ALAN.docx",
+              "driveId": "15-hLrNPJ0LVqgRIGuVG2tmTjhGKRO8gH",
+              "driveUrl": "https://drive.google.com/file/d/15-hLrNPJ0LVqgRIGuVG2tmTjhGKRO8gH/view"
+            },
+            {
+              "fileName": "2DA ADENDA DE CONTRATO BAZAN ALAN.docx",
+              "localUrl": "/docs/adendas/2DA%20ADENDA%20DE%20CONTRATO%20BAZAN%20ALAN.docx",
+              "driveId": "1svw39LX4l3r00txDgrZYmKt_B2CNkOKQ",
+              "driveUrl": "https://drive.google.com/file/d/1svw39LX4l3r00txDgrZYmKt_B2CNkOKQ/view"
+            },
+            {
+              "fileName": "3RA ADENDA DE CONTRATO BAZAN ALAN.docx",
+              "localUrl": "/docs/adendas/3RA%20ADENDA%20DE%20CONTRATO%20BAZAN%20ALAN.docx",
+              "driveId": "1DihHdcnhrOEs56fMPpf0ofoFc-lfBCUH",
+              "driveUrl": "https://drive.google.com/file/d/1DihHdcnhrOEs56fMPpf0ofoFc-lfBCUH/view"
+            }
+          ],
+          "memorandums": [],
+          "liquidacion": null,
+          "fotoDni": {
+            "fileName": "DNI_60877846_IMG_20260220_014555_-_ALAN_IMANOL_BAZAN.jpg",
+            "originalName": "IMG_20260220_014555 - ALAN IMANOL BAZAN.jpg",
+            "localUrl": "/docs/dni/DNI_60877846_IMG_20260220_014555_-_ALAN_IMANOL_BAZAN.jpg",
+            "driveId": "1xD8RdIpQoSlstcfSdyiV9B1eHL6zqSBw",
+            "driveUrl": "https://drive.google.com/file/d/1xD8RdIpQoSlstcfSdyiV9B1eHL6zqSBw/view",
+            "isImage": true
+          }
+        }
+      },
+      {
+        "id": 9,
+        "nombre": "ORBEGOSO CASSANO GEORGE ALDAIR",
+        "dni": "70287707",
+        "area": "Salón",
+        "cargo": "Mozo",
+        "cargoContrato": "Mozo",
+        "condicionLaborable": "FULL TIME",
+        "condicionLaboral": "CONTRATO",
+        "sueldo": 1500,
+        "estado": "ACTIVO",
+        "estadoTexto": "Renovación Pendiente",
+        "semaforo": "naranja",
+        "fechaIngreso": "01/02/2026",
+        "finContratoBase": "30/04/2026",
+        "vigenciaHasta": "31/10/2026",
+        "fechaCese": null,
+        "modalidadCese": null,
+        "tiempoServicio": null,
+        "domicilio": "San Pablo 480, Distrito de La Esperanza, Provincia de Trujillo, Departamento de La Libertad",
+        "celular": "936378773",
+        "correo": "georgecassano50@gmail.com",
+        "banco": "BBVA",
+        "numeroCuenta": "001105790223855562",
+        "fechaNacimiento": "28/01/1997",
+        "edad": "27",
+        "carnetSanitario": "SI",
+        "adendas": [
+          {
+            "numero": "1RA ADENDA",
+            "archivo": "1RA ADENDA DE CONTRATO ORBEGOSO ALDAIR.docx",
+            "firma": "30/04/2026",
+            "inicio": "01/05/2026",
+            "fin": "31/07/2026",
+            "remuneracion": 1500,
+            "concepto": "Prórroga 3 meses"
+          },
+          {
+            "numero": "2DA ADENDA",
+            "archivo": "2DA ADENDA DE CONTRATO ORBEGOSO ALDAIR.docx",
+            "firma": "31/07/2026",
+            "inicio": "01/08/2026",
+            "fin": "31/10/2026",
+            "remuneracion": 1500,
+            "concepto": "Prórroga 3 meses"
+          }
+        ],
+        "proximaAdenda": "3RA ADENDA",
+        "observaciones": "Colaborador activo con expediente auditado.",
+        "documentos": {
+          "contrato": {
+            "fileName": "GRUPO GASTRONOMICO AURORA SAC - CONTRATO - ORBEGOSO CASSANO GEORGE ALDAIR - 260201 - 260430 - 03.pdf",
+            "localUrl": "/docs/contratos/GRUPO%20GASTRONOMICO%20AURORA%20SAC%20-%20CONTRATO%20-%20ORBEGOSO%20CASSANO%20GEORGE%20ALDAIR%20-%20260201%20-%20260430%20-%2003.pdf",
+            "driveId": "1QalGBt18E_guf-iWqTo-pY7KxbZdFShe",
+            "driveUrl": "https://drive.google.com/file/d/1QalGBt18E_guf-iWqTo-pY7KxbZdFShe/view"
+          },
+          "adendas": [
+            {
+              "fileName": "1RA ADENDA DE CONTRATO ORBEGOSO ALDAIR.docx",
+              "localUrl": "/docs/adendas/1RA%20ADENDA%20DE%20CONTRATO%20ORBEGOSO%20ALDAIR.docx",
+              "driveId": "1bwocZI2u7DA8cOLn8vNjOmy_nrDXulQC",
+              "driveUrl": "https://drive.google.com/file/d/1bwocZI2u7DA8cOLn8vNjOmy_nrDXulQC/view"
+            },
+            {
+              "fileName": "2DA ADENDA DE CONTRATO ORBEGOSO ALDAIR.docx",
+              "localUrl": "/docs/adendas/2DA%20ADENDA%20DE%20CONTRATO%20ORBEGOSO%20ALDAIR.docx",
+              "driveId": "1Y50gFQ_K29-7jBb914OgEVUNyYfX6Yfk",
+              "driveUrl": "https://drive.google.com/file/d/1Y50gFQ_K29-7jBb914OgEVUNyYfX6Yfk/view"
+            },
+            {
+              "fileName": "3RA ADENDA DE CONTRATO ORBEGOSO ALDAIR.docx",
+              "localUrl": "/docs/adendas/3RA%20ADENDA%20DE%20CONTRATO%20ORBEGOSO%20ALDAIR.docx",
+              "driveId": "1x-if6mosHlykC1ejVHaZj5m6IotE5tK4",
+              "driveUrl": "https://drive.google.com/file/d/1x-if6mosHlykC1ejVHaZj5m6IotE5tK4/view"
+            }
+          ],
+          "memorandums": [],
+          "liquidacion": null,
+          "fotoDni": {
+            "fileName": "DNI_70287707_dni_aldair.pdf",
+            "originalName": "dni aldair.pdf",
+            "localUrl": "/docs/dni/DNI_70287707_dni_aldair.pdf",
+            "driveId": "1D-GYIdTQsO6v5NwkDqvb3Sf72WUhWKXe",
+            "driveUrl": "https://drive.google.com/file/d/1D-GYIdTQsO6v5NwkDqvb3Sf72WUhWKXe/view",
+            "isImage": false
+          }
+        }
+      },
+      {
+        "id": 10,
+        "nombre": "ESQUIVEL RODRIGUEZ KARLA DAYAN",
+        "dni": "73576771",
+        "area": "Cocina / Salón",
+        "cargo": "Ensaladero / Atención",
+        "cargoContrato": "Ensaladero / Atención",
+        "condicionLaborable": "FULL TIME",
+        "condicionLaboral": "CONTRATO",
+        "sueldo": 1400,
+        "estado": "ACTIVO",
+        "estadoTexto": "Renovación Pendiente",
+        "semaforo": "naranja",
+        "fechaIngreso": "01/02/2026",
+        "finContratoBase": "30/04/2026",
+        "vigenciaHasta": "30/09/2026",
+        "fechaCese": null,
+        "modalidadCese": null,
+        "tiempoServicio": null,
+        "domicilio": "Asentamiento Humano Pesqueda Sector III Mz. 04 Lt. 18, Distrito de Trujillo, Provincia de Trujillo, Departamento de La Libertad",
+        "celular": "938736231",
+        "correo": "karladayanarodriguez.25@gmail.com",
+        "banco": "BBVA",
+        "numeroCuenta": "001108140289893763",
+        "fechaNacimiento": "25/08/2003",
+        "edad": "22",
+        "carnetSanitario": "SI",
+        "adendas": [
+          {
+            "numero": "1RA ADENDA",
+            "archivo": "1era ADENDA DE CONTRATO ESQUIVEL RODRIGUEZ KARLA DAYAN.docx",
+            "firma": "30/04/2026",
+            "inicio": "01/05/2026",
+            "fin": "31/07/2026",
+            "remuneracion": 1400,
+            "concepto": "Prórroga 3 meses"
+          },
+          {
+            "numero": "2DA ADENDA",
+            "archivo": "2DA ADENDA DE CONTRATO ESQUIVEL RODRIGUEZ KARLA DAYAN.docx",
+            "firma": "31/07/2026",
+            "inicio": "01/08/2026",
+            "fin": "31/08/2026",
+            "remuneracion": 1400,
+            "concepto": "Prórroga 1 mes"
+          },
+          {
+            "numero": "3RA ADENDA",
+            "archivo": "3RA ADENDA DE CONTRATO ESQUIVEL RODRIGUEZ KARLA DAYAN.docx",
+            "firma": "31/08/2026",
+            "inicio": "01/09/2026",
+            "fin": "30/09/2026",
+            "remuneracion": 1400,
+            "concepto": "Prórroga 1 mes"
+          }
+        ],
+        "proximaAdenda": "4TA ADENDA",
+        "observaciones": "Colaborador activo con expediente auditado.",
+        "documentos": {
+          "contrato": {
+            "fileName": "GRUPO GASTRONOMICO AURORA SAC - CONTRATO - ESQUIVEL RODRIGUEZ KARLA DAYAN - 260201 - 260430 - 03.pdf",
+            "localUrl": "/docs/contratos/GRUPO%20GASTRONOMICO%20AURORA%20SAC%20-%20CONTRATO%20-%20ESQUIVEL%20RODRIGUEZ%20KARLA%20DAYAN%20-%20260201%20-%20260430%20-%2003.pdf",
+            "driveId": "1pQVn2vOcftC6AGNDRJ-HdR-O8_HlekNe",
+            "driveUrl": "https://drive.google.com/file/d/1pQVn2vOcftC6AGNDRJ-HdR-O8_HlekNe/view"
+          },
+          "adendas": [
+            {
+              "fileName": "1era ADENDA DE CONTRATO ESQUIVEL RODRIGUEZ KARLA DAYAN.docx",
+              "localUrl": "/docs/adendas/1era%20ADENDA%20DE%20CONTRATO%20ESQUIVEL%20RODRIGUEZ%20KARLA%20DAYAN.docx",
+              "driveId": "1pG7tF9DwdcvxgSjUkXL0QwLW_EdWKyV-",
+              "driveUrl": "https://drive.google.com/file/d/1pG7tF9DwdcvxgSjUkXL0QwLW_EdWKyV-/view"
+            },
+            {
+              "fileName": "2DA ADENDA DE CONTRATO ESQUIVEL RODRIGUEZ KARLA DAYAN.docx",
+              "localUrl": "/docs/adendas/2DA%20ADENDA%20DE%20CONTRATO%20ESQUIVEL%20RODRIGUEZ%20KARLA%20DAYAN.docx",
+              "driveId": "1pZ08ECg91WrApJF-M57OdVf1DJ3BFzPj",
+              "driveUrl": "https://drive.google.com/file/d/1pZ08ECg91WrApJF-M57OdVf1DJ3BFzPj/view"
+            },
+            {
+              "fileName": "3RA ADENDA DE CONTRATO ESQUIVEL RODRIGUEZ KARLA DAYAN.docx",
+              "localUrl": "/docs/adendas/3RA%20ADENDA%20DE%20CONTRATO%20ESQUIVEL%20RODRIGUEZ%20KARLA%20DAYAN.docx",
+              "driveId": "154gWRip22IJ8s9yKp4MhHKaPdlTKaszQ",
+              "driveUrl": "https://drive.google.com/file/d/154gWRip22IJ8s9yKp4MhHKaPdlTKaszQ/view"
+            },
+            {
+              "fileName": "4TA ADENDA DE CONTRATO ESQUIVEL KARLA DAYAN.docx",
+              "localUrl": "/docs/adendas/4TA%20ADENDA%20DE%20CONTRATO%20ESQUIVEL%20KARLA%20DAYAN.docx",
+              "driveId": "1tgiVeZS74RCIzrcrmbFyaMR248LVeVR8",
+              "driveUrl": "https://drive.google.com/file/d/1tgiVeZS74RCIzrcrmbFyaMR248LVeVR8/view"
+            }
+          ],
+          "memorandums": [],
+          "liquidacion": null,
+          "fotoDni": {
+            "fileName": "DNI_73576771_Dni_-_Dayana_Rodriguez.pdf",
+            "originalName": "Dni - Dayana Rodriguez.pdf",
+            "localUrl": "/docs/dni/DNI_73576771_Dni_-_Dayana_Rodriguez.pdf",
+            "driveId": "1DFttTH8HFdtAnqWZ_cdf0R28no68odsp",
+            "driveUrl": "https://drive.google.com/file/d/1DFttTH8HFdtAnqWZ_cdf0R28no68odsp/view",
+            "isImage": false
+          }
+        }
+      },
+      {
+        "id": 11,
+        "nombre": "CUEVA HUAMAN ANDREA XIMENA FRANCHESCA",
+        "dni": "70405132",
+        "area": "Recepción",
+        "cargo": "Anfitrión",
+        "cargoContrato": "Anfitrión",
+        "condicionLaborable": "FULL TIME",
+        "condicionLaboral": "CONTRATO",
+        "sueldo": 1500,
+        "estado": "CESADO",
+        "estadoTexto": "Cesado (31/05/2026)",
+        "semaforo": "gris",
+        "fechaIngreso": "09/02/2026",
+        "finContratoBase": "08/05/2026",
+        "vigenciaHasta": "31/05/2026",
+        "fechaCese": "31/05/2026",
+        "modalidadCese": "Cese de Labores al 31/05/2026",
+        "tiempoServicio": "3 meses y 22 días (09/02/2026 al 31/05/2026)",
+        "domicilio": "Mz. C Lt. 10 Urbanización Manuel Arévalo III Etapa, Distrito de La Esperanza, Provincia de Trujillo, Departamento de La Libertad",
+        "celular": "970814983",
+        "correo": "ximena.10leo@hotmail.com",
+        "banco": "BCP INT",
+        "numeroCuenta": "00257010626237108100",
+        "fechaNacimiento": "23/08/2003",
+        "edad": "22",
+        "carnetSanitario": "NO",
+        "adendas": [
+          {
+            "numero": "ADENDA V.1",
+            "archivo": "ADENDA DE CONTRATO CUEVA ANDREA V.1.docx",
+            "firma": "28/05/2026",
+            "inicio": "09/05/2026",
+            "fin": "31/05/2026",
+            "remuneracion": 1500,
+            "concepto": "Prórroga y cese de labores al 31/05/2026"
+          }
+        ],
+        "proximaAdenda": "N/A",
+        "observaciones": "Cese de labores convenido al 31 de mayo de 2026",
+        "documentos": {
+          "contrato": {
+            "fileName": "GRUPO GASTRONOMICO AURORA SAC - CONTRATO - CUEVA HUAMAN ANDREA XIMENA FRANCHESCA - 260209 - 260508 - 03.pdf",
+            "localUrl": "/docs/contratos/GRUPO%20GASTRONOMICO%20AURORA%20SAC%20-%20CONTRATO%20-%20CUEVA%20HUAMAN%20ANDREA%20XIMENA%20FRANCHESCA%20-%20260209%20-%20260508%20-%2003.pdf",
+            "driveId": "1CcI3mXKR5vNMGj-h3GGIwCM4nnyn0TxX",
+            "driveUrl": "https://drive.google.com/file/d/1CcI3mXKR5vNMGj-h3GGIwCM4nnyn0TxX/view"
+          },
+          "adendas": [
+            {
+              "fileName": "ADENDA DE CONTRATO CUEVA ANDREA V.1.docx",
+              "localUrl": "/docs/adendas/ADENDA%20DE%20CONTRATO%20CUEVA%20ANDREA%20V.1.docx",
+              "driveId": "1hVMet89QtdG96qAJW0IS8sMT8MT4MD3Y",
+              "driveUrl": "https://drive.google.com/file/d/1hVMet89QtdG96qAJW0IS8sMT8MT4MD3Y/view"
+            }
+          ],
+          "memorandums": [],
+          "liquidacion": {
+            "fileName": "LIQUIDACION_BBSS_70405132_CUEVA.html",
+            "localUrl": "/docs/liquidaciones/LIQUIDACION_BBSS_70405132_CUEVA.html",
+            "driveId": "1aXeGdrgEzjF2-ZriFo_mGNOlj431x2eF",
+            "driveUrl": "https://drive.google.com/file/d/1aXeGdrgEzjF2-ZriFo_mGNOlj431x2eF/view"
+          },
+          "fotoDni": {
+            "fileName": "DNI_70405132_DNI_ANDREA_-_Andrea_Cueva.pdf",
+            "originalName": "DNI ANDREA - Andrea Cueva.pdf",
+            "localUrl": "/docs/dni/DNI_70405132_DNI_ANDREA_-_Andrea_Cueva.pdf",
+            "driveId": "1iZDRq9H4DRDV8_BDk1cdYEUQBgZAkCMg",
+            "driveUrl": "https://drive.google.com/file/d/1iZDRq9H4DRDV8_BDk1cdYEUQBgZAkCMg/view",
+            "isImage": false
+          }
+        }
+      },
+      {
+        "id": 12,
+        "nombre": "CERNA ALVITES BRAYAN SEBASTIAN",
+        "dni": "74968621",
+        "area": "Cocina",
+        "cargo": "Freidor",
+        "cargoContrato": "Freidor",
+        "condicionLaborable": "FULL TIME",
+        "condicionLaboral": "CONTRATO",
+        "sueldo": 1500,
+        "estado": "CESADO",
+        "estadoTexto": "Cesado (31/08/2026)",
+        "semaforo": "gris",
+        "fechaIngreso": "01/02/2026",
+        "finContratoBase": "30/04/2026",
+        "vigenciaHasta": "31/08/2026",
+        "fechaCese": "31/08/2026",
+        "modalidadCese": "Adenda Improrrogable",
+        "tiempoServicio": null,
+        "domicilio": "Calle Atahualpa 511 Int. 1 Barrio Chicago, Distrito de Trujillo, Provincia de Trujillo, Departamento de La Libertad",
+        "celular": "912013101",
+        "correo": "sebastianalvitez393@gmail.com",
+        "banco": "BBVA",
+        "numeroCuenta": "001108140271794768",
+        "fechaNacimiento": "21/07/2001",
+        "edad": "24",
+        "carnetSanitario": "NO",
+        "adendas": [],
+        "proximaAdenda": "N/A",
+        "observaciones": "Vínculo laboral concluido.",
+        "documentos": {
+          "contrato": {
+            "fileName": "GRUPO GASTRONOMICO AURORA SAC - CONTRATO - CERNA ALVITES BRAYAN SEBASTIAN - 260201 - 260430 - 03.pdf",
+            "localUrl": "/docs/contratos/GRUPO%20GASTRONOMICO%20AURORA%20SAC%20-%20CONTRATO%20-%20CERNA%20ALVITES%20BRAYAN%20SEBASTIAN%20-%20260201%20-%20260430%20-%2003.pdf",
+            "driveId": "1sparFKIqh5qMKtAijU2oEHwDRIin7ks2",
+            "driveUrl": "https://drive.google.com/file/d/1sparFKIqh5qMKtAijU2oEHwDRIin7ks2/view"
+          },
+          "adendas": [
+            {
+              "fileName": "1RA ADENDA DE CONTRATO CERNA SEBASTIAN.docx",
+              "localUrl": "/docs/adendas/1RA%20ADENDA%20DE%20CONTRATO%20CERNA%20SEBASTIAN.docx",
+              "driveId": "1vra4kR4gqyuFXY7Co0_8mUG5Gm7upppD",
+              "driveUrl": "https://drive.google.com/file/d/1vra4kR4gqyuFXY7Co0_8mUG5Gm7upppD/view"
+            },
+            {
+              "fileName": "2DA ADENDA DE CONTRATO CERNA SEBASTIAN.docx",
+              "localUrl": "/docs/adendas/2DA%20ADENDA%20DE%20CONTRATO%20CERNA%20SEBASTIAN.docx",
+              "driveId": "1_nocGdKpSFUOjP883opNMh1SFY1u6XX1",
+              "driveUrl": "https://drive.google.com/file/d/1_nocGdKpSFUOjP883opNMh1SFY1u6XX1/view"
+            }
+          ],
+          "memorandums": [],
+          "liquidacion": {
+            "fileName": "LIQUIDACION_BBSS_74968621_CERNA.html",
+            "localUrl": "/docs/liquidaciones/LIQUIDACION_BBSS_74968621_CERNA.html",
+            "driveId": "1cb_13D7MZ16aJZGLzjXxhyCNZMLJEAtL",
+            "driveUrl": "https://drive.google.com/file/d/1cb_13D7MZ16aJZGLzjXxhyCNZMLJEAtL/view"
+          },
+          "fotoDni": {
+            "fileName": "DNI_74968621_FOTOS_DNI_SEBASTIAN_CERNA_ALVITES.pdf",
+            "originalName": "FOTOS DNI SEBASTIAN CERNA ALVITES.pdf",
+            "localUrl": "/docs/dni/DNI_74968621_FOTOS_DNI_SEBASTIAN_CERNA_ALVITES.pdf",
+            "driveId": "17UDRFzz-74OINTe68yLnJIpS02i6KxBN",
+            "driveUrl": "https://drive.google.com/file/d/17UDRFzz-74OINTe68yLnJIpS02i6KxBN/view",
+            "isImage": false
+          }
+        }
+      },
+      {
+        "id": 13,
+        "nombre": "TERRONES SALIRROSAS SANDRO GHESSAHILL",
+        "dni": "74303945",
+        "area": "Salón",
+        "cargo": "Mozo",
+        "cargoContrato": "Mozo",
+        "condicionLaborable": "FULL TIME",
+        "condicionLaboral": "CONTRATO",
+        "sueldo": 1500,
+        "estado": "CESADO",
+        "estadoTexto": "Cesado (31/08/2026)",
+        "semaforo": "gris",
+        "fechaIngreso": "01/02/2026",
+        "finContratoBase": "30/04/2026",
+        "vigenciaHasta": "31/08/2026",
+        "fechaCese": "31/08/2026",
+        "modalidadCese": "Adenda Improrrogable",
+        "tiempoServicio": null,
+        "domicilio": "Avenida Pesqueda Urbanización Pop. Independencia Mz. D Lt. 23, Distrito de Trujillo, Provincia de Trujillo, Departamento de La Libertad",
+        "celular": "914938736",
+        "correo": "sandroterrones6@gmail.com",
+        "banco": "BBVA",
+        "numeroCuenta": "001108140274818714",
+        "fechaNacimiento": "28/06/2003",
+        "edad": "22",
+        "carnetSanitario": "SI",
+        "adendas": [],
+        "proximaAdenda": "N/A",
+        "observaciones": "Vínculo laboral concluido.",
+        "documentos": {
+          "contrato": {
+            "fileName": "GRUPO GASTRONOMICO AURORA SAC - CONTRATO - TERRONES SALIRROSAS SANDRO GHESSAHILL - 260201 - 260430 - 03.pdf",
+            "localUrl": "/docs/contratos/GRUPO%20GASTRONOMICO%20AURORA%20SAC%20-%20CONTRATO%20-%20TERRONES%20SALIRROSAS%20SANDRO%20GHESSAHILL%20-%20260201%20-%20260430%20-%2003.pdf",
+            "driveId": "11IJcEbH7YVfOm3qmBinZvmwHV_Cxb1Jo",
+            "driveUrl": "https://drive.google.com/file/d/11IJcEbH7YVfOm3qmBinZvmwHV_Cxb1Jo/view"
+          },
+          "adendas": [
+            {
+              "fileName": "1RA ADENDA DE CONTRATO TERRONES SANDRO.docx",
+              "localUrl": "/docs/adendas/1RA%20ADENDA%20DE%20CONTRATO%20TERRONES%20SANDRO.docx",
+              "driveId": "12KObXOU10UerIzYR_1RgAMmBchFS0ymF",
+              "driveUrl": "https://drive.google.com/file/d/12KObXOU10UerIzYR_1RgAMmBchFS0ymF/view"
+            },
+            {
+              "fileName": "2DA ADENDA DE CONTRATO TERRONES SANDRO.docx",
+              "localUrl": "/docs/adendas/2DA%20ADENDA%20DE%20CONTRATO%20TERRONES%20SANDRO.docx",
+              "driveId": "1N7bRcVMmVqH5PAaytU5wjP6HnTzkqwEL",
+              "driveUrl": "https://drive.google.com/file/d/1N7bRcVMmVqH5PAaytU5wjP6HnTzkqwEL/view"
+            }
+          ],
+          "memorandums": [],
+          "liquidacion": {
+            "fileName": "LIQUIDACION_BBSS_74303945_TERRONES.html",
+            "localUrl": "/docs/liquidaciones/LIQUIDACION_BBSS_74303945_TERRONES.html",
+            "driveId": "16KtPjENL30gmag5vn3y_-8y5NSfIwtpr",
+            "driveUrl": "https://drive.google.com/file/d/16KtPjENL30gmag5vn3y_-8y5NSfIwtpr/view"
+          },
+          "fotoDni": {
+            "fileName": "DNI_74303945_FOTOS_DNI_SANDRO_TERRONES.pdf",
+            "originalName": "FOTOS DNI SANDRO TERRONES.pdf",
+            "localUrl": "/docs/dni/DNI_74303945_FOTOS_DNI_SANDRO_TERRONES.pdf",
+            "driveId": "1rLm_oprTafVZsFcwZ4VMCaGwUbWB3IAV",
+            "driveUrl": "https://drive.google.com/file/d/1rLm_oprTafVZsFcwZ4VMCaGwUbWB3IAV/view",
+            "isImage": false
+          }
+        }
+      },
+      {
+        "id": 14,
+        "nombre": "SEREY BARDALES LUCAS ANDRES",
+        "dni": "70824901",
+        "area": "Cocina",
+        "cargo": "Sub Jefe de Cocina",
+        "cargoContrato": "Sub Jefe de Cocina",
+        "condicionLaborable": "FULL TIME",
+        "condicionLaboral": "CONTRATO",
+        "sueldo": 2300,
+        "estado": "CESADO",
+        "estadoTexto": "Cesado (30/06/2026)",
+        "semaforo": "gris",
+        "fechaIngreso": "01/02/2026",
+        "finContratoBase": "30/04/2026",
+        "vigenciaHasta": "30/06/2026",
+        "fechaCese": "30/06/2026",
+        "modalidadCese": "Adenda Improrrogable",
+        "tiempoServicio": null,
+        "domicilio": "Calle Rosa Pelletier Urbanización San Andrés V Etapa, Distrito de Víctor Larco Herrera, Provincia de Trujillo, Departamento de La Libertad",
+        "celular": "900125863",
+        "correo": "lucasserey2000@gmail.com",
+        "banco": "BBVA",
+        "numeroCuenta": "001105790223855589",
+        "fechaNacimiento": "23/05/2000",
+        "edad": "25",
+        "carnetSanitario": "SI",
+        "adendas": [],
+        "proximaAdenda": "N/A",
+        "observaciones": "Vínculo laboral concluido.",
+        "documentos": {
+          "contrato": {
+            "fileName": "GRUPO GASTRONOMICO AURORA SAC - CONTRATO - SEREY BARDALES LUCAS ANDRES - 260201 - 260430 - 03.pdf",
+            "localUrl": "/docs/contratos/GRUPO%20GASTRONOMICO%20AURORA%20SAC%20-%20CONTRATO%20-%20SEREY%20BARDALES%20LUCAS%20ANDRES%20-%20260201%20-%20260430%20-%2003.pdf",
+            "driveId": "1HqOc6pAp-kPoULl5K3hUggLBjiFFljmL",
+            "driveUrl": "https://drive.google.com/file/d/1HqOc6pAp-kPoULl5K3hUggLBjiFFljmL/view"
+          },
+          "adendas": [
+            {
+              "fileName": "1RA ADENDA DE CONTRATO SEREY LUCAS.docx",
+              "localUrl": "/docs/adendas/1RA%20ADENDA%20DE%20CONTRATO%20SEREY%20LUCAS.docx",
+              "driveId": "1YlWlbsxjZCKPteCwe329IDgFSH4f5FSt",
+              "driveUrl": "https://drive.google.com/file/d/1YlWlbsxjZCKPteCwe329IDgFSH4f5FSt/view"
+            },
+            {
+              "fileName": "2DA ADENDA DE CONTRATO SEREY LUCAS.docx",
+              "localUrl": "/docs/adendas/2DA%20ADENDA%20DE%20CONTRATO%20SEREY%20LUCAS.docx",
+              "driveId": "16qwAggVljG8N1yGxe4XaFk5GlrIsOtIk",
+              "driveUrl": "https://drive.google.com/file/d/16qwAggVljG8N1yGxe4XaFk5GlrIsOtIk/view"
+            }
+          ],
+          "memorandums": [],
+          "liquidacion": {
+            "fileName": "LIQUIDACION_BBSS_70824901_SEREY.html",
+            "localUrl": "/docs/liquidaciones/LIQUIDACION_BBSS_70824901_SEREY.html",
+            "driveId": "1B0rpB2W5gMdr2rEMM8UJ3UngFHUpzOZH",
+            "driveUrl": "https://drive.google.com/file/d/1B0rpB2W5gMdr2rEMM8UJ3UngFHUpzOZH/view"
+          },
+          "fotoDni": {
+            "fileName": "DNI_70824901_dni_lucas_-_Lucas_Andres_Serey_Bardales.pdf",
+            "originalName": "dni lucas - Lucas Andres Serey Bardales.pdf",
+            "localUrl": "/docs/dni/DNI_70824901_dni_lucas_-_Lucas_Andres_Serey_Bardales.pdf",
+            "driveId": "1Ur8Dxnrh48RPFplWmWHA1cWU2-o2TR0l",
+            "driveUrl": "https://drive.google.com/file/d/1Ur8Dxnrh48RPFplWmWHA1cWU2-o2TR0l/view",
+            "isImage": false
+          }
+        }
+      },
+      {
+        "id": 15,
+        "nombre": "FLORES CALDERON JOSE AUGUSTO GUSTAVO",
+        "dni": "75008865",
+        "area": "Salón",
+        "cargo": "Mozo",
+        "cargoContrato": "Mozo",
+        "condicionLaborable": "FULL TIME",
+        "condicionLaboral": "CONTRATO",
+        "sueldo": 1300,
+        "estado": "CESADO",
+        "estadoTexto": "Cesado (30/04/2026)",
+        "semaforo": "gris",
+        "fechaIngreso": "01/02/2026",
+        "finContratoBase": "30/04/2026",
+        "vigenciaHasta": "30/04/2026",
+        "fechaCese": "30/04/2026",
+        "modalidadCese": "Adenda Improrrogable",
+        "tiempoServicio": null,
+        "domicilio": "Mz. C Lt. 8 Torre 4 Dpto. 403 Urbanización La Campiña, Distrito de Chorrillos, Provincia de Lima, Departamento de Lima",
+        "celular": "904679932",
+        "correo": "joseaugustoflorescalderon@gmail.com",
+        "banco": "BBVA",
+        "numeroCuenta": "0011-0814-0274304990",
+        "fechaNacimiento": "18/10/2004",
+        "edad": "21",
+        "carnetSanitario": "SI",
+        "adendas": [],
+        "proximaAdenda": "N/A",
+        "observaciones": "Vínculo laboral concluido.",
+        "documentos": {
+          "contrato": {
+            "fileName": "GRUPO GASTRONOMICO AURORA SAC - CONTRATO - CALDERON MARTEL GUSTAVO - 260201 - 260430 - 03.pdf",
+            "localUrl": "/docs/contratos/GRUPO%20GASTRONOMICO%20AURORA%20SAC%20-%20CONTRATO%20-%20CALDERON%20MARTEL%20GUSTAVO%20-%20260201%20-%20260430%20-%2003.pdf",
+            "driveId": "1twoNiXBWvwvwt6zF89y_ORnXvH3AI-BX",
+            "driveUrl": "https://drive.google.com/file/d/1twoNiXBWvwvwt6zF89y_ORnXvH3AI-BX/view"
+          },
+          "adendas": [
+            {
+              "fileName": "1RA ADENDA DE CONTRATO JOSE FLORES.docx",
+              "localUrl": "/docs/adendas/1RA%20ADENDA%20DE%20CONTRATO%20JOSE%20FLORES.docx",
+              "driveId": "1lPcS0xwGWk01CExrObJLSR6Fy8WaWZtQ",
+              "driveUrl": "https://drive.google.com/file/d/1lPcS0xwGWk01CExrObJLSR6Fy8WaWZtQ/view"
+            }
+          ],
+          "memorandums": [],
+          "liquidacion": {
+            "fileName": "LIQUIDACION_BBSS_75008865_FLORES.html",
+            "localUrl": "/docs/liquidaciones/LIQUIDACION_BBSS_75008865_FLORES.html",
+            "driveId": "19aFsYvFfiWUscIB22AqOMRmFtc1wuHg1",
+            "driveUrl": "https://drive.google.com/file/d/19aFsYvFfiWUscIB22AqOMRmFtc1wuHg1/view"
+          },
+          "fotoDni": {
+            "fileName": "DNI_75008865_FOTOS_DNI_JOSE_FLORES_CALDERON.pdf",
+            "originalName": "FOTOS DNI JOSE FLORES CALDERON.pdf",
+            "localUrl": "/docs/dni/DNI_75008865_FOTOS_DNI_JOSE_FLORES_CALDERON.pdf",
+            "driveId": "1VbRqgsyGLrUCOY9XkvVABJ4pVumwF2TE",
+            "driveUrl": "https://drive.google.com/file/d/1VbRqgsyGLrUCOY9XkvVABJ4pVumwF2TE/view",
+            "isImage": false
+          }
+        }
+      },
+      {
+        "id": 16,
+        "nombre": "CARDENAS ACHATA PEDRO PAUL",
+        "dni": "47924719",
+        "area": "Seguridad",
+        "cargo": "Jefe de Seguridad",
+        "cargoContrato": "Jefe de Seguridad",
+        "condicionLaborable": "FULL TIME",
+        "condicionLaboral": "CONTRATO",
+        "sueldo": 2000,
+        "estado": "CESADO",
+        "estadoTexto": "Cesado (30/04/2026)",
+        "semaforo": "gris",
+        "fechaIngreso": "01/02/2026",
+        "finContratoBase": "30/04/2026",
+        "vigenciaHasta": "30/04/2026",
+        "fechaCese": "30/04/2026",
+        "modalidadCese": "Vencimiento de Contrato Base",
+        "tiempoServicio": null,
+        "domicilio": "Calle Deán Valdivia Mz. E Lt. 10 Sec., Distrito de Arequipa, Provincia de Arequipa, Departamento de Arequipa",
+        "celular": "942858098",
+        "correo": "pedropaulcsrde@gmail.com",
+        "banco": "BBVA",
+        "numeroCuenta": "001108140289527090",
+        "fechaNacimiento": "28/03/1993",
+        "edad": "32",
+        "carnetSanitario": "SI",
+        "adendas": [],
+        "proximaAdenda": "N/A",
+        "observaciones": "Vínculo laboral concluido.",
+        "documentos": {
+          "contrato": {
+            "fileName": "GRUPO GASTRONOMICO AURORA SAC - CONTRATO - CARDENAS ACHATA PEDRO PAUL - 260201 - 260430 - 03.pdf",
+            "localUrl": "/docs/contratos/GRUPO%20GASTRONOMICO%20AURORA%20SAC%20-%20CONTRATO%20-%20CARDENAS%20ACHATA%20PEDRO%20PAUL%20-%20260201%20-%20260430%20-%2003.pdf",
+            "driveId": "1fWAd-kbHa_1oXbCUpP4TXZDXR5OPw1dh",
+            "driveUrl": "https://drive.google.com/file/d/1fWAd-kbHa_1oXbCUpP4TXZDXR5OPw1dh/view"
+          },
+          "adendas": [],
+          "memorandums": [],
+          "liquidacion": {
+            "fileName": "LIQUIDACION_BBSS_47924719_CARDENAS.html",
+            "localUrl": "/docs/liquidaciones/LIQUIDACION_BBSS_47924719_CARDENAS.html",
+            "driveId": "1UR1FN4slN9ytCw6MW8mtQ1LFTgY5fH2v",
+            "driveUrl": "https://drive.google.com/file/d/1UR1FN4slN9ytCw6MW8mtQ1LFTgY5fH2v/view"
+          },
+          "fotoDni": {
+            "fileName": "DNI_47924719_IMG-20260129-WA0035_-_Pedro_C_rdenas.jpg",
+            "originalName": "IMG-20260129-WA0035 - Pedro Cárdenas.jpg",
+            "localUrl": "/docs/dni/DNI_47924719_IMG-20260129-WA0035_-_Pedro_C_rdenas.jpg",
+            "driveId": "1ZkMOPe8V0wORLJpHRmssct01n5AkUxjW",
+            "driveUrl": "https://drive.google.com/file/d/1ZkMOPe8V0wORLJpHRmssct01n5AkUxjW/view",
+            "isImage": true
+          }
+        }
+      },
+      {
+        "id": 17,
+        "nombre": "CASTRO VASQUEZ JIMMY JACK",
+        "dni": "45385820",
+        "area": "Salón",
+        "cargo": "Sub Jefe de Mozos",
+        "cargoContrato": "Sub Jefe de Mozos",
+        "condicionLaborable": "FULL TIME",
+        "condicionLaboral": "CONTRATO",
+        "sueldo": 2000,
+        "estado": "CESADO",
+        "estadoTexto": "Cesado (30/04/2026)",
+        "semaforo": "gris",
+        "fechaIngreso": "01/02/2026",
+        "finContratoBase": "30/04/2026",
+        "vigenciaHasta": "30/04/2026",
+        "fechaCese": "30/04/2026",
+        "modalidadCese": "Vencimiento de Contrato Base",
+        "tiempoServicio": null,
+        "domicilio": "Avenida Carlos Wiesse Mz. A Lt. 23, Distrito de Trujillo, Provincia de Trujillo, Departamento de La Libertad",
+        "celular": "991124389",
+        "correo": "jimmycaztro@gmail.com",
+        "banco": "BBVA",
+        "numeroCuenta": "00110814029049666215",
+        "fechaNacimiento": "25/03/1988",
+        "edad": "38",
+        "carnetSanitario": "NO",
+        "adendas": [],
+        "proximaAdenda": "N/A",
+        "observaciones": "Vínculo laboral concluido.",
+        "documentos": {
+          "contrato": {
+            "fileName": "GRUPO GASTRONOMICO AURORA SAC - CONTRATO - CASTRO VASQUEZ JIMMY JACK - 260201 - 260430 - 03.pdf",
+            "localUrl": "/docs/contratos/GRUPO%20GASTRONOMICO%20AURORA%20SAC%20-%20CONTRATO%20-%20CASTRO%20VASQUEZ%20JIMMY%20JACK%20-%20260201%20-%20260430%20-%2003.pdf",
+            "driveId": "1SKp2PkX8tCeKPhvGsN5-79Yn6ygQzuQg",
+            "driveUrl": "https://drive.google.com/file/d/1SKp2PkX8tCeKPhvGsN5-79Yn6ygQzuQg/view"
+          },
+          "adendas": [],
+          "memorandums": [],
+          "liquidacion": {
+            "fileName": "Liq. Castro Jimmy.pdf",
+            "localUrl": "/docs/liquidaciones/Liq.%20Castro%20Jimmy.pdf",
+            "driveId": "1TF1O9qm4qeuc_DCVcP2c8wiILleWyL3b",
+            "driveUrl": "https://drive.google.com/file/d/1TF1O9qm4qeuc_DCVcP2c8wiILleWyL3b/view"
+          },
+          "fotoDni": {
+            "fileName": "DNI_45385820_FOTOS_DNI_CASTRO_VASQUEZ_JIMMY.pdf",
+            "originalName": "FOTOS DNI CASTRO VASQUEZ JIMMY.pdf",
+            "localUrl": "/docs/dni/DNI_45385820_FOTOS_DNI_CASTRO_VASQUEZ_JIMMY.pdf",
+            "driveId": "14kPtX_yizgce7wTkdCmnV5QYmpJHXrzk",
+            "driveUrl": "https://drive.google.com/file/d/14kPtX_yizgce7wTkdCmnV5QYmpJHXrzk/view",
+            "isImage": false
+          }
+        }
+      },
+      {
+        "id": 18,
+        "nombre": "QUIÑONES CALDERON VICTOR ANDY",
+        "dni": "76590395",
+        "area": "Cocina",
+        "cargo": "Lanzador",
+        "cargoContrato": "Lanzador",
+        "condicionLaborable": "FULL TIME",
+        "condicionLaboral": "CONTRATO",
+        "sueldo": 1800,
+        "estado": "CESADO",
+        "estadoTexto": "Cesado (30/04/2026)",
+        "semaforo": "gris",
+        "fechaIngreso": "01/02/2026",
+        "finContratoBase": "30/04/2026",
+        "vigenciaHasta": "30/04/2026",
+        "fechaCese": "30/04/2026",
+        "modalidadCese": "Vencimiento de Contrato Base",
+        "tiempoServicio": null,
+        "domicilio": "Mz. C Lt. 8 Torre 4 Dpto. 403 Urbanización La Campiña, Distrito de Chorrillos, Provincia de Lima, Departamento de Lima",
+        "celular": "973189918",
+        "correo": "andycalderon0402@gmail.com",
+        "banco": "BBVA",
+        "numeroCuenta": "001108140289696941",
+        "fechaNacimiento": "4/07/2002",
+        "edad": "23",
+        "carnetSanitario": "SI",
+        "adendas": [],
+        "proximaAdenda": "N/A",
+        "observaciones": "Vínculo laboral concluido.",
+        "documentos": {
+          "contrato": {
+            "fileName": "GRUPO GASTRONOMICO AURORA SAC - CONTRATO - QUIÑONES CALDERON VICTOR ANDY - 260201 - 260430 - 03.pdf",
+            "localUrl": "/docs/contratos/GRUPO%20GASTRONOMICO%20AURORA%20SAC%20-%20CONTRATO%20-%20QUI%C3%91ONES%20CALDERON%20VICTOR%20ANDY%20-%20260201%20-%20260430%20-%2003.pdf",
+            "driveId": "112puryW-MlmF9bsu22klIWDl4Wd2xLV2",
+            "driveUrl": "https://drive.google.com/file/d/112puryW-MlmF9bsu22klIWDl4Wd2xLV2/view"
+          },
+          "adendas": [],
+          "memorandums": [],
+          "liquidacion": {
+            "fileName": "Liq. Quiñones Victor.pdf",
+            "localUrl": "/docs/liquidaciones/Liq.%20Qui%C3%B1ones%20Victor.pdf",
+            "driveId": "1UQy0DafI-OxE0iBKy0aik3KiSKqlR4sz",
+            "driveUrl": "https://drive.google.com/file/d/1UQy0DafI-OxE0iBKy0aik3KiSKqlR4sz/view"
+          },
+          "fotoDni": {
+            "fileName": "DNI_76590395_FOTOS_DNI_QUI_ONES_CALDERON_ANDY.pdf",
+            "originalName": "FOTOS DNI QUIÑONES CALDERON ANDY.pdf",
+            "localUrl": "/docs/dni/DNI_76590395_FOTOS_DNI_QUI_ONES_CALDERON_ANDY.pdf",
+            "driveId": "11RE_4dhuFPlHw8KZ3ir6uqv0ektErm1O",
+            "driveUrl": "https://drive.google.com/file/d/11RE_4dhuFPlHw8KZ3ir6uqv0ektErm1O/view",
+            "isImage": false
+          }
+        }
+      },
+      {
+        "id": 19,
+        "nombre": "CALDERON MARTEL GUSTAVO",
+        "dni": "48325353",
+        "area": "Almacén",
+        "cargo": "Almacenero",
+        "cargoContrato": "Almacenero",
+        "condicionLaborable": "FULL TIME",
+        "condicionLaboral": "CONTRATO",
+        "sueldo": 1700,
+        "estado": "CESADO",
+        "estadoTexto": "Cesado (30/04/2026)",
+        "semaforo": "gris",
+        "fechaIngreso": "01/02/2026",
+        "finContratoBase": "30/04/2026",
+        "vigenciaHasta": "30/04/2026",
+        "fechaCese": "30/04/2026",
+        "modalidadCese": "Vencimiento de Contrato Base",
+        "tiempoServicio": null,
+        "domicilio": "Avenida 28 de Julio 611 Huamán, Distrito de Víctor Larco Herrera, Provincia de Trujillo, Departamento de La Libertad",
+        "celular": "920238754",
+        "correo": "doko.gus.calderon@gmail.com",
+        "banco": "BBVA",
+        "numeroCuenta": "001108140286287420",
+        "fechaNacimiento": "1/06/1994",
+        "edad": "31",
+        "carnetSanitario": "SI",
+        "adendas": [],
+        "proximaAdenda": "N/A",
+        "observaciones": "Vínculo laboral concluido.",
+        "documentos": {
+          "contrato": {
+            "fileName": "GRUPO GASTRONOMICO AURORA SAC - CONTRATO - CALDERON MARTEL GUSTAVO - 260201 - 260430 - 03.pdf",
+            "localUrl": "/docs/contratos/GRUPO%20GASTRONOMICO%20AURORA%20SAC%20-%20CONTRATO%20-%20CALDERON%20MARTEL%20GUSTAVO%20-%20260201%20-%20260430%20-%2003.pdf",
+            "driveId": "1twoNiXBWvwvwt6zF89y_ORnXvH3AI-BX",
+            "driveUrl": "https://drive.google.com/file/d/1twoNiXBWvwvwt6zF89y_ORnXvH3AI-BX/view"
+          },
+          "adendas": [],
+          "memorandums": [],
+          "liquidacion": {
+            "fileName": "LIQUIDACION_BBSS_48325353_CALDERON.html",
+            "localUrl": "/docs/liquidaciones/LIQUIDACION_BBSS_48325353_CALDERON.html",
+            "driveId": "1Cro1GiP_LBvNskzgm5wVjHTOzEseW4m2",
+            "driveUrl": "https://drive.google.com/file/d/1Cro1GiP_LBvNskzgm5wVjHTOzEseW4m2/view"
+          },
+          "fotoDni": {
+            "fileName": "DNI_48325353_FOTOS_DNI_CALDERON_MARTEL_GUSTAVO.pdf",
+            "originalName": "FOTOS DNI CALDERON MARTEL GUSTAVO.pdf",
+            "localUrl": "/docs/dni/DNI_48325353_FOTOS_DNI_CALDERON_MARTEL_GUSTAVO.pdf",
+            "driveId": "1sJpfdfVmNoG-mjd_K5lAv4I4JeXeu4tD",
+            "driveUrl": "https://drive.google.com/file/d/1sJpfdfVmNoG-mjd_K5lAv4I4JeXeu4tD/view",
+            "isImage": false
+          }
+        }
+      },
+      {
+        "id": 20,
+        "nombre": "MONDRAGON JIMENEZ CLAUDIA PAOLA",
+        "dni": "60731243",
+        "area": "Recepción",
+        "cargo": "Anfitrión",
+        "cargoContrato": "Anfitrión",
+        "condicionLaborable": "FULL TIME",
+        "condicionLaboral": "CONTRATO",
+        "sueldo": 1500,
+        "estado": "CESADO",
+        "estadoTexto": "Cesado (07/05/2026)",
+        "semaforo": "gris",
+        "fechaIngreso": "08/02/2026",
+        "finContratoBase": "07/05/2026",
+        "vigenciaHasta": "07/05/2026",
+        "fechaCese": "07/05/2026",
+        "modalidadCese": "Vencimiento de Contrato Base",
+        "tiempoServicio": null,
+        "domicilio": "Mz. U Lt. 14 Sector Nuevo Florencia, Distrito de El Porvenir, Provincia de Trujillo, Departamento de La Libertad",
+        "celular": "907765582",
+        "correo": "Claudiamonji@gmail.com",
+        "banco": "BCP INT",
+        "numeroCuenta": "00247510990591002722",
+        "fechaNacimiento": "22/03/2006",
+        "edad": "19",
+        "carnetSanitario": "SI",
+        "adendas": [],
+        "proximaAdenda": "N/A",
+        "observaciones": "Vínculo laboral concluido.",
+        "documentos": {
+          "contrato": {
+            "fileName": "GRUPO GASTRONOMICO AURORA SAC - CONTRATO - MONDRAGON JIMENEZ CLAUDIA PAOLA - 260208 - 260507 - 03.pdf",
+            "localUrl": "/docs/contratos/GRUPO%20GASTRONOMICO%20AURORA%20SAC%20-%20CONTRATO%20-%20MONDRAGON%20JIMENEZ%20CLAUDIA%20PAOLA%20-%20260208%20-%20260507%20-%2003.pdf",
+            "driveId": "1pXBOl5ZDsK0ZG0H_3_vLG1dVO-xe82fY",
+            "driveUrl": "https://drive.google.com/file/d/1pXBOl5ZDsK0ZG0H_3_vLG1dVO-xe82fY/view"
+          },
+          "adendas": [],
+          "memorandums": [],
+          "liquidacion": {
+            "fileName": "LIQUIDACION_BBSS_60731243_MONDRAGON.html",
+            "localUrl": "/docs/liquidaciones/LIQUIDACION_BBSS_60731243_MONDRAGON.html",
+            "driveId": "1mWwOFjn6Wk160PBKELxxLGDaP4qK8qc7",
+            "driveUrl": "https://drive.google.com/file/d/1mWwOFjn6Wk160PBKELxxLGDaP4qK8qc7/view"
+          },
+          "fotoDni": {
+            "fileName": "DNI_60731243_DNI_CLA_-_Claudia_Monji.pdf",
+            "originalName": "DNI CLA - Claudia Monji.pdf",
+            "localUrl": "/docs/dni/DNI_60731243_DNI_CLA_-_Claudia_Monji.pdf",
+            "driveId": "1DSTWhyhIlKTJ8l4DfPmkqw-l5iBSHq9-",
+            "driveUrl": "https://drive.google.com/file/d/1DSTWhyhIlKTJ8l4DfPmkqw-l5iBSHq9-/view",
+            "isImage": false
+          }
+        }
+      },
+      {
+        "id": 21,
+        "nombre": "ARTEAGA BERNARDO EMERSON ANDRES",
+        "dni": "74935872",
+        "area": "Cocina",
+        "cargo": "Cortador",
+        "cargoContrato": "Cortador",
+        "condicionLaborable": "FULL TIME",
+        "condicionLaboral": "CONTRATO",
+        "sueldo": 1300,
+        "estado": "CESADO",
+        "estadoTexto": "Cesado (30/04/2026)",
+        "semaforo": "gris",
+        "fechaIngreso": "01/02/2026",
+        "finContratoBase": "30/04/2026",
+        "vigenciaHasta": "30/04/2026",
+        "fechaCese": "30/04/2026",
+        "modalidadCese": "Vencimiento de Contrato Base",
+        "tiempoServicio": null,
+        "domicilio": "Jirón Francisco de Zela 755 Asentamiento Humano La Merced, Distrito de El Porvenir, Provincia de Trujillo, Departamento de La Libertad",
+        "celular": "932150170",
+        "correo": "Andrés.arteaga98765@gmail.com",
+        "banco": "BBVA",
+        "numeroCuenta": "001108140289701546",
+        "fechaNacimiento": "6/07/2005",
+        "edad": "20",
+        "carnetSanitario": "NO",
+        "adendas": [],
+        "proximaAdenda": "N/A",
+        "observaciones": "Vínculo laboral concluido.",
+        "documentos": {
+          "contrato": {
+            "fileName": "GRUPO GASTRONOMICO AURORA SAC - CONTRATO - ARTEAGA BERNARDO EMERSON ANDRES - 260201 - 260430 - 03.pdf",
+            "localUrl": "/docs/contratos/GRUPO%20GASTRONOMICO%20AURORA%20SAC%20-%20CONTRATO%20-%20ARTEAGA%20BERNARDO%20EMERSON%20ANDRES%20-%20260201%20-%20260430%20-%2003.pdf",
+            "driveId": "1bi9Ym0Q4BUBc2u1b-8CbC_Ay0e36dOTD",
+            "driveUrl": "https://drive.google.com/file/d/1bi9Ym0Q4BUBc2u1b-8CbC_Ay0e36dOTD/view"
+          },
+          "adendas": [],
+          "memorandums": [],
+          "liquidacion": {
+            "fileName": "LIQUIDACION_BBSS_74935872_ARTEAGA.html",
+            "localUrl": "/docs/liquidaciones/LIQUIDACION_BBSS_74935872_ARTEAGA.html",
+            "driveId": "1Xc7hyVULWNKl6QWQLvh84Un96n34W9xQ",
+            "driveUrl": "https://drive.google.com/file/d/1Xc7hyVULWNKl6QWQLvh84Un96n34W9xQ/view"
+          },
+          "fotoDni": {
+            "fileName": "DNI_74935872_FOTOS_DNI_ARTEAGA_BERNARDO_EMERSON.pdf",
+            "originalName": "FOTOS DNI ARTEAGA BERNARDO EMERSON.pdf",
+            "localUrl": "/docs/dni/DNI_74935872_FOTOS_DNI_ARTEAGA_BERNARDO_EMERSON.pdf",
+            "driveId": "1sS_smEqrsQNodOFUhzUNWWQ-uf_mzLE2",
+            "driveUrl": "https://drive.google.com/file/d/1sS_smEqrsQNodOFUhzUNWWQ-uf_mzLE2/view",
+            "isImage": false
+          }
+        }
+      },
+      {
+        "id": 22,
+        "nombre": "SEREY BARDALES LUIS IGNACIO",
+        "dni": "60554635",
+        "area": "Cocina",
+        "cargo": "Lavaplatos",
+        "cargoContrato": "Lavaplatos",
+        "condicionLaborable": "FULL TIME",
+        "condicionLaboral": "CONTRATO",
+        "sueldo": 1300,
+        "estado": "CESADO",
+        "estadoTexto": "Cesado (30/04/2026)",
+        "semaforo": "gris",
+        "fechaIngreso": "01/02/2026",
+        "finContratoBase": "30/04/2026",
+        "vigenciaHasta": "30/04/2026",
+        "fechaCese": "30/04/2026",
+        "modalidadCese": "Vencimiento de Contrato Base",
+        "tiempoServicio": null,
+        "domicilio": "Calle Rosa Pelletier Urbanización San Andrés V Etapa, Distrito de Víctor Larco Herrera, Provincia de Trujillo, Departamento de La Libertad",
+        "celular": "941864587",
+        "correo": "Mrignaciosb@gmail.com",
+        "banco": "BBVA",
+        "numeroCuenta": "001108140289696941",
+        "fechaNacimiento": "28/09/2007",
+        "edad": "18",
+        "carnetSanitario": "NO",
+        "adendas": [],
+        "proximaAdenda": "N/A",
+        "observaciones": "Vínculo laboral concluido.",
+        "documentos": {
+          "contrato": {
+            "fileName": "GRUPO GASTRONOMICO AURORA SAC - CONTRATO - SEREY BARDALES LUCAS ANDRES - 260201 - 260430 - 03.pdf",
+            "localUrl": "/docs/contratos/GRUPO%20GASTRONOMICO%20AURORA%20SAC%20-%20CONTRATO%20-%20SEREY%20BARDALES%20LUCAS%20ANDRES%20-%20260201%20-%20260430%20-%2003.pdf",
+            "driveId": "1HqOc6pAp-kPoULl5K3hUggLBjiFFljmL",
+            "driveUrl": "https://drive.google.com/file/d/1HqOc6pAp-kPoULl5K3hUggLBjiFFljmL/view"
+          },
+          "adendas": [],
+          "memorandums": [],
+          "liquidacion": {
+            "fileName": "LIQUIDACION_BBSS_60554635_SEREY.html",
+            "localUrl": "/docs/liquidaciones/LIQUIDACION_BBSS_60554635_SEREY.html",
+            "driveId": "1eXEFyCJJ6w8gbEgLPT-YeHgVFYDgmjVA",
+            "driveUrl": "https://drive.google.com/file/d/1eXEFyCJJ6w8gbEgLPT-YeHgVFYDgmjVA/view"
+          },
+          "fotoDni": {
+            "fileName": "DNI_60554635_Luis_Serey_-_Brinner_Castro_Vasquez.pdf",
+            "originalName": "Luis Serey - Brinner Castro Vasquez.pdf",
+            "localUrl": "/docs/dni/DNI_60554635_Luis_Serey_-_Brinner_Castro_Vasquez.pdf",
+            "driveId": "1V-KykA8mF5UK_GTzJZdWgXIY5SD6Gd1I",
+            "driveUrl": "https://drive.google.com/file/d/1V-KykA8mF5UK_GTzJZdWgXIY5SD6Gd1I/view",
+            "isImage": false
+          }
+        }
+      },
+      {
+        "id": 23,
+        "nombre": "RODRIGUEZ DAVALOS FLOR STEFANY",
+        "dni": "73633434",
+        "area": "Caja",
+        "cargo": "Cajera (Fijo RxH)",
+        "cargoContrato": "Cajera",
+        "condicionLaborable": "FIJO RXH",
+        "condicionLaboral": "RXH",
+        "sueldo": 1500,
+        "estado": "RXH",
+        "estadoTexto": "Fijo RxH Activo",
+        "semaforo": "verde",
+        "fechaIngreso": "04/07/2026",
+        "finContratoBase": "Indeterminado RxH",
+        "vigenciaHasta": "Vigente RxH",
+        "fechaCese": null,
+        "modalidadCese": null,
+        "tiempoServicio": null,
+        "domicilio": "Trujillo, La Libertad (Registrado en Sheet)",
+        "celular": "992838739",
+        "correo": "rodriguezdavalosflor@gmail.com",
+        "banco": "BCP INT",
+        "numeroCuenta": "00257010446486201508",
+        "fechaNacimiento": "22/02/2002",
+        "edad": "24",
+        "carnetSanitario": "NO",
+        "adendas": [],
+        "proximaAdenda": "N/A",
+        "observaciones": "Registrada vía Formulario de Ingreso Google Sheets el 02/10/2026",
+        "documentos": {
+          "contrato": null,
+          "adendas": [],
+          "memorandums": [],
+          "liquidacion": null,
+          "fotoDni": {
+            "fileName": "DNI_73633434_IMG_20261002_145811_-_FLOR_RODRIGUEZ_DAVALOS.jpg",
+            "originalName": "IMG_20261002_145811 - FLOR RODRIGUEZ DAVALOS.jpg",
+            "localUrl": "/docs/dni/DNI_73633434_IMG_20261002_145811_-_FLOR_RODRIGUEZ_DAVALOS.jpg",
+            "driveId": "1nmC_RdrPi0xfrvngTFWfhOAsvVaGJ_5G",
+            "driveUrl": "https://drive.google.com/file/d/1nmC_RdrPi0xfrvngTFWfhOAsvVaGJ_5G/view",
+            "isImage": true
+          }
+        }
+      },
+      {
+        "id": 24,
+        "nombre": "SILVA CERNA BILLY ANDRES",
+        "dni": "43341525",
+        "area": "Bar",
+        "cargo": "Bartender Corporativo",
+        "cargoContrato": "Bartender Corporativo",
+        "condicionLaborable": "FULL TIME",
+        "condicionLaboral": "RXH",
+        "sueldo": 2500,
+        "estado": "RXH",
+        "estadoTexto": "Fijo RxH Activo",
+        "semaforo": "verde",
+        "fechaIngreso": "23/01/2026",
+        "finContratoBase": "Sin contrato modal",
+        "vigenciaHasta": "Sin contrato modal",
+        "fechaCese": null,
+        "modalidadCese": null,
+        "tiempoServicio": null,
+        "domicilio": "Trujillo, La Libertad (Registrado en Sheet)",
+        "celular": "949955909",
+        "correo": "billysilvacerna@gmail.com",
+        "banco": "No registrado",
+        "numeroCuenta": "No registrado",
+        "fechaNacimiento": "2/11/1985",
+        "edad": "41",
+        "carnetSanitario": "NO",
+        "adendas": [],
+        "proximaAdenda": "N/A",
+        "observaciones": "Personal de apoyo corporativo registrado en Google Sheet",
+        "documentos": {
+          "contrato": null,
+          "adendas": [],
+          "memorandums": [],
+          "liquidacion": null,
+          "fotoDni": {
+            "fileName": "DNI_43341525_DNI_BILLY_SILVA.pdf",
+            "originalName": "DNI BILLY SILVA.pdf",
+            "localUrl": "/docs/dni/DNI_43341525_DNI_BILLY_SILVA.pdf",
+            "driveId": "1WHToaZOd7KAlvIY_5NP4LZnf7YNKf6s2",
+            "driveUrl": "https://drive.google.com/file/d/1WHToaZOd7KAlvIY_5NP4LZnf7YNKf6s2/view",
+            "isImage": false
+          }
+        }
+      },
+      {
+        "id": 25,
+        "nombre": "DIONICIO CASTILLO JOSE MARCIAL",
+        "dni": "19693465",
+        "area": "Mantenimiento",
+        "cargo": "Mantenimiento",
+        "cargoContrato": "Mantenimiento",
+        "condicionLaborable": "FULL TIME",
+        "condicionLaboral": "RXH",
+        "sueldo": 2000,
+        "estado": "RXH",
+        "estadoTexto": "Fijo RxH Activo",
+        "semaforo": "verde",
+        "fechaIngreso": "23/01/2026",
+        "finContratoBase": "Sin contrato modal",
+        "vigenciaHasta": "Sin contrato modal",
+        "fechaCese": null,
+        "modalidadCese": null,
+        "tiempoServicio": null,
+        "domicilio": "Trujillo, La Libertad (Registrado en Sheet)",
+        "celular": "952871803",
+        "correo": "jomardic1977@gmail.com",
+        "banco": "BBVA",
+        "numeroCuenta": "001102490202269944",
+        "fechaNacimiento": "5/04/1977",
+        "edad": "49",
+        "carnetSanitario": "NO",
+        "adendas": [],
+        "proximaAdenda": "N/A",
+        "observaciones": "Personal de mantenimiento registrado en Google Sheet",
+        "documentos": {
+          "contrato": null,
+          "adendas": [],
+          "memorandums": [],
+          "liquidacion": null,
+          "fotoDni": {
+            "fileName": "DNI_19693465_DNI_JOSE_DIONICIO.pdf",
+            "originalName": "DNI JOSE DIONICIO.pdf",
+            "localUrl": "/docs/dni/DNI_19693465_DNI_JOSE_DIONICIO.pdf",
+            "driveId": "1hQsKRaMHwNSPLu7M6QpneRTYtyTMNUh_",
+            "driveUrl": "https://drive.google.com/file/d/1hQsKRaMHwNSPLu7M6QpneRTYtyTMNUh_/view",
+            "isImage": false
+          }
+        }
+      },
+      {
+        "id": 26,
+        "nombre": "BANCES ESPINOZA DEYDI FLADIR",
+        "dni": "77822206",
+        "area": "Cocina",
+        "cargo": "Lavaplatos",
+        "cargoContrato": "Lavaplatos",
+        "condicionLaborable": "FULL TIME",
+        "condicionLaboral": "OTROS",
+        "sueldo": 1300,
+        "estado": "APOYO",
+        "estadoTexto": "Apoyo / Por Regularizar",
+        "semaforo": "amarillo",
+        "fechaIngreso": "03/01/2026",
+        "finContratoBase": "Sin contrato modal",
+        "vigenciaHasta": "Sin contrato modal",
+        "fechaCese": null,
+        "modalidadCese": null,
+        "tiempoServicio": null,
+        "domicilio": "Trujillo, La Libertad (Registrado en Sheet)",
+        "celular": "955585735",
+        "correo": "No registrado",
+        "banco": "No registrado",
+        "numeroCuenta": "No registrado",
+        "fechaNacimiento": "21/09/1996",
+        "edad": "30",
+        "carnetSanitario": "NO",
+        "adendas": [],
+        "proximaAdenda": "N/A",
+        "observaciones": "Personal de apoyo registrado en Google Sheet",
+        "documentos": {
+          "contrato": null,
+          "adendas": [],
+          "memorandums": [],
+          "liquidacion": null,
+          "fotoDni": {
+            "fileName": "DNI_77822206_DNI_DEIDI.pdf",
+            "originalName": "DNI DEIDI.pdf",
+            "localUrl": "/docs/dni/DNI_77822206_DNI_DEIDI.pdf",
+            "driveId": "1IMBtAXjSatcQ1TDpYsYXQgBNE4jy0-f5",
+            "driveUrl": "https://drive.google.com/file/d/1IMBtAXjSatcQ1TDpYsYXQgBNE4jy0-f5/view",
+            "isImage": false
+          }
+        }
+      },
+      {
+        "id": 27,
+        "nombre": "CRUZ CORTEZ JEREMY MIJAIL",
+        "dni": "72242662",
+        "area": "Cocina",
+        "cargo": "Cortador",
+        "cargoContrato": "Cortador",
+        "condicionLaborable": "FULL TIME",
+        "condicionLaboral": "OTROS",
+        "sueldo": 1600,
+        "estado": "APOYO",
+        "estadoTexto": "Apoyo / Por Regularizar",
+        "semaforo": "amarillo",
+        "fechaIngreso": "03/01/2026",
+        "finContratoBase": "Sin contrato modal",
+        "vigenciaHasta": "Sin contrato modal",
+        "fechaCese": null,
+        "modalidadCese": null,
+        "tiempoServicio": null,
+        "domicilio": "Trujillo, La Libertad (Registrado en Sheet)",
+        "celular": "No registrado",
+        "correo": "No registrado",
+        "banco": "No registrado",
+        "numeroCuenta": "No registrado",
+        "fechaNacimiento": "29/04/2002",
+        "edad": "24",
+        "carnetSanitario": "NO",
+        "adendas": [],
+        "proximaAdenda": "N/A",
+        "observaciones": "Personal de apoyo registrado en Google Sheet",
+        "documentos": {
+          "contrato": null,
+          "adendas": [],
+          "memorandums": [],
+          "liquidacion": null,
+          "fotoDni": {
+            "fileName": "DNI_72242662_DNI_JEREMY.pdf",
+            "originalName": "DNI JEREMY.pdf",
+            "localUrl": "/docs/dni/DNI_72242662_DNI_JEREMY.pdf",
+            "driveId": "1fJd4R1P5fzYCZ_GnsaoVIhWrN4f52Wtm",
+            "driveUrl": "https://drive.google.com/file/d/1fJd4R1P5fzYCZ_GnsaoVIhWrN4f52Wtm/view",
+            "isImage": false
+          }
+        }
+      },
+      {
+        "id": 28,
+        "nombre": "GUZMAN RODRIGUEZ GARY JOSIMAR",
+        "dni": "70247113",
+        "area": "Cocina",
+        "cargo": "JEFE DE COCINA",
+        "cargoContrato": "JEFE DE COCINA",
+        "condicionLaborable": "FULL TIME",
+        "condicionLaboral": "CONTRATO",
+        "sueldo": 3500,
+        "estado": "ACTIVO",
+        "estadoTexto": "Contrato Vigente",
+        "semaforo": "verde",
+        "fechaIngreso": "01/11/2026",
+        "finContratoBase": "31/01/2027",
+        "vigenciaHasta": "31/01/2027",
+        "fechaCese": null,
+        "modalidadCese": null,
+        "tiempoServicio": null,
+        "domicilio": "PSJ. MIGUEL GRAU MZ. E LT. 11 LAS MALVINAS. TRUJILLO. TRUJILLO",
+        "celular": "990525126",
+        "correo": "No registrado",
+        "banco": "BCP",
+        "numeroCuenta": "No registrado",
+        "fechaNacimiento": "01/06/1989",
+        "edad": "37",
+        "carnetSanitario": "NO",
+        "adendas": [],
+        "proximaAdenda": "1RA ADENDA",
+        "observaciones": "Ingreso registrado vía RH BRINNERCAS el 18/11/2026",
+        "documentos": {
+          "contrato": {
+            "fileName": "GRUPO GASTRONOMICO AURORA SAC - CONTRATO - GUZMAN RODRIGUEZ GARY JOSIMAR.docx",
+            "localUrl": "/docs/contratos/GRUPO%20GASTRONOMICO%20AURORA%20SAC%20-%20CONTRATO%20-%20GUZMAN%20RODRIGUEZ%20GARY%20JOSIMAR.docx",
+            "driveId": "1lYrBkDQnUfVxmQhvPqqtXZmeCzdS3V-R",
+            "driveUrl": "https://drive.google.com/file/d/1lYrBkDQnUfVxmQhvPqqtXZmeCzdS3V-R/view"
+          },
+          "adendas": [],
+          "memorandums": [],
+          "liquidacion": null,
+          "fotoDni": {
+            "fileName": "DNI_70247113_GUZMAN_RODRIGUEZ_GARY_JOSIMAR.pdf",
+            "originalName": "DNI DE GARY GUZMAN.pdf",
+            "localUrl": "/docs/dni/DNI_70247113_GUZMAN_RODRIGUEZ_GARY_JOSIMAR.pdf",
+            "driveId": "1fRRjGAtamy14X06IecRLjhUEFMVXzDB1",
+            "driveUrl": "https://drive.google.com/file/d/1fRRjGAtamy14X06IecRLjhUEFMVXzDB1/view",
+            "isImage": false
+          }
+        }
+      }
+    ]
+  },
+  "mof": {
+    "empresa": "GRUPO GASTRONÓMICO AURORA S.A.C.",
+    "puestos": [
+      {
+        "id": "admin_general",
+        "puesto": "Administrador General",
+        "area": "Administración",
+        "superiorInmediato": "Gerencia General",
+        "mision": "Planificar, dirigir, coordinar y supervisar todas las operaciones operativas, financieras, legales y comerciales del restaurante, garantizando rentabilidad, excelencia en el servicio y cumplimiento normativo.",
+        "funciones": [
+          "Supervisar el cumplimiento de los estándares de calidad en cocina, salón y bar.",
+          "Gestionar la contratación, adendas, inducción y clima laboral del personal en coordinación con Gerencia.",
+          "Aprobar requerimientos de compras y controlar los costos de insumos y mermas.",
+          "Supervisar el cuadre diario de caja, ingresos, egresos y pagos a proveedores.",
+          "Representar a la empresa ante fiscalizaciones laborales, sanitarias y municipales."
+        ]
+      },
+      {
+        "id": "sub_jefe_cocina",
+        "puesto": "Sub Jefe de Cocina",
+        "area": "Cocina",
+        "superiorInmediato": "Chef Corporativo / Administrador",
+        "mision": "Liderar la brigada de cocina durante los turnos operativos, garantizando la consistencia en sabor, gramajes, tiempos de despacho y protocolos BPM.",
+        "funciones": [
+          "Asegurar la correcta mise en place de cada estación (calientes, fríos, parrilla).",
+          "Controlar la rotación PEPS de los alimentos y el correcto etiquetado y fechado.",
+          "Supervisar las temperaturas de refrigeración y cocción segura de carnes y mariscos.",
+          "Gestionar los pedidos diarios de reposición de insumos al área de Logística.",
+          "Capacitar a los ayudantes operarios y freidores en técnicas culinarias estandarizadas."
+        ]
+      },
+      {
+        "id": "jefe_mozos",
+        "puesto": "Jefe de Mozos",
+        "area": "Salón",
+        "superiorInmediato": "Administrador General",
+        "mision": "Organizar, dirigir y supervisar el servicio en salón, asegurando una experiencia gastronómica memorable para cada comensal bajo los estándares de elegancia de Aurora.",
+        "funciones": [
+          "Distribuir las estaciones de salón y asignar mesas al equipo de mozos antes del servicio.",
+          "Realizar el briefing diario repasando platos del día, sugerencias del sommelier y alérgenos.",
+          "Atender reclamos y situaciones especiales de clientes con diplomacia y resolución inmediata.",
+          "Verificar la correcta presentación personal, uniformes impecables y pulcritud de cubiertos/copas.",
+          "Coordinar con caja y cocina la fluidez en la comanda y tiempos de servicio."
+        ]
+      },
+      {
+        "id": "jefe_logistica",
+        "puesto": "Jefa de Logística",
+        "area": "Logística y Almacén",
+        "superiorInmediato": "Administrador General",
+        "mision": "Administrar el abastecimiento oportuno, almacenamiento seguro y custodia de insumos, bebidas y menaje, manteniendo los niveles óptimos de stock.",
+        "funciones": [
+          "Consolidar las hojas de requerimientos de Bar, Cocina, Salón y Carnes.",
+          "Negociar precios, plazos y condiciones con proveedores homologados.",
+          "Inspeccionar organolépticamente la frescura y calidad de productos perecibles al ingreso.",
+          "Registrar entradas y salidas en el sistema AuroraSync y realizar inventarios físicos semanales.",
+          "Monitorear alertas de stock mínimo para evitar roturas de abastecimiento."
+        ]
+      },
+      {
+        "id": "bartender",
+        "puesto": "Bartender",
+        "area": "Bar",
+        "superiorInmediato": "Administrador General",
+        "mision": "Diseñar, preparar y despachar coctelería de autor, clásica y bebidas en barra con técnica rigurosa, presentación sofisticada y control de costos.",
+        "funciones": [
+          "Elaborar cócteles de acuerdo con el recetario estandarizado y ficha de insumos.",
+          "Mantener la higiene, orden y desinfección total de la barra, cristalería y herramientas.",
+          "Monitorear el stock de licores, syrups, hielo y guarniciones para el turno.",
+          "Recomendar maridajes y cócteles según las preferencias de los clientes en barra.",
+          "Registrar mermas y botellas abiertas al cierre de cada jornada."
+        ]
+      },
+      {
+        "id": "cajera",
+        "puesto": "Cajera",
+        "area": "Caja",
+        "superiorInmediato": "Administrador General",
+        "mision": "Gestionar con exactitud y seguridad el cobro de cuentas, facturación electrónica, medios de pago y cuadre de caja chica.",
+        "funciones": [
+          "Emitir boletas, facturas y notas de crédito verificando comensales y propinas.",
+          "Controlar el flujo de efectivo, cobros POS (Visa, Mastercard, etc.) y billeteras digitales (Yape, Plin).",
+          "Efectuar el arqueo y cuadre de caja al cierre de turno con entrega de voucher y reporte.",
+          "Custodiar el fondo de sencillo y validar la autenticidad de billetes recibidos."
+        ]
+      },
+      {
+        "id": "mozo",
+        "puesto": "Mozo",
+        "area": "Salón",
+        "superiorInmediato": "Jefe de Mozos",
+        "mision": "Brindar una atención cordial, técnica y eficiente al comensal, dominando la carta, alérgenos y tiempos del servicio.",
+        "funciones": [
+          "Acondicionar mesas, montaje de vajilla y cristalería antes de la apertura.",
+          "Presentar la carta física o Flipbook 3D, sugiriendo platos de autor y maridajes.",
+          "Tomar comandas con precisión en sistema y retransmitir especificaciones de comensales a cocina.",
+          "Despejar platos vacíos y mantener la mesa limpia en todo momento sin invadir el espacio del cliente."
+        ]
+      },
+      {
+        "id": "ensaladero_atencion",
+        "puesto": "Ensaladero / Atención",
+        "area": "Cocina / Apoyo",
+        "superiorInmediato": "Sub Jefe de Cocina",
+        "mision": "Preparar y montar ensaladas, entradas frías y guarniciones con frescura y estética, apoyando en la limpieza de estaciones.",
+        "funciones": [
+          "Lavar, desinfectar y trozar vegetales y hojas verdes siguiendo la cadena de frío.",
+          "Emplatar entradas frías respetando el gramaje y la decoración aprobada en ficha técnica.",
+          "Mantener refrigeradores de insumos fríos limpios y ordenados."
+        ]
+      },
+      {
+        "id": "anfitriona",
+        "puesto": "Anfitriona",
+        "area": "Recepción / Salón",
+        "superiorInmediato": "Administrador General",
+        "mision": "Recibir y despedir a los clientes con calidez, gestionar el flujo de reservas y coordinar la asignación de mesas.",
+        "funciones": [
+          "Saludar al comensal, verificar reservaciones y acompañarlo elegantemente a su mesa.",
+          "Gestionar la lista de espera en horarios pico manteniendo informados a los clientes.",
+          "Entregar cartas de bienvenida y orientar a los visitantes sobre servicios adicionales."
+        ]
+      }
+    ]
+  },
+  "memoMotivos": {
+    "llamada_atencion_tardanza": {
+      "tipo": "LLAMADA DE ATENCIÓN",
+      "asunto": "Reiterada impuntualidad en el horario de ingreso al turno",
+      "fundamento": "Conforme al Reglamento Interno de Trabajo (RIT) y las directivas del Administrador General, la puntualidad es indispensable para asegurar el correcto mise en place y la fluidez del servicio.",
+      "gravedad": "LEVE A MODERADA"
+    },
+    "llamada_atencion_bpm": {
+      "tipo": "LLAMADA DE ATENCIÓN",
+      "asunto": "Incumplimiento de los Protocolos de Buenas Prácticas de Manufactura (BPM)",
+      "fundamento": "Se constató omisión en el correcto lavado de manos, uso de cofia/redilla o manipulación indebida de alimentos en área operativa, contraviniendo la normativa sanitaria y estándares de calidad de Aurora.",
+      "gravedad": "GRAVE"
+    },
+    "llamada_atencion_uniforme": {
+      "tipo": "LLAMADA DE ATENCIÓN",
+      "asunto": "Presentación personal y descuido en el uniforme reglamentario",
+      "fundamento": "El estándar de imagen de Grupo Gastronómico Aurora exige calzado reglamentario cerrado antideslizante, uniforme completo limpio y planchado, cabello recogido y pulcritud absoluta en salón y cocina.",
+      "gravedad": "LEVE"
+    },
+    "llamada_atencion_faltas": {
+      "tipo": "LLAMADA DE ATENCIÓN",
+      "asunto": "Faltas injustificadas al centro de labores",
+      "fundamento": "Se registra inasistencia injustificada sin aviso previo ni sustento documentado dentro del plazo de ley establecido en el Reglamento Interno de Trabajo y D.Leg. 728.",
+      "gravedad": "GRAVE"
+    },
+    "felicitacion_desempeno": {
+      "tipo": "MEMORÁNDUM DE RECONOCIMIENTO",
+      "asunto": "Felicitación por excelencia operativa y compromiso en el servicio",
+      "fundamento": "Se destaca y reconoce públicamente su proactividad, liderazgo positivo en el equipo y las reiteradas menciones favorables por parte de los comensales.",
+      "gravedad": "MÉRITO"
+    },
+    "comunicado_general": {
+      "tipo": "CIRCULAR / DIRECTIVA",
+      "asunto": "Disposiciones de cumplimiento obligatorio para todo el equipo",
+      "fundamento": "Directiva general emitida por la Administración General y Gerencia para optimizar la coordinación del servicio.",
+      "gravedad": "INFORMATIVO"
+    }
+  }
+};

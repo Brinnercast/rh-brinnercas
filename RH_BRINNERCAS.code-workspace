@@ -1,0 +1,28 @@
+{
+  "folders": [
+    {
+      "name": "RH BRINNERCAS (App Principal)",
+      "path": "."
+    },
+    {
+      "name": "AURORA 2025 - 2026 (Contratos y Adendas)",
+      "path": "C:\\Users\\brinn\\OneDrive\\AURORA 2025 - 2026"
+    },
+    {
+      "name": "AuroraSync Workspace Global",
+      "path": ".."
+    }
+  ],
+  "settings": {
+    "files.autoSave": "afterDelay",
+    "files.encoding": "utf8",
+    "editor.formatOnSave": false,
+    "editor.tabSize": 2,
+    "editor.wordWrap": "on",
+    "explorer.confirmDelete": false,
+    "search.exclude": {
+      "**/node_modules": true,
+      "**/public/docs": true
+    }
+  }
+}

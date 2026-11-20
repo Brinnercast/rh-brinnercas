@@ -1,0 +1,15 @@
+{
+  "name": "rh-brinnercas",
+  "version": "1.0.0",
+  "description": "Plataforma Glassmorphism de Gestión Integral de Recursos Humanos - Grupo Gastronómico Aurora S.A.C.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "sync-drive": "node scripts/sync_drive_rh_brinnercas.js"
+  },
+  "author": "Castro Vásquez Wilmer Brinner / Antigravity AI",
+  "license": "ISC",
+  "dependencies": {
+    "jszip": "^3.10.2"
+  }
+}

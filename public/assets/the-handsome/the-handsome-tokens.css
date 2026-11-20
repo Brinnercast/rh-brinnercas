@@ -1,0 +1,210 @@
+/* ==========================================================================
+   THE HANDSOME DESIGN SYSTEM — Official Tokens & Architectural UI Framework
+   Source: HuskyFox Brand Identity (Behance Gallery #124792173)
+   Extracted & Vectorized via REA (Reverse Engineer Anything)
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  /* 1. COLOR PALETTE (Archive High-Contrast Monochromatic + UI Accents) */
+  --hs-black: #000000;
+  --hs-white: #FFFFFF;
+  --hs-canvas: #F5F5F5;
+  --hs-surface-alt: #EBEBEB;
+  --hs-border: #DCDCDC;
+  --hs-border-dark: #000000;
+  --hs-text-primary: #000000;
+  --hs-text-secondary: #555555;
+  --hs-text-muted: #888888;
+
+  /* Functional Accents (from Mobile App UI Module 27) */
+  --hs-accent-blue: #3B82F6;
+  --hs-accent-gold: #F2994A;
+  --hs-accent-sage: #CAD5C8;
+
+  /* 2. TYPOGRAPHY (TT Interphases / Inter Neo-Grotesque System) */
+  --hs-font-sans: 'TT Interphases', 'Inter', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --hs-font-mono: 'JetBrains Mono', monospace;
+
+  /* 3. HANDSOME-BAR PROPORTIONS (0.6X : X : 1.9X) */
+  --hs-bar-06x: 1.5px;
+  --hs-bar-10x: 3.0px;
+  --hs-bar-19x: 5.7px;
+
+  /* 4. ICONOGRAPHY DEFAULTS */
+  --hs-icon-size: 24px;
+  --hs-icon-stroke: 3.2px;
+}
+
+[data-theme="dark"] {
+  --hs-black: #FFFFFF;
+  --hs-white: #0A0A0A;
+  --hs-canvas: #141414;
+  --hs-surface-alt: #1F1F1F;
+  --hs-border: #2A2A2A;
+  --hs-border-dark: #FFFFFF;
+  --hs-text-primary: #FFFFFF;
+  --hs-text-secondary: #B0B0B0;
+  --hs-text-muted: #666666;
+}
+
+/* BASE RESET & ARCHITECTURAL PURITY */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body.hs-body {
+  font-family: var(--hs-font-sans);
+  background-color: var(--hs-canvas);
+  color: var(--hs-text-primary);
+  line-height: 1.5;
+  font-variant-numeric: tabular-nums;
+  -webkit-font-smoothing: antialiased;
+  margin: 0;
+}
+
+/* MOTIF TYPE A: PROGRESSIVE BAR BRANDMARK (0.6X | WORD 1 | X | WORD 2 | 1.9X) */
+.hs-brandmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--hs-font-sans);
+  color: var(--hs-text-primary);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  line-height: 1;
+}
+
+.hs-brandmark .hs-bar-left {
+  width: 2px;
+  height: 1.35em;
+  background: currentColor;
+}
+
+.hs-brandmark .hs-word-thin {
+  font-weight: 400;
+}
+
+.hs-brandmark .hs-bar-mid {
+  width: 3.4px;
+  height: 1.35em;
+  background: currentColor;
+}
+
+.hs-brandmark .hs-word-bold {
+  font-weight: 700;
+}
+
+.hs-brandmark .hs-bar-right {
+  width: 6.4px;
+  height: 1.35em;
+  background: currentColor;
+}
+
+/* MOTIF TYPE B: EDITORIAL GRID BLOCK (Top 0.6X, Header 1.0X, Bottom 1.9X) */
+.hs-grid-block {
+  background: var(--hs-white);
+  border-top: var(--hs-bar-06x) solid var(--hs-border-dark);
+  border-bottom: var(--hs-bar-19x) solid var(--hs-border-dark);
+  padding: 24px;
+}
+
+.hs-grid-block-header {
+  padding-bottom: 14px;
+  margin-bottom: 20px;
+  border-bottom: var(--hs-bar-10x) solid var(--hs-border-dark);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.hs-grid-block-title {
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0;
+}
+
+/* MOTIF TYPE C: PROGRESSIVE HORIZONTAL DIVIDERS */
+.hs-rule-06x { border: 0; border-top: var(--hs-bar-06x) solid var(--hs-border-dark); margin: 16px 0; }
+.hs-rule-10x { border: 0; border-top: var(--hs-bar-10x) solid var(--hs-border-dark); margin: 16px 0; }
+.hs-rule-19x { border: 0; border-top: var(--hs-bar-19x) solid var(--hs-border-dark); margin: 16px 0; }
+
+/* ICONOGRAPHY SYSTEM */
+.hs-icon,
+[data-hs-icon] svg {
+  width: var(--hs-icon-size);
+  height: var(--hs-icon-size);
+  stroke: currentColor;
+  stroke-width: var(--hs-icon-stroke);
+  stroke-linecap: butt;
+  stroke-linejoin: miter;
+  fill: none;
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+/* ARCHITECTURAL BUTTONS (Zero Border Radius) */
+.hs-btn {
+  font-family: var(--hs-font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 11px 18px;
+  border-radius: 0;
+  border: 1px solid var(--hs-border-dark);
+  background: var(--hs-white);
+  color: var(--hs-text-primary);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background-color 0.15s ease, color 0.15s ease;
+  text-decoration: none;
+}
+
+.hs-btn:hover {
+  background: var(--hs-text-primary);
+  color: var(--hs-white);
+}
+
+.hs-btn-primary {
+  background: var(--hs-text-primary);
+  color: var(--hs-white);
+}
+
+.hs-btn-primary:hover {
+  opacity: 0.85;
+}
+
+/* EDITORIAL ARCHIVE TABLE (Module 20 Invoice Style) */
+.hs-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-top: var(--hs-bar-06x) solid var(--hs-border-dark);
+  border-bottom: var(--hs-bar-19x) solid var(--hs-border-dark);
+  font-size: 13px;
+}
+
+.hs-table thead th {
+  text-align: left;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 11px;
+  padding: 12px 14px;
+  border-bottom: var(--hs-bar-10x) solid var(--hs-border-dark);
+}
+
+.hs-table tbody td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--hs-border);
+}
+

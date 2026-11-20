@@ -1,0 +1,59 @@
+{
+  "updatedAt": "2026-11-18T06:25:46.780Z",
+  "account": "admr.brinnercas@gmail.com",
+  "stats": {
+    "totalColaboradores": 27,
+    "contratos": 22,
+    "adendas": 43,
+    "dnis": 27,
+    "memos": 3,
+    "liquidaciones": 15
+  },
+  "drive": {
+    "rootFolder": {
+      "id": "1i_K5OJHe5vvnQTrMnwEm0e2CQIT4MGuT",
+      "name": "RH BRINNERCAS - GRUPO GASTRONOMICO AURORA SAC",
+      "url": "https://drive.google.com/drive/folders/1i_K5OJHe5vvnQTrMnwEm0e2CQIT4MGuT"
+    },
+    "subfolders": {
+      "contratos": {
+        "id": "1NrM4vQ8S8YBh1Gs5BiK9VcGib1DSgZ7V",
+        "name": "01_CONTRATOS_PERSONAL_PDF",
+        "url": "https://drive.google.com/drive/folders/1NrM4vQ8S8YBh1Gs5BiK9VcGib1DSgZ7V"
+      },
+      "adendas": {
+        "id": "1Li_ya6fsK_ipu7ZJmfQ3x4hDRg4krVKJ",
+        "name": "02_ADENDAS_MODALIDAD_DOCX",
+        "url": "https://drive.google.com/drive/folders/1Li_ya6fsK_ipu7ZJmfQ3x4hDRg4krVKJ"
+      },
+      "fotosDni": {
+        "id": "18iMe_-p5JAyd1HE3ToMvmkwp0O8B73qp",
+        "name": "03_FOTOS_DNI_IDENTIDAD_PDF",
+        "url": "https://drive.google.com/drive/folders/18iMe_-p5JAyd1HE3ToMvmkwp0O8B73qp"
+      },
+      "memosActas": {
+        "id": "10Yf4rxBWqkmyGDWMsNZk6_FoP93E_22_",
+        "name": "04_MEMORANDUMS_Y_ACTAS",
+        "url": "https://drive.google.com/drive/folders/10Yf4rxBWqkmyGDWMsNZk6_FoP93E_22_"
+      },
+      "liquidaciones": {
+        "id": "15wbYdD_0CoAezbCxo4Kio89O7yiAvSyJ",
+        "name": "05_LIQUIDACIONES_Y_BOLETAS",
+        "url": "https://drive.google.com/drive/folders/15wbYdD_0CoAezbCxo4Kio89O7yiAvSyJ"
+      },
+      "baseDatos": {
+        "id": "1AK8EUGRgkXQKK_xdkexG8E-qg0nJpFZo",
+        "name": "06_BASE_DATOS_SHEETS_Y_EXCEL",
+        "url": "https://drive.google.com/drive/folders/1AK8EUGRgkXQKK_xdkexG8E-qg0nJpFZo"
+      }
+    }
+  },
+  "sheets": {
+    "masterSheetId": "1SUJymC5eFiNERhbm-fg5KeCDWcLLTOiSV8NC9SYSwVk",
+    "masterSheetName": "BD_MAESTRA_RH_BRINNERCAS_AURORA_2026",
+    "masterSheetUrl": "https://docs.google.com/spreadsheets/d/1SUJymC5eFiNERhbm-fg5KeCDWcLLTOiSV8NC9SYSwVk/edit",
+    "historicalSheetId": "1Wrelu9FcxOF7g82u2n5sw8LegBMeI1wecNIUfh1EwWM",
+    "historicalSheetName": "REGISTRO DEL PERSONAL DE AURORA",
+    "historicalSheetUrl": "https://docs.google.com/spreadsheets/d/1Wrelu9FcxOF7g82u2n5sw8LegBMeI1wecNIUfh1EwWM/edit"
+  }
+}

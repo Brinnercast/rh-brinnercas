@@ -1,0 +1,1596 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light dark" />
+  <script>
+    try {
+      const savedScheme = localStorage.getItem('color-scheme');
+      if (savedScheme === 'dark' || savedScheme === 'light') {
+        document.querySelector('meta[name="color-scheme"]').content = savedScheme;
+        document.documentElement.setAttribute('data-theme', savedScheme);
+      }
+      if (sessionStorage.getItem('rh_brinnercas_user')) {
+        document.documentElement.classList.add('session-unlocked');
+      }
+    } catch (e) {}
+  </script>
+  <title>RH BRINNERCAS — Archive Glass HR System | Aurora Restaurant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/the-handsome/the-handsome-tokens.css" />
+  <link rel="stylesheet" href="assets/button-web/button-web-tokens.css" />
+  <link rel="stylesheet" href="styles.css?v=20261119f" />
+</head>
+<body class="hs-body">
+  <!-- Anunciador único ARIA Live para errores de formulario -->
+  <div id="validation-announcer" class="visually-hidden" aria-live="polite"></div>
+
+  <!-- Lienzo Ambiental Sutil para Efecto Glassmorphism (Día y Noche) -->
+  <div class="ambient-canvas" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <!-- ======================================================================
+       CONTROL DE LOGIN LIMPIO GLASSMORPHISM (CLON 1:1 DE IMAGEN DE REFERENCIA)
+       ====================================================================== -->
+  <section id="login-screen" class="login-overlay" aria-label="Control de Acceso RH BRINNERCAS">
+    <div class="login-card">
+      <h1 class="login-clean-title">Login</h1>
+      <p class="login-clean-sub">Bienvenido a RH BRINNERCAS, inicia sesión en tu cuenta.</p>
+
+      <!-- Formulario Credenciales Limpio -->
+      <form id="login-form-cred" class="login-form" novalidate>
+        <div class="login-field-wrap">
+          <label for="login-email" class="visually-hidden">User Name</label>
+          <div class="login-glass-field">
+            <span class="login-field-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                <path d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm0 2c-3.33 0-10 1.67-10 5v2h20v-2c0-3.33-6.67-5-10-5z"/>
+              </svg>
+            </span>
+            <input
+              id="login-email"
+              name="username"
+              type="text"
+              class="login-clean-input"
+              autocomplete="username"
+              autocorrect="off"
+              autocapitalize="none"
+              spellcheck="false"
+              required
+              value="brinnercas"
+              data-error="login-email-err"
+              placeholder="User Name"
+            />
+          </div>
+          <p id="login-email-err" class="error-msg">Ingresa tu usuario (brinnercas).</p>
+        </div>
+
+        <div class="login-field-wrap">
+          <label for="login-pass" class="visually-hidden">Password</label>
+          <div class="login-glass-field password-wrap">
+            <span class="login-field-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
+              </svg>
+            </span>
+            <input
+              id="login-pass"
+              name="password"
+              type="password"
+              class="login-clean-input"
+              autocomplete="current-password"
+              required
+              value="1234"
+              data-error="login-pass-err"
+              placeholder="Password"
+            />
+            <button
+              type="button"
+              id="toggle-pass-btn"
+              class="login-eye-btn"
+              aria-label="Mostrar u ocultar contraseña"
+              aria-pressed="false"
+            >
+              <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
+                <line x1="1" y1="1" x2="23" y2="23"/>
+              </svg>
+            </button>
+          </div>
+          <p id="login-pass-err" class="error-msg">Ingresa tu contraseña (1234).</p>
+        </div>
+
+        <label class="login-remember-row" for="login-remember">
+          <input id="login-remember" type="checkbox" checked />
+          <span class="login-check-box" aria-hidden="true">
+            <svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="3.5 8.5 6.5 11.5 12.5 4.5" />
+            </svg>
+          </span>
+          <span class="login-remember-text">Remember me</span>
+        </label>
+
+        <div id="login-auth-feedback" class="bw-status-box bw-status-error" style="display:none; width:100%;"></div>
+
+        <button type="submit" class="login-green-btn">Login</button>
+
+        <p class="login-bottom-text">
+          ¿Acceso rápido gerencial?
+          <button type="button" class="login-footer-link" data-login-tab="pin">Usar PIN 1234</button>
+        </p>
+      </form>
+
+      <!-- Formulario PIN Rápido (Opcional al pulsar "Usar PIN 1234") -->
+      <form id="login-form-pin" class="login-form" style="display:none;" novalidate>
+        <div class="login-field-wrap">
+          <label for="login-pin-input" class="visually-hidden">PIN de 4 dígitos</label>
+          <div class="login-glass-field">
+            <input
+              id="login-pin-input"
+              name="pin"
+              type="password"
+              inputmode="numeric"
+              maxlength="4"
+              pattern="^[0-9]{4}$"
+              class="login-clean-input"
+              required
+              data-error="login-pin-err"
+              placeholder="PIN (1234)"
+              style="text-align:center; font-size:1.25rem; letter-spacing:0.4em;"
+            />
+          </div>
+          <p id="login-pin-err" class="error-msg">Ingresa el PIN de 4 dígitos.</p>
+        </div>
+
+        <div class="pin-keypad" aria-label="Teclado numérico de PIN">
+          <button type="button" class="pin-key" data-pin-val="1">1</button>
+          <button type="button" class="pin-key" data-pin-val="2">2</button>
+          <button type="button" class="pin-key" data-pin-val="3">3</button>
+          <button type="button" class="pin-key" data-pin-val="4">4</button>
+          <button type="button" class="pin-key" data-pin-val="5">5</button>
+          <button type="button" class="pin-key" data-pin-val="6">6</button>
+          <button type="button" class="pin-key" data-pin-val="7">7</button>
+          <button type="button" class="pin-key" data-pin-val="8">8</button>
+          <button type="button" class="pin-key" data-pin-val="9">9</button>
+          <button type="button" class="pin-key is-clear" data-pin-val="C">C</button>
+          <button type="button" class="pin-key" data-pin-val="0">0</button>
+          <button type="submit" class="pin-key is-ok">OK</button>
+        </div>
+
+        <div id="login-pin-feedback" class="bw-status-box bw-status-error" style="display:none; width:100%;"></div>
+
+        <p class="login-bottom-text">
+          ¿Volver a usuario y clave?
+          <button type="button" class="login-footer-link" data-login-tab="cred">Login normal</button>
+        </p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       SHELL DE APLICACIÓN:
+       DOCK VERTICAL IZQUIERDO (ÚNICO LUGAR CON ICONOS + SUBMENÚ AL CLIC)
+       ====================================================================== -->
+  <div class="app-shell">
+
+    <aside id="left-dock-aside" class="glass-dock-wrapper left-dock-rail" aria-label="Barra lateral de menús RH BRINNERCAS">
+      <nav class="glass-dock" aria-label="Menú Principal RH BRINNERCAS">
+        <!-- Cabecera del Dock Izquierdo -->
+        <div class="dock-brand-box">
+          <div class="dock-brand-top">
+            <span class="dock-monogram" data-hs-brandmark="RH|BRINNERCAS"></span>
+            <button type="button" id="btn-toggle-dock" class="dock-collapse-btn" title="Colapsar / Expandir menú lateral" aria-label="Alternar ancho del menú lateral">
+              <span data-hs-icon="menu" data-hs-size="18"></span>
+            </button>
+          </div>
+          <div class="dock-brand-meta">
+            <span class="dock-brand-sub">GRUPO GASTRONÓMICO AURORA S.A.C.</span>
+            <div class="dock-session-strip">
+              <span class="dock-live-dot" title="Google Drive &amp; Sheets Conectado"></span>
+              <span id="user-badge-name" class="dock-user-name">brinnercas (Admin)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Menús Principales: El submenú se despliega directamente al hacer clic en el botón -->
+        <div class="dock-section-label">MENÚ PRINCIPAL</div>
+        <ul class="dock-menu-list" role="list">
+
+          <!-- 01. PANEL EJECUTIVO -->
+          <li class="dock-menu-group">
+            <button type="button" class="dock-item active" data-view="dashboard" aria-current="page" aria-expanded="true" aria-controls="sub-dashboard">
+              <span class="dock-index">01</span>
+              <span class="dock-icon" data-hs-icon="home" data-hs-size="19"></span>
+              <span class="dock-label">Panel Ejecutivo</span>
+            </button>
+            <ul id="sub-dashboard" class="dock-submenu">
+              <li><button type="button" class="dock-sub-link" onclick="jumpToSection('dashboard', 'kpi-grid')">KPIs &amp; Masa Salarial</button></li>
+              <li><button type="button" class="dock-sub-link" onclick="jumpToSection('dashboard', 'areas-grid')">Planilla por Área</button></li>
+              <li><button type="button" class="dock-sub-link" onclick="jumpToSection('dashboard', 'condicion-laboral-grid')">Condición Laboral (Sheets)</button></li>
+              <li><button type="button" class="dock-sub-link" onclick="jumpToSection('dashboard', 'dash-alerts-tbody')">Alertas D.Leg. 728</button></li>
+            </ul>
+          </li>
+
+          <!-- 02. LEGAJOS & 5 DOCS -->
+          <li class="dock-menu-group">
+            <button type="button" class="dock-item" data-view="legajos" aria-expanded="false" aria-controls="sub-legajos">
+              <span class="dock-index">02</span>
+              <span class="dock-icon" data-hs-icon="search" data-hs-size="19"></span>
+              <span class="dock-label">Legajos &amp; 5 Docs</span>
+            </button>
+            <ul id="sub-legajos" class="dock-submenu" hidden>
+              <li><button type="button" class="dock-sub-link" onclick="quickFilterLegajos('')">Todos los Legajos (27)</button></li>
+              <li><button type="button" class="dock-sub-link" onclick="quickFilterLegajos('ACTIVO')">Personal Activo (9)</button></li>
+              <li><button type="button" class="dock-sub-link" onclick="quickFilterLegajos('CESADO')">Personal Cesado (13)</button></li>
+              <li><button type="button" class="dock-sub-link" onclick="quickFilterLegajos('RXH')">Personal RxH / Apoyo (5)</button></li>
+            </ul>
+          </li>
+
+          <!-- 03. PRIMER INGRESO -->
+          <li class="dock-menu-group">
+            <button type="button" class="dock-item" data-view="ingreso" aria-expanded="false" aria-controls="sub-ingreso">
+              <span class="dock-index">03</span>
+              <span class="dock-icon" data-hs-icon="more" data-hs-size="19"></span>
+              <span class="dock-label">Primer Ingreso</span>
+            </button>
+            <ul id="sub-ingreso" class="dock-submenu" hidden>
+              <li><button type="button" class="dock-sub-link" onclick="jumpToSection('ingreso', 'form-nuevo-ingreso')">Ficha de Alta Laboral</button></li>
+              <li><button type="button" class="dock-sub-link" onclick="jumpToSection('ingreso', 'dni-dropzone')">Subir Foto / PDF DNI</button></li>
+            </ul>
+          </li>
+
+          <!-- 04. ADENDAS DOCX -->
+          <li class="dock-menu-group">
+            <button type="button" class="dock-item" data-view="adendas" aria-expanded="false" aria-controls="sub-adendas">
+              <span class="dock-index">04</span>
+              <span class="dock-icon" data-hs-icon="time_sale" data-hs-size="19"></span>
+              <span class="dock-label">Adendas DOCX</span>
+            </button>
+            <ul id="sub-adendas" class="dock-submenu" hidden>
+              <li><button type="button" class="dock-sub-link" onclick="jumpToSection('adendas', 'btn-gen-all-adendas')">Lote Masivo Trimestral</button></li>
+              <li><button type="button" class="dock-sub-link" onclick="jumpToSection('adendas', 'adendas-tbody')">Emisión Individual</button></li>
+            </ul>
+          </li>
+
+          <!-- 05. MEMOS, ACTAS, LIQUIDACIONES & MOF -->
+          <li class="dock-menu-group">
+            <button type="button" class="dock-item" data-view="docs" aria-expanded="false" aria-controls="sub-docs">
+              <span class="dock-index">05</span>
+              <span class="dock-icon" data-hs-icon="complete_order" data-hs-size="19"></span>
+              <span class="dock-label">Memos, Actas &amp; Liq.</span>
+            </button>
+            <ul id="sub-docs" class="dock-submenu" hidden>
+              <li><button type="button" class="dock-sub-link" onclick="jumpToSection('docs', 'form-memo')">Emitir Memorándum RIT</button></li>
+              <li><button type="button" class="dock-sub-link" onclick="jumpToSection('docs', 'form-acta')">Emitir Acta SUNAFIL</button></li>
+              <li><button type="button" class="dock-sub-link" onclick="jumpToSection('docs', 'form-liquidacion')">Liquidación BB.SS.</button></li>
+              <li><button type="button" class="dock-sub-link" onclick="jumpToSection('docs', 'mof-grid')">Perfiles MOF</button></li>
+            </ul>
+          </li>
+
+          <!-- 06. ENVIAR POR CORREO -->
+          <li class="dock-menu-group">
+            <button type="button" class="dock-item" data-view="correo" aria-expanded="false" aria-controls="sub-correo">
+              <span class="dock-index">06</span>
+              <span class="dock-icon" data-hs-icon="share" data-hs-size="19"></span>
+              <span class="dock-label">Enviar por Correo</span>
+            </button>
+            <ul id="sub-correo" class="dock-submenu" hidden>
+              <li><button type="button" class="dock-sub-link" onclick="openEmailComposer('ADENDA')">Enviar Adenda</button></li>
+              <li><button type="button" class="dock-sub-link" onclick="openEmailComposer('CONTRATO')">Enviar Contrato</button></li>
+              <li><button type="button" class="dock-sub-link" onclick="openEmailComposer('MEMORANDUM')">Enviar Memorándum</button></li>
+              <li><button type="button" class="dock-sub-link" onclick="openEmailComposer('RESUMEN_GENERAL')">Resumen Todo el Personal</button></li>
+            </ul>
+          </li>
+
+          <!-- 07. DRIVE & SHEETS -->
+          <li class="dock-menu-group">
+            <button type="button" class="dock-item" data-view="drive" aria-expanded="false" aria-controls="sub-drive">
+              <span class="dock-index">07</span>
+              <span class="dock-icon" data-hs-icon="preparation" data-hs-size="19"></span>
+              <span class="dock-label">Drive &amp; Sheets</span>
+            </button>
+            <ul id="sub-drive" class="dock-submenu" hidden>
+              <li><button type="button" class="dock-sub-link" onclick="switchView('drive')">6 Subcarpetas Drive</button></li>
+              <li><a href="https://docs.google.com/spreadsheets/d/1SUJymC5eFiNERhbm-fg5KeCDWcLLTOiSV8NC9SYSwVk/edit" target="_blank" rel="noopener" class="dock-sub-link">Abrir Sheet Maestro</a></li>
+              <li><a href="http://localhost:3005/api/excel/resumen" class="dock-sub-link">Descargar Excel Contable</a></li>
+            </ul>
+          </li>
+
+          <!-- 08. ASISTENTE GEMINI IA -->
+          <li class="dock-menu-group">
+            <button type="button" class="dock-item" data-view="chat" aria-expanded="false" aria-controls="sub-chat">
+              <span class="dock-index">08</span>
+              <span class="dock-icon" data-hs-icon="message" data-hs-size="19"></span>
+              <span class="dock-label">Gemini IA Assistant</span>
+            </button>
+            <ul id="sub-chat" class="dock-submenu" hidden>
+              <li><button type="button" class="dock-sub-link" onclick="switchView('chat')">Consola Completa Gemini</button></li>
+              <li><button type="button" class="dock-sub-link" onclick="toggleGeminiDrawer(true)">Abrir Copiloto Flotante</button></li>
+            </ul>
+          </li>
+
+          <!-- 09. PLANILLA & EDITOR EN VIVO (SYNC SHEETS) -->
+          <li class="dock-menu-group">
+            <button type="button" class="dock-item" data-view="planilla" aria-expanded="false" aria-controls="sub-planilla">
+              <span class="dock-index">09</span>
+              <span class="dock-icon" data-hs-icon="complete_order" data-hs-size="19"></span>
+              <span class="dock-label">Editar Planilla</span>
+            </button>
+            <ul id="sub-planilla" class="dock-submenu" hidden>
+              <li><button type="button" class="dock-sub-link" onclick="openPlanillaFilter('')">Toda la Planilla</button></li>
+              <li><button type="button" class="dock-sub-link" onclick="openPlanillaFilter('ACTIVO')">Solo Activos</button></li>
+              <li><button type="button" class="dock-sub-link" onclick="openPlanillaFilter('CONTRATO')">Condición: CONTRATO</button></li>
+              <li><button type="button" class="dock-sub-link" onclick="openPlanillaFilter('RXH')">Condición: RXH</button></li>
+              <li><button type="button" class="dock-sub-link" onclick="openPlanillaFilter('OTROS')">Condición: OTROS</button></li>
+            </ul>
+          </li>
+        </ul>
+
+        <div class="dock-divider" aria-hidden="true"></div>
+
+        <!-- BÓVEDA CLOUD RH BRINNERCAS (INTEGRADA DENTRO DEL DOCK) -->
+        <div class="dock-cloud-vault" aria-label="Bóveda Cloud RH BRINNERCAS">
+          <div class="dock-cloud-header">
+            <div>
+              <span class="dock-cloud-eyebrow">DRIVE &amp; SHEETS</span>
+              <h3 class="dock-cloud-title">BÓVEDA CLOUD RH BRINNERCAS</h3>
+            </div>
+            <button type="button" class="dock-cloud-open-btn" onclick="switchView('drive')">
+              ABRIR
+            </button>
+          </div>
+          <div id="dashboard-cloud-summary" class="dock-cloud-links"></div>
+        </div>
+
+        <div class="dock-divider" aria-hidden="true"></div>
+
+        <!-- Pie del Dock: Modo Día / Noche General + Bloquear Sesión -->
+        <div class="dock-section-label">PANTALLA &amp; SESIÓN</div>
+        <div class="dock-footer-actions">
+          <button type="button" id="btn-theme-toggle" class="dock-item dock-theme-btn" title="Cambiar toda la pantalla (incluido el Dock) entre Modo Día y Modo Noche">
+            <span class="dock-index" id="theme-toggle-badge">DÍA</span>
+            <span class="dock-icon" data-hs-icon="aline" data-hs-size="19"></span>
+            <span class="dock-label" id="theme-toggle-label">Modo Noche</span>
+          </button>
+
+          <button type="button" id="btn-logout-dock" class="dock-item dock-logout-btn" title="Cerrar o bloquear sesión">
+            <span class="dock-index">SALIR</span>
+            <span class="dock-icon" data-hs-icon="lock" data-hs-size="19"></span>
+            <span class="dock-label">Bloquear Sesión</span>
+          </button>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- ====================================================================
+         COLUMNA PRINCIPAL DERECHA (SIN ICONOS — TIPOGRAFÍA MONTSERRAT + GLASS)
+         ==================================================================== -->
+    <div class="app-main-column">
+      <main class="workspace-container">
+
+        <!-- 1. DASHBOARD EJECUTIVO -->
+        <section id="view-dashboard" class="view-pane active" aria-labelledby="title-dashboard">
+          <div class="section-header hs-section-banner">
+            <div>
+              <p class="section-eyebrow">ARCHIVE MODULE 01 • AUDITORÍA LABORAL &amp; CLOUD HUB</p>
+              <h2 id="title-dashboard" class="section-title">PANEL GERENCIAL AURORA RESTAURANT</h2>
+            </div>
+            <div class="bw-scope" style="display:flex; gap:10px; flex-wrap:wrap;">
+              <button type="button" class="bw-btn bw-btn-4" onclick="switchView('legajos')">
+                LEGAJOS &amp; 5 DOCS
+              </button>
+              <button type="button" class="bw-btn bw-btn-2" onclick="openEmailComposer('RESUMEN_GENERAL')">
+                ENVIAR RESUMEN POR CORREO
+              </button>
+            </div>
+          </div>
+
+          <!-- KPIs Dinámicos -->
+          <div id="kpi-grid" class="kpi-grid"></div>
+
+          <!-- Áreas y Banner Cloud -->
+          <div class="dashboard-dual-grid">
+            <article class="glass-card hs-grid-block">
+              <div class="hs-grid-block-header">
+                <div>
+                  <p class="section-eyebrow">ESTRUCTURA OPERATIVA</p>
+                  <h3 class="hs-grid-block-title">PLANILLA ACTIVA POR ÁREA</h3>
+                </div>
+                <span class="status-badge badge-verde">AUDITADO 2026</span>
+              </div>
+              <div id="areas-grid" class="areas-grid"></div>
+            </article>
+
+            <article class="glass-card hs-grid-block gold-accent-border">
+              <div class="hs-grid-block-header">
+                <div>
+                  <p class="section-eyebrow">PROYECCIÓN DE DATOS • GOOGLE SHEETS SYNC</p>
+                  <h3 class="hs-grid-block-title">CONDICIÓN LABORAL (CONTRATO / RXH / OTROS)</h3>
+                </div>
+                <a href="https://docs.google.com/spreadsheets/d/1SUJymC5eFiNERhbm-fg5KeCDWcLLTOiSV8NC9SYSwVk/edit" target="_blank" rel="noopener" class="bw-btn-sm is-primary">
+                  VER EN SHEETS
+                </a>
+              </div>
+              <div id="condicion-laboral-grid" class="condicion-laboral-grid"></div>
+            </article>
+          </div>
+
+          <!-- Alertas y Próximos Vencimientos -->
+          <article class="glass-card hs-grid-block">
+            <div class="hs-grid-block-header">
+              <div>
+                <p class="section-eyebrow">CALENDARIO LEGAL D.LEG. 728</p>
+                <h3 class="hs-grid-block-title">ALERTAS CONTRACTUALES &amp; MOVIMIENTOS RECIENTES</h3>
+              </div>
+              <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                <button type="button" class="bw-btn-sm is-gold" onclick="switchView('adendas')">
+                  GENERAR ADENDAS
+                </button>
+                <button type="button" class="bw-btn-sm is-primary" onclick="openEmailComposer('RESUMEN_GENERAL')">
+                  ENVIAR REPORTE POR CORREO
+                </button>
+              </div>
+            </div>
+            <div class="table-wrapper" tabindex="0" role="region" aria-labelledby="dash-alerts-caption">
+              <table class="aurora-table hs-table">
+                <caption id="dash-alerts-caption" class="visually-hidden">Colaboradores activos, ceses recientes y próximos vencimientos</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Colaborador</th>
+                    <th scope="col">Puesto / Área</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Vigencia / Cese</th>
+                    <th scope="col">Detalle / Acción</th>
+                    <th scope="col">Acceso Rápido</th>
+                  </tr>
+                </thead>
+                <tbody id="dash-alerts-tbody"></tbody>
+              </table>
+            </div>
+          </article>
+        </section>
+
+        <!-- 2. LEGAJOS Y CENTRO DE DESCARGA DE 5 DOCUMENTOS POR PERSONAL -->
+        <section id="view-legajos" class="view-pane" aria-labelledby="title-legajos">
+          <div class="section-header hs-section-banner">
+            <div>
+              <p class="section-eyebrow">ARCHIVE MODULE 02 • EXPEDIENTES DIGITALES &amp; FOTOS DE DNI DESDE DRIVE</p>
+              <h2 id="title-legajos" class="section-title">LEGAJOS DEL PERSONAL &amp; BÓVEDA DE 5 DESCARGAS</h2>
+            </div>
+            <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+              <span id="legajos-count-pill" class="status-pill">Cargando padrón...</span>
+            </div>
+          </div>
+
+          <!-- Barra de Búsqueda Button-Web + Filtros -->
+          <div class="glass-card hs-grid-block" style="margin-bottom:22px;">
+            <div class="filter-toolbar bw-scope">
+              <div class="bw-combo-pill aurora-search">
+                <input
+                  id="search-input"
+                  type="search"
+                  placeholder="Buscar por nombre, apellido, DNI, puesto, banco o domicilio..."
+                  aria-label="Filtrar colaborador por nombre, DNI o cargo"
+                />
+                <button type="button" id="btn-buscar-legajo" class="bw-combo-btn">FILTRAR</button>
+              </div>
+
+              <select id="select-colaborador-ficha" class="glass-select" aria-label="Elegir colaborador específico">
+                <option value="">-- Seleccionar personal específico --</option>
+              </select>
+
+              <select id="filter-area" class="glass-select" aria-label="Filtrar por área">
+                <option value="">Todas las Áreas</option>
+                <option value="Salón">Salón</option>
+                <option value="Cocina">Cocina</option>
+                <option value="Barra">Barra</option>
+                <option value="Administración">Administración</option>
+                <option value="Operaciones / Apoyo">Operaciones / Apoyo</option>
+              </select>
+
+              <select id="filter-estado" class="glass-select" aria-label="Filtrar por estado laboral">
+                <option value="">Todos los Estados</option>
+                <option value="ACTIVO">Solo Activos</option>
+                <option value="CESADO">Cesados / Liquidados</option>
+                <option value="RXH">RxH / Apoyo Eventual</option>
+              </select>
+
+              <select id="filter-condicion-laboral" class="glass-select" aria-label="Filtrar por condición laboral">
+                <option value="">Todas las Condiciones</option>
+                <option value="CONTRATO">CONTRATO</option>
+                <option value="RXH">RXH</option>
+                <option value="OTROS">OTROS</option>
+              </select>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+              <span class="field-hint">
+                Selecciona cualquier colaborador para abrir sus 5 descargas (Contrato, Adendas, Memorándum, Liquidación y DNI) o enviárselos por correo.
+              </span>
+              <button type="button" id="btn-limpiar-filtros" class="bw-btn-sm">
+                LIMPIAR FILTROS
+              </button>
+            </div>
+          </div>
+
+          <!-- BÓVEDA INDIVIDUAL SPOTLIGHT: 5 OPCIONES DE DESCARGA + ENVIAR POR CORREO -->
+          <article id="expediente-spotlight" class="glass-card hs-grid-block expediente-spotlight" aria-live="polite"></article>
+
+          <!-- TABLA MAESTRA RESPONSIVA -->
+          <article class="glass-card hs-grid-block">
+            <div class="hs-grid-block-header">
+              <h3 class="hs-grid-block-title">PADRÓN GENERAL AUDITADO (CLIC EN CUALQUIER TRABAJADOR PARA SUS 5 DESCARGAS)</h3>
+              <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                <button type="button" class="bw-btn-sm is-gold" onclick="openEmailComposer('RESUMEN_GENERAL')">
+                  ENVIAR PADRÓN POR CORREO
+                </button>
+                <a href="http://localhost:3005/api/excel/resumen" class="bw-btn-sm is-primary">
+                  DESCARGAR EXCEL CONTABLE
+                </a>
+              </div>
+            </div>
+            <div class="table-wrapper" tabindex="0" role="region" aria-labelledby="legajos-caption">
+              <table class="aurora-table hs-table">
+                <caption id="legajos-caption" class="visually-hidden">
+                  Padrón general de colaboradores de Grupo Gastronómico Aurora S.A.C. con descargas de contrato, adendas, memorándum, liquidación y foto de DNI
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Colaborador</th>
+                    <th scope="col">DNI / Edad</th>
+                    <th scope="col">Área &amp; Puesto</th>
+                    <th scope="col">Condición Laboral</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Sueldo</th>
+                    <th scope="col">Vigencia / Cese</th>
+                    <th scope="col">Domicilio &amp; Detalle</th>
+                    <th scope="col">5 Descargas &amp; Correo</th>
+                  </tr>
+                </thead>
+                <tbody id="legajos-tbody"></tbody>
+              </table>
+            </div>
+          </article>
+        </section>
+
+        <!-- 3. FORMULARIO DE PRIMER INGRESO -> GOOGLE SHEETS + GOOGLE DRIVE -->
+        <section id="view-ingreso" class="view-pane" aria-labelledby="title-ingreso">
+          <div class="section-header hs-section-banner">
+            <div>
+              <p class="section-eyebrow">ARCHIVE MODULE 03 • ONBOARDING AUTOMATIZADO • GOOGLE SHEETS + DRIVE</p>
+              <h2 id="title-ingreso" class="section-title">REGISTRO DE PERSONAL DE PRIMER INGRESO</h2>
+            </div>
+            <span class="status-badge badge-naranja">GENERA CONTRATO + SUBE DNI + LLENA SHEETS</span>
+          </div>
+
+          <form id="form-nuevo-ingreso" class="glass-card hs-grid-block gold-accent-border" novalidate>
+            <div class="hs-grid-block-header">
+              <h3 class="hs-grid-block-title">FICHA DE ALTA LABORAL D.LEG. 728</h3>
+              <span class="hs-archive-tag">APTOS 11PT • 3 MESES INICIALES</span>
+            </div>
+
+            <div class="onboarding-grid">
+              <div class="field-group">
+                <label for="ing-tipo-doc">Tipo de Documento</label>
+                <span id="ing-tipo-doc-hint" class="field-hint">DNI (Perú), Carné de Extranjería o PTP</span>
+                <select id="ing-tipo-doc" name="tipoDocumento" class="glass-select" aria-describedby="ing-tipo-doc-hint">
+                  <option value="DNI">DNI</option>
+                  <option value="CE">Carné de Extranjería (CE)</option>
+                  <option value="PTP">PTP / CPP</option>
+                </select>
+              </div>
+
+              <div class="field-group">
+                <label for="ing-dni">Número de Documento *</label>
+                <span id="ing-dni-hint" class="field-hint">8 dígitos exactos para DNI o hasta 12 para CE</span>
+                <input
+                  id="ing-dni"
+                  name="dni"
+                  type="text"
+                  class="glass-input"
+                  required
+                  pattern="^[0-9A-Za-z]{8,12}$"
+                  aria-describedby="ing-dni-hint"
+                  data-error="ing-dni-err"
+                  placeholder="Ej: 71234567"
+                />
+                <p id="ing-dni-err" class="error-msg">Ingresa un DNI o documento válido de 8 a 12 caracteres.</p>
+              </div>
+
+              <div class="field-group">
+                <label for="ing-nombre">Apellidos y Nombres Completos *</label>
+                <span id="ing-nombre-hint" class="field-hint">Se guardará en MAYÚSCULAS tal como figura en el DNI</span>
+                <input
+                  id="ing-nombre"
+                  name="nombre"
+                  type="text"
+                  class="glass-input"
+                  required
+                  minlength="5"
+                  aria-describedby="ing-nombre-hint"
+                  data-error="ing-nombre-err"
+                  placeholder="Ej: PÉREZ GÓMEZ JUAN CARLOS"
+                />
+                <p id="ing-nombre-err" class="error-msg">Ingresa los apellidos y nombres completos.</p>
+              </div>
+
+              <div class="field-group">
+                <label for="ing-area">Área Operativa *</label>
+                <span id="ing-area-hint" class="field-hint">Área asignada en Aurora Restaurant</span>
+                <select id="ing-area" name="area" class="glass-select" required aria-describedby="ing-area-hint" data-error="ing-area-err">
+                  <option value="Salón">Salón</option>
+                  <option value="Cocina">Cocina</option>
+                  <option value="Bar">Bar</option>
+                  <option value="Caja">Caja</option>
+                  <option value="Logística">Logística</option>
+                  <option value="Recepción">Recepción</option>
+                  <option value="Administración">Administración</option>
+                  <option value="Seguridad">Seguridad</option>
+                  <option value="Almacén">Almacén</option>
+                  <option value="Mantenimiento">Mantenimiento</option>
+                </select>
+                <p id="ing-area-err" class="error-msg">Selecciona un área operativa.</p>
+              </div>
+
+              <div class="field-group">
+                <label for="ing-cargo">Cargo / Puesto en Contrato *</label>
+                <span id="ing-cargo-hint" class="field-hint">Ej: Mozo, Azafata, Cocinero, Barista, Cajero</span>
+                <input
+                  id="ing-cargo"
+                  name="cargo"
+                  type="text"
+                  class="glass-input"
+                  required
+                  aria-describedby="ing-cargo-hint"
+                  data-error="ing-cargo-err"
+                  placeholder="Ej: Cocinero"
+                />
+                <p id="ing-cargo-err" class="error-msg">Indica el cargo a figurar en el contrato.</p>
+              </div>
+
+              <div class="field-group">
+                <label for="ing-condicion-laboral">Condición Laboral (Sheets) *</label>
+                <span id="ing-condicion-laboral-hint" class="field-hint">Sincronizado con columna CONDICION LABORAL en Google Sheets</span>
+                <select id="ing-condicion-laboral" name="condicionLaboral" class="glass-select" required aria-describedby="ing-condicion-laboral-hint">
+                  <option value="CONTRATO" selected>CONTRATO</option>
+                  <option value="RXH">RXH</option>
+                  <option value="OTROS">OTROS</option>
+                </select>
+              </div>
+
+              <div class="field-group">
+                <label for="ing-condicion">Jornada Laboral</label>
+                <span id="ing-condicion-hint" class="field-hint">Régimen de jornada pactada</span>
+                <select id="ing-condicion" name="condicion" class="glass-select" aria-describedby="ing-condicion-hint">
+                  <option value="FULL TIME">FULL TIME</option>
+                  <option value="PART TIME">PART TIME</option>
+                  <option value="RXH / APOYO">RXH / APOYO</option>
+                </select>
+              </div>
+
+              <div class="field-group">
+                <label for="ing-sueldo">Remuneración Bruta Mensual (S/) *</label>
+                <span id="ing-sueldo-hint" class="field-hint">Monto en Soles peruanos (mínimo S/ 500)</span>
+                <input
+                  id="ing-sueldo"
+                  name="sueldo"
+                  type="number"
+                  min="500"
+                  step="10"
+                  class="glass-input"
+                  required
+                  value="1500"
+                  aria-describedby="ing-sueldo-hint"
+                  data-error="ing-sueldo-err"
+                />
+                <p id="ing-sueldo-err" class="error-msg">Ingresa una remuneración válida (mínimo S/ 500).</p>
+              </div>
+
+              <div class="field-group">
+                <label for="ing-fecha-inicio">Fecha de Inicio de Contrato (DD/MM/YYYY) *</label>
+                <span id="ing-fecha-inicio-hint" class="field-hint">Al cambiarla se calcula automáticamente el fin a 3 meses</span>
+                <input
+                  id="ing-fecha-inicio"
+                  name="fechaInicio"
+                  type="text"
+                  class="glass-input"
+                  required
+                  pattern="^\d{2}/\d{2}/\d{4}$"
+                  value="01/11/2026"
+                  aria-describedby="ing-fecha-inicio-hint"
+                  data-error="ing-fecha-inicio-err"
+                />
+                <p id="ing-fecha-inicio-err" class="error-msg">Usa formato DD/MM/AAAA (ej: 01/11/2026).</p>
+              </div>
+
+              <div class="field-group">
+                <label for="ing-fecha-fin">Fecha de Fin Inicial (3 Meses) *</label>
+                <span id="ing-fecha-fin-hint" class="field-hint">Plazo inicial estándar por inicio de actividades</span>
+                <input
+                  id="ing-fecha-fin"
+                  name="fechaFin"
+                  type="text"
+                  class="glass-input"
+                  required
+                  pattern="^\d{2}/\d{2}/\d{4}$"
+                  value="31/01/2027"
+                  aria-describedby="ing-fecha-fin-hint"
+                  data-error="ing-fecha-fin-err"
+                />
+                <p id="ing-fecha-fin-err" class="error-msg">Usa formato DD/MM/AAAA (ej: 31/01/2027).</p>
+              </div>
+
+              <div class="field-group">
+                <label for="ing-domicilio">Domicilio Fiscal / Dirección Real *</label>
+                <span id="ing-domicilio-hint" class="field-hint">Dirección exacta para contrato inicial y Google Sheets</span>
+                <input
+                  id="ing-domicilio"
+                  name="domicilio"
+                  type="text"
+                  class="glass-input"
+                  required
+                  aria-describedby="ing-domicilio-hint"
+                  data-error="ing-domicilio-err"
+                  placeholder="Ej: Av. Larco 1450, Víctor Larco, Trujillo"
+                />
+                <p id="ing-domicilio-err" class="error-msg">Ingresa el domicilio completo del trabajador.</p>
+              </div>
+
+              <div class="field-group">
+                <label for="ing-nacimiento">Fecha de Nacimiento</label>
+                <span id="ing-nacimiento-hint" class="field-hint">Formato DD/MM/AAAA (opcional)</span>
+                <input id="ing-nacimiento" name="fechaNacimiento" type="text" class="glass-input" aria-describedby="ing-nacimiento-hint" placeholder="Ej: 15/05/1998" />
+              </div>
+
+              <div class="field-group">
+                <label for="ing-edad">Edad Actual</label>
+                <span id="ing-edad-hint" class="field-hint">Años cumplidos</span>
+                <input id="ing-edad" name="edad" type="number" min="18" max="85" class="glass-input" aria-describedby="ing-edad-hint" placeholder="Ej: 28" />
+              </div>
+
+              <div class="field-group">
+                <label for="ing-celular">Celular / WhatsApp</label>
+                <span id="ing-celular-hint" class="field-hint">9 dígitos para contacto y envíos de boletas</span>
+                <input id="ing-celular" name="celular" type="tel" class="glass-input" aria-describedby="ing-celular-hint" placeholder="Ej: 944123456" />
+              </div>
+
+              <div class="field-group">
+                <label for="ing-correo">Correo Electrónico Personal</label>
+                <span id="ing-correo-hint" class="field-hint">Para envío de contrato digital</span>
+                <input id="ing-correo" name="correo" type="email" class="glass-input" aria-describedby="ing-correo-hint" data-error="ing-correo-err" placeholder="trabajador@gmail.com" />
+                <p id="ing-correo-err" class="error-msg">Si ingresas correo, debe tener formato válido.</p>
+              </div>
+
+              <div class="field-group">
+                <label for="ing-banco">Entidad Bancaria</label>
+                <span id="ing-banco-hint" class="field-hint">Banco para depósito de haberes</span>
+                <select id="ing-banco" name="banco" class="glass-select" aria-describedby="ing-banco-hint">
+                  <option value="BCP">BCP</option>
+                  <option value="BBVA">BBVA</option>
+                  <option value="INTERBANK">INTERBANK</option>
+                  <option value="SCOTIABANK">SCOTIABANK</option>
+                  <option value="BANCO DE LA NACIÓN">BANCO DE LA NACIÓN</option>
+                  <option value="EFECTIVO / POR DEFINIR">EFECTIVO / POR DEFINIR</option>
+                </select>
+              </div>
+
+              <div class="field-group">
+                <label for="ing-cuenta">Número de Cuenta / CCI</label>
+                <span id="ing-cuenta-hint" class="field-hint">Cuenta ahorros o CCI interbancario</span>
+                <input id="ing-cuenta" name="numeroCuenta" type="text" class="glass-input" aria-describedby="ing-cuenta-hint" placeholder="Ej: 570-12345678-0-90" />
+              </div>
+
+              <div class="field-group">
+                <label for="ing-carnet">Carnet de Sanidad</label>
+                <span id="ing-carnet-hint" class="field-hint">Exigible por MPT / DIGESA en gastronomía</span>
+                <select id="ing-carnet" name="carnetSanitario" class="glass-select" aria-describedby="ing-carnet-hint">
+                  <option value="SÍ">SÍ (Vigente)</option>
+                  <option value="EN TRÁMITE">EN TRÁMITE</option>
+                  <option value="NO">NO PRESENTA AÚN</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field-group" style="margin-top:16px;">
+              <label for="ing-obs">Observaciones y Cláusulas Especiales</label>
+              <span id="ing-obs-hint" class="field-hint">Horario asignado, recomendaciones médicas, tallas de uniforme o persona de referencia</span>
+              <textarea id="ing-obs" name="observaciones" rows="2" class="glass-textarea" aria-describedby="ing-obs-hint" placeholder="Ej: Turno partido / uniforme talla M / Contacto de emergencia..."></textarea>
+            </div>
+
+            <!-- Carga de Foto o PDF de DNI -->
+            <div class="field-group" style="margin-top:18px;">
+              <label for="dni-file-input">Foto o Escaneo de DNI (PDF / JPG / PNG) — Se sube directo a Drive</label>
+              <span class="field-hint">El archivo se respaldará en Drive carpeta 03_FOTOS_DNI_IDENTIDAD_PDF y quedará disponible en su ficha</span>
+              <label for="dni-file-input" id="dni-dropzone" class="upload-dropzone">
+                <input id="dni-file-input" type="file" accept=".pdf,.jpg,.jpeg,.png,.webp" class="visually-hidden" />
+                <div style="font-weight:700; margin-bottom:4px;">
+                  HAZ CLIC AQUÍ O ARRASTRA EL ARCHIVO DE DNI (PDF / JPG / PNG)
+                </div>
+                <div id="dni-file-status" style="font-size:0.8rem; opacity:0.8;">
+                  Ningún archivo adjunto aún (opcional si se cargará luego).
+                </div>
+              </label>
+            </div>
+
+            <div style="display:flex; gap:14px; flex-wrap:wrap; margin-top:22px; align-items:center;">
+              <div class="bw-scope" style="display:flex; gap:12px; flex-wrap:wrap;">
+                <button type="submit" id="btn-submit-ingreso" class="bw-btn bw-btn-4">
+                  REGISTRAR Y SINCRONIZAR CON SHEETS + DRIVE
+                </button>
+                <button type="button" id="btn-preview-contrato-ingreso" class="bw-btn bw-btn-2">
+                  PREVISUALIZAR CONTRATO (ANEXO N° 001)
+                </button>
+                <button type="button" id="btn-reset-ingreso" class="bw-btn bw-btn-1">
+                  LIMPIAR FORMULARIO
+                </button>
+              </div>
+            </div>
+
+            <div id="ingreso-result-box" class="glass-card-subtle" style="display:none; margin-top:18px;"></div>
+          </form>
+        </section>
+
+        <!-- 9. PLANILLA COMPLETA & EDITOR EN VENTANA EMERGENTE (ACTUALIZA GOOGLE SHEETS EN VIVO) -->
+        <section id="view-planilla" class="view-pane" aria-labelledby="title-planilla">
+          <div class="section-header hs-section-banner">
+            <div>
+              <p class="section-eyebrow">ARCHIVE MODULE 09 • PLANILLA COMPLETA • EDICIÓN EN VENTANA EMERGENTE → GOOGLE SHEETS</p>
+              <h2 id="title-planilla" class="section-title">LISTA COMPLETA DE LA PLANILLA AURORA</h2>
+            </div>
+            <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+              <span id="planilla-list-count" class="status-pill">28 / 28 colaboradores</span>
+              <a href="https://docs.google.com/spreadsheets/d/1SUJymC5eFiNERhbm-fg5KeCDWcLLTOiSV8NC9SYSwVk/edit" target="_blank" rel="noopener" class="bw-btn-sm is-gold">
+                ABRIR SHEETS MAESTRO
+              </a>
+            </div>
+          </div>
+
+          <!-- Barra de búsqueda y filtro de planilla completa -->
+          <div class="glass-card hs-grid-block" style="margin-bottom:20px;">
+            <div class="filter-toolbar bw-scope">
+              <div class="bw-combo-pill aurora-search">
+                <input
+                  id="planilla-search"
+                  type="search"
+                  placeholder="Buscar por nombre, apellido, DNI, cargo, área o banco..."
+                  aria-label="Buscar colaborador en la lista de planilla"
+                />
+                <button type="button" id="btn-planilla-buscar" class="bw-combo-btn">BUSCAR</button>
+              </div>
+
+              <select id="planilla-filter" class="glass-select" aria-label="Filtrar lista de planilla">
+                <option value="">Toda la Planilla (Todos)</option>
+                <option value="ACTIVO">Estado: ACTIVO</option>
+                <option value="CESADO">Estado: CESADO</option>
+                <option value="CONTRATO">Condición Laboral: CONTRATO</option>
+                <option value="RXH">Condición Laboral: RXH</option>
+                <option value="OTROS">Condición Laboral: OTROS</option>
+              </select>
+
+              <button type="button" id="btn-planilla-limpiar" class="bw-btn-sm">
+                MOSTRAR TODOS
+              </button>
+            </div>
+          </div>
+
+          <!-- TABLA COMPLETA DE TODA LA PLANILLA CON BOTÓN EDITAR POR COLABORADOR -->
+          <article class="glass-card hs-grid-block">
+            <div class="hs-grid-block-header">
+              <div>
+                <p class="section-eyebrow">CLIC EN «EDITAR» PARA ABRIR TODOS LOS CAMPOS EN VENTANA EMERGENTE</p>
+                <h3 class="hs-grid-block-title">PADRÓN COMPLETO DE PLANILLA (EDICIÓN EN VIVO CON GOOGLE SHEETS)</h3>
+              </div>
+              <span class="status-badge badge-naranja">SYNC SHEETS EN TIEMPO REAL</span>
+            </div>
+            <div class="table-wrapper planilla-full-table-wrap" tabindex="0" role="region" aria-labelledby="planilla-table-caption">
+              <table class="aurora-table hs-table">
+                <caption id="planilla-table-caption" class="visually-hidden">Lista completa de toda la planilla con botón Editar</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Apellidos y Nombres</th>
+                    <th scope="col">DNI</th>
+                    <th scope="col">Área &amp; Cargo</th>
+                    <th scope="col">Condición Laboral</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Sueldo S/</th>
+                    <th scope="col">Vigencia / Cese</th>
+                    <th scope="col">Acción</th>
+                  </tr>
+                </thead>
+                <tbody id="planilla-employee-tbody"></tbody>
+              </table>
+            </div>
+          </article>
+        </section>
+
+        <!-- 4. GENERADOR DE ADENDAS DOCX (APTOS 11PT) -->
+        <section id="view-adendas" class="view-pane" aria-labelledby="title-adendas">
+          <div class="section-header hs-section-banner">
+            <div>
+              <p class="section-eyebrow">ARCHIVE MODULE 04 • AUTOMATIZACIÓN D.LEG. 728 • FORMATO OFICIAL CASTRO BRINNER (APTOS 11PT)</p>
+              <h2 id="title-adendas" class="section-title">GENERADOR DE ADENDAS DE PRÓRROGA Y REMUNERACIÓN</h2>
+            </div>
+            <button type="button" class="bw-btn-sm is-primary" onclick="openEmailComposer('ADENDA')">
+              ENVIAR ADENDAS POR CORREO
+            </button>
+          </div>
+
+          <article class="glass-card hs-grid-block gold-accent-border" style="margin-bottom:20px;">
+            <div class="hs-grid-block-header">
+              <h3 class="hs-grid-block-title">PARÁMETROS DE LOTE DE RENOVACIÓN TRIMESTRAL</h3>
+              <span class="hs-archive-tag">DOCX OOXML • APTOS 11PT</span>
+            </div>
+            <div class="onboarding-grid">
+              <div class="field-group">
+                <label for="adenda-fecha-inicio">Nueva Vigencia Desde</label>
+                <input id="adenda-fecha-inicio" type="text" class="glass-input" value="01 de noviembre de 2026" />
+              </div>
+              <div class="field-group">
+                <label for="adenda-fecha-fin">Nueva Vigencia Hasta (3 Meses)</label>
+                <input id="adenda-fecha-fin" type="text" class="glass-input" value="31 de enero de 2027" />
+              </div>
+              <div class="field-group">
+                <label for="adenda-fecha-firma">Fecha de Firma del Documento</label>
+                <input id="adenda-fecha-firma" type="text" class="glass-input" value="31 días del mes de octubre de 2026" />
+              </div>
+            </div>
+            <div style="margin-top:16px; display:flex; align-items:center; gap:14px; flex-wrap:wrap;">
+              <div class="bw-scope">
+                <button type="button" id="btn-gen-all-adendas" class="bw-btn bw-btn-4">
+                  GENERAR ADENDAS MASIVAS (PERSONAL ACTIVO)
+                </button>
+              </div>
+              <span id="adenda-batch-status" class="field-hint"></span>
+            </div>
+            <div id="adenda-batch-links" style="margin-top:12px; display:flex; flex-wrap:wrap; gap:8px;"></div>
+          </article>
+
+          <article class="glass-card hs-grid-block">
+            <div class="hs-grid-block-header">
+              <h3 class="hs-grid-block-title">EMISIÓN INDIVIDUAL POR COLABORADOR ACTIVO</h3>
+            </div>
+            <div class="table-wrapper" tabindex="0" role="region" aria-labelledby="adendas-caption">
+              <table class="aurora-table hs-table">
+                <caption id="adendas-caption" class="visually-hidden">Lista de colaboradores activos para emitir adendas individuales en Word</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Colaborador</th>
+                    <th scope="col">DNI</th>
+                    <th scope="col">Puesto / Área</th>
+                    <th scope="col">Sueldo Actual</th>
+                    <th scope="col">Historial de Adendas</th>
+                    <th scope="col">Acción / Correo</th>
+                  </tr>
+                </thead>
+                <tbody id="adendas-tbody"></tbody>
+              </table>
+            </div>
+          </article>
+        </section>
+
+        <!-- 5. MEMORÁNDUMS, ACTAS, LIQUIDACIONES BBSS & MOF -->
+        <section id="view-docs" class="view-pane" aria-labelledby="title-docs">
+          <div class="section-header hs-section-banner">
+            <div>
+              <p class="section-eyebrow">ARCHIVE MODULE 05 • NORMATIVA LABORAL PERUANA • DOCUMENTOS INSTANTÁNEOS</p>
+              <h2 id="title-docs" class="section-title">MEMORÁNDUMS, ACTAS RIT, LIQUIDACIONES BB.SS. &amp; MOF</h2>
+            </div>
+            <button type="button" class="bw-btn-sm is-primary" onclick="openEmailComposer('MEMORANDUM')">
+              ENVIAR MEMO POR CORREO
+            </button>
+          </div>
+
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(330px, 1fr)); gap:18px; margin-bottom:24px;">
+            <!-- Emisor de Memorándums -->
+            <form id="form-memo" class="glass-card hs-grid-block" novalidate>
+              <div class="hs-grid-block-header">
+                <div>
+                  <p class="section-eyebrow">DISCIPLINA Y RECONOCIMIENTO</p>
+                  <h3 class="hs-grid-block-title">EMITIR MEMORÁNDUM</h3>
+                </div>
+              </div>
+              <div style="display:flex; flex-direction:column; gap:12px;">
+                <div class="field-group">
+                  <label for="memo-colab">Colaborador</label>
+                  <select id="memo-colab" class="glass-select" required></select>
+                </div>
+                <div class="field-group">
+                  <label for="memo-motivo">Motivo Predefinido (RIT Aurora)</label>
+                  <select id="memo-motivo" class="glass-select"></select>
+                </div>
+                <div class="field-group">
+                  <label for="memo-asunto">Asunto (Opcional para personalizar)</label>
+                  <input id="memo-asunto" type="text" class="glass-input" placeholder="Dejar vacío para usar motivo estándar" />
+                </div>
+                <div class="field-group">
+                  <label for="memo-hechos">Descripción de Hechos (Opcional)</label>
+                  <textarea id="memo-hechos" rows="3" class="glass-textarea" placeholder="Detalle puntual de fecha, hora o fundamento..."></textarea>
+                </div>
+                <div class="bw-scope" style="margin-top:4px; display:flex; gap:8px; flex-wrap:wrap;">
+                  <button type="submit" class="bw-btn bw-btn-4" style="flex:1;">
+                    PREVISUALIZAR MEMO
+                  </button>
+                  <button type="button" class="bw-btn-sm is-gold" onclick="sendCurrentMemoToEmail()">
+                    ENVIAR POR CORREO
+                  </button>
+                </div>
+              </div>
+            </form>
+
+            <!-- Emisor de Actas de Entrega -->
+            <form id="form-acta" class="glass-card hs-grid-block" novalidate>
+              <div class="hs-grid-block-header">
+                <div>
+                  <p class="section-eyebrow">RECEPCIÓN FORMAL SUNAFIL</p>
+                  <h3 class="hs-grid-block-title">EMITIR ACTA DE ENTREGA</h3>
+                </div>
+              </div>
+              <div style="display:flex; flex-direction:column; gap:12px;">
+                <div class="field-group">
+                  <label for="acta-colab">Colaborador</label>
+                  <select id="acta-colab" class="glass-select" required></select>
+                </div>
+                <div class="field-group">
+                  <label for="acta-tipo">Tipo de Acta Oficial</label>
+                  <select id="acta-tipo" class="glass-select">
+                    <option value="rit">Acta de Entrega de RIT, MOF y Políticas BPM</option>
+                    <option value="cargo">Acta de Entrega y Recepción de Puesto de Trabajo</option>
+                    <option value="uniformes">Acta de Asignación de Uniformes y Herramientas</option>
+                  </select>
+                </div>
+                <div class="field-group">
+                  <label for="acta-bienes">Detalle Adicional / Bienes (uno por línea)</label>
+                  <textarea id="acta-bienes" rows="3" class="glass-textarea" placeholder="Ej: 02 Filipinas Aurora&#10;01 Mandil institucional&#10;01 Fotocheck corporativo"></textarea>
+                </div>
+                <div class="bw-scope" style="margin-top:4px;">
+                  <button type="submit" class="bw-btn bw-btn-2" style="width:100%;">
+                    GENERAR &amp; PREVISUALIZAR ACTA
+                  </button>
+                </div>
+              </div>
+            </form>
+
+            <!-- Calculadora de Liquidaciones BBSS -->
+            <form id="form-liquidacion" class="glass-card hs-grid-block gold-accent-border" novalidate>
+              <div class="hs-grid-block-header">
+                <div>
+                  <p class="section-eyebrow">D.LEG. 728 / CTS / GRATIFICACIÓN / VACACIONES</p>
+                  <h3 class="hs-grid-block-title">CALCULADORA LIQUIDACIÓN BB.SS.</h3>
+                </div>
+              </div>
+              <div style="display:flex; flex-direction:column; gap:12px;">
+                <div class="field-group">
+                  <label for="liq-colab">Colaborador</label>
+                  <select id="liq-colab" class="glass-select" required></select>
+                </div>
+                <div class="field-group">
+                  <label for="liq-regimen">Régimen Laboral Aplicable</label>
+                  <select id="liq-regimen" class="glass-select">
+                    <option value="GENERAL">Régimen General (100% Gratificación, CTS y Vacaciones)</option>
+                    <option value="MYPE_PEQUENA">MYPE Pequeña Empresa (50% Beneficios)</option>
+                  </select>
+                </div>
+                <div class="field-group">
+                  <label for="liq-fecha-cese">Fecha de Cese Simulada / Real (Opcional)</label>
+                  <input id="liq-fecha-cese" type="text" class="glass-input" placeholder="DD/MM/AAAA (vacío = usa cese/vigencia)" />
+                </div>
+                <div class="bw-scope" style="margin-top:4px;">
+                  <button type="submit" class="bw-btn bw-btn-4" style="width:100%;">
+                    CALCULAR Y VER LIQUIDACIÓN
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <!-- Catálogo MOF con "Leer más / Leer menos" -->
+          <article class="glass-card hs-grid-block">
+            <div class="hs-grid-block-header">
+              <div>
+                <p class="section-eyebrow">MANUAL DE ORGANIZACIÓN Y FUNCIONES (MOF)</p>
+                <h3 class="hs-grid-block-title">PERFILES OFICIALES POR PUESTO (CON LEER MÁS / LEER MENOS)</h3>
+              </div>
+            </div>
+            <div id="mof-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(290px, 1fr)); gap:14px;"></div>
+          </article>
+        </section>
+
+        <!-- 6. CENTRO DE ENVÍO DE CORREOS CORPORATIVOS -->
+        <section id="view-correo" class="view-pane" aria-labelledby="title-correo">
+          <div class="section-header hs-section-banner">
+            <div>
+              <p class="section-eyebrow">ARCHIVE MODULE 06 • DESPACHO DIGITAL DOCUMENTAL &amp; REPORTES GERENCIALES</p>
+              <h2 id="title-correo" class="section-title">CENTRO DE ENVÍO POR CORREO (ADENDAS, CONTRATOS, MEMOS &amp; RESUMEN)</h2>
+            </div>
+            <div class="bw-scope" style="display:flex; gap:8px; flex-wrap:wrap;">
+              <button type="button" class="bw-btn-sm is-primary" onclick="openEmailComposer('RESUMEN_GENERAL')">
+                CARGAR RESUMEN DE TODO EL PERSONAL
+              </button>
+            </div>
+          </div>
+
+          <!-- Barra de Selección Rápida de Plantilla Button-Web -->
+          <div class="bw-scope" style="margin-bottom:20px;">
+            <div class="bw-tabs-bar" role="tablist" aria-label="Plantillas de correo">
+              <button type="button" class="bw-tab-item is-active" data-email-tpl="ADENDA" onclick="setEmailTemplate('ADENDA')">
+                1. Enviar Adenda
+              </button>
+              <button type="button" class="bw-tab-item" data-email-tpl="CONTRATO" onclick="setEmailTemplate('CONTRATO')">
+                2. Enviar Contrato
+              </button>
+              <button type="button" class="bw-tab-item" data-email-tpl="MEMORANDUM" onclick="setEmailTemplate('MEMORANDUM')">
+                3. Enviar Memorándum
+              </button>
+              <button type="button" class="bw-tab-item" data-email-tpl="LIQUIDACION" onclick="setEmailTemplate('LIQUIDACION')">
+                4. Enviar Liquidación
+              </button>
+              <button type="button" class="bw-tab-item" data-email-tpl="RESUMEN_GENERAL" onclick="setEmailTemplate('RESUMEN_GENERAL')">
+                5. Resumen Todo el Personal
+              </button>
+            </div>
+          </div>
+
+          <form id="form-enviar-correo" class="glass-card hs-grid-block gold-accent-border" novalidate style="margin-bottom:24px;">
+            <div class="hs-grid-block-header">
+              <h3 class="hs-grid-block-title">COMPOSITOR CORPORATIVO CON ENLACES DE GOOGLE DRIVE &amp; GEMINI IA</h3>
+              <button type="button" id="btn-gemini-draft-email" class="bw-btn-sm is-gold">
+                REDACTAR / MEJORAR CON GEMINI IA
+              </button>
+            </div>
+
+            <div class="onboarding-grid" style="margin-bottom:16px;">
+              <div class="field-group">
+                <label for="email-from">De (Correo Remitente Oficial)</label>
+                <select id="email-from" class="glass-select">
+                  <option value="admr.brinnercas@gmail.com">admr.brinnercas@gmail.com (Administración RH BRINNERCAS)</option>
+                  <option value="brinnercas@gmail.com">brinnercas@gmail.com (Wilmer Brinner Castro Vásquez)</option>
+                  <option value="gerencia@aurora.pe">gerencia@aurora.pe (Gerencia General Aurora)</option>
+                </select>
+              </div>
+
+              <div class="field-group">
+                <label for="email-tipo">Tipo de Envío Documental</label>
+                <select id="email-tipo" class="glass-select">
+                  <option value="ADENDA">Adenda de Prórroga de Contrato (.DOCX)</option>
+                  <option value="CONTRATO">Contrato Individual de Trabajo (.PDF / .DOCX)</option>
+                  <option value="MEMORANDUM">Memorándum / Citación RIT Aurora</option>
+                  <option value="LIQUIDACION">Hoja de Liquidación de Beneficios Sociales</option>
+                  <option value="RESUMEN_GENERAL">Resumen Ejecutivo de Todo el Personal (27 Colaboradores)</option>
+                </select>
+              </div>
+
+              <div class="field-group">
+                <label for="email-colab">Colaborador (Autocompleta correo y archivos Drive)</label>
+                <select id="email-colab" class="glass-select"></select>
+              </div>
+
+              <div class="field-group">
+                <label for="email-to">Para (Correo Destinatario) *</label>
+                <input id="email-to" type="text" class="glass-input" required placeholder="trabajador@gmail.com, gerencia@aurora.pe" />
+              </div>
+
+              <div class="field-group">
+                <label for="email-cc">CC (Con Copia a Administración / Gerencia)</label>
+                <input id="email-cc" type="text" class="glass-input" value="admr.brinnercas@gmail.com, gerencia@aurora.pe" />
+              </div>
+            </div>
+
+            <div class="field-group" style="margin-bottom:14px;">
+              <label for="email-subject">Asunto del Correo *</label>
+              <input id="email-subject" type="text" class="glass-input" required />
+            </div>
+
+            <div class="field-group" style="margin-bottom:14px;">
+              <label>Documentos y Enlaces de Google Drive Incluidos</label>
+              <div id="email-attachments-box" class="glass-card-subtle" style="display:flex; flex-wrap:wrap; gap:8px; font-size:0.8rem;"></div>
+            </div>
+
+            <div class="field-group" style="margin-bottom:18px;">
+              <label for="email-body">Mensaje y Detalle Documental *</label>
+              <textarea id="email-body" rows="11" class="glass-textarea" style="font-family:var(--font-mono); font-size:0.82rem; line-height:1.55;" required></textarea>
+            </div>
+
+            <div class="bw-scope" style="display:flex; gap:12px; flex-wrap:wrap; align-items:center;">
+              <button type="button" id="btn-send-gmail" class="bw-btn bw-btn-4">
+                ENVIAR POR GMAIL WEB (1 CLIC)
+              </button>
+              <button type="button" id="btn-send-mailto" class="bw-btn bw-btn-2">
+                ABRIR EN OUTLOOK / CORREO LOCAL
+              </button>
+              <button type="submit" id="btn-save-email-log" class="bw-btn bw-btn-1">
+                REGISTRAR EN HISTORIAL
+              </button>
+              <button type="button" id="btn-copy-email" class="bw-btn-sm">
+                COPIAR TEXTO COMPLETO
+              </button>
+            </div>
+
+            <div id="email-feedback-box" class="bw-status-box bw-status-success" style="display:none; margin-top:14px; width:100%;"></div>
+          </form>
+
+          <!-- Historial de Correos Despachados -->
+          <article class="glass-card hs-grid-block">
+            <div class="hs-grid-block-header">
+              <h3 class="hs-grid-block-title">HISTORIAL DE CORREOS ENVIADOS Y PREPARADOS</h3>
+            </div>
+            <div class="table-wrapper" tabindex="0" role="region" aria-label="Historial de correos enviados">
+              <table class="aurora-table hs-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Fecha / Hora</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Colaborador / Destino</th>
+                    <th scope="col">Correo Para</th>
+                    <th scope="col">Asunto</th>
+                    <th scope="col">Estado</th>
+                  </tr>
+                </thead>
+                <tbody id="email-history-tbody"></tbody>
+              </table>
+            </div>
+          </article>
+        </section>
+
+        <!-- 7. GOOGLE DRIVE & GOOGLE SHEETS CLOUD HUB -->
+        <section id="view-drive" class="view-pane" aria-labelledby="title-drive">
+          <div class="section-header hs-section-banner">
+            <div>
+              <p class="section-eyebrow">ARCHIVE MODULE 07 • CUENTA CONECTADA: admr.brinnercas@gmail.com</p>
+              <h2 id="title-drive" class="section-title">CARPETA ORGANIZADA GOOGLE DRIVE &amp; HOJAS DE CÁLCULO</h2>
+            </div>
+            <a href="http://localhost:3005/api/excel/resumen" class="bw-btn-sm is-primary">
+              DESCARGAR EXCEL LOCAL CONTABLE
+            </a>
+          </div>
+
+          <div id="drive-hub-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(290px, 1fr)); gap:16px;"></div>
+        </section>
+
+        <!-- 8. ASISTENTE GEMINI IA LEGAL & RRHH -->
+        <section id="view-chat" class="view-pane" aria-labelledby="title-chat">
+          <div class="section-header hs-section-banner">
+            <div>
+              <p class="section-eyebrow">ARCHIVE MODULE 08 • MOTOR GEMINI-4-HYDROGEN + AUDITORÍA EN TIEMPO REAL</p>
+              <h2 id="title-chat" class="section-title">ASISTENTE GEMINI IA — RH BRINNERCAS</h2>
+            </div>
+            <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+              <input id="gemini-api-key-input" type="password" class="glass-input" style="width:240px; padding:7px 10px; font-size:0.76rem;" placeholder="API Key Gemini (opcional)" />
+              <button type="button" id="btn-save-gemini-key" class="bw-btn-sm is-gold">GUARDAR KEY</button>
+            </div>
+          </div>
+
+          <div class="glass-card hs-grid-block chat-layout">
+            <aside style="display:flex; flex-direction:column; gap:10px;">
+              <p class="section-eyebrow">ACCIONES GEMINI EN 1 CLIC</p>
+              <button type="button" class="bw-btn-sm quick-chat-btn" data-q="¿Cuál es la planilla activa actual y el ahorro frente a febrero?">Planilla Activa y Ahorro</button>
+              <button type="button" class="bw-btn-sm quick-chat-btn" data-q="Dame la ficha completa de Wilmer Brinner Castro Vásquez">Ficha Wilmer Brinner</button>
+              <button type="button" class="bw-btn-sm quick-chat-btn" data-q="Resume los ceses de Andrea Cueva y Diego Minchón">Ceses Andrea y Diego</button>
+              <button type="button" class="bw-btn-sm quick-chat-btn" data-q="¿Quiénes necesitan adenda de renovación para el próximo periodo?">Adendas Pendientes</button>
+              <button type="button" class="bw-btn-sm quick-chat-btn" data-q="Redacta un correo formal para enviar el resumen de todo el personal a gerencia">Redactar Correo Resumen</button>
+              <button type="button" class="bw-btn-sm quick-chat-btn" data-q="¿Cuáles son las funciones del Jefe de Cocina según el MOF?">Funciones MOF Cocina</button>
+            </aside>
+
+            <div style="display:flex; flex-direction:column; gap:12px;">
+              <div id="chat-messages" class="chat-messages">
+                <div class="chat-bubble bot">
+                  Hola, soy <strong>Gemini HR Assistant</strong> (<code>gemini-4-hydrogen</code>) integrado en <strong>RH BRINNERCAS</strong>. Tengo cargado el padrón de los <strong>27 colaboradores</strong>, contratos, adendas, liquidaciones, enlaces de Google Drive y centro de correos. ¿En qué te ayudo hoy?
+                </div>
+              </div>
+              <form id="chat-form" class="bw-scope" novalidate>
+                <div class="bw-combo-pill" style="width:100%;">
+                  <input id="chat-input" type="text" placeholder="Pregúntale a Gemini sobre cualquier colaborador, sueldo, contrato o pídele redactar un correo..." required />
+                  <button type="submit" class="bw-combo-btn">PREGUNTAR A GEMINI</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- ======================================================================
+       COPILOTO FLOTANTE GEMINI IA (SIN ICONOS — MONTSERRAT + GLASS)
+       ====================================================================== -->
+  <button type="button" id="gemini-copilot-fab" class="gemini-fab" onclick="toggleGeminiDrawer()" title="Abrir Asistente Gemini IA">
+    <span>GEMINI IA</span>
+  </button>
+
+  <aside id="gemini-copilot-drawer" class="gemini-drawer hs-grid-block" aria-label="Copiloto Flotante Gemini IA" hidden>
+    <div class="gemini-drawer-head">
+      <div>
+        <div style="font-size:0.8rem; font-weight:800; letter-spacing:0.06em;">GEMINI HR COPILOT</div>
+        <div style="font-family:var(--font-mono); font-size:0.64rem; color:var(--accent-orange);">gemini-4-hydrogen • 27 Legajos</div>
+      </div>
+      <div style="display:flex; gap:6px;">
+        <button type="button" class="bw-btn-sm" onclick="switchView('chat'); toggleGeminiDrawer(false);" title="Abrir en pantalla completa">Ampliar</button>
+        <button type="button" class="bw-btn-sm" onclick="toggleGeminiDrawer(false)" aria-label="Cerrar copiloto">Cerrar</button>
+      </div>
+    </div>
+
+    <div id="gemini-drawer-messages" class="gemini-drawer-messages">
+      <div class="chat-bubble bot">
+        Soy <strong>Gemini IA</strong>. Pregúntame por cualquier trabajador, DNI, sueldo, adenda o pídeme preparar un correo desde cualquier vista.
+      </div>
+    </div>
+
+    <div class="gemini-drawer-quick">
+      <button type="button" class="bw-btn-sm" onclick="askGeminiCopilot('¿Cuál es la planilla activa y el ahorro mensual?')">Nómina &amp; Ahorro</button>
+      <button type="button" class="bw-btn-sm" onclick="askGeminiCopilot('¿Quiénes necesitan adenda de renovación?')">Adendas</button>
+      <button type="button" class="bw-btn-sm" onclick="openEmailComposer('RESUMEN_GENERAL'); toggleGeminiDrawer(false);">Enviar Correo</button>
+    </div>
+
+    <form id="gemini-drawer-form" class="bw-scope" novalidate>
+      <div class="bw-combo-pill" style="width:100%;">
+        <input id="gemini-drawer-input" type="text" placeholder="Escribe a Gemini IA..." required />
+        <button type="submit" class="bw-combo-btn">ENVIAR</button>
+      </div>
+    </form>
+  </aside>
+
+  <!-- ======================================================================
+       MODALES NATIVOS <dialog>
+       ====================================================================== -->
+  <dialog id="doc-viewer-dialog" class="glass-dialog hs-grid-block" closedby="any" aria-labelledby="doc-viewer-title">
+    <div class="dialog-head">
+      <div>
+        <p class="section-eyebrow" style="margin-bottom:2px;">VISOR DOCUMENTAL RH BRINNERCAS</p>
+        <h3 id="doc-viewer-title" class="hs-grid-block-title">Documento</h3>
+      </div>
+      <div style="display:flex; gap:8px; align-items:center;">
+        <div id="doc-viewer-actions" style="display:flex; gap:8px; flex-wrap:wrap;"></div>
+        <button type="button" class="bw-btn-sm" data-close-dialog="doc-viewer-dialog" aria-label="Cerrar visor">
+          CERRAR
+        </button>
+      </div>
+    </div>
+    <div id="doc-viewer-body" class="dialog-body"></div>
+  </dialog>
+
+  <dialog id="colab-dialog" class="glass-dialog hs-grid-block" closedby="any" aria-labelledby="colab-dialog-title">
+    <div class="dialog-head">
+      <div>
+        <p class="section-eyebrow" style="margin-bottom:2px;">EXPEDIENTE DETALLADO DEL COLABORADOR</p>
+        <h3 id="colab-dialog-title" class="hs-grid-block-title">Colaborador</h3>
+      </div>
+      <button type="button" class="bw-btn-sm" data-close-dialog="colab-dialog" aria-label="Cerrar ficha">
+        CERRAR
+      </button>
+    </div>
+    <div id="colab-dialog-body" class="dialog-body"></div>
+  </dialog>
+
+  <!-- VENTANA EMERGENTE: EDITOR COMPLETO DE FICHA LABORAL (SYNC GOOGLE SHEETS) -->
+  <dialog id="planilla-edit-dialog" class="glass-dialog hs-grid-block planilla-modal-dialog" closedby="any" aria-labelledby="edit-selected-title">
+    <div class="dialog-head">
+      <div>
+        <p class="section-eyebrow" style="margin-bottom:2px;">FICHA LABORAL EDITABLE D.LEG. 728 • SINCRONIZACIÓN DIRECTA CON GOOGLE SHEETS</p>
+        <h3 id="edit-selected-title" class="hs-grid-block-title">EDITAR COLABORADOR</h3>
+      </div>
+      <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+        <span id="edit-selected-tag" class="hs-archive-tag">ID #01 • GOOGLE SHEETS LIVE</span>
+        <button type="button" class="bw-btn-sm" data-close-dialog="planilla-edit-dialog" aria-label="Cerrar editor">
+          CERRAR
+        </button>
+      </div>
+    </div>
+
+    <div class="dialog-body planilla-modal-body">
+      <form id="form-editar-planilla" novalidate>
+        <input type="hidden" id="edit-id" name="id" />
+        <input type="hidden" id="edit-original-dni" name="originalDni" />
+
+        <div class="onboarding-grid">
+          <div class="field-group">
+            <label for="edit-tipo-doc">Tipo de Documento</label>
+            <span class="field-hint">DNI (Perú), Carné de Extranjería o PTP</span>
+            <select id="edit-tipo-doc" name="tipoDocumento" class="glass-select">
+              <option value="DNI">DNI</option>
+              <option value="CE">Carné de Extranjería (CE)</option>
+              <option value="PTP">PTP / CPP</option>
+            </select>
+          </div>
+
+          <div class="field-group">
+            <label for="edit-dni">Número de Documento *</label>
+            <span class="field-hint">8 dígitos exactos para DNI o hasta 12 para CE</span>
+            <input id="edit-dni" name="dni" type="text" class="glass-input" required pattern="^[0-9A-Za-z]{8,12}$" data-error="edit-dni-err" />
+            <p id="edit-dni-err" class="error-msg">Ingresa un documento válido de 8 a 12 caracteres.</p>
+          </div>
+
+          <div class="field-group">
+            <label for="edit-nombre">Apellidos y Nombres Completos *</label>
+            <span class="field-hint">Se guardará en MAYÚSCULAS tal como figura en el DNI</span>
+            <input id="edit-nombre" name="nombre" type="text" class="glass-input" required minlength="5" data-error="edit-nombre-err" />
+            <p id="edit-nombre-err" class="error-msg">Ingresa los apellidos y nombres completos.</p>
+          </div>
+
+          <div class="field-group">
+            <label for="edit-area">Área Operativa *</label>
+            <span class="field-hint">Área asignada en Aurora Restaurant</span>
+            <select id="edit-area" name="area" class="glass-select" required>
+              <option value="Administración">Administración</option>
+              <option value="Salón">Salón</option>
+              <option value="Cocina">Cocina</option>
+              <option value="Cocina / Salón">Cocina / Salón</option>
+              <option value="Bar">Bar</option>
+              <option value="Barra">Barra</option>
+              <option value="Caja">Caja</option>
+              <option value="Logística">Logística</option>
+              <option value="Recepción">Recepción</option>
+              <option value="Seguridad">Seguridad</option>
+              <option value="Almacén">Almacén</option>
+              <option value="Mantenimiento">Mantenimiento</option>
+              <option value="Operaciones / Apoyo">Operaciones / Apoyo</option>
+            </select>
+          </div>
+
+          <div class="field-group">
+            <label for="edit-cargo">Cargo / Puesto en Contrato *</label>
+            <span class="field-hint">Ej: Mozo, Azafata, Cocinero, Barista, Cajero</span>
+            <input id="edit-cargo" name="cargo" type="text" class="glass-input" required data-error="edit-cargo-err" />
+            <p id="edit-cargo-err" class="error-msg">Indica el cargo del colaborador.</p>
+          </div>
+
+          <div class="field-group">
+            <label for="edit-condicion-laboral">Condición Laboral (Sheets) *</label>
+            <span class="field-hint">Sincronizado con columna CONDICION LABORAL en Google Sheets</span>
+            <select id="edit-condicion-laboral" name="condicionLaboral" class="glass-select" required>
+              <option value="CONTRATO">CONTRATO</option>
+              <option value="RXH">RXH</option>
+              <option value="OTROS">OTROS</option>
+            </select>
+          </div>
+
+          <div class="field-group">
+            <label for="edit-condicion">Jornada Laboral</label>
+            <span class="field-hint">Régimen de jornada pactada</span>
+            <select id="edit-condicion" name="condicion" class="glass-select">
+              <option value="FULL TIME">FULL TIME</option>
+              <option value="PART TIME">PART TIME</option>
+              <option value="FIJO RXH">FIJO RXH</option>
+              <option value="RXH / APOYO">RXH / APOYO</option>
+            </select>
+          </div>
+
+          <div class="field-group">
+            <label for="edit-estado">Estado Laboral *</label>
+            <span class="field-hint">Situación actual en planilla</span>
+            <select id="edit-estado" name="estado" class="glass-select" required>
+              <option value="ACTIVO">ACTIVO</option>
+              <option value="CESADO">CESADO</option>
+              <option value="RXH">RXH</option>
+              <option value="APOYO">APOYO</option>
+            </select>
+          </div>
+
+          <div class="field-group">
+            <label for="edit-sueldo">Remuneración Bruta Mensual (S/) *</label>
+            <span class="field-hint">Monto en Soles peruanos</span>
+            <input id="edit-sueldo" name="sueldo" type="number" min="0" step="10" class="glass-input" required data-error="edit-sueldo-err" />
+            <p id="edit-sueldo-err" class="error-msg">Ingresa una remuneración válida.</p>
+          </div>
+
+          <div class="field-group">
+            <label for="edit-fecha-inicio">Fecha de Inicio de Contrato (DD/MM/YYYY)</label>
+            <span class="field-hint">Inicio de vínculo laboral</span>
+            <input id="edit-fecha-inicio" name="fechaInicio" type="text" class="glass-input" placeholder="Ej: 01/02/2026" />
+          </div>
+
+          <div class="field-group">
+            <label for="edit-fecha-fin">Fecha de Fin / Vigencia Actual</label>
+            <span class="field-hint">Vencimiento vigente de contrato o adenda</span>
+            <input id="edit-fecha-fin" name="fechaFin" type="text" class="glass-input" placeholder="Ej: 31/10/2026" />
+          </div>
+
+          <div class="field-group">
+            <label for="edit-fecha-cese">Fecha de Cese (si aplica)</label>
+            <span class="field-hint">Dejar vacío si el colaborador sigue activo</span>
+            <input id="edit-fecha-cese" name="fechaCese" type="text" class="glass-input" placeholder="Ej: 31/10/2026" />
+          </div>
+
+          <div class="field-group">
+            <label for="edit-domicilio">Domicilio Fiscal / Dirección Real *</label>
+            <span class="field-hint">Dirección exacta para contratos, adendas y Sheets</span>
+            <input id="edit-domicilio" name="domicilio" type="text" class="glass-input" required data-error="edit-domicilio-err" />
+            <p id="edit-domicilio-err" class="error-msg">Ingresa el domicilio del colaborador.</p>
+          </div>
+
+          <div class="field-group">
+            <label for="edit-nacimiento">Fecha de Nacimiento</label>
+            <span class="field-hint">Formato DD/MM/AAAA</span>
+            <input id="edit-nacimiento" name="fechaNacimiento" type="text" class="glass-input" placeholder="Ej: 15/05/1998" />
+          </div>
+
+          <div class="field-group">
+            <label for="edit-edad">Edad Actual</label>
+            <span class="field-hint">Años cumplidos</span>
+            <input id="edit-edad" name="edad" type="text" class="glass-input" placeholder="Ej: 28" />
+          </div>
+
+          <div class="field-group">
+            <label for="edit-celular">Celular / WhatsApp</label>
+            <span class="field-hint">9 dígitos para contacto y envíos</span>
+            <input id="edit-celular" name="celular" type="tel" class="glass-input" placeholder="Ej: 944123456" />
+          </div>
+
+          <div class="field-group">
+            <label for="edit-correo">Correo Electrónico Personal</label>
+            <span class="field-hint">Para envío de documentos laborales</span>
+            <input id="edit-correo" name="correo" type="email" class="glass-input" placeholder="trabajador@gmail.com" />
+          </div>
+
+          <div class="field-group">
+            <label for="edit-banco">Entidad Bancaria</label>
+            <span class="field-hint">Banco para depósito de haberes</span>
+            <input id="edit-banco" name="banco" type="text" list="edit-banco-list" class="glass-input" placeholder="Ej: BBVA, BCP, BCP INT" />
+            <datalist id="edit-banco-list">
+              <option value="BCP"></option>
+              <option value="BCP INT"></option>
+              <option value="BBVA"></option>
+              <option value="INTERBANK"></option>
+              <option value="SCOTIABANK"></option>
+              <option value="BANCO DE LA NACIÓN"></option>
+              <option value="EFECTIVO / POR DEFINIR"></option>
+            </datalist>
+          </div>
+
+          <div class="field-group">
+            <label for="edit-cuenta">Número de Cuenta / CCI</label>
+            <span class="field-hint">Cuenta ahorros o CCI interbancario</span>
+            <input id="edit-cuenta" name="numeroCuenta" type="text" class="glass-input" />
+          </div>
+
+          <div class="field-group">
+            <label for="edit-carnet">Carnet de Sanidad</label>
+            <span class="field-hint">Exigible por MPT / DIGESA en gastronomía</span>
+            <select id="edit-carnet" name="carnetSanitario" class="glass-select">
+              <option value="SI">SI (Vigente)</option>
+              <option value="SÍ">SÍ (Vigente)</option>
+              <option value="EN TRÁMITE">EN TRÁMITE</option>
+              <option value="NO">NO</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field-group" style="margin-top:16px;">
+          <label for="edit-obs">Observaciones y Detalle Laboral</label>
+          <span class="field-hint">Notas de contrato, adendas, horario o cese</span>
+          <textarea id="edit-obs" name="observaciones" rows="2" class="glass-textarea"></textarea>
+        </div>
+
+        <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:22px; align-items:center;">
+          <div class="bw-scope" style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+            <button type="submit" id="btn-submit-editar-planilla" class="bw-btn bw-btn-4">
+              GUARDAR CAMBIOS Y ACTUALIZAR SHEETS
+            </button>
+            <button type="button" id="btn-preview-contrato-edit" class="bw-btn bw-btn-2">
+              PREVISUALIZAR CONTRATO (ANEXO N° 001)
+            </button>
+            <button type="button" id="btn-edit-ver-boveda" class="bw-btn-sm is-gold">
+              VER 5 DOCS EN BÓVEDA
+            </button>
+            <button type="button" id="btn-reset-editar-planilla" class="bw-btn-sm">
+              RESTAURAR
+            </button>
+          </div>
+        </div>
+
+        <div id="edit-planilla-result-box" class="glass-card-subtle" style="display:none; margin-top:18px;"></div>
+      </form>
+    </div>
+  </dialog>
+
+  <script src="assets/the-handsome/the-handsome-icons.js"></script>
+  <script src="assets/button-web/button-web-icons.js"></script>
+  <script src="data-bundle.js?v=20261119f"></script>
+  <script src="app.js?v=20261119f"></script>
+</body>
+</html>
