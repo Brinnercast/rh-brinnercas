@@ -7,18 +7,93 @@ const API_BASE = (window.location.protocol === 'http:' && window.location.port =
   ? ''
   : 'http://localhost:3005';
 
+const SESSION_KEY = 'rh_brinnercas_session';
+
 function apiUrl(p) {
   return `${API_BASE}${p}`;
 }
 
+/**
+ * Validación estricta de URLs para prevenir inyección XSS por esquemas javascript:/vbscript:
+ */
+function safeUrl(raw) {
+  const s = String(raw || '').trim();
+  if (!s) return '#';
+  if (/^(javascript|vbscript|data:text\/html)/i.test(s)) return '#';
+  if (/^(https?:\/\/|\/|docs\/|assets\/|#)/i.test(s)) return s;
+  return '#';
+}
+
+function getStoredSession() {
+  try {
+    const raw = sessionStorage.getItem(SESSION_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    if (!parsed || !parsed.expiresAt || Date.now() >= parsed.expiresAt) {
+      sessionStorage.removeItem(SESSION_KEY);
+      return null;
+    }
+    return parsed;
+  } catch (e) {
+    sessionStorage.removeItem(SESSION_KEY);
+    return null;
+  }
+}
+
+function getAuthToken() {
+  return getStoredSession()?.token || '';
+}
+
+function saveSession({ user, token, expiresAt }) {
+  const safeObj = {
+    user: {
+      email: user?.email || '',
+      name: user?.name || '',
+      role: user?.role || '',
+      roleCode: user?.roleCode || 'ADMIN_GENERAL',
+      department: user?.department || 'ALL'
+    },
+    token: token || '',
+    expiresAt: expiresAt || (Date.now() + 8 * 60 * 60 * 1000)
+  };
+  sessionStorage.setItem(SESSION_KEY, JSON.stringify(safeObj));
+  sessionStorage.removeItem('rh_brinnercas_user');
+  return safeObj;
+}
+
+function clearSessionStorage() {
+  sessionStorage.removeItem(SESSION_KEY);
+  sessionStorage.removeItem('rh_brinnercas_user');
+}
+
+/**
+ * Wrapper Zero-Trust para peticiones autenticadas con Bearer Token y manejo automático de 401
+ */
+async function authFetch(url, options = {}) {
+  const token = getAuthToken();
+  const headers = { ...(options.headers || {}) };
+  if (token) headers['Authorization'] = `Bearer ${token}`;
+  const res = await fetch(url, { ...options, headers });
+  if (res.status === 401 && typeof window.forceLockPortal === 'function') {
+    window.forceLockPortal('Tu sesión ha expirado. Inicia sesión nuevamente.');
+  }
+  return res;
+}
+
 function relDocUrl(localUrl, apiPath, driveUrl) {
   if (localUrl) {
-    return String(localUrl).replace(/^\//, '');
+    return safeUrl(String(localUrl).replace(/^\//, ''));
   }
   if (window.location.protocol === 'file:' && driveUrl) {
-    return driveUrl;
+    return safeUrl(driveUrl);
   }
-  return apiUrl(apiPath);
+  const base = apiUrl(apiPath);
+  const tok = getAuthToken();
+  if (tok && apiPath.startsWith('/api/')) {
+    const sep = base.includes('?') ? '&' : '?';
+    return safeUrl(`${base}${sep}token=${encodeURIComponent(tok)}`);
+  }
+  return safeUrl(base);
 }
 
 const state = {
@@ -234,6 +309,37 @@ function initDialogLightDismiss() {
 // ==========================================================================
 // CONTROL DE LOGIN Y SESIÓN
 // ==========================================================================
+// CONTROL DE ACCESO (ZERO-TRUST + HASH SHA-256 SIN CONTRASEÑAS EN TEXTO PLANO)
+// ==========================================================================
+const STATIC_AUTH_SALT = 'aurora_web_v2';
+const STATIC_PASS_HASHES = [
+  '02537d52a6512eec5023fcda6e7cc650bfd1a58e47b60d85d8b4a052d6b71b8b',
+  '2ffc8a814e8fa64dcf4958355d06a65a9dd18a5afd8bec715dd4949aad098744'
+];
+const STATIC_ACCOUNTS = [
+  { email: 'brinnercas', aliases: ['admr.brinnercas@gmail.com', 'brinnercas@gmail.com'], name: 'Wilmer Brinner Castro Vásquez', role: 'Administrador General', roleCode: 'ADMIN_GENERAL', department: 'ALL' },
+  { email: 'gerencia@aurora.pe', aliases: [], name: 'Gladys Verónica Carbajal Urquizo', role: 'Gerente General', roleCode: 'GERENCIA', department: 'ALL' }
+];
+
+async function sha256HexClient(text) {
+  if (!window.crypto?.subtle) return '';
+  const data = new TextEncoder().encode(text);
+  const hashBuf = await window.crypto.subtle.digest('SHA-256', data);
+  return Array.from(new Uint8Array(hashBuf)).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+async function verifyStaticFallback({ email, password, pin }) {
+  if (pin) {
+    const h = await sha256HexClient(`${STATIC_AUTH_SALT}:${pin}`);
+    return h === STATIC_PASS_HASHES[0] ? STATIC_ACCOUNTS[0] : null;
+  }
+  const cleanEmail = String(email || '').trim().toLowerCase();
+  const acc = STATIC_ACCOUNTS.find(u => u.email === cleanEmail || u.aliases.includes(cleanEmail));
+  if (!acc) return null;
+  const h = await sha256HexClient(`${STATIC_AUTH_SALT}:${password}`);
+  return STATIC_PASS_HASHES.includes(h) ? acc : null;
+}
+
 function initLoginControl() {
   const overlay = document.getElementById('login-screen');
   const formCred = document.getElementById('login-form-cred');
@@ -243,13 +349,11 @@ function initLoginControl() {
   const passInput = document.getElementById('login-pass');
   const pinInput = document.getElementById('login-pin-input');
 
-  // Restaurar sesión activa en la pestaña actual si ya se autenticó
-  const saved = sessionStorage.getItem('rh_brinnercas_user');
-  if (saved) {
-    try {
-      state.user = JSON.parse(saved);
-      unlockPortal(state.user);
-    } catch (e) {}
+  // Restaurar sesión activa solo si no ha expirado
+  const savedSess = getStoredSession();
+  if (savedSess && savedSess.user) {
+    state.user = savedSess.user;
+    unlockPortal(savedSess.user);
   }
 
   tabBtns.forEach(btn => {
@@ -299,16 +403,6 @@ function initLoginControl() {
     const email = document.getElementById('login-email').value.trim().toLowerCase();
     const password = passInput.value.trim();
 
-    const localUsers = [
-      { email: 'brinnercas', pass: '1234', name: 'Wilmer Brinner Castro Vásquez', role: 'Administrador General' },
-      { email: 'admr.brinnercas@gmail.com', pass: '1234', name: 'Wilmer Brinner Castro Vásquez', role: 'Administrador General' },
-      { email: 'admr.brinnercas@gmail.com', pass: 'Aurora2026!', name: 'Wilmer Brinner Castro Vásquez', role: 'Administrador General' },
-      { email: 'brinnercas@gmail.com', pass: '1234', name: 'Wilmer Brinner Castro Vásquez', role: 'Administrador General' },
-      { email: 'brinnercas@gmail.com', pass: 'Aurora2026!', name: 'Wilmer Brinner Castro Vásquez', role: 'Administrador General' },
-      { email: 'gerencia@aurora.pe', pass: '1234', name: 'Gladys Verónica Carbajal Urquizo', role: 'Gerente General' },
-      { email: 'gerencia@aurora.pe', pass: 'Aurora2026!', name: 'Gladys Verónica Carbajal Urquizo', role: 'Gerente General' }
-    ];
-
     try {
       const res = await fetch(apiUrl('/api/auth/login'), {
         method: 'POST',
@@ -317,26 +411,22 @@ function initLoginControl() {
       });
       const data = await res.json();
       if (!res.ok || !data.success) {
-        const fallbackUser = localUsers.find(u => u.email === email && u.pass === password);
-        if (fallbackUser) {
-          sessionStorage.setItem('rh_brinnercas_user', JSON.stringify(fallbackUser));
-          state.user = fallbackUser;
-          unlockPortal(fallbackUser);
-          return;
-        }
         feedback.textContent = data.error || 'Credenciales incorrectas.';
         feedback.style.display = 'block';
         return;
       }
-      sessionStorage.setItem('rh_brinnercas_user', JSON.stringify(data.user));
-      state.user = data.user;
-      unlockPortal(data.user);
+      const sess = saveSession({ user: data.user, token: data.token, expiresAt: data.expiresAt });
+      passInput.value = '';
+      state.user = sess.user;
+      unlockPortal(sess.user);
     } catch (err) {
-      const fallbackUser = localUsers.find(u => u.email === email && u.pass === password);
+      // Modo estático sin servidor local activo (Firebase Hosting): verificación criptográfica SHA-256 sin texto plano
+      const fallbackUser = await verifyStaticFallback({ email, password });
       if (fallbackUser) {
-        sessionStorage.setItem('rh_brinnercas_user', JSON.stringify(fallbackUser));
-        state.user = fallbackUser;
-        unlockPortal(fallbackUser);
+        const sess = saveSession({ user: fallbackUser, token: '', expiresAt: Date.now() + 8 * 60 * 60 * 1000 });
+        passInput.value = '';
+        state.user = sess.user;
+        unlockPortal(sess.user);
         return;
       }
       feedback.textContent = 'Usuario o clave incorrectos.';
@@ -351,7 +441,6 @@ function initLoginControl() {
     if (!window.validateFormOnSubmit(formPin)) return;
 
     const pinVal = pinInput.value.trim();
-    const defaultPinUser = { email: 'brinnercas', name: 'Wilmer Brinner Castro Vásquez', role: 'Administrador General' };
 
     try {
       const res = await fetch(apiUrl('/api/auth/login'), {
@@ -361,24 +450,21 @@ function initLoginControl() {
       });
       const data = await res.json();
       if (!res.ok || !data.success) {
-        if (pinVal === '1234' || pinVal === '2026') {
-          sessionStorage.setItem('rh_brinnercas_user', JSON.stringify(defaultPinUser));
-          state.user = defaultPinUser;
-          unlockPortal(defaultPinUser);
-          return;
-        }
         feedback.textContent = data.error || 'PIN inválido.';
         feedback.style.display = 'block';
         return;
       }
-      sessionStorage.setItem('rh_brinnercas_user', JSON.stringify(data.user));
-      state.user = data.user;
-      unlockPortal(data.user);
+      const sess = saveSession({ user: data.user, token: data.token, expiresAt: data.expiresAt });
+      pinInput.value = '';
+      state.user = sess.user;
+      unlockPortal(sess.user);
     } catch (err) {
-      if (pinVal === '1234' || pinVal === '2026') {
-        sessionStorage.setItem('rh_brinnercas_user', JSON.stringify(defaultPinUser));
-        state.user = defaultPinUser;
-        unlockPortal(defaultPinUser);
+      const fallbackUser = await verifyStaticFallback({ pin: pinVal });
+      if (fallbackUser) {
+        const sess = saveSession({ user: fallbackUser, token: '', expiresAt: Date.now() + 8 * 60 * 60 * 1000 });
+        pinInput.value = '';
+        state.user = sess.user;
+        unlockPortal(sess.user);
         return;
       }
       feedback.textContent = 'PIN inválido.';
@@ -386,15 +472,29 @@ function initLoginControl() {
     }
   });
 
-  function lockPortal() {
-    sessionStorage.removeItem('rh_brinnercas_user');
+  async function lockPortal(reasonMsg) {
+    const tok = getAuthToken();
+    if (tok) {
+      try {
+        await fetch(apiUrl('/api/auth/logout'), {
+          method: 'POST',
+          headers: { 'Authorization': `Bearer ${tok}` }
+        });
+      } catch (e) {}
+    }
+    clearSessionStorage();
     document.documentElement.classList.remove('session-unlocked');
     state.user = null;
     overlay.classList.remove('is-hidden');
+    if (reasonMsg) {
+      const fb = document.getElementById('login-auth-feedback');
+      if (fb) { fb.textContent = reasonMsg; fb.style.display = 'block'; }
+    }
   }
 
-  document.getElementById('btn-logout-header')?.addEventListener('click', lockPortal);
-  document.getElementById('btn-logout-dock')?.addEventListener('click', lockPortal);
+  window.forceLockPortal = lockPortal;
+  document.getElementById('btn-logout-header')?.addEventListener('click', () => lockPortal());
+  document.getElementById('btn-logout-dock')?.addEventListener('click', () => lockPortal());
 }
 
 function unlockPortal(user) {
@@ -629,12 +729,13 @@ async function loadAllData() {
     renderAllViews();
   }
 
-  // 2. Sincronizar en segundo plano con el servidor en puerto 3005 si está activo
+  // 2. Sincronizar en segundo plano con el servidor en puerto 3005 si está activo y autenticado
+  if (!getAuthToken()) return;
   try {
     const [auditRes, mofRes, motivosRes] = await Promise.all([
-      fetch(apiUrl('/api/audit')),
-      fetch(apiUrl('/api/mof')),
-      fetch(apiUrl('/api/memo-motivos'))
+      authFetch(apiUrl('/api/audit')),
+      authFetch(apiUrl('/api/mof')),
+      authFetch(apiUrl('/api/memo-motivos'))
     ]);
     if (auditRes.ok && mofRes.ok && motivosRes.ok) {
       state.audit = normalizeAuditData(await auditRes.json());
@@ -1252,7 +1353,7 @@ function initOnboardingForm() {
     }
 
     try {
-      const res = await fetch(apiUrl('/api/personal/nuevo'), {
+      const res = await authFetch(apiUrl('/api/personal/nuevo'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
@@ -1340,7 +1441,7 @@ window.generarAdendaIndividual = async function (id, btn) {
   btn.disabled = true;
   btn.textContent = 'Generando...';
   try {
-    const res = await fetch(apiUrl(`/api/adenda/generate/${id}`), {
+    const res = await authFetch(apiUrl(`/api/adenda/generate/${id}`), {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ fechaInicioNueva, fechaFinNueva, firmaTexto })
@@ -1366,7 +1467,7 @@ function initAdendaBatch() {
     status.textContent = 'Compilando adendas en Aptos 11pt...';
     linksBox.innerHTML = '';
 
-    const res = await fetch(apiUrl('/api/adenda/generate-all'), {
+    const res = await authFetch(apiUrl('/api/adenda/generate-all'), {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ fechaInicioNueva, fechaFinNueva, firmaTexto })
@@ -1410,7 +1511,7 @@ function renderDocsAndMof() {
 function initDocsForms() {
   document.getElementById('form-memo')?.addEventListener('submit', async e => {
     e.preventDefault();
-    const res = await fetch(apiUrl('/api/memo/generate'), {
+    const res = await authFetch(apiUrl('/api/memo/generate'), {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -1432,7 +1533,7 @@ function initDocsForms() {
       .split('\n')
       .map(s => s.trim())
       .filter(Boolean);
-    const res = await fetch(apiUrl('/api/acta/generate'), {
+    const res = await authFetch(apiUrl('/api/acta/generate'), {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -1459,7 +1560,7 @@ function initDocsForms() {
 window.openLiquidacionModal = async function (id, regimen = 'GENERAL', fechaCese = '') {
   const qs = new URLSearchParams({ regimen });
   if (fechaCese) qs.set('fechaCese', fechaCese);
-  const res = await fetch(apiUrl(`/api/liquidacion/calc/${id}?${qs.toString()}`));
+  const res = await authFetch(apiUrl(`/api/liquidacion/calc/${id}?${qs.toString()}`));
   const data = await res.json();
   if (data.success) {
     openDocPreview(
@@ -1853,7 +1954,7 @@ async function recordEmailDispatch(canal) {
   } catch (e) {}
 
   try {
-    await fetch(apiUrl('/api/email/send'), {
+    await authFetch(apiUrl('/api/email/send'), {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ ...payload, sendViaGmailCli: true })
@@ -1998,7 +2099,7 @@ async function queryGeminiAssistant(q) {
 
   // 1. Intentar con el servidor Node en puerto 3005
   try {
-    const res = await fetch(apiUrl('/api/chat'), {
+    const res = await authFetch(apiUrl('/api/chat'), {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ message: q, apiKey: savedKey })
@@ -2672,7 +2773,7 @@ function initPlanillaEditor() {
     }
 
     try {
-      const res = await fetch(apiUrl('/api/personal/actualizar'), {
+      const res = await authFetch(apiUrl('/api/personal/actualizar'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)

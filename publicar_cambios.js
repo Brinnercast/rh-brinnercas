@@ -23,6 +23,8 @@ const IGNORE_PATTERNS = [
   /^tmp_.*\.md$/i,
   /^append_.*\.json$/i,
   /^update_.*\.json$/i,
+  /^\.session_hmac_secret$/i,
+  /^audit_security_log\.jsonl$/i,
   /\.log$/i,
   /^Thumbs\.db$/i,
   /^\.DS_Store$/i

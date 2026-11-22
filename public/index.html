@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="color-scheme" content="light dark" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https://drive.google.com https://lh3.googleusercontent.com; connect-src 'self' http://localhost:3005 http://127.0.0.1:3005 https://script.google.com https://script.googleusercontent.com; frame-src 'self' blob: https://drive.google.com https://docs.google.com; object-src 'none'; base-uri 'self'; form-action 'self'" />
   <script>
     try {
       const savedScheme = localStorage.getItem('color-scheme');
@@ -11,8 +13,14 @@
         document.querySelector('meta[name="color-scheme"]').content = savedScheme;
         document.documentElement.setAttribute('data-theme', savedScheme);
       }
-      if (sessionStorage.getItem('rh_brinnercas_user')) {
-        document.documentElement.classList.add('session-unlocked');
+      const rawSess = sessionStorage.getItem('rh_brinnercas_session');
+      if (rawSess) {
+        const parsed = JSON.parse(rawSess);
+        if (parsed && parsed.expiresAt && Date.now() < parsed.expiresAt) {
+          document.documentElement.classList.add('session-unlocked');
+        } else {
+          sessionStorage.removeItem('rh_brinnercas_session');
+        }
       }
     } catch (e) {}
   </script>
@@ -22,7 +30,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/the-handsome/the-handsome-tokens.css" />
   <link rel="stylesheet" href="assets/button-web/button-web-tokens.css" />
-  <link rel="stylesheet" href="styles.css?v=20261119f" />
+  <link rel="stylesheet" href="styles.css?v=20261122sec" />
 </head>
 <body class="hs-body">
   <!-- Anunciador único ARIA Live para errores de formulario -->
@@ -86,7 +94,6 @@
               class="login-clean-input"
               autocomplete="current-password"
               required
-              value="1234"
               data-error="login-pass-err"
               placeholder="Password"
             />
@@ -103,7 +110,7 @@
               </svg>
             </button>
           </div>
-          <p id="login-pass-err" class="error-msg">Ingresa tu contraseña (1234).</p>
+          <p id="login-pass-err" class="error-msg">Ingresa tu contraseña.</p>
         </div>
 
         <label class="login-remember-row" for="login-remember">
@@ -1610,7 +1617,7 @@
 
   <script src="assets/the-handsome/the-handsome-icons.js"></script>
   <script src="assets/button-web/button-web-icons.js"></script>
-  <script src="data-bundle.js?v=20261120a"></script>
-  <script src="app.js?v=20261120a"></script>
+  <script src="data-bundle.js?v=20261122sec"></script>
+  <script src="app.js?v=20261122sec"></script>
 </body>
 </html>

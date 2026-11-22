@@ -4,6 +4,8 @@ output/
 data/tmp_*.md
 data/append_*.json
 data/update_*.json
+data/.session_hmac_secret
+data/audit_security_log.jsonl
 *.log
 .DS_Store
 Thumbs.db

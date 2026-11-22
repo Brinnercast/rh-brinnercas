@@ -75,29 +75,33 @@ window.RH_EMBEDDED_DATA = {
       }
     },
     "resumen": {
-      "totalColaboradores": 29,
-      "activosCount": 11,
+      "totalColaboradores": 33,
+      "activosCount": 15,
       "cesadosCount": 13,
       "rxhApoyoCount": 5,
-      "totalNominaActiva": 21900,
+      "totalNominaActiva": 29700,
       "masaInicialFeb": 40880,
-      "ahorroMensual": 18980,
-      "porcentajeOptimizacion": 46.4,
+      "ahorroMensual": 11180,
+      "porcentajeOptimizacion": 27.3,
       "porArea": {
         "Administración": {
-          "count": 1,
-          "total": 3200,
+          "count": 3,
+          "total": 8200,
           "colaboradores": [
-            "CASTRO VASQUEZ WILMER BRINNER"
+            "CASTRO VASQUEZ WILMER BRINNER",
+            "CARBAJAL URQUIZO GLADYS VERONICA",
+            "DIONICIO CASTILLO OBED ESBAN"
           ]
         },
         "Salón": {
-          "count": 3,
-          "total": 5300,
+          "count": 5,
+          "total": 8100,
           "colaboradores": [
             "RIOS PONCE DE LEON ROGER GABRIEL",
             "BAZAN RODRIGUEZ ALAN IMANOL",
-            "ORBEGOSO CASSANO GEORGE ALDAIR"
+            "ORBEGOSO CASSANO GEORGE ALDAIR",
+            "SALIRROSAS LUIS ROBERTO CARLOS",
+            "RUIZ ESQUIVEL FELIX ALEJANDRO"
           ]
         },
         "Logística": {
@@ -139,7 +143,7 @@ window.RH_EMBEDDED_DATA = {
         }
       },
       "porCondicionLaboral": {
-        "CONTRATO": 24,
+        "CONTRATO": 28,
         "RXH": 3,
         "OTROS": 2
       }
@@ -2158,6 +2162,178 @@ window.RH_EMBEDDED_DATA = {
             "localUrl": "/docs/contratos/GRUPO%20GASTRONOMICO%20AURORA%20SAC%20-%20CONTRATO%20-%20CAMPOS%20TERRONES%20ALEJANDRA%20JEANNETT%20-%20261101%20-%20270131%20-%2003.docx",
             "driveId": "1C7b0gZTJpX8RRI-vzgu2HYSAv8PK0BTf",
             "driveUrl": "https://drive.google.com/file/d/1C7b0gZTJpX8RRI-vzgu2HYSAv8PK0BTf/view"
+          },
+          "adendas": [],
+          "memorandums": [],
+          "liquidacion": null,
+          "fotoDni": null
+        }
+      },
+      {
+        "id": 30,
+        "nombre": "CARBAJAL URQUIZO GLADYS VERONICA",
+        "dni": "42892738",
+        "area": "Administración",
+        "cargo": "GERENTE",
+        "cargoContrato": "GERENTE",
+        "condicionLaborable": "FULL TIME",
+        "condicionLaboral": "CONTRATO",
+        "sueldo": 2500,
+        "estado": "ACTIVO",
+        "estadoTexto": "Contrato Vigente",
+        "semaforo": "verde",
+        "fechaIngreso": "01/11/2026",
+        "finContratoBase": "31/01/2027",
+        "vigenciaHasta": "31/01/2027",
+        "fechaCese": null,
+        "modalidadCese": null,
+        "tiempoServicio": null,
+        "domicilio": "Calle Blas Pascal 167 INT. 3 Asent. H. El Palomar. Trujillo-Trujillo-La Libertad",
+        "celular": "No registrado",
+        "correo": "No registrado",
+        "banco": "BBVA",
+        "numeroCuenta": "No registrado",
+        "fechaNacimiento": "06/08/1984",
+        "edad": "N/A",
+        "carnetSanitario": "NO",
+        "adendas": [],
+        "proximaAdenda": "1RA ADENDA",
+        "observaciones": "Ingreso registrado vía RH BRINNERCAS el 20/11/2026",
+        "documentos": {
+          "contrato": {
+            "fileName": "GRUPO GASTRONOMICO AURORA SAC - CONTRATO - CARBAJAL URQUIZO GLADYS VERONICA - 261101 - 270131 - 03.docx",
+            "localUrl": "/docs/contratos/GRUPO%20GASTRONOMICO%20AURORA%20SAC%20-%20CONTRATO%20-%20CARBAJAL%20URQUIZO%20GLADYS%20VERONICA%20-%20261101%20-%20270131%20-%2003.docx",
+            "driveId": "1aPnyj97pbd4i7mraP4XhSON3IY6kx9xs",
+            "driveUrl": "https://drive.google.com/file/d/1aPnyj97pbd4i7mraP4XhSON3IY6kx9xs/view"
+          },
+          "adendas": [],
+          "memorandums": [],
+          "liquidacion": null,
+          "fotoDni": null
+        }
+      },
+      {
+        "id": 31,
+        "nombre": "SALIRROSAS LUIS ROBERTO CARLOS",
+        "dni": "727220377",
+        "area": "Salón",
+        "cargo": "Mozo",
+        "cargoContrato": "Mozo",
+        "condicionLaborable": "FULL TIME",
+        "condicionLaboral": "CONTRATO",
+        "sueldo": 1500,
+        "estado": "ACTIVO",
+        "estadoTexto": "Contrato Vigente",
+        "semaforo": "verde",
+        "fechaIngreso": "01/11/2026",
+        "finContratoBase": "31/01/2027",
+        "vigenciaHasta": "31/01/2027",
+        "fechaCese": null,
+        "modalidadCese": null,
+        "tiempoServicio": null,
+        "domicilio": "Trujillo",
+        "celular": "950209138",
+        "correo": "No registrado",
+        "banco": "BCP",
+        "numeroCuenta": "No registrado",
+        "fechaNacimiento": "20/08/2003",
+        "edad": "N/A",
+        "carnetSanitario": "NO",
+        "adendas": [],
+        "proximaAdenda": "1RA ADENDA",
+        "observaciones": "Ingreso registrado vía RH BRINNERCAS el 20/11/2026",
+        "documentos": {
+          "contrato": {
+            "fileName": "GRUPO GASTRONOMICO AURORA SAC - CONTRATO - SALIRROSAS LUIS ROBERTO CARLOS - 261101 - 270131 - 03.docx",
+            "localUrl": "/docs/contratos/GRUPO%20GASTRONOMICO%20AURORA%20SAC%20-%20CONTRATO%20-%20SALIRROSAS%20LUIS%20ROBERTO%20CARLOS%20-%20261101%20-%20270131%20-%2003.docx",
+            "driveId": "1nssPSrm4McyfiNClsa3qSqoTOKA9uDcz",
+            "driveUrl": "https://drive.google.com/file/d/1nssPSrm4McyfiNClsa3qSqoTOKA9uDcz/view"
+          },
+          "adendas": [],
+          "memorandums": [],
+          "liquidacion": null,
+          "fotoDni": null
+        }
+      },
+      {
+        "id": 32,
+        "nombre": "DIONICIO CASTILLO OBED ESBAN",
+        "dni": "41938014",
+        "area": "Administración",
+        "cargo": "Administrador General",
+        "cargoContrato": "Administrador General",
+        "condicionLaborable": "FULL TIME",
+        "condicionLaboral": "CONTRATO",
+        "sueldo": 2500,
+        "estado": "ACTIVO",
+        "estadoTexto": "Contrato Vigente",
+        "semaforo": "verde",
+        "fechaIngreso": "01/11/2026",
+        "finContratoBase": "31/01/2027",
+        "vigenciaHasta": "31/01/2027",
+        "fechaCese": null,
+        "modalidadCese": null,
+        "tiempoServicio": null,
+        "domicilio": "Calle Blas Pascal 167 INT. 3 Asent. H. El Palomar. Trujillo-Trujillo-La Libertad",
+        "celular": "No registrado",
+        "correo": "No registrado",
+        "banco": "BCP",
+        "numeroCuenta": "No registrado",
+        "fechaNacimiento": "No registrado",
+        "edad": "N/A",
+        "carnetSanitario": "NO",
+        "adendas": [],
+        "proximaAdenda": "1RA ADENDA",
+        "observaciones": "Ingreso registrado vía RH BRINNERCAS el 20/11/2026",
+        "documentos": {
+          "contrato": {
+            "fileName": "GRUPO GASTRONOMICO AURORA SAC - CONTRATO - DIONICIO CASTILLO OBED ESBAN - 261101 - 270131 - 03.docx",
+            "localUrl": "/docs/contratos/GRUPO%20GASTRONOMICO%20AURORA%20SAC%20-%20CONTRATO%20-%20DIONICIO%20CASTILLO%20OBED%20ESBAN%20-%20261101%20-%20270131%20-%2003.docx",
+            "driveId": "1eIeJA_gMlNH0bS3jZZnM1PnHZMjmfCAh",
+            "driveUrl": "https://drive.google.com/file/d/1eIeJA_gMlNH0bS3jZZnM1PnHZMjmfCAh/view"
+          },
+          "adendas": [],
+          "memorandums": [],
+          "liquidacion": null,
+          "fotoDni": null
+        }
+      },
+      {
+        "id": 33,
+        "nombre": "RUIZ ESQUIVEL FELIX ALEJANDRO",
+        "dni": "70670113",
+        "area": "Salón",
+        "cargo": "Corredor",
+        "cargoContrato": "Corredor",
+        "condicionLaborable": "FULL TIME",
+        "condicionLaboral": "CONTRATO",
+        "sueldo": 1300,
+        "estado": "ACTIVO",
+        "estadoTexto": "Contrato Vigente",
+        "semaforo": "verde",
+        "fechaIngreso": "01/11/2026",
+        "finContratoBase": "31/01/2027",
+        "vigenciaHasta": "31/01/2027",
+        "fechaCese": null,
+        "modalidadCese": null,
+        "tiempoServicio": null,
+        "domicilio": "Asent H. Las Malvinas. Mz. B Lt. 5. Trujillo-Trujillo-La Libertad",
+        "celular": "947494327",
+        "correo": "No registrado",
+        "banco": "BCP",
+        "numeroCuenta": "No registrado",
+        "fechaNacimiento": "05/08/2005",
+        "edad": "N/A",
+        "carnetSanitario": "SÍ",
+        "adendas": [],
+        "proximaAdenda": "1RA ADENDA",
+        "observaciones": "Ingreso registrado vía RH BRINNERCAS el 20/11/2026",
+        "documentos": {
+          "contrato": {
+            "fileName": "GRUPO GASTRONOMICO AURORA SAC - CONTRATO - RUIZ ESQUIVEL FELIX ALEJANDRO - 261101 - 270131 - 03.docx",
+            "localUrl": "/docs/contratos/GRUPO%20GASTRONOMICO%20AURORA%20SAC%20-%20CONTRATO%20-%20RUIZ%20ESQUIVEL%20FELIX%20ALEJANDRO%20-%20261101%20-%20270131%20-%2003.docx",
+            "driveId": "1eTj748FZvgH00J5ueuaFg_EcR6SEWfWR",
+            "driveUrl": "https://drive.google.com/file/d/1eTj748FZvgH00J5ueuaFg_EcR6SEWfWR/view"
           },
           "adendas": [],
           "memorandums": [],

@@ -5,26 +5,23 @@
 
 const fs = require('fs');
 const path = require('path');
-const { execSync } = require('child_process');
+const { execFileSync } = require('child_process');
 const { cargarPadron, guardarPadron, cargarManifest } = require('./audit_engine');
 const { generarContratoBuffer } = require('./contrato_engine');
+const { sanitizeSheetCell, sanitizeText, validatePersonalPayload } = require('./security');
 
 const ROOT_DIR = path.join(__dirname, '..');
 const DOCS_DIR = path.join(ROOT_DIR, 'public', 'docs');
 const DATA_DIR = path.join(ROOT_DIR, 'data');
 
-function quoteArg(arg) {
-  const s = String(arg ?? '');
-  if (s === '') return '""';
-  if (/[\s"&|<>^()%]/.test(s)) {
-    return '"' + s.replace(/"/g, '\\"') + '"';
-  }
-  return s;
-}
+const ALLOWED_CLI_BINS = new Set(['gdrive', 'gsheets']);
 
 function runCliSafe(bin, args) {
-  const cmd = `${bin} ${args.map(quoteArg).join(' ')}`;
-  const out = execSync(cmd, { encoding: 'utf8', maxBuffer: 15 * 1024 * 1024 }).trim();
+  if (!ALLOWED_CLI_BINS.has(bin)) {
+    throw new Error('Binario CLI no autorizado.');
+  }
+  const safeArgs = (args || []).map(a => String(a ?? ''));
+  const out = execFileSync(bin, safeArgs, { encoding: 'utf8', maxBuffer: 15 * 1024 * 1024, shell: false }).trim();
   const idxObj = out.indexOf('{');
   const idxArr = out.indexOf('[');
   let start = -1;
@@ -56,11 +53,15 @@ function calcularFechaFin3Meses(fechaInicioStr) {
 }
 
 async function registrarNuevoIngreso(payload) {
+  const validationErrors = validatePersonalPayload(payload, false);
+  if (validationErrors.length > 0) {
+    throw new Error(validationErrors.join(' '));
+  }
   const padron = cargarPadron();
   const manifest = cargarManifest();
 
-  const dni = String(payload.dni || '').trim();
-  const nombre = String(payload.nombre || '').toUpperCase().trim();
+  const dni = sanitizeText(payload.dni, 16);
+  const nombre = sanitizeText(payload.nombre, 140).toUpperCase();
   if (!dni || !nombre) throw new Error('El DNI y los Apellidos y Nombres son obligatorios.');
   if (padron.colaboradores.some(c => c.dni === dni)) {
     throw new Error(`Ya existe un colaborador registrado con el DNI ${dni}.`);
@@ -224,8 +225,8 @@ async function registrarNuevoIngreso(payload) {
         condicionLaboral
       ];
       fs.writeFileSync(batchFile, JSON.stringify([
-        { op: 'append', range: '2_NUEVOS_INGRESOS!A1', data: [rowNuevo] },
-        { op: 'append', range: '1_PADRON_GENERAL!A1', data: [rowPadron] }
+        { op: 'append', range: '2_NUEVOS_INGRESOS!A1', data: [rowNuevo.map(v => sanitizeSheetCell(v))] },
+        { op: 'append', range: '1_PADRON_GENERAL!A1', data: [rowPadron.map(v => sanitizeSheetCell(v))] }
       ]), 'utf8');
       runCliSafe('gsheets', ['mutate', 'batch', manifest.sheets.masterSheetId, '-f', batchFile]);
       fs.unlinkSync(batchFile);
@@ -262,7 +263,7 @@ async function registrarNuevoIngreso(payload) {
       condicionLaboral
     ];
     fs.writeFileSync(batchHist, JSON.stringify([
-      { op: 'append', range: 'Respuestas de formulario 1!A1', data: [rowHist] }
+      { op: 'append', range: 'Respuestas de formulario 1!A1', data: [rowHist.map(v => sanitizeSheetCell(v))] }
     ]), 'utf8');
     runCliSafe('gsheets', ['mutate', 'batch', histId, '-f', batchHist]);
     fs.unlinkSync(batchHist);
@@ -303,6 +304,10 @@ function readSheetRows(sheetId, range) {
 
 async function actualizarPersonalExistente(idOrPayload, maybePayload) {
   const payload = typeof idOrPayload === 'object' ? idOrPayload : { ...maybePayload, id: idOrPayload };
+  const validationErrors = validatePersonalPayload(payload, true);
+  if (validationErrors.length > 0) {
+    throw new Error(validationErrors.join(' '));
+  }
   const padron = cargarPadron();
   const manifest = cargarManifest();
 
@@ -448,9 +453,10 @@ async function actualizarPersonalExistente(idOrPayload, maybePayload) {
     ];
 
     const batchMaster = path.join(DATA_DIR, `update_master_${colab.id}_${Date.now()}.json`);
+    const safeMasterRow = updatedMasterRow.map(v => sanitizeSheetCell(v));
     const opObj = matchRowNum > 0
-      ? { op: 'write', range: `1_PADRON_GENERAL!A${matchRowNum}:R${matchRowNum}`, data: [updatedMasterRow] }
-      : { op: 'append', range: '1_PADRON_GENERAL!A1', data: [updatedMasterRow] };
+      ? { op: 'write', range: `1_PADRON_GENERAL!A${matchRowNum}:R${matchRowNum}`, data: [safeMasterRow] }
+      : { op: 'append', range: '1_PADRON_GENERAL!A1', data: [safeMasterRow] };
     fs.writeFileSync(batchMaster, JSON.stringify([opObj]), 'utf8');
     runCliSafe('gsheets', ['mutate', 'batch', masterId, '-f', batchMaster]);
     if (fs.existsSync(batchMaster)) fs.unlinkSync(batchMaster);
@@ -497,7 +503,7 @@ async function actualizarPersonalExistente(idOrPayload, maybePayload) {
       ];
       const batchHist = path.join(DATA_DIR, `update_hist_${colab.id}_${Date.now()}.json`);
       fs.writeFileSync(batchHist, JSON.stringify([
-        { op: 'write', range: `'Respuestas de formulario 1'!B${hRowNum}:U${hRowNum}`, data: [updatedHistColsBtoU] }
+        { op: 'write', range: `'Respuestas de formulario 1'!B${hRowNum}:U${hRowNum}`, data: [updatedHistColsBtoU.map(v => sanitizeSheetCell(v))] }
       ]), 'utf8');
       runCliSafe('gsheets', ['mutate', 'batch', histId, '-f', batchHist]);
       if (fs.existsSync(batchHist)) fs.unlinkSync(batchHist);
