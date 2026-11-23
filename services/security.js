@@ -336,13 +336,15 @@ function validatePersonalPayload(payload, isUpdate = false) {
 // 7. CABECERAS DE SEGURIDAD HTTP, CORS WHITELIST Y PATH TRAVERSAL GUARD
 // ============================================================================
 const ALLOWED_ORIGINS = new Set([
-  'http://localhost:3005',
-  'http://127.0.0.1:3005',
-  'http://localhost:5500',
-  'http://127.0.0.1:5500',
   'https://rh-brinnercas.web.app',
   'https://rh-brinnercas.firebaseapp.com'
 ]);
+
+function isAllowedOrigin(origin) {
+  if (!origin) return false;
+  if (ALLOWED_ORIGINS.has(origin)) return true;
+  return /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/i.test(origin);
+}
 
 const CSP_HEADER = [
   "default-src 'self'",
@@ -367,8 +369,9 @@ function getSecurityHeaders(req, isApi = false) {
     'Permissions-Policy': 'camera=(), microphone=(), geolocation=(), payment=()',
     'Content-Security-Policy': CSP_HEADER
   };
-  if (ALLOWED_ORIGINS.has(origin)) {
+  if (isAllowedOrigin(origin)) {
     headers['Access-Control-Allow-Origin'] = origin;
+    headers['Access-Control-Allow-Private-Network'] = 'true';
     headers['Vary'] = 'Origin';
   }
   if (isApi) {
@@ -409,3 +412,4 @@ module.exports = {
   resolveSafePath,
   SESSION_TTL_MS
 };
+
