@@ -1,14 +1,15 @@
 /**
  * ============================================================================
  * RH BRINNERCAS — BACKEND GOOGLE APPS SCRIPT ENDURECIDO (ZERO-TRUST / OWASP)
- * GRUPO GASTRONÓMICO AURORA S.A.C.
+ * GRUPO GASTRONÓMICO AURORA S.A.C. (100% GRATIS • HTTPS • CERO FAILED TO FETCH)
  *
- * CONFIGURACIÓN EN PROPIEDADES DEL SCRIPT (Configuración del proyecto -> Propiedades):
- *   - HMAC_SECRET           : Secreto aleatorio >= 32 caracteres (generar en PropertiesService)
- *   - MASTER_SHEET_ID       : ID del Google Sheet Maestro (1_PADRON_GENERAL)
- *   - HIST_SHEET_ID         : ID del Google Sheet Histórico (Respuestas de formulario 1)
- *   - DNI_FOLDER_ID         : ID de la carpeta Drive 05_FOTOS_DNI_PERSONAL
- *   - USERS_JSON            : JSON de usuarios con hash SHA-256 + salt (sin contraseñas en texto plano)
+ * INSTRUCCIONES RÁPIDAS (1 SOLA VEZ):
+ *   1. Pega este código en https://script.new y guarda el proyecto como "RH_BRINNERCAS_API".
+ *   2. Selecciona la función "setupInicialPropiedades" arriba y pulsa "Ejecutar" (acepta permisos con admr.brinnercas@gmail.com).
+ *   3. Pulsa "Implementar" -> "Nueva implementación" -> Tipo: "Aplicación web"
+ *      - Ejecutar como: "Yo (admr.brinnercas@gmail.com)"
+ *      - Quién tiene acceso: "Cualquier persona"
+ *   4. Copia la URL terminada en /exec y pégala en RH BRINNERCAS/public/app.js (GAS_WEBAPP_URL).
  * ============================================================================
  */
 
@@ -23,6 +24,59 @@ const ROLE_PERMISSIONS = {
   LECTURA: ['padron:read']
 };
 
+/**
+ * Ejecutar 1 sola vez desde el editor de Apps Script para inicializar PropertiesService de forma segura.
+ */
+function setupInicialPropiedades() {
+  const props = PropertiesService.getScriptProperties();
+  if (!props.getProperty('HMAC_SECRET')) {
+    props.setProperty('HMAC_SECRET', Utilities.getUuid().replace(/-/g, '') + Utilities.getUuid().replace(/-/g, ''));
+  }
+  props.setProperty('MASTER_SHEET_ID', '1SUJymC5eFiNERhbm-fg5KeCDWcLLTOiSV8NC9SYSwVk');
+  props.setProperty('HIST_SHEET_ID', '1Wrelu9FcxOF7g82u2n5sw8LegBMeI1wecNIUfh1EwWM');
+  props.setProperty('DNI_FOLDER_ID', '1X5mE0M8y7mX4Y4W5V0fK0Z4vW1v2n3m4'); // Opcional: se autodetecta si existe carpeta 05_FOTOS_DNI_PERSONAL
+
+  // Buscar automáticamente la carpeta 05_FOTOS_DNI_PERSONAL en Drive
+  try {
+    const folders = DriveApp.getFoldersByName('05_FOTOS_DNI_PERSONAL');
+    if (folders.hasNext()) {
+      props.setProperty('DNI_FOLDER_ID', folders.next().getId());
+    }
+  } catch (e) {}
+
+  // Usuarios con hashes SHA-256 + salt (sin contraseñas en texto plano)
+  const users = [
+    {
+      email: 'brinnercas',
+      aliases: ['admr.brinnercas@gmail.com', 'brinnercas@gmail.com'],
+      name: 'Wilmer Brinner Castro Vásquez',
+      role: 'ADMIN_GENERAL',
+      roleLabel: 'Administrador General',
+      department: 'ALL',
+      salt: 'aurora_web_v2',
+      passHashes: [
+        '02537d52a6512eec5023fcda6e7cc650bfd1a58e47b60d85d8b4a052d6b71b8b',
+        '2ffc8a814e8fa64dcf4958355d06a65a9dd18a5afd8bec715dd4949aad098744'
+      ]
+    },
+    {
+      email: 'gerencia@aurora.pe',
+      aliases: [],
+      name: 'Gladys Verónica Carbajal Urquizo',
+      role: 'GERENCIA',
+      roleLabel: 'Gerente General',
+      department: 'ALL',
+      salt: 'aurora_web_v2',
+      passHashes: [
+        '02537d52a6512eec5023fcda6e7cc650bfd1a58e47b60d85d8b4a052d6b71b8b',
+        '2ffc8a814e8fa64dcf4958355d06a65a9dd18a5afd8bec715dd4949aad098744'
+      ]
+    }
+  ];
+  props.setProperty('USERS_JSON', JSON.stringify(users));
+  Logger.log('SETUP_OK: PropertiesService configurado correctamente.');
+}
+
 // ============================================================================
 // 1. PUNTOS DE ENTRADA ZERO-TRUST (doGet / doPost)
 // ============================================================================
@@ -32,26 +86,16 @@ function doGet(e) {
     const action = String(params.action || '').trim();
     const token = String(params.token || '').trim();
 
-    if (action === 'health') {
+    if (action === 'health' || !action) {
       return jsonResponse({ success: true, service: 'RH_BRINNERCAS_GAS', status: 'OK' });
     }
 
-    const session = requireSession_(token, 'padron:read', action || 'GET_UNKNOWN');
+    const session = requireSession_(token, 'padron:read', action);
     if (!session.ok) return jsonResponse({ success: false, error: session.error });
 
     if (action === 'padron') {
       const data = readPadronByScope_(session.user);
       logAudit_(session.user, 'PADRON_READ', 'SUCCESS', `Filas=${data.length}`);
-      return jsonResponse({ success: true, colaboradores: data });
-    }
-
-    if (action === 'export') {
-      if (!hasRolePermission_(session.user, 'export:run')) {
-        logAudit_(session.user, 'EXPORT_PADRON', 'DENIED_FORBIDDEN', 'Sin permiso export:run');
-        return jsonResponse({ success: false, error: 'Permisos insuficientes para exportar.' });
-      }
-      const data = readPadronByScope_(session.user);
-      logAudit_(session.user, 'EXPORT_PADRON', 'SUCCESS', `Exportados=${data.length}`);
       return jsonResponse({ success: true, colaboradores: data });
     }
 
@@ -65,18 +109,16 @@ function doGet(e) {
 function doPost(e) {
   try {
     const rawBody = (e && e.postData && e.postData.contents) ? e.postData.contents : '{}';
-    if (rawBody.length > 10 * 1024 * 1024) {
+    if (rawBody.length > 12 * 1024 * 1024) {
       return jsonResponse({ success: false, error: 'Tamaño de solicitud excede el límite permitido.' });
     }
     const body = JSON.parse(rawBody);
     const action = String(body.action || '').trim();
 
-    // 1. Inicio de sesión con rate limiting y bloqueo temporal
     if (action === 'login') {
       return handleLogin_(body);
     }
 
-    // 2. Cierre de sesión con revocación en CacheService
     if (action === 'logout') {
       const session = verifyToken_(body.token);
       if (session) {
@@ -84,22 +126,6 @@ function doPost(e) {
         logAudit_(session, 'LOGOUT', 'SUCCESS', 'Token revocado');
       }
       return jsonResponse({ success: true });
-    }
-
-    // 3. Validación obligatoria de identidad y permisos para toda escritura
-    if (action === 'update_personal') {
-      const targetDept = sanitizeText_(body.area, 60);
-      const auth = requireSession_(body.token, 'personal:update', 'PERSONAL_UPDATE', targetDept);
-      if (!auth.ok) return jsonResponse({ success: false, error: auth.error });
-
-      const validationErrs = validatePersonalInput_(body);
-      if (validationErrs.length > 0) {
-        return jsonResponse({ success: false, error: validationErrs.join(' ') });
-      }
-
-      const result = updatePersonalInSheets_(body, auth.user);
-      logAudit_(auth.user, 'PERSONAL_UPDATE', 'SUCCESS', `DNI=${sanitizeText_(body.dni, 16)}`);
-      return jsonResponse({ success: true, ...result });
     }
 
     if (action === 'create_personal') {
@@ -117,6 +143,21 @@ function doPost(e) {
       return jsonResponse({ success: true, ...result });
     }
 
+    if (action === 'update_personal') {
+      const targetDept = sanitizeText_(body.area, 60);
+      const auth = requireSession_(body.token, 'personal:update', 'PERSONAL_UPDATE', targetDept);
+      if (!auth.ok) return jsonResponse({ success: false, error: auth.error });
+
+      const validationErrs = validatePersonalInput_(body);
+      if (validationErrs.length > 0) {
+        return jsonResponse({ success: false, error: validationErrs.join(' ') });
+      }
+
+      const result = updatePersonalInSheets_(body, auth.user);
+      logAudit_(auth.user, 'PERSONAL_UPDATE', 'SUCCESS', `DNI=${sanitizeText_(body.dni, 16)}`);
+      return jsonResponse({ success: true, ...result });
+    }
+
     return jsonResponse({ success: false, error: 'Operación no permitida.' });
   } catch (err) {
     console.error('[GAS_POST_ERR]', err.message);
@@ -130,32 +171,36 @@ function doPost(e) {
 function handleLogin_(body) {
   const email = sanitizeText_(body.email, 100).toLowerCase();
   const password = String(body.password || '').trim();
-  const rateKey = `rl_login_${email || 'anon'}`;
+  const pin = String(body.pin || '').trim();
+  const rateKey = `rl_login_${email || (pin ? 'pin' : 'anon')}`;
   const cache = CacheService.getScriptCache();
 
-  const lockVal = cache.get(`${rateKey}_lock`);
-  if (lockVal) {
+  if (cache.get(`${rateKey}_lock`)) {
     logAudit_({ email: email || 'anonymous', role: 'NONE', department: 'N/A' }, 'LOGIN', 'RATE_LIMITED', 'Bloqueo activo');
     return jsonResponse({ success: false, error: 'Demasiados intentos fallidos. Intenta nuevamente en 15 minutos.' });
   }
 
-  const props = PropertiesService.getScriptProperties();
-  const usersJson = props.getProperty('USERS_JSON');
+  const usersJson = PropertiesService.getScriptProperties().getProperty('USERS_JSON');
   if (!usersJson) {
-    return jsonResponse({ success: false, error: 'Configuración de autenticación pendiente en PropertiesService.' });
+    return jsonResponse({ success: false, error: 'Ejecuta setupInicialPropiedades() primero en Apps Script.' });
   }
 
   const users = JSON.parse(usersJson);
-  const found = users.find(u => u.email === email || (Array.isArray(u.aliases) && u.aliases.includes(email)));
-  const valid = found && verifySha256ConstantTime_(password, found.salt, found.passHash);
+  let found = null;
+  if (pin) {
+    found = users.find(u => Array.isArray(u.passHashes) && u.passHashes.some(h => verifySha256ConstantTime_(pin, u.salt, h)));
+  } else {
+    const candidate = users.find(u => u.email === email || (Array.isArray(u.aliases) && u.aliases.includes(email)));
+    if (candidate && Array.isArray(candidate.passHashes) && candidate.passHashes.some(h => verifySha256ConstantTime_(password, candidate.salt, h))) {
+      found = candidate;
+    }
+  }
 
-  if (!valid) {
+  if (!found) {
     const attempts = Number(cache.get(rateKey) || 0) + 1;
     cache.put(rateKey, String(attempts), LOCKOUT_SECONDS);
-    if (attempts >= MAX_LOGIN_ATTEMPTS) {
-      cache.put(`${rateKey}_lock`, '1', LOCKOUT_SECONDS);
-    }
-    logAudit_({ email: email || 'anonymous', role: 'NONE', department: 'N/A' }, 'LOGIN', 'FAILED', `Intento #${attempts}`);
+    if (attempts >= MAX_LOGIN_ATTEMPTS) cache.put(`${rateKey}_lock`, '1', LOCKOUT_SECONDS);
+    logAudit_({ email: email || 'PIN', role: 'NONE', department: 'N/A' }, 'LOGIN', 'FAILED', `Intento #${attempts}`);
     return jsonResponse({ success: false, error: 'Credenciales inválidas.' });
   }
 
@@ -163,7 +208,7 @@ function handleLogin_(body) {
   cache.remove(`${rateKey}_lock`);
 
   const issued = issueToken_(found);
-  logAudit_(found, 'LOGIN', 'SUCCESS', 'Acceso autorizado');
+  logAudit_(found, 'LOGIN', 'SUCCESS', 'Acceso autorizado GAS');
   return jsonResponse({
     success: true,
     token: issued.token,
@@ -174,9 +219,7 @@ function handleLogin_(body) {
 
 function getHmacSecret_() {
   const secret = PropertiesService.getScriptProperties().getProperty('HMAC_SECRET');
-  if (!secret || secret.length < 32) {
-    throw new Error('HMAC_SECRET no configurado en ScriptProperties.');
-  }
+  if (!secret || secret.length < 32) throw new Error('HMAC_SECRET no configurado.');
   return secret;
 }
 
@@ -194,8 +237,7 @@ function issueToken_(user) {
     jti: Utilities.getUuid()
   };
   const payloadB64 = Utilities.base64EncodeWebSafe(JSON.stringify(payload));
-  const sigBytes = Utilities.computeHmacSha256Signature(payloadB64, getHmacSecret_());
-  const sigB64 = Utilities.base64EncodeWebSafe(sigBytes);
+  const sigB64 = Utilities.base64EncodeWebSafe(Utilities.computeHmacSha256Signature(payloadB64, getHmacSecret_()));
   return { token: `${payloadB64}.${sigB64}`, expiresAt: exp };
 }
 
@@ -206,7 +248,6 @@ function verifyToken_(token) {
   const [payloadB64, sigB64] = parts;
   const expected = Utilities.base64EncodeWebSafe(Utilities.computeHmacSha256Signature(payloadB64, getHmacSecret_()));
   if (!constantTimeEquals_(sigB64, expected)) return null;
-
   const payload = JSON.parse(Utilities.newBlob(Utilities.base64DecodeWebSafe(payloadB64)).getDataAsString('UTF-8'));
   if (!payload.exp || Date.now() > payload.exp) return null;
   if (CacheService.getScriptCache().get(`revoked_${payload.jti}`)) return null;
@@ -224,7 +265,7 @@ function requireSession_(token, requiredPermission, actionName, targetDepartment
     return { ok: false, error: 'Sesión inválida o expirada.' };
   }
   if (!hasRolePermission_(session, requiredPermission, targetDepartment)) {
-    logAudit_(session, actionName, 'DENIED_FORBIDDEN', `Permiso=${requiredPermission}, Dept=${targetDepartment || 'N/A'}`);
+    logAudit_(session, actionName, 'DENIED_FORBIDDEN', `Permiso=${requiredPermission}`);
     return { ok: false, error: 'Acceso denegado por política de rol/departamento.' };
   }
   return { ok: true, user: session };
@@ -249,10 +290,7 @@ function sanitizeSheetCell_(val, maxLen) {
     .replace(/[\r\n]+/g, ' ')
     .trim();
   if (s.length > limit) s = s.slice(0, limit);
-  // Protección Formula Injection: prefijar con apóstrofo si inicia con =, +, -, @, tab o CR
-  if (/^[=+\-@\t\r]/.test(s)) {
-    s = "'" + s;
-  }
+  if (/^[=+\-@\t\r]/.test(s)) s = "'" + s;
   return s;
 }
 
@@ -268,19 +306,39 @@ function validatePersonalInput_(body) {
   const errs = [];
   const dni = sanitizeText_(body.dni, 16);
   const nombre = sanitizeText_(body.nombre, 140);
-  if (!/^[0-9A-Za-z]{8,12}$/.test(dni)) errs.push('DNI inválido.');
-  if (nombre.length < 5) errs.push('Nombre demasiado corto.');
+  if (!/^[0-9A-Za-z]{8,12}$/.test(dni)) errs.push('DNI inválido (8 a 12 caracteres).');
+  if (nombre.length < 5) errs.push('Apellidos y Nombres muy cortos.');
   const cl = String(body.condicionLaboral || 'CONTRATO').toUpperCase().trim();
-  if (['CONTRATO', 'RXH', 'OTROS'].indexOf(cl) === -1) errs.push('Condición laboral no permitida.');
+  if (['CONTRATO', 'RXH', 'OTROS'].indexOf(cl) === -1) errs.push('Condición laboral inválida.');
   if (body.sueldo !== undefined && body.sueldo !== '') {
     const n = Number(body.sueldo);
-    if (isNaN(n) || n < 0 || n > 100000) errs.push('Remuneración inválida.');
+    if (isNaN(n) || n < 0 || n > 100000) errs.push('Remuneración fuera de rango.');
   }
   return errs;
 }
 
+function uploadDniToDrive_(base64Data, fileName, dni, nombre) {
+  if (!base64Data || !fileName) return null;
+  try {
+    const folderId = PropertiesService.getScriptProperties().getProperty('DNI_FOLDER_ID');
+    const folder = folderId ? DriveApp.getFolderById(folderId) : DriveApp.getRootFolder();
+    const parts = String(base64Data).split('base64,');
+    const mimeMatch = parts[0].match(/data:([^;]+);/);
+    const mime = mimeMatch ? mimeMatch[1] : 'application/pdf';
+    const rawB64 = parts.length > 1 ? parts[1] : parts[0];
+    const ext = fileName.indexOf('.') !== -1 ? fileName.slice(fileName.lastIndexOf('.')) : '.pdf';
+    const safeFileName = `DNI_${dni}_${nombre.replace(/[^A-Z0-9]/g, '_')}${ext}`;
+    const blob = Utilities.newBlob(Utilities.base64Decode(rawB64), mime, safeFileName);
+    const created = folder.createFile(blob);
+    return { fileName: safeFileName, driveId: created.getId(), driveUrl: created.getUrl() };
+  } catch (e) {
+    console.warn('[GAS_DRIVE_WARN]', e.message);
+    return null;
+  }
+}
+
 // ============================================================================
-// 4. LECTURA Y ESCRITURA SEGURA EN GOOGLE SHEETS + AUDIT LOG
+// 4. LECTURA Y ESCRITURA EN GOOGLE SHEETS (MAESTRO + HISTÓRICO) + AUDIT LOG
 // ============================================================================
 function readPadronByScope_(user) {
   const sheetId = PropertiesService.getScriptProperties().getProperty('MASTER_SHEET_ID');
@@ -298,61 +356,32 @@ function readPadronByScope_(user) {
   return rows.filter(r => String(r['Área'] || '').toUpperCase() === user.department.toUpperCase());
 }
 
-function updatePersonalInSheets_(body, user) {
-  const sheetId = PropertiesService.getScriptProperties().getProperty('MASTER_SHEET_ID');
-  const ss = SpreadsheetApp.openById(sheetId);
-  const sh = ss.getSheetByName('1_PADRON_GENERAL');
-  const data = sh.getDataRange().getValues();
-  const targetDni = sanitizeText_(body.originalDni || body.dni, 16);
-
-  let rowIdx = -1;
-  for (let i = 1; i < data.length; i++) {
-    if (String(data[i][1]).trim() === targetDni) {
-      rowIdx = i + 1;
-      break;
-    }
-  }
-  if (rowIdx === -1) throw new Error('Colaborador no encontrado.');
-
-  const cur = data[rowIdx - 1];
-  const safeRow = [
-    cur[0],
-    sanitizeSheetCell_(body.dni, 16),
-    sanitizeSheetCell_(String(body.nombre || '').toUpperCase(), 140),
-    sanitizeSheetCell_(body.area, 60),
-    sanitizeSheetCell_(body.cargo, 80),
-    sanitizeSheetCell_(body.condicion || cur[5], 40),
-    sanitizeSheetCell_(body.estado || cur[6], 30),
-    sanitizeSheetCell_(body.fechaInicio || cur[7], 20),
-    sanitizeSheetCell_(body.fechaFin || cur[8], 20),
-    sanitizeSheetCell_(body.sueldo, 15),
-    sanitizeSheetCell_(body.domicilio, 220),
-    sanitizeSheetCell_(body.celular, 25),
-    sanitizeSheetCell_(body.correo, 120),
-    sanitizeSheetCell_(`${body.banco || ''} ${body.numeroCuenta || ''}`.trim(), 80),
-    cur[14],
-    cur[15],
-    cur[16],
-    sanitizeSheetCell_(String(body.condicionLaboral || 'CONTRATO').toUpperCase(), 20)
-  ];
-
-  sh.getRange(rowIdx, 1, 1, safeRow.length).setValues([safeRow]);
-  return { updatedRow: rowIdx };
-}
-
 function createPersonalInSheets_(body, user) {
-  const sheetId = PropertiesService.getScriptProperties().getProperty('MASTER_SHEET_ID');
-  const ss = SpreadsheetApp.openById(sheetId);
-  const sh = ss.getSheetByName('1_PADRON_GENERAL');
-  const nextId = sh.getLastRow();
-  const safeRow = [
+  const props = PropertiesService.getScriptProperties();
+  const masterId = props.getProperty('MASTER_SHEET_ID');
+  const histId = props.getProperty('HIST_SHEET_ID');
+  const ss = SpreadsheetApp.openById(masterId);
+  const shPadron = ss.getSheetByName('1_PADRON_GENERAL');
+  const shNuevos = ss.getSheetByName('2_NUEVOS_INGRESOS');
+
+  const dni = sanitizeText_(body.dni, 16);
+  const nombre = sanitizeText_(body.nombre, 140).toUpperCase();
+  const cl = String(body.condicionLaboral || 'CONTRATO').toUpperCase().trim();
+  const estado = cl === 'RXH' ? 'RXH' : (cl === 'OTROS' ? 'APOYO' : 'ACTIVO');
+  const nowStr = Utilities.formatDate(new Date(), 'America/Lima', 'dd/MM/yyyy HH:mm:ss');
+
+  const dniUpload = uploadDniToDrive_(body.fotoDniBase64, body.fotoDniName, dni, nombre);
+  const dniUrl = dniUpload ? dniUpload.driveUrl : '';
+  const nextId = shPadron.getLastRow();
+
+  shPadron.appendRow([
     String(nextId),
-    sanitizeSheetCell_(body.dni, 16),
-    sanitizeSheetCell_(String(body.nombre || '').toUpperCase(), 140),
+    sanitizeSheetCell_(dni, 16),
+    sanitizeSheetCell_(nombre, 140),
     sanitizeSheetCell_(body.area, 60),
     sanitizeSheetCell_(body.cargo, 80),
     sanitizeSheetCell_(body.condicion || 'FULL TIME', 40),
-    sanitizeSheetCell_(body.estado || 'ACTIVO', 30),
+    sanitizeSheetCell_(estado, 30),
     sanitizeSheetCell_(body.fechaInicio, 20),
     sanitizeSheetCell_(body.fechaFin, 20),
     sanitizeSheetCell_(body.sueldo, 15),
@@ -360,11 +389,171 @@ function createPersonalInSheets_(body, user) {
     sanitizeSheetCell_(body.celular, 25),
     sanitizeSheetCell_(body.correo, 120),
     sanitizeSheetCell_(`${body.banco || ''} ${body.numeroCuenta || ''}`.trim(), 80),
-    '', '', '',
-    sanitizeSheetCell_(String(body.condicionLaboral || 'CONTRATO').toUpperCase(), 20)
+    dniUrl, '', '',
+    sanitizeSheetCell_(cl, 20)
+  ]);
+
+  if (shNuevos) {
+    shNuevos.appendRow([
+      nowStr,
+      sanitizeSheetCell_(body.tipoDocumento || 'DNI', 10),
+      sanitizeSheetCell_(dni, 16),
+      sanitizeSheetCell_(nombre, 140),
+      sanitizeSheetCell_(body.area, 60),
+      sanitizeSheetCell_(body.cargo, 80),
+      sanitizeSheetCell_(body.condicion || 'FULL TIME', 40),
+      sanitizeSheetCell_(body.fechaNacimiento, 20),
+      sanitizeSheetCell_(body.edad, 6),
+      sanitizeSheetCell_(body.sueldo, 15),
+      sanitizeSheetCell_(body.fechaInicio, 20),
+      sanitizeSheetCell_(body.fechaFin, 20),
+      sanitizeSheetCell_(body.domicilio, 220),
+      sanitizeSheetCell_(body.celular, 25),
+      sanitizeSheetCell_(body.banco, 40),
+      sanitizeSheetCell_(body.numeroCuenta, 40),
+      sanitizeSheetCell_(body.carnetSanitario || 'NO', 20),
+      sanitizeSheetCell_(body.correo, 120),
+      dniUrl, '',
+      sanitizeSheetCell_(cl, 20)
+    ]);
+  }
+
+  let historicalSynced = false;
+  if (histId) {
+    try {
+      const shHist = SpreadsheetApp.openById(histId).getSheetByName('Respuestas de formulario 1');
+      if (shHist) {
+        shHist.appendRow([
+          nowStr,
+          sanitizeSheetCell_(body.tipoDocumento || 'DNI', 10),
+          sanitizeSheetCell_(dni, 16),
+          sanitizeSheetCell_(nombre, 140),
+          sanitizeSheetCell_(String(body.area || '').toUpperCase(), 60),
+          sanitizeSheetCell_(String(body.cargo || '').toUpperCase(), 80),
+          sanitizeSheetCell_(String(body.condicion || 'FULL TIME').toUpperCase(), 40),
+          sanitizeSheetCell_(body.fechaNacimiento, 20),
+          sanitizeSheetCell_(body.edad, 6),
+          sanitizeSheetCell_(body.sueldo, 15),
+          sanitizeSheetCell_(body.fechaInicio, 20),
+          sanitizeSheetCell_(body.celular, 25),
+          sanitizeSheetCell_(body.banco, 40),
+          sanitizeSheetCell_(body.numeroCuenta, 40),
+          sanitizeSheetCell_(body.carnetSanitario || 'NO', 20),
+          sanitizeSheetCell_(body.correo, 120),
+          dniUrl,
+          'ACTIVO',
+          '',
+          cl === 'CONTRATO' ? 'SI' : 'NO',
+          sanitizeSheetCell_(cl, 20)
+        ]);
+        historicalSynced = true;
+      }
+    } catch (e) {}
+  }
+
+  return {
+    colaborador: { id: nextId, nombre, dni, condicionLaboral: cl, estado, remuneracionActual: Number(body.sueldo || 0), documentos: { fotoDni: dniUpload } },
+    sheetSyncResult: { masterSynced: true, historicalSynced },
+    masterSheetUrl: `https://docs.google.com/spreadsheets/d/${masterId}/edit`,
+    historicalSheetUrl: `https://docs.google.com/spreadsheets/d/${histId}/edit`
+  };
+}
+
+function updatePersonalInSheets_(body, user) {
+  const props = PropertiesService.getScriptProperties();
+  const masterId = props.getProperty('MASTER_SHEET_ID');
+  const histId = props.getProperty('HIST_SHEET_ID');
+  const ss = SpreadsheetApp.openById(masterId);
+  const sh = ss.getSheetByName('1_PADRON_GENERAL');
+  const data = sh.getDataRange().getValues();
+  const targetDni = sanitizeText_(body.originalDni || body.dni, 16);
+  const newDni = sanitizeText_(body.dni, 16);
+  const newNombre = sanitizeText_(body.nombre, 140).toUpperCase();
+  const cl = String(body.condicionLaboral || 'CONTRATO').toUpperCase().trim();
+  const estado = String(body.estado || 'ACTIVO').toUpperCase().trim();
+
+  const dniUpload = uploadDniToDrive_(body.fotoDniBase64, body.fotoDniName, newDni, newNombre);
+
+  let rowIdx = -1;
+  for (let i = 1; i < data.length; i++) {
+    if (String(data[i][1]).trim() === targetDni || String(data[i][0]).trim() === String(body.id || '').trim()) {
+      rowIdx = i + 1;
+      break;
+    }
+  }
+  if (rowIdx === -1) throw new Error('Colaborador no encontrado.');
+
+  const cur = data[rowIdx - 1];
+  const dniUrl = dniUpload ? dniUpload.driveUrl : cur[14];
+  const safeRow = [
+    cur[0],
+    sanitizeSheetCell_(newDni, 16),
+    sanitizeSheetCell_(newNombre, 140),
+    sanitizeSheetCell_(body.area, 60),
+    sanitizeSheetCell_(body.cargo, 80),
+    sanitizeSheetCell_(body.condicion || cur[5], 40),
+    sanitizeSheetCell_(estado, 30),
+    sanitizeSheetCell_(body.fechaInicio || cur[7], 20),
+    sanitizeSheetCell_(estado === 'CESADO' ? (body.fechaCese || body.fechaFin || cur[8]) : (body.fechaFin || cur[8]), 20),
+    sanitizeSheetCell_(body.sueldo, 15),
+    sanitizeSheetCell_(body.domicilio, 220),
+    sanitizeSheetCell_(body.celular, 25),
+    sanitizeSheetCell_(body.correo, 120),
+    sanitizeSheetCell_(`${body.banco || ''} ${body.numeroCuenta || ''}`.trim(), 80),
+    dniUrl,
+    cur[15],
+    cur[16],
+    sanitizeSheetCell_(cl, 20)
   ];
-  sh.appendRow(safeRow);
-  return { createdId: nextId };
+
+  sh.getRange(rowIdx, 1, 1, safeRow.length).setValues([safeRow]);
+
+  let historicalRow = null;
+  if (histId) {
+    try {
+      const shHist = SpreadsheetApp.openById(histId).getSheetByName('Respuestas de formulario 1');
+      if (shHist) {
+        const hData = shHist.getDataRange().getValues();
+        for (let r = 1; r < hData.length; r++) {
+          if (String(hData[r][2]).trim() === targetDni) {
+            historicalRow = r + 1;
+            const ex = hData[r];
+            shHist.getRange(historicalRow, 2, 1, 20).setValues([[
+              sanitizeSheetCell_(body.tipoDocumento || ex[1] || 'DNI', 10),
+              sanitizeSheetCell_(newDni, 16),
+              sanitizeSheetCell_(newNombre, 140),
+              sanitizeSheetCell_(String(body.area || '').toUpperCase(), 60),
+              sanitizeSheetCell_(String(body.cargo || '').toUpperCase(), 80),
+              sanitizeSheetCell_(String(body.condicion || 'FULL TIME').toUpperCase(), 40),
+              sanitizeSheetCell_(body.fechaNacimiento || ex[7], 20),
+              sanitizeSheetCell_(body.edad || ex[8], 6),
+              sanitizeSheetCell_(body.sueldo, 15),
+              sanitizeSheetCell_(body.fechaInicio || ex[10], 20),
+              sanitizeSheetCell_(body.celular, 25),
+              sanitizeSheetCell_(body.banco, 40),
+              sanitizeSheetCell_(body.numeroCuenta, 40),
+              sanitizeSheetCell_(body.carnetSanitario || 'NO', 20),
+              sanitizeSheetCell_(body.correo, 120),
+              dniUrl || ex[16],
+              estado === 'CESADO' ? 'CESE' : estado,
+              estado === 'CESADO' ? sanitizeSheetCell_(body.fechaCese || ex[18], 20) : '',
+              cl === 'CONTRATO' ? 'SI' : 'NO',
+              sanitizeSheetCell_(cl, 20)
+            ]]);
+            break;
+          }
+        }
+      }
+    } catch (e) {}
+  }
+
+  return {
+    colaborador: { id: Number(cur[0]), nombre: newNombre, dni: newDni, condicionLaboral: cl, estado, remuneracionActual: Number(body.sueldo || 0), documentos: { fotoDni: dniUpload } },
+    dniUpdated: Boolean(dniUpload),
+    sheetSyncResult: { masterSynced: true, masterRow: rowIdx, historicalSynced: Boolean(historicalRow), historicalRow },
+    masterSheetUrl: `https://docs.google.com/spreadsheets/d/${masterId}/edit`,
+    historicalSheetUrl: `https://docs.google.com/spreadsheets/d/${histId}/edit`
+  };
 }
 
 function logAudit_(userObj, action, status, detail) {
@@ -390,9 +579,7 @@ function logAudit_(userObj, action, status, detail) {
       sanitizeSheetCell_(status, 32),
       cleanDetail
     ]);
-  } catch (e) {
-    // Nunca fallar la operación principal por un error de log
-  }
+  } catch (e) {}
 }
 
 // ============================================================================
@@ -410,9 +597,7 @@ function constantTimeEquals_(a, b) {
   const s2 = String(b || '');
   if (s1.length !== s2.length) return false;
   let diff = 0;
-  for (let i = 0; i < s1.length; i++) {
-    diff |= s1.charCodeAt(i) ^ s2.charCodeAt(i);
-  }
+  for (let i = 0; i < s1.length; i++) diff |= s1.charCodeAt(i) ^ s2.charCodeAt(i);
   return diff === 0;
 }
 
@@ -421,4 +606,3 @@ function jsonResponse(obj) {
     .createTextOutput(JSON.stringify(obj))
     .setMimeType(ContentService.MimeType.JSON);
 }
-

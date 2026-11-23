@@ -340,10 +340,15 @@ const ALLOWED_ORIGINS = new Set([
   'https://rh-brinnercas.firebaseapp.com'
 ]);
 
-function isAllowedOrigin(origin) {
+function isAllowedOrigin(origin, req) {
   if (!origin) return false;
   if (ALLOWED_ORIGINS.has(origin)) return true;
-  return /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/i.test(origin);
+  if (/^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/i.test(origin)) return true;
+  if (origin === 'null') {
+    const ip = getClientIp(req);
+    return ip === '127.0.0.1' || ip === '::1' || ip === '::ffff:127.0.0.1';
+  }
+  return false;
 }
 
 const CSP_HEADER = [
@@ -369,7 +374,7 @@ function getSecurityHeaders(req, isApi = false) {
     'Permissions-Policy': 'camera=(), microphone=(), geolocation=(), payment=()',
     'Content-Security-Policy': CSP_HEADER
   };
-  if (isAllowedOrigin(origin)) {
+  if (isAllowedOrigin(origin, req)) {
     headers['Access-Control-Allow-Origin'] = origin;
     headers['Access-Control-Allow-Private-Network'] = 'true';
     headers['Vary'] = 'Origin';

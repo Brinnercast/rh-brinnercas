@@ -7,7 +7,29 @@ const API_BASE = (window.location.protocol === 'http:' && window.location.port =
   ? ''
   : 'http://localhost:3005';
 
+// URL del backend gratuito Google Apps Script (HTTPS, 0 errores CORS desde Firebase Hosting)
+const GAS_WEBAPP_URL = (typeof localStorage !== 'undefined' && localStorage.getItem('rh_gas_webapp_url'))
+  || 'https://script.google.com/macros/s/AKfycbxQQkZp3r83pGiycuN3i33m6ndiptf9bqS-I4zD9ScvqE7b0N6U0bwnSI6fQC5wsUDpAA/exec';
+
 const SESSION_KEY = 'rh_brinnercas_session';
+
+function useGasBackend() {
+  return Boolean(GAS_WEBAPP_URL) && (window.location.protocol === 'https:' || (window.location.port !== '3005' && window.location.protocol !== 'file:'));
+}
+
+async function gasPost(action, payload = {}) {
+  const token = getAuthToken();
+  const res = await fetch(GAS_WEBAPP_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify({ action, token, ...payload })
+  });
+  const json = await res.json();
+  if (json && !json.success && /expirada|inválida/i.test(json.error || '') && action !== 'login' && typeof window.forceLockPortal === 'function') {
+    window.forceLockPortal('Tu sesión ha expirado. Inicia sesión nuevamente.');
+  }
+  return json;
+}
 
 function apiUrl(p) {
   return `${API_BASE}${p}`;
@@ -404,12 +426,19 @@ function initLoginControl() {
     const password = passInput.value.trim();
 
     try {
-      const res = await fetch(apiUrl('/api/auth/login'), {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
-      });
-      const data = await res.json();
+      let res = null;
+      let data = null;
+      if (useGasBackend()) {
+        data = await gasPost('login', { email, password });
+        res = { ok: Boolean(data && data.success) };
+      } else {
+        res = await fetch(apiUrl('/api/auth/login'), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+        data = await res.json();
+      }
       if (!res.ok || !data.success) {
         feedback.textContent = data.error || 'Credenciales incorrectas.';
         feedback.style.display = 'block';
@@ -443,12 +472,19 @@ function initLoginControl() {
     const pinVal = pinInput.value.trim();
 
     try {
-      const res = await fetch(apiUrl('/api/auth/login'), {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ pin: pinVal })
-      });
-      const data = await res.json();
+      let res = null;
+      let data = null;
+      if (useGasBackend()) {
+        data = await gasPost('login', { pin: pinVal });
+        res = { ok: Boolean(data && data.success) };
+      } else {
+        res = await fetch(apiUrl('/api/auth/login'), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ pin: pinVal })
+        });
+        data = await res.json();
+      }
       if (!res.ok || !data.success) {
         feedback.textContent = data.error || 'PIN inválido.';
         feedback.style.display = 'block';
@@ -476,10 +512,14 @@ function initLoginControl() {
     const tok = getAuthToken();
     if (tok) {
       try {
-        await fetch(apiUrl('/api/auth/logout'), {
-          method: 'POST',
-          headers: { 'Authorization': `Bearer ${tok}` }
-        });
+        if (useGasBackend()) {
+          await gasPost('logout', {});
+        } else {
+          await fetch(apiUrl('/api/auth/logout'), {
+            method: 'POST',
+            headers: { 'Authorization': `Bearer ${tok}` }
+          });
+        }
       } catch (e) {}
     }
     clearSessionStorage();
@@ -729,8 +769,8 @@ async function loadAllData() {
     renderAllViews();
   }
 
-  // 2. Sincronizar en segundo plano con el servidor en puerto 3005 si está activo y autenticado
-  if (!getAuthToken()) return;
+  // 2. Sincronizar en segundo plano con el servidor en puerto 3005 si está activo y autenticado (en local)
+  if (!getAuthToken() || useGasBackend()) return;
   try {
     const [auditRes, mofRes, motivosRes] = await Promise.all([
       authFetch(apiUrl('/api/audit')),
@@ -1353,12 +1393,19 @@ function initOnboardingForm() {
     }
 
     try {
-      const res = await authFetch(apiUrl('/api/personal/nuevo'), {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-      const data = await res.json();
+      let res = null;
+      let data = null;
+      if (useGasBackend()) {
+        data = await gasPost('create_personal', payload);
+        res = { ok: Boolean(data && data.success) };
+      } else {
+        res = await authFetch(apiUrl('/api/personal/nuevo'), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        data = await res.json();
+      }
 
       if (!res.ok || !data.success) {
         resBox.style.display = 'block';
@@ -1394,7 +1441,10 @@ function initOnboardingForm() {
     } catch (err) {
       resBox.style.display = 'block';
       resBox.style.borderColor = '#EF4444';
-      resBox.textContent = 'Error de red: ' + err.message;
+      const isHttps = window.location.protocol === 'https:';
+      resBox.innerHTML = isHttps
+        ? `<strong style="color:#EF4444;">Bloqueo de red HTTPS → servidor local:</strong> Desde <code>${escapeHtml(window.location.host)}</code> el navegador bloquea envíos a <code>http://localhost:3005</code>. Para registrar y sincronizar en vivo con Google Sheets + Drive, abre <a href="http://localhost:3005" style="color:var(--accent-orange); font-weight:700; text-decoration:underline;">http://localhost:3005</a> en esta PC (o conecta Google Apps Script <code>Code.gs</code>).`
+        : `<strong style="color:#EF4444;">Error de red (${escapeHtml(err.message)}):</strong> Verifica que el servidor local esté activo en <a href="http://localhost:3005" style="color:var(--accent-orange); font-weight:700; text-decoration:underline;">http://localhost:3005</a> (ejecuta <code>INICIAR_RH_BRINNERCAS.bat</code>).`;
     } finally {
       btn.disabled = false;
       btn.innerHTML = origHtml;
@@ -2773,12 +2823,19 @@ function initPlanillaEditor() {
     }
 
     try {
-      const res = await authFetch(apiUrl('/api/personal/actualizar'), {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-      const data = await res.json();
+      let res = null;
+      let data = null;
+      if (useGasBackend()) {
+        data = await gasPost('update_personal', payload);
+        res = { ok: Boolean(data && data.success) };
+      } else {
+        res = await authFetch(apiUrl('/api/personal/actualizar'), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        data = await res.json();
+      }
 
       if (!res.ok || !data.success) {
         resBox.style.display = 'block';
