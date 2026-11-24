@@ -760,8 +760,166 @@ function normalizeAuditData(audit) {
   return audit;
 }
 
+function formatSheetDate(val) {
+  if (!val) return '';
+  const s = String(val).trim();
+  const iso = s.match(/^(\d{4})-(\d{2})-(\d{2})T/);
+  if (iso) return `${iso[3]}/${iso[2]}/${iso[1]}`;
+  return s;
+}
+
+function mergeGasPadronIntoAudit(gasRows, baseAudit) {
+  const existing = Array.isArray(baseAudit?.colaboradores) ? baseAudit.colaboradores : [];
+  const byDni = new Map(existing.map(c => [String(c.dni || '').trim(), c]));
+  const byId = new Map(existing.map(c => [Number(c.id), c]));
+
+  const hoy = new Date();
+  const mergedCols = (gasRows || []).filter(r => r && (r['DNI'] || r['Apellidos y Nombres'])).map((r, idx) => {
+    const id = Number(r['ID']) || (idx + 1);
+    const dni = String(r['DNI'] || '').trim();
+    const prev = byDni.get(dni) || byId.get(id) || {};
+
+    const nombre = String(r['Apellidos y Nombres'] || prev.nombre || '').trim();
+    const area = String(r['Área'] || prev.area || 'General').trim();
+    const cargo = String(r['Cargo Actual'] || prev.cargo || 'Colaborador').trim();
+    const condicionLaborable = String(r['Condición'] || prev.condicionLaborable || 'FULL TIME').trim();
+    const estado = String(r['Estado'] || prev.estado || 'ACTIVO').toUpperCase().trim();
+    const rawCL = String(r['CONDICION LABORAL'] || prev.condicionLaboral || '').toUpperCase().trim();
+    const condicionLaboral = ['CONTRATO', 'RXH', 'OTROS'].includes(rawCL)
+      ? rawCL
+      : (estado === 'RXH' ? 'RXH' : (estado === 'APOYO' ? 'OTROS' : 'CONTRATO'));
+
+    const fechaIngreso = formatSheetDate(r['Ingreso / Contrato']) || prev.fechaIngreso || 'N/A';
+    const vigenciaHasta = formatSheetDate(r['Vigencia / Cese']) || prev.vigenciaHasta || 'Vigente';
+    const sueldo = Number(r['Sueldo S/'] !== '' && r['Sueldo S/'] !== undefined ? r['Sueldo S/'] : (prev.sueldo || 0));
+    const domicilio = String(r['Domicilio'] || prev.domicilio || 'No registrado').trim();
+    const celular = String(r['Celular'] || prev.celular || 'No registrado').trim();
+    const correo = String(r['Correo'] || prev.correo || 'No registrado').trim();
+
+    const bancoCuenta = String(r['Banco / Cuenta'] || '').trim();
+    let banco = prev.banco || 'No registrado';
+    let numeroCuenta = prev.numeroCuenta || 'No registrado';
+    if (bancoCuenta) {
+      const spIdx = bancoCuenta.indexOf(' ');
+      if (spIdx > 0 && /\d/.test(bancoCuenta.slice(spIdx + 1))) {
+        banco = bancoCuenta.slice(0, spIdx).trim();
+        numeroCuenta = bancoCuenta.slice(spIdx + 1).trim();
+      } else {
+        banco = bancoCuenta;
+      }
+    }
+
+    let semaforo = 'gris';
+    let estadoTexto = estado;
+    if (estado === 'ACTIVO') {
+      const parts = vigenciaHasta.split('/');
+      const fVig = parts.length === 3 ? new Date(Number(parts[2]), Number(parts[1]) - 1, Number(parts[0])) : null;
+      if (fVig && !isNaN(fVig.getTime()) && fVig < hoy) {
+        semaforo = 'naranja';
+        estadoTexto = 'Renovación Pendiente';
+      } else {
+        semaforo = 'verde';
+        estadoTexto = 'Contrato Vigente';
+      }
+    } else if (estado === 'RXH') {
+      semaforo = 'verde';
+      estadoTexto = 'Fijo RxH Activo';
+    } else if (estado === 'APOYO') {
+      semaforo = 'amarillo';
+      estadoTexto = 'Apoyo / Por Regularizar';
+    } else if (estado === 'CESADO') {
+      semaforo = 'gris';
+      estadoTexto = `Cesado (${vigenciaHasta || 'Concluido'})`;
+    }
+
+    const prevDocs = prev.documentos || { contrato: null, adendas: [], memorandums: [], liquidacion: null, fotoDni: null };
+    const sheetDniUrl = String(r['Foto DNI (Drive)'] || '').trim();
+    const sheetContratoUrl = String(r['Contrato (Drive)'] || '').trim();
+    const fotoDni = sheetDniUrl
+      ? { ...(prevDocs.fotoDni || {}), driveUrl: sheetDniUrl, originalName: prevDocs.fotoDni?.originalName || `DNI_${dni}` }
+      : prevDocs.fotoDni;
+    const contratoDoc = sheetContratoUrl
+      ? { ...(prevDocs.contrato || {}), driveUrl: sheetContratoUrl }
+      : prevDocs.contrato;
+
+    return {
+      ...prev,
+      id,
+      nombre,
+      dni,
+      area,
+      cargo,
+      cargoContrato: prev.cargoContrato || cargo,
+      condicionLaborable,
+      condicionLaboral,
+      sueldo,
+      estado,
+      estadoTexto,
+      semaforo,
+      fechaIngreso,
+      finContratoBase: prev.finContratoBase || vigenciaHasta,
+      vigenciaHasta,
+      fechaCese: estado === 'CESADO' ? vigenciaHasta : null,
+      domicilio,
+      celular,
+      correo,
+      banco,
+      numeroCuenta,
+      fechaNacimiento: prev.fechaNacimiento || 'No registrado',
+      edad: prev.edad || 'N/A',
+      carnetSanitario: prev.carnetSanitario || 'NO',
+      adendas: prev.adendas || [],
+      observaciones: prev.observaciones || (estado === 'ACTIVO' ? 'Sincronizado en vivo con Google Sheets.' : 'Vínculo laboral concluido.'),
+      documentos: {
+        ...prevDocs,
+        fotoDni,
+        contrato: contratoDoc
+      }
+    };
+  });
+
+  const activos = mergedCols.filter(c => c.estado === 'ACTIVO');
+  const cesados = mergedCols.filter(c => c.estado === 'CESADO');
+  const rxhApoyo = mergedCols.filter(c => c.estado === 'RXH' || c.estado === 'APOYO');
+  const totalNominaActiva = activos.reduce((sum, c) => sum + (Number(c.sueldo) || 0), 0);
+  const masaInicialFeb = baseAudit?.resumen?.masaInicialFeb || 40880;
+  const ahorroMensual = Math.max(0, masaInicialFeb - totalNominaActiva);
+
+  const porArea = {};
+  activos.forEach(c => {
+    const a = c.area || 'General';
+    if (!porArea[a]) porArea[a] = { count: 0, total: 0, colaboradores: [] };
+    porArea[a].count += 1;
+    porArea[a].total += Number(c.sueldo) || 0;
+    porArea[a].colaboradores.push(c.nombre);
+  });
+
+  const porCondicionLaboral = { CONTRATO: 0, RXH: 0, OTROS: 0 };
+  mergedCols.forEach(c => {
+    porCondicionLaboral[c.condicionLaboral] = (porCondicionLaboral[c.condicionLaboral] || 0) + 1;
+  });
+
+  return {
+    ...(baseAudit || {}),
+    resumen: {
+      ...(baseAudit?.resumen || {}),
+      totalColaboradores: mergedCols.length,
+      activosCount: activos.length,
+      cesadosCount: cesados.length,
+      rxhApoyoCount: rxhApoyo.length,
+      totalNominaActiva,
+      masaInicialFeb,
+      ahorroMensual,
+      porcentajeOptimizacion: Number(((ahorroMensual / masaInicialFeb) * 100).toFixed(1)),
+      porArea,
+      porCondicionLaboral
+    },
+    colaboradores: mergedCols
+  };
+}
+
 async function loadAllData() {
-  // 1. Renderizar de inmediato desde el bundle embebido de Drive + Padrón (0ms, funciona también en file:// y Live Server)
+  // 1. Renderizar de inmediato desde el bundle embebido de Drive + Padrón (0ms)
   if (window.RH_EMBEDDED_DATA) {
     if (!state.audit) state.audit = normalizeAuditData(window.RH_EMBEDDED_DATA.audit);
     if (!state.mof) state.mof = window.RH_EMBEDDED_DATA.mof;
@@ -769,8 +927,25 @@ async function loadAllData() {
     renderAllViews();
   }
 
-  // 2. Sincronizar en segundo plano con el servidor en puerto 3005 si está activo y autenticado (en local)
-  if (!getAuthToken() || useGasBackend()) return;
+  const tok = getAuthToken();
+  if (!tok) return;
+
+  // 2A. En Firebase Hosting / Nube (HTTPS): sincronizar en vivo directamente desde Google Sheets (Apps Script)
+  if (useGasBackend()) {
+    try {
+      const res = await fetch(`${GAS_WEBAPP_URL}?action=padron&token=${encodeURIComponent(tok)}`);
+      const data = await res.json();
+      if (data && data.success && Array.isArray(data.colaboradores)) {
+        state.audit = normalizeAuditData(mergeGasPadronIntoAudit(data.colaboradores, state.audit || window.RH_EMBEDDED_DATA?.audit));
+        renderAllViews();
+      }
+    } catch (e) {
+      // Mantiene los datos embebidos si falla la red
+    }
+    return;
+  }
+
+  // 2B. En Local (http://localhost:3005): sincronizar con servidor Node.js
   try {
     const [auditRes, mofRes, motivosRes] = await Promise.all([
       authFetch(apiUrl('/api/audit')),
@@ -784,10 +959,31 @@ async function loadAllData() {
       renderAllViews();
     }
   } catch (err) {
-    // En file:// o sin servidor Node activo, mantenemos window.RH_EMBEDDED_DATA ya renderizado
     renderAllViews();
   }
 }
+
+window.sincronizarAhora = async function (btnEl) {
+  const orig = btnEl ? btnEl.textContent : '';
+  if (btnEl) {
+    btnEl.disabled = true;
+    btnEl.textContent = 'SINCRONIZANDO...';
+  }
+  try {
+    await loadAllData();
+    const total = state.audit?.colaboradores?.length || 0;
+    if (btnEl) btnEl.textContent = `SINCRONIZADO (${total})`;
+  } catch (e) {
+    if (btnEl) btnEl.textContent = 'REINTENTAR SYNC';
+  } finally {
+    setTimeout(() => {
+      if (btnEl) {
+        btnEl.disabled = false;
+        btnEl.textContent = orig;
+      }
+    }, 2200);
+  }
+};
 
 function populateSelects() {
   if (!state.audit) return;

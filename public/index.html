@@ -352,6 +352,9 @@
               ABRIR
             </button>
           </div>
+          <button type="button" id="btn-sync-sheets-dock" class="dock-cloud-open-btn" style="width:100%; padding:7px 10px; text-align:center;" onclick="sincronizarAhora(this)">
+            SINCRONIZAR DATOS SHEETS
+          </button>
           <div id="dashboard-cloud-summary" class="dock-cloud-links"></div>
         </div>
 
@@ -389,10 +392,13 @@
               <h2 id="title-dashboard" class="section-title">PANEL GERENCIAL AURORA RESTAURANT</h2>
             </div>
             <div class="bw-scope" style="display:flex; gap:10px; flex-wrap:wrap;">
-              <button type="button" class="bw-btn bw-btn-4" onclick="switchView('legajos')">
+              <button type="button" id="btn-sync-sheets-dash" class="bw-btn bw-btn-4" onclick="sincronizarAhora(this)">
+                SINCRONIZAR SHEETS
+              </button>
+              <button type="button" class="bw-btn bw-btn-2" onclick="switchView('legajos')">
                 LEGAJOS &amp; 5 DOCS
               </button>
-              <button type="button" class="bw-btn bw-btn-2" onclick="openEmailComposer('RESUMEN_GENERAL')">
+              <button type="button" class="bw-btn bw-btn-1" onclick="openEmailComposer('RESUMEN_GENERAL')">
                 ENVIAR RESUMEN POR CORREO
               </button>
             </div>
@@ -850,7 +856,10 @@
               <h2 id="title-planilla" class="section-title">LISTA COMPLETA DE LA PLANILLA AURORA</h2>
             </div>
             <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
-              <span id="planilla-list-count" class="status-pill">28 / 28 colaboradores</span>
+              <span id="planilla-list-count" class="status-pill">Cargando planilla...</span>
+              <button type="button" id="btn-sync-sheets-planilla" class="bw-btn-sm is-primary" onclick="sincronizarAhora(this)">
+                SINCRONIZAR SHEETS
+              </button>
               <a href="https://docs.google.com/spreadsheets/d/1SUJymC5eFiNERhbm-fg5KeCDWcLLTOiSV8NC9SYSwVk/edit" target="_blank" rel="noopener" class="bw-btn-sm is-gold">
                 ABRIR SHEETS MAESTRO
               </a>
@@ -1617,7 +1626,7 @@
 
   <script src="assets/the-handsome/the-handsome-icons.js"></script>
   <script src="assets/button-web/button-web-icons.js"></script>
-  <script src="data-bundle.js?v=20261123gas"></script>
-  <script src="app.js?v=20261123gas"></script>
+  <script src="data-bundle.js?v=20261124sync"></script>
+  <script src="app.js?v=20261124sync"></script>
 </body>
 </html>
