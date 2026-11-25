@@ -276,7 +276,8 @@
               <li><button type="button" class="dock-sub-link" onclick="jumpToSection('docs', 'form-memo')">Emitir Memorándum RIT</button></li>
               <li><button type="button" class="dock-sub-link" onclick="jumpToSection('docs', 'form-acta')">Emitir Acta SUNAFIL</button></li>
               <li><button type="button" class="dock-sub-link" onclick="jumpToSection('docs', 'form-liquidacion')">Liquidación BB.SS.</button></li>
-              <li><button type="button" class="dock-sub-link" onclick="jumpToSection('docs', 'mof-grid')">Perfiles MOF</button></li>
+              <li><button type="button" class="dock-sub-link" onclick="jumpToSection('docs', 'normativa-general-grid')">Documentación Gnrl RH</button></li>
+              <li><button type="button" class="dock-sub-link" onclick="jumpToSection('docs', 'mof-grid')">Perfiles MOF (PDF/HTML)</button></li>
             </ul>
           </li>
 
@@ -1105,12 +1106,31 @@
             </form>
           </div>
 
-          <!-- Catálogo MOF con "Leer más / Leer menos" -->
+          <!-- Biblioteca Normativa General sincronizada desde DOCUMENTACION GNRL RH -->
+          <article class="glass-card hs-grid-block gold-accent-border" style="margin-bottom:24px;">
+            <div class="hs-grid-block-header">
+              <div>
+                <p class="section-eyebrow">PROYECTO VINCULADO EN VIVO • DOCUMENTACION GNRL RH</p>
+                <h3 class="hs-grid-block-title">BIBLIOTECA NORMATIVA GENERAL (MOF CONSOLIDADO, PROTOCOLO BPM, ACTAS RIT &amp; MEMOS)</h3>
+              </div>
+              <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                <a href="docs/normativa/mof/MOF_MASTER_CONSOLIDADO_AURORA_2026.pdf" target="_blank" rel="noopener" class="bw-btn-sm is-gold">
+                  MOF MASTER 2026 (PDF)
+                </a>
+                <a href="docs/normativa/bpm/PROTOCOLO_HIGIENE_BPM_AURORA.pdf" target="_blank" rel="noopener" class="bw-btn-sm is-primary">
+                  PROTOCOLO BPM (PDF)
+                </a>
+              </div>
+            </div>
+            <div id="normativa-general-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(290px, 1fr)); gap:14px;"></div>
+          </article>
+
+          <!-- Catálogo MOF con "Leer más / Leer menos" y Visor HTML/PDF -->
           <article class="glass-card hs-grid-block">
             <div class="hs-grid-block-header">
               <div>
-                <p class="section-eyebrow">MANUAL DE ORGANIZACIÓN Y FUNCIONES (MOF)</p>
-                <h3 class="hs-grid-block-title">PERFILES OFICIALES POR PUESTO (CON LEER MÁS / LEER MENOS)</h3>
+                <p class="section-eyebrow">MANUAL DE ORGANIZACIÓN Y FUNCIONES (MOF) • DOCUMENTACION GNRL RH</p>
+                <h3 class="hs-grid-block-title">PERFILES OFICIALES POR PUESTO (CON DESCARGA PDF Y VISOR HTML)</h3>
               </div>
             </div>
             <div id="mof-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(290px, 1fr)); gap:14px;"></div>

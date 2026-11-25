@@ -1,0 +1,175 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>MEMORANDUM - {{TIPO_SANCION}} - {{NOMBRE_COLABORADOR}}</title>
+  <style>
+    @page { size: A4; margin: 18mm 18mm 22mm 18mm; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: #1a1a1a;
+      background: #fff;
+      padding: 28px 38px;
+      font-size: 10.5pt;
+      line-height: 1.55;
+    }
+    .header-table { width: 100%; border-collapse: collapse; margin-bottom: 16px; }
+    .header-table td { border: 1.5px solid #8C1D18; padding: 10px 13px; vertical-align: middle; }
+    .logo-cell { width: 22%; text-align: center; background: linear-gradient(145deg, #8C1D18 0%, #6b1512 100%); }
+    .company-name { font-size: 18pt; font-weight: 900; color: #fff; letter-spacing: 2px; display: block; }
+    .company-sub { font-size: 7.5pt; color: #f5c8c6; margin-top: 2px; letter-spacing: 0.8px; display: block; }
+    .company-ruc { font-size: 7pt; color: #f5c8c6; margin-top: 1px; display: block; }
+    .doc-title-cell { width: 52%; text-align: center; background: #FAFAFA; }
+    .doc-main-title { font-size: 11.5pt; font-weight: bold; color: #1A1A1A; text-transform: uppercase; letter-spacing: 0.4px; }
+    .doc-subtitle { font-size: 10pt; font-weight: bold; color: #8C1D18; margin-top: 5px; }
+    .meta-cell { width: 26%; font-size: 8.5pt; color: #444; line-height: 1.7; background: #FAFAFA; }
+    .meta-cell .meta-label { color: #8C1D18; font-weight: bold; }
+    .memo-numero-bar { background: #8C1D18; color: #fff; text-align: center; font-size: 11pt; font-weight: bold; padding: 5px 12px; margin-bottom: 14px; letter-spacing: 1px; border-radius: 1px; }
+    .section-bar { font-size: 9.5pt; font-weight: bold; color: #fff; background: #8C1D18; padding: 5px 12px; margin-top: 16px; margin-bottom: 7px; text-transform: uppercase; letter-spacing: 0.5px; border-radius: 1px; }
+    .data-table { width: 100%; border-collapse: collapse; margin-bottom: 8px; font-size: 10pt; }
+    .data-table th, .data-table td { border: 1px solid #D0D0D0; padding: 6px 11px; text-align: left; vertical-align: top; }
+    .data-table th { background: #F3ECEC; color: #8C1D18; font-weight: bold; width: 30%; white-space: nowrap; }
+    .body-box { border: 1.5px solid #C9A8A6; border-radius: 3px; background: #FDFBFB; padding: 13px 16px; font-size: 10pt; line-height: 1.75; text-align: justify; margin-bottom: 10px; }
+    .body-box p { margin-bottom: 9px; }
+    .body-box p:last-child { margin-bottom: 0; }
+    .aviso-box { border-left: 5px solid #8C1D18; background: #FFF5F5; padding: 9px 13px; font-size: 9.5pt; margin: 12px 0; border-radius: 0 3px 3px 0; line-height: 1.65; }
+    .aviso-box strong { color: #8C1D18; }
+    .suspension-box { border: 2px solid #8C1D18; border-radius: 4px; background: #FFF0F0; padding: 12px 16px; text-align: center; margin: 12px 0; }
+    .suspension-box .sus-title { font-size: 11pt; font-weight: bold; color: #8C1D18; text-transform: uppercase; }
+    .suspension-box .sus-dias { font-size: 13pt; font-weight: 900; color: #1a1a1a; margin: 5px 0; }
+    .suspension-box .sus-detalle { font-size: 9.5pt; color: #444; }
+    .firmas-table { width: 100%; border-collapse: collapse; margin-top: 28px; font-size: 9pt; }
+    .firmas-table td { border: 1px solid #D0D0D0; padding: 50px 8px 8px 8px; text-align: center; width: 33.33%; vertical-align: bottom; }
+    .firma-line { border-top: 1.5px solid #8C1D18; padding-top: 4px; margin-bottom: 3px; }
+    .firma-rol { font-weight: bold; color: #8C1D18; font-size: 8.5pt; text-transform: uppercase; }
+    .firma-nombre { font-weight: bold; font-size: 9.5pt; color: #1A1A1A; }
+    .firma-cargo { font-size: 8pt; color: #555; }
+    .firma-dni { font-size: 8pt; color: #777; }
+    .firma-linea-firma { font-size: 8pt; color: #999; margin-top: 6px; }
+    .footer { margin-top: 24px; border-top: 1.5px solid #8C1D18; padding-top: 7px; display: flex; justify-content: space-between; font-size: 7.5pt; color: #888; }
+    .highlight { color: #8C1D18; font-weight: bold; }
+    ul.compromisos { margin: 7px 0 4px 0; padding-left: 20px; line-height: 1.8; }
+    ul.compromisos li { margin-bottom: 2px; }
+    .articulo-ref { font-style: italic; color: #666; font-size: 9pt; }
+  </style>
+</head>
+<body>
+
+  <table class="header-table">
+    <tr>
+      <td class="logo-cell">
+        <span class="company-name">AURORA</span>
+        <span class="company-sub">GRUPO GASTRONOMICO</span>
+        <span class="company-ruc">RUC: 20615117111</span>
+      </td>
+      <td class="doc-title-cell">
+        <div class="doc-main-title">MEMORANDUM DE SANCION DISCIPLINARIA</div>
+        <div class="doc-subtitle">{{TIPO_SANCION}}</div>
+      </td>
+      <td class="meta-cell">
+        <span class="meta-label">Codigo: </span> {{CODIGO_MEMO}}<br>
+        <span class="meta-label">Version: </span> 01<br>
+        <span class="meta-label">Vigencia: </span> {{ANO}}<br>
+        <span class="meta-label">Pagina: </span> 1 de 1<br>
+        <span class="meta-label">Clasificacion: </span> CONFIDENCIAL
+      </td>
+    </tr>
+  </table>
+
+  <div class="memo-numero-bar">MEMORANDUM N. {{NUMERO_MEMO}}</div>
+
+  <div class="section-bar">I. DATOS DEL DOCUMENTO</div>
+  <table class="data-table">
+    <tr><th>PARA:</th><td><strong>{{APELLIDOS_NOMBRES_COLABORADOR}}</strong> &nbsp;|&nbsp; DNI: {{DNI_COLABORADOR}}</td></tr>
+    <tr><th>CARGO:</th><td>{{CARGO_COLABORADOR}} &mdash; Grupo Gastronomico Aurora S.A.C.</td></tr>
+    <tr><th>DE:</th><td>Administracion y Recursos Humanos &mdash; Grupo Gastronomico Aurora S.A.C.</td></tr>
+    <tr><th>ASUNTO:</th><td><strong>{{ASUNTO_MEMO}}</strong></td></tr>
+    <tr><th>FECHA:</th><td>Trujillo, {{FECHA_EMISION}}</td></tr>
+    <tr><th>BASE LEGAL:</th><td>{{BASE_LEGAL}}</td></tr>
+  </table>
+
+  <div class="section-bar">II. ANTECEDENTES Y FUNDAMENTOS</div>
+  <div class="body-box">
+    <p>{{CUERPO_ANTECEDENTES}}</p>
+  </div>
+
+  <div class="aviso-box">
+    <strong>{{TITULO_AVISO}}</strong> {{TEXTO_AVISO}}
+  </div>
+
+  <div class="section-bar">III. SANCION DISCIPLINARIA APLICADA</div>
+  <div class="body-box">
+    <p>{{TEXTO_SANCION_INTRO}}</p>
+  </div>
+
+  <div class="suspension-box">
+    <div class="sus-title">{{TIPO_MEDIDA_DISCIPLINARIA}}</div>
+    <div class="sus-dias">{{DIAS_SUSPENSION}}</div>
+    <div class="sus-detalle">
+      Inicio: <strong>{{FECHA_INICIO_SUSPENSION}}</strong><br>
+      Fin: <strong>{{FECHA_FIN_SUSPENSION}}</strong><br>
+      Reincorporacion: <strong>{{FECHA_REINCORPORACION}}</strong><br><br>
+      <em>{{CITA_ARTICULO_SUSPENSION}}</em>
+    </div>
+  </div>
+
+  <div class="section-bar">IV. DISPOSICIONES Y COMPROMISOS EXIGIDOS</div>
+  <div class="body-box">
+    <p>Se requiere al colaborador el cumplimiento inmediato y estricto de las siguientes disposiciones:</p>
+    <ul class="compromisos">
+      {{LISTA_COMPROMISOS}}
+    </ul>
+  </div>
+
+  <div class="section-bar">V. FIRMAS Y CONFORMIDAD</div>
+  <table class="firmas-table">
+    <tr>
+      <td>
+        <div class="firma-line"></div>
+        <div class="firma-rol">Administracion</div>
+        <div class="firma-nombre">WILMER BRINNER CASTRO VASQUEZ</div>
+        <div class="firma-cargo">Administrador</div>
+        <div class="firma-dni">DNI: 44031290</div>
+        <div class="firma-linea-firma">Fecha: _______________</div>
+      </td>
+      <td>
+        <div class="firma-line"></div>
+        <div class="firma-rol">Supervision</div>
+        <div class="firma-nombre">BILLY ANDRES SILVA CERNA</div>
+        <div class="firma-cargo">Supervisor</div>
+        <div class="firma-dni">DNI: 43341525</div>
+        <div class="firma-linea-firma">Fecha: _______________</div>
+      </td>
+      <td>
+        <div class="firma-line"></div>
+        <div class="firma-rol">Gerencia General</div>
+        <div class="firma-nombre">GLADYS VERONICA CARBAJAL URQUIZO</div>
+        <div class="firma-cargo">Gerente General</div>
+        <div class="firma-dni">DNI: 42892738</div>
+        <div class="firma-linea-firma">Fecha: _______________</div>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3" style="padding: 8px 12px; border-top: 2px solid #8C1D18; background: #FFF5F5;">
+        <div style="text-align:center;">
+          <div class="firma-line" style="width:60%; margin: 30px auto 4px auto;"></div>
+          <div class="firma-rol">RECIBE Y NOTIFICADO / COLABORADOR SANCIONADO</div>
+          <div class="firma-nombre">{{APELLIDOS_NOMBRES_COLABORADOR}}</div>
+          <div class="firma-cargo">{{CARGO_COLABORADOR}} &mdash; DNI: {{DNI_COLABORADOR}}</div>
+          <div class="firma-linea-firma">Fecha de recepcion: _______________</div>
+          <div style="font-size:8pt; color:#c00; margin-top:5px; font-style:italic;">
+            La firma del colaborador NO implica conformidad con la sancion, unicamente acredita su recepcion y notificacion.
+          </div>
+        </div>
+      </td>
+    </tr>
+  </table>
+
+  <div class="footer">
+    <div>Grupo Gastronomico Aurora S.A.C. &nbsp;|&nbsp; RUC: 20615117111 &nbsp;|&nbsp; Documento Interno Confidencial</div>
+    <div>{{CODIGO_MEMO}} &nbsp;|&nbsp; {{ANO}}</div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>ACTA DE ENTREGA - REGLAMENTO INTERNO DE TRABAJO - AURORA SAC</title>
+  <style>
+    @page { size: A4; margin: 15mm 15mm 20mm 15mm; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: #1a1a1a;
+      background: #fff;
+      padding: 22px 30px;
+      font-size: 10pt;
+      line-height: 1.5;
+    }
+
+    /* === ENCABEZADO === */
+    .header-table { width: 100%; border-collapse: collapse; margin-bottom: 14px; }
+    .header-table td { border: 1.5px solid #8C1D18; padding: 9px 12px; vertical-align: middle; }
+    .logo-cell { width: 20%; text-align: center; background: linear-gradient(145deg, #8C1D18 0%, #6b1512 100%); }
+    .company-name { font-size: 17pt; font-weight: 900; color: #fff; letter-spacing: 2px; display: block; }
+    .company-sub  { font-size: 7pt;  color: #f5c8c6; letter-spacing: 1px; display: block; margin-top: 2px; }
+    .company-ruc  { font-size: 6.5pt; color: #f5c8c6; display: block; margin-top: 1px; }
+    .doc-title-cell { width: 55%; text-align: center; background: #FAFAFA; }
+    .doc-main-title { font-size: 12pt; font-weight: bold; color: #1A1A1A; text-transform: uppercase; }
+    .doc-ref        { font-size: 9.5pt; color: #8C1D18; font-weight: bold; margin-top: 4px; }
+    .meta-cell { width: 25%; font-size: 8pt; color: #444; line-height: 1.8; background: #FAFAFA; }
+    .meta-cell b { color: #8C1D18; }
+
+    /* === TITULO ACTA === */
+    .titulo-acta {
+      background: #8C1D18;
+      color: #fff;
+      text-align: center;
+      font-size: 11pt;
+      font-weight: bold;
+      padding: 6px 0;
+      letter-spacing: 1.5px;
+      margin-bottom: 10px;
+      border-radius: 1px;
+    }
+
+    /* === INTRO === */
+    .intro-box {
+      border: 1.5px solid #C9A8A6;
+      border-radius: 3px;
+      background: #FDFBFB;
+      padding: 10px 14px;
+      font-size: 9.5pt;
+      line-height: 1.7;
+      text-align: justify;
+      margin-bottom: 12px;
+    }
+    .intro-box strong { color: #8C1D18; }
+
+    /* === CAMPO ASUNTO === */
+    .campo-asunto {
+      border: 1px solid #D0D0D0;
+      border-radius: 3px;
+      padding: 8px 14px;
+      margin-bottom: 12px;
+      font-size: 9.5pt;
+    }
+    .campo-asunto b { color: #8C1D18; }
+    .campo-linea { border-bottom: 1px solid #aaa; display: inline-block; width: 320px; margin-left: 6px; }
+
+    /* === TABLA PRINCIPAL === */
+    .personal-table { width: 100%; border-collapse: collapse; margin-bottom: 14px; font-size: 9pt; }
+    .personal-table thead tr { background: #8C1D18; color: #fff; }
+    .personal-table thead th {
+      padding: 7px 8px;
+      text-align: center;
+      font-weight: bold;
+      letter-spacing: 0.3px;
+      border: 1px solid #6b1512;
+      font-size: 8.5pt;
+    }
+    .personal-table tbody tr:nth-child(even) { background: #FBF6F6; }
+    .personal-table tbody tr:nth-child(odd)  { background: #fff; }
+    .personal-table tbody td {
+      border: 1px solid #D8D8D8;
+      padding: 6px 8px;
+      vertical-align: middle;
+    }
+    .td-num    { text-align: center; font-weight: bold; color: #8C1D18; width: 4%; }
+    .td-dni    { text-align: center; font-family: "Courier New", monospace; font-size: 8.5pt; width: 10%; font-weight: bold; }
+    .td-nombre { width: 32%; font-weight: 600; }
+    .td-cargo  { width: 22%; color: #444; font-size: 8.5pt; }
+    .td-fecha  { width: 14%; text-align: center; color: #666; font-size: 8pt; }
+    .td-firma  { width: 18%; text-align: center; }
+    .firma-linea { border-bottom: 1px solid #aaa; margin: 0 10px; height: 18px; }
+
+    /* === SECCIÓN AUTORIDADES === */
+    .section-bar {
+      background: #8C1D18; color: #fff;
+      font-size: 9pt; font-weight: bold;
+      padding: 5px 12px;
+      margin: 14px 0 8px 0;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-radius: 1px;
+    }
+
+    /* === FIRMAS AUTORIDADES === */
+    .autoridades-table { width: 100%; border-collapse: collapse; margin-top: 6px; font-size: 8.5pt; }
+    .autoridades-table td { border: 1px solid #D0D0D0; padding: 40px 8px 8px 8px; text-align: center; width: 33.33%; vertical-align: bottom; }
+    .aut-line  { border-top: 1.5px solid #8C1D18; padding-top: 4px; margin-bottom: 2px; }
+    .aut-rol   { font-weight: bold; color: #8C1D18; font-size: 8pt; text-transform: uppercase; }
+    .aut-nombre{ font-weight: bold; font-size: 9pt; color: #1A1A1A; }
+    .aut-cargo { font-size: 7.5pt; color: #555; }
+    .aut-dni   { font-size: 7.5pt; color: #777; }
+
+    /* === PIE === */
+    .footer {
+      margin-top: 16px;
+      border-top: 1.5px solid #8C1D18;
+      padding-top: 6px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 7pt;
+      color: #999;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ENCABEZADO -->
+  <table class="header-table">
+    <tr>
+      <td class="logo-cell">
+        <span class="company-name">AURORA</span>
+        <span class="company-sub">GRUPO GASTRONOMICO</span>
+        <span class="company-ruc">RUC: 20615117111</span>
+      </td>
+      <td class="doc-title-cell">
+        <div class="doc-main-title">ACTA DE ENTREGA Y RECIBIDO</div>
+        <div class="doc-ref">REGLAMENTO INTERNO DE TRABAJO</div>
+        <div style="font-size:8.5pt; color:#555; margin-top:3px;">Grupo Gastron&oacute;mico Aurora S.A.C. &mdash; 2026</div>
+      </td>
+      <td class="meta-cell">
+        <b>Codigo:</b> RRHH-ACT-001-2026<br>
+        <b>Version:</b> 01<br>
+        <b>Fecha:</b> 29 de agosto de 2026<br>
+        <b>Pagina:</b> 1 de 1<br>
+        <b>Clasificacion:</b> INTERNO
+      </td>
+    </tr>
+  </table>
+
+  <!-- TITULO -->
+  <div class="titulo-acta">ACTA DE ENTREGA &mdash; REGLAMENTO INTERNO DE TRABAJO &mdash; AURORA 2026</div>
+
+  <!-- INTRO -->
+  <div class="intro-box">
+    Por medio del presente documento, el Area de <strong>Administracion y Recursos Humanos del Grupo
+    Gastronomico Aurora S.A.C.</strong>, con RUC N. 20615117111, con domicilio en Av. Victor Larco
+    Herrera N. 2164, Urb. San Andres V Etapa, Trujillo &mdash; La Libertad, deja constancia de la
+    entrega del <strong>Reglamento Interno de Trabajo (RIT)</strong> a cada uno de los colaboradores
+    que integran el plantel de personal activo de la empresa, en cumplimiento de lo dispuesto en el
+    <strong>Articulo 7 del Reglamento Interno de Trabajo</strong>, el cual establece expresamente:
+    <em>"El Reglamento Interno de Trabajo sera entregado a cada uno de los trabajadores de la empresa,
+    con cargo de recepcion [...] Consecuentemente todos los trabajadores de la empresa estan informados
+    de su existencia y contenido y ninguno de ellos podra invocar su ignorancia parcial o total, para
+    justificar su inobservancia o incumplimiento ya que sus normas tienen caracter obligatorio."</em>
+    Con su firma, cada colaborador acredita haber recibido el presente documento en la fecha indicada.
+  </div>
+
+  <!-- CAMPO ASUNTO -->
+  <div class="campo-asunto">
+    <b>DOCUMENTO ENTREGADO:</b>&nbsp;
+    <span style="font-weight:600; color:#1a1a1a;">REGLAMENTO INTERNO DE TRABAJO &mdash; GRUPO GASTRON&Oacute;MICO AURORA S.A.C.</span>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <b>BASE LEGAL:</b>&nbsp;
+    <span style="color:#555;">Art. 7 del Reglamento Interno de Trabajo &mdash; Vigencia 2026</span>
+  </div>
+
+  <!-- TABLA PERSONAL -->
+  <table class="personal-table">
+    <thead>
+      <tr>
+        <th>N&deg;</th>
+        <th>DNI</th>
+        <th>APELLIDOS Y NOMBRES</th>
+        <th>CARGO</th>
+        <th>FECHA DE ENTREGA</th>
+        <th>FIRMA</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="td-num">1</td>
+        <td class="td-dni">48306117</td>
+        <td class="td-nombre">ABAD ALVAREZ, XIOMARA SOLANGE</td>
+        <td class="td-cargo">Cajera</td>
+        <td class="td-fecha">____/____/______</td>
+        <td class="td-firma"><div class="firma-linea"></div></td>
+      </tr>
+      <tr>
+        <td class="td-num">2</td>
+        <td class="td-dni">74935872</td>
+        <td class="td-nombre">ARTEAGA BERNARDO, EMERSON ANDRES</td>
+        <td class="td-cargo">Cortador</td>
+        <td class="td-fecha">____/____/______</td>
+        <td class="td-firma"><div class="firma-linea"></div></td>
+      </tr>
+      <tr>
+        <td class="td-num">3</td>
+        <td class="td-dni">60877846</td>
+        <td class="td-nombre">BAZAN RODRIGUEZ, ALAN IMANOL</td>
+        <td class="td-cargo">Ayudante de Mozo</td>
+        <td class="td-fecha">____/____/______</td>
+        <td class="td-firma"><div class="firma-linea"></div></td>
+      </tr>
+      <tr>
+        <td class="td-num">4</td>
+        <td class="td-dni">48325353</td>
+        <td class="td-nombre">CALDERON MARTEL, GUSTAVO</td>
+        <td class="td-cargo">Almacenero</td>
+        <td class="td-fecha">____/____/______</td>
+        <td class="td-firma"><div class="firma-linea"></div></td>
+      </tr>
+      <tr>
+        <td class="td-num">5</td>
+        <td class="td-dni">47924719</td>
+        <td class="td-nombre">CARDENAS ACHATA, PEDRO PAUL</td>
+        <td class="td-cargo">Jefe de Seguridad</td>
+        <td class="td-fecha">____/____/______</td>
+        <td class="td-firma"><div class="firma-linea"></div></td>
+      </tr>
+      <tr>
+        <td class="td-num">6</td>
+        <td class="td-dni">45385820</td>
+        <td class="td-nombre">CASTRO VASQUEZ, JIMMY JACK</td>
+        <td class="td-cargo">Sub Jefe de Mozos</td>
+        <td class="td-fecha">____/____/______</td>
+        <td class="td-firma"><div class="firma-linea"></div></td>
+      </tr>
+      <tr>
+        <td class="td-num">7</td>
+        <td class="td-dni">44031290</td>
+        <td class="td-nombre">CASTRO VASQUEZ, WILMER BRINNER</td>
+        <td class="td-cargo">Administrador</td>
+        <td class="td-fecha">____/____/______</td>
+        <td class="td-firma"><div class="firma-linea"></div></td>
+      </tr>
+      <tr>
+        <td class="td-num">8</td>
+        <td class="td-dni">74968621</td>
+        <td class="td-nombre">CERNA ALVITES, BRAYAN SEBASTIAN</td>
+        <td class="td-cargo">Freidor</td>
+        <td class="td-fecha">____/____/______</td>
+        <td class="td-firma"><div class="firma-linea"></div></td>
+      </tr>
+      <tr>
+        <td class="td-num">9</td>
+        <td class="td-dni">70405132</td>
+        <td class="td-nombre">CUEVA HUAMAN, ANDREA XIMENA F.</td>
+        <td class="td-cargo">Anfitriona</td>
+        <td class="td-fecha">____/____/______</td>
+        <td class="td-firma"><div class="firma-linea"></div></td>
+      </tr>
+      <tr>
+        <td class="td-num">10</td>
+        <td class="td-dni">73576771</td>
+        <td class="td-nombre">ESQUIVEL RODRIGUEZ, KARLA DAYAN</td>
+        <td class="td-cargo">Ensaladero</td>
+        <td class="td-fecha">____/____/______</td>
+        <td class="td-firma"><div class="firma-linea"></div></td>
+      </tr>
+      <tr>
+        <td class="td-num">11</td>
+        <td class="td-dni">75008865</td>
+        <td class="td-nombre">FLORES CALDERON, JOSE AUGUSTO G.</td>
+        <td class="td-cargo">Mozo</td>
+        <td class="td-fecha">____/____/______</td>
+        <td class="td-firma"><div class="firma-linea"></div></td>
+      </tr>
+      <tr>
+        <td class="td-num">12</td>
+        <td class="td-dni">73709422</td>
+        <td class="td-nombre">MINCHON ALVAREZ, DIEGO LEONARDO</td>
+        <td class="td-cargo">Jefe de Cocina</td>
+        <td class="td-fecha">____/____/______</td>
+        <td class="td-firma"><div class="firma-linea"></div></td>
+      </tr>
+      <tr>
+        <td class="td-num">13</td>
+        <td class="td-dni">60731243</td>
+        <td class="td-nombre">MONDRAGON JIMENEZ, CLAUDIA PAOLA</td>
+        <td class="td-cargo">_______________</td>
+        <td class="td-fecha">____/____/______</td>
+        <td class="td-firma"><div class="firma-linea"></div></td>
+      </tr>
+      <tr>
+        <td class="td-num">14</td>
+        <td class="td-dni">70287707</td>
+        <td class="td-nombre">ORBEGOSO CASSANO, GEORGE ALDAIR</td>
+        <td class="td-cargo">_______________</td>
+        <td class="td-fecha">____/____/______</td>
+        <td class="td-firma"><div class="firma-linea"></div></td>
+      </tr>
+      <tr>
+        <td class="td-num">15</td>
+        <td class="td-dni">74805963</td>
+        <td class="td-nombre">PENA ULLILEN, EDWIN SMITH</td>
+        <td class="td-cargo">Bartender</td>
+        <td class="td-fecha">____/____/______</td>
+        <td class="td-firma"><div class="firma-linea"></div></td>
+      </tr>
+      <tr>
+        <td class="td-num">16</td>
+        <td class="td-dni">76590395</td>
+        <td class="td-nombre">QUINONES CALDERON, VICTOR ANDY</td>
+        <td class="td-cargo">Lanzador</td>
+        <td class="td-fecha">____/____/______</td>
+        <td class="td-firma"><div class="firma-linea"></div></td>
+      </tr>
+      <tr>
+        <td class="td-num">17</td>
+        <td class="td-dni">47658476</td>
+        <td class="td-nombre">RIOS PONCE DE LEON, ROGER GABRIEL</td>
+        <td class="td-cargo">Jefe de Mozos</td>
+        <td class="td-fecha">____/____/______</td>
+        <td class="td-firma"><div class="firma-linea"></div></td>
+      </tr>
+      <tr>
+        <td class="td-num">18</td>
+        <td class="td-dni">76766492</td>
+        <td class="td-nombre">RODRIGUEZ CAPA, NICOLE LALESHKA</td>
+        <td class="td-cargo">Jefe de Logistica</td>
+        <td class="td-fecha">____/____/______</td>
+        <td class="td-firma"><div class="firma-linea"></div></td>
+      </tr>
+      <tr>
+        <td class="td-num">19</td>
+        <td class="td-dni">70378576</td>
+        <td class="td-nombre">SANCHEZ VASQUEZ, BRYAM ARMANDO</td>
+        <td class="td-cargo">_______________</td>
+        <td class="td-fecha">____/____/______</td>
+        <td class="td-firma"><div class="firma-linea"></div></td>
+      </tr>
+      <tr>
+        <td class="td-num">20</td>
+        <td class="td-dni">70824901</td>
+        <td class="td-nombre">SEREY BARDALES, LUCAS ANDRES</td>
+        <td class="td-cargo">Sub Jefe de Cocina</td>
+        <td class="td-fecha">____/____/______</td>
+        <td class="td-firma"><div class="firma-linea"></div></td>
+      </tr>
+      <tr>
+        <td class="td-num">21</td>
+        <td class="td-dni">60554635</td>
+        <td class="td-nombre">SEREY BARDALES, LUIS IGNACIO</td>
+        <td class="td-cargo">Lava Platos</td>
+        <td class="td-fecha">____/____/______</td>
+        <td class="td-firma"><div class="firma-linea"></div></td>
+      </tr>
+      <tr>
+        <td class="td-num">22</td>
+        <td class="td-dni">74303945</td>
+        <td class="td-nombre">TERRONES SALIRROSAS, SANDRO GHESSAHILL</td>
+        <td class="td-cargo">_______________</td>
+        <td class="td-fecha">____/____/______</td>
+        <td class="td-firma"><div class="firma-linea"></div></td>
+      </tr>
+      <tr>
+        <td class="td-num">23</td>
+        <td class="td-dni">43341525</td>
+        <td class="td-nombre">SILVA CERNA, BILLY ANDRES</td>
+        <td class="td-cargo">Supervisor / Bartender Corp.</td>
+        <td class="td-fecha">____/____/______</td>
+        <td class="td-firma"><div class="firma-linea"></div></td>
+      </tr>
+      <tr>
+        <td class="td-num">24</td>
+        <td class="td-dni">19693465</td>
+        <td class="td-nombre">BANCES ESPINOZA, DEYDI FLADIR</td>
+        <td class="td-cargo">Lava Platos / Mantenimiento</td>
+        <td class="td-fecha">____/____/______</td>
+        <td class="td-firma"><div class="firma-linea"></div></td>
+      </tr>
+      <tr>
+        <td class="td-num">25</td>
+        <td class="td-dni">77822206</td>
+        <td class="td-nombre">CRUZ CORTEZ, JEREMY MIJAIL</td>
+        <td class="td-cargo">Cantador</td>
+        <td class="td-fecha">____/____/______</td>
+        <td class="td-firma"><div class="firma-linea"></div></td>
+      </tr>
+      <tr>
+        <td class="td-num">26</td>
+        <td class="td-dni">72242662</td>
+        <td class="td-nombre">DIONICIO CASTILLO, JOSE MARCIAL</td>
+        <td class="td-cargo">_______________</td>
+        <td class="td-fecha">____/____/______</td>
+        <td class="td-firma"><div class="firma-linea"></div></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- AUTORIDADES -->
+  <div class="section-bar">EMITEN Y ENTREGAN EL PRESENTE DOCUMENTO</div>
+  <table class="autoridades-table">
+    <tr>
+      <td>
+        <div class="aut-line"></div>
+        <div class="aut-rol">Administracion</div>
+        <div class="aut-nombre">WILMER BRINNER CASTRO VASQUEZ</div>
+        <div class="aut-cargo">Administrador</div>
+        <div class="aut-dni">DNI: 44031290</div>
+      </td>
+      <td>
+        <div class="aut-line"></div>
+        <div class="aut-rol">Supervision</div>
+        <div class="aut-nombre">BILLY ANDRES SILVA CERNA</div>
+        <div class="aut-cargo">Supervisor</div>
+        <div class="aut-dni">DNI: 43341525</div>
+      </td>
+      <td>
+        <div class="aut-line"></div>
+        <div class="aut-rol">Gerencia General</div>
+        <div class="aut-nombre">GLADYS VERONICA CARBAJAL URQUIZO</div>
+        <div class="aut-cargo">Gerente General</div>
+        <div class="aut-dni">DNI: 42892738</div>
+      </td>
+    </tr>
+  </table>
+
+  <!-- PIE -->
+  <div class="footer">
+    <div>Grupo Gastronomico Aurora S.A.C. &nbsp;|&nbsp; RUC: 20615117111 &nbsp;|&nbsp; Av. Victor Larco Herrera N. 2164, Trujillo &mdash; La Libertad</div>
+    <div>RRHH-ACT-001-2026 &nbsp;|&nbsp; Agosto 2026</div>
+  </div>
+
+</body>
+</html>

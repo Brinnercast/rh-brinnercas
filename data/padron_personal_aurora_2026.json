@@ -15,10 +15,10 @@
     "excelContabilidad": "C:\\Users\\brinn\\OneDrive\\AURORA 2025 - 2026\\RESUMEN_PERSONAL_Y_ADENDAS_AURORA_2026.xlsx"
   },
   "proximaRenovacion": {
-    "fechaFirma": "31 de octubre de 2026",
+    "fechaFirma": "31 de enero de 2027",
     "periodo": "3 meses",
-    "inicio": "01/11/2026",
-    "fin": "31/01/2027"
+    "inicio": "01/02/2027",
+    "fin": "30/04/2027"
   },
   "colaboradores": [
     {
@@ -53,13 +53,22 @@
           "fin": "31/10/2026",
           "remuneracion": 3200,
           "concepto": "Prórroga de 3 meses"
+        },
+        {
+          "numero": "3RA ADENDA",
+          "archivo": "3RA ADENDA DE CONTRATO CASTRO BRINNER.docx",
+          "firma": "31/10/2026",
+          "inicio": "01/11/2026",
+          "fin": "31/01/2027",
+          "remuneracion": 3200,
+          "concepto": "Prórroga de 3 meses (01/11/2026 al 31/01/2027)"
         }
       ],
       "estado": "ACTIVO",
       "remuneracionActual": 3200,
-      "vigenciaActualHasta": "31/10/2026",
-      "proximaAdenda": "3RA ADENDA",
-      "proximaVigencia": "01/11/2026 al 31/01/2027",
+      "vigenciaActualHasta": "31/01/2027",
+      "proximaAdenda": "4TA ADENDA",
+      "proximaVigencia": "01/02/2027 al 30/04/2027",
       "nombreSheet": "CASTRO VÁSQUEZ WILMER BRINNER",
       "condicionLaborable": "FULL TIME",
       "fechaNacimiento": "25/12/1984",
@@ -71,10 +80,10 @@
       "correo": "brinnercas@gmail.com",
       "documentos": {
         "contrato": {
-          "fileName": "GRUPO GASTRONOMICO AURORA SAC - CONTRATO - CASTRO VASQUEZ JIMMY JACK - 260201 - 260430 - 03.pdf",
-          "localUrl": "/docs/contratos/GRUPO%20GASTRONOMICO%20AURORA%20SAC%20-%20CONTRATO%20-%20CASTRO%20VASQUEZ%20JIMMY%20JACK%20-%20260201%20-%20260430%20-%2003.pdf",
-          "driveId": "1SKp2PkX8tCeKPhvGsN5-79Yn6ygQzuQg",
-          "driveUrl": "https://drive.google.com/file/d/1SKp2PkX8tCeKPhvGsN5-79Yn6ygQzuQg/view"
+          "fileName": "GRUPO GASTRONOMICO AURORA SAC - CONTRATO - CASTRO VASQUEZ WILMER BRINNER - 260201 - 260430 - 03.pdf",
+          "localUrl": "/docs/contratos/GRUPO%20GASTRONOMICO%20AURORA%20SAC%20-%20CONTRATO%20-%20CASTRO%20VASQUEZ%20WILMER%20BRINNER%20-%20260201%20-%20260430%20-%2003.pdf",
+          "driveId": "1P40y1KwY3QZZMfgCTM1gjIyXAvYP7BND",
+          "driveUrl": "https://drive.google.com/file/d/1P40y1KwY3QZZMfgCTM1gjIyXAvYP7BND/view"
         },
         "adendas": [
           {
@@ -193,12 +202,6 @@
             "localUrl": "/docs/adendas/3RA%20ADENDA%20DE%20CONTRATO%20MINCHON%20DIEGO.docx",
             "driveId": "1FLOBLUz5webjaTA5YqZmXw75Bx7I2aew",
             "driveUrl": "https://drive.google.com/file/d/1FLOBLUz5webjaTA5YqZmXw75Bx7I2aew/view"
-          },
-          {
-            "fileName": "4TA ADENDA DE CONTRATO MINCHON DIEGO.docx",
-            "localUrl": "/docs/adendas/4TA%20ADENDA%20DE%20CONTRATO%20MINCHON%20DIEGO.docx",
-            "driveId": "1i0A8d572tB-GuqnSGcsI23rT5wlWZYCz",
-            "driveUrl": "https://drive.google.com/file/d/1i0A8d572tB-GuqnSGcsI23rT5wlWZYCz/view"
           }
         ],
         "memorandums": [
@@ -278,13 +281,22 @@
           "fin": "31/10/2026",
           "remuneracion": 2300,
           "concepto": "Prórroga 3 meses con salario actual"
+        },
+        {
+          "numero": "4TA ADENDA",
+          "archivo": "4TA ADENDA DE CONTRATO RIOS ROGER.docx",
+          "firma": "31/10/2026",
+          "inicio": "01/11/2026",
+          "fin": "31/01/2027",
+          "remuneracion": 2300,
+          "concepto": "Prórroga de 3 meses (01/11/2026 al 31/01/2027)"
         }
       ],
       "estado": "ACTIVO",
       "remuneracionActual": 2300,
-      "vigenciaActualHasta": "31/10/2026",
-      "proximaAdenda": "4TA ADENDA",
-      "proximaVigencia": "01/11/2026 al 31/01/2027",
+      "vigenciaActualHasta": "31/01/2027",
+      "proximaAdenda": "5TA ADENDA",
+      "proximaVigencia": "01/02/2027 al 30/04/2027",
       "nombreSheet": "Ríos Ponce de León Roger Gabriel",
       "condicionLaborable": "FULL TIME",
       "fechaNacimiento": "24/02/1992",
@@ -371,13 +383,22 @@
           "fin": "31/10/2026",
           "remuneracion": 2000,
           "concepto": "Readecuación operativa y ajuste a S/ 2,000"
+        },
+        {
+          "numero": "3RA ADENDA",
+          "archivo": "3RA ADENDA DE CONTRATO RODRIGUEZ NICOLE.docx",
+          "firma": "31/10/2026",
+          "inicio": "01/11/2026",
+          "fin": "31/01/2027",
+          "remuneracion": 2000,
+          "concepto": "Prórroga de 3 meses (01/11/2026 al 31/01/2027)"
         }
       ],
       "estado": "ACTIVO",
       "remuneracionActual": 2000,
-      "vigenciaActualHasta": "31/10/2026",
-      "proximaAdenda": "3RA ADENDA",
-      "proximaVigencia": "01/11/2026 al 31/01/2027",
+      "vigenciaActualHasta": "31/01/2027",
+      "proximaAdenda": "4TA ADENDA",
+      "proximaVigencia": "01/02/2027 al 30/04/2027",
       "nombreSheet": "RODRIGUEZ CAPA NICOLE LALESHKA",
       "condicionLaborable": "FULL TIME",
       "fechaNacimiento": "7/12/1999",
@@ -467,13 +488,22 @@
           "fin": "31/10/2026",
           "remuneracion": 1700,
           "concepto": "Prórroga 3 meses"
+        },
+        {
+          "numero": "4TA ADENDA",
+          "archivo": "4TA ADENDA DE CONTRATO PEÑA EDWIN.docx",
+          "firma": "31/10/2026",
+          "inicio": "01/11/2026",
+          "fin": "31/01/2027",
+          "remuneracion": 1700,
+          "concepto": "Prórroga de 3 meses (01/11/2026 al 31/01/2027)"
         }
       ],
       "estado": "ACTIVO",
       "remuneracionActual": 1700,
-      "vigenciaActualHasta": "31/10/2026",
-      "proximaAdenda": "4TA ADENDA",
-      "proximaVigencia": "01/11/2026 al 31/01/2027",
+      "vigenciaActualHasta": "31/01/2027",
+      "proximaAdenda": "5TA ADENDA",
+      "proximaVigencia": "01/02/2027 al 30/04/2027",
       "nombreSheet": "Edwin Smith Peña Ullilen",
       "condicionLaborable": "FULL TIME",
       "fechaNacimiento": "1/09/2002",
@@ -569,13 +599,22 @@
           "fin": "31/10/2026",
           "remuneracion": 1700,
           "concepto": "Prórroga 3 meses"
+        },
+        {
+          "numero": "4TA ADENDA",
+          "archivo": "4TA ADENDA DE CONTRATO SANCHEZ BRYAM.docx",
+          "firma": "31/10/2026",
+          "inicio": "01/11/2026",
+          "fin": "31/01/2027",
+          "remuneracion": 1700,
+          "concepto": "Prórroga de 3 meses (01/11/2026 al 31/01/2027)"
         }
       ],
       "estado": "ACTIVO",
       "remuneracionActual": 1700,
-      "vigenciaActualHasta": "31/10/2026",
-      "proximaAdenda": "4TA ADENDA",
-      "proximaVigencia": "01/11/2026 al 31/01/2027",
+      "vigenciaActualHasta": "31/01/2027",
+      "proximaAdenda": "5TA ADENDA",
+      "proximaVigencia": "01/02/2027 al 30/04/2027",
       "nombreSheet": "Sánchez Vásquez Bryam Armando",
       "condicionLaborable": "FULL TIME",
       "fechaNacimiento": "24/08/2000",
@@ -662,13 +701,22 @@
           "fin": "31/10/2026",
           "remuneracion": 1500,
           "concepto": "Prórroga 3 meses"
+        },
+        {
+          "numero": "3RA ADENDA",
+          "archivo": "3RA ADENDA DE CONTRATO ABAD XIOMARA.docx",
+          "firma": "31/10/2026",
+          "inicio": "01/11/2026",
+          "fin": "31/01/2027",
+          "remuneracion": 1500,
+          "concepto": "Prórroga de 3 meses (01/11/2026 al 31/01/2027)"
         }
       ],
       "estado": "ACTIVO",
       "remuneracionActual": 1500,
-      "vigenciaActualHasta": "31/10/2026",
-      "proximaAdenda": "3RA ADENDA",
-      "proximaVigencia": "01/11/2026 al 31/01/2027",
+      "vigenciaActualHasta": "31/01/2027",
+      "proximaAdenda": "4TA ADENDA",
+      "proximaVigencia": "01/02/2027 al 30/04/2027",
       "nombreSheet": "Abad Alvarez Xiomara Solange",
       "condicionLaborable": "FULL TIME",
       "fechaNacimiento": "23/03/1994",
@@ -749,13 +797,22 @@
           "fin": "31/10/2026",
           "remuneracion": 1500,
           "concepto": "Prórroga 3 meses"
+        },
+        {
+          "numero": "3RA ADENDA",
+          "archivo": "3RA ADENDA DE CONTRATO BAZAN ALAN.docx",
+          "firma": "31/10/2026",
+          "inicio": "01/11/2026",
+          "fin": "31/01/2027",
+          "remuneracion": 1500,
+          "concepto": "Prórroga de 3 meses (01/11/2026 al 31/01/2027)"
         }
       ],
       "estado": "ACTIVO",
       "remuneracionActual": 1500,
-      "vigenciaActualHasta": "31/10/2026",
-      "proximaAdenda": "3RA ADENDA",
-      "proximaVigencia": "01/11/2026 al 31/01/2027",
+      "vigenciaActualHasta": "31/01/2027",
+      "proximaAdenda": "4TA ADENDA",
+      "proximaVigencia": "01/02/2027 al 30/04/2027",
       "nombreSheet": "Bazán Rodríguez Alan Imanol",
       "condicionLaborable": "FULL TIME",
       "fechaNacimiento": "18/10/2006",
@@ -836,13 +893,22 @@
           "fin": "31/10/2026",
           "remuneracion": 1500,
           "concepto": "Prórroga 3 meses"
+        },
+        {
+          "numero": "3RA ADENDA",
+          "archivo": "3RA ADENDA DE CONTRATO ORBEGOSO ALDAIR.docx",
+          "firma": "31/10/2026",
+          "inicio": "01/11/2026",
+          "fin": "31/01/2027",
+          "remuneracion": 1500,
+          "concepto": "Prórroga de 3 meses (01/11/2026 al 31/01/2027)"
         }
       ],
       "estado": "ACTIVO",
       "remuneracionActual": 1500,
-      "vigenciaActualHasta": "31/10/2026",
-      "proximaAdenda": "3RA ADENDA",
-      "proximaVigencia": "01/11/2026 al 31/01/2027",
+      "vigenciaActualHasta": "31/01/2027",
+      "proximaAdenda": "4TA ADENDA",
+      "proximaVigencia": "01/02/2027 al 30/04/2027",
       "nombreSheet": "Orbegoso cassano George Aldair",
       "condicionLaborable": "FULL TIME",
       "fechaNacimiento": "28/01/1997",
@@ -932,13 +998,22 @@
           "fin": "30/09/2026",
           "remuneracion": 1400,
           "concepto": "Prórroga 1 mes"
+        },
+        {
+          "numero": "4TA ADENDA",
+          "archivo": "4TA ADENDA DE CONTRATO ESQUIVEL KARLA DAYAN.docx",
+          "firma": "31/10/2026",
+          "inicio": "01/11/2026",
+          "fin": "31/01/2027",
+          "remuneracion": 1400,
+          "concepto": "Prórroga de 3 meses (01/11/2026 al 31/01/2027)"
         }
       ],
       "estado": "ACTIVO",
       "remuneracionActual": 1400,
-      "vigenciaActualHasta": "30/09/2026",
-      "proximaAdenda": "4TA ADENDA",
-      "proximaVigencia": "01/10/2026 al 31/12/2026 o al 31/01/2027",
+      "vigenciaActualHasta": "31/01/2027",
+      "proximaAdenda": "5TA ADENDA",
+      "proximaVigencia": "01/02/2027 al 30/04/2027",
       "nombreSheet": "Esquivel Rodriguez Karla",
       "condicionLaborable": "FULL TIME",
       "fechaNacimiento": "25/08/2003",
@@ -1291,10 +1366,10 @@
       "correo": "joseaugustoflorescalderon@gmail.com",
       "documentos": {
         "contrato": {
-          "fileName": "GRUPO GASTRONOMICO AURORA SAC - CONTRATO - CALDERON MARTEL GUSTAVO - 260201 - 260430 - 03.pdf",
-          "localUrl": "/docs/contratos/GRUPO%20GASTRONOMICO%20AURORA%20SAC%20-%20CONTRATO%20-%20CALDERON%20MARTEL%20GUSTAVO%20-%20260201%20-%20260430%20-%2003.pdf",
-          "driveId": "1twoNiXBWvwvwt6zF89y_ORnXvH3AI-BX",
-          "driveUrl": "https://drive.google.com/file/d/1twoNiXBWvwvwt6zF89y_ORnXvH3AI-BX/view"
+          "fileName": "GRUPO GASTRONOMICO AURORA SAC - CONTRATO - FLORES CALDERON JOSE AUGUSTO GUSTAVO - 260201 - 260430 - 03.pdf",
+          "localUrl": "/docs/contratos/GRUPO%20GASTRONOMICO%20AURORA%20SAC%20-%20CONTRATO%20-%20FLORES%20CALDERON%20JOSE%20AUGUSTO%20GUSTAVO%20-%20260201%20-%20260430%20-%2003.pdf",
+          "driveId": "1bZ7ESaDHE38324DD9t5Qt7QO-RpsxLIL",
+          "driveUrl": "https://drive.google.com/file/d/1bZ7ESaDHE38324DD9t5Qt7QO-RpsxLIL/view"
         },
         "adendas": [
           {
@@ -1662,10 +1737,10 @@
       "correo": "Mrignaciosb@gmail.com",
       "documentos": {
         "contrato": {
-          "fileName": "GRUPO GASTRONOMICO AURORA SAC - CONTRATO - SEREY BARDALES LUCAS ANDRES - 260201 - 260430 - 03.pdf",
-          "localUrl": "/docs/contratos/GRUPO%20GASTRONOMICO%20AURORA%20SAC%20-%20CONTRATO%20-%20SEREY%20BARDALES%20LUCAS%20ANDRES%20-%20260201%20-%20260430%20-%2003.pdf",
-          "driveId": "1HqOc6pAp-kPoULl5K3hUggLBjiFFljmL",
-          "driveUrl": "https://drive.google.com/file/d/1HqOc6pAp-kPoULl5K3hUggLBjiFFljmL/view"
+          "fileName": "GRUPO GASTRONOMICO AURORA SAC - CONTRATO - SEREY BARDALES LUIS IGNACIO - 260201 - 260430 - 03.pdf",
+          "localUrl": "/docs/contratos/GRUPO%20GASTRONOMICO%20AURORA%20SAC%20-%20CONTRATO%20-%20SEREY%20BARDALES%20LUIS%20IGNACIO%20-%20260201%20-%20260430%20-%2003.pdf",
+          "driveId": "10WIarDwgduLPojm-ZY_sr0O2yGpeYzf_",
+          "driveUrl": "https://drive.google.com/file/d/10WIarDwgduLPojm-ZY_sr0O2yGpeYzf_/view"
         },
         "adendas": [],
         "memorandums": [],

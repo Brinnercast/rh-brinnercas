@@ -1,0 +1,64 @@
+﻿# SISTEMA DE MEMORANDUMS DE SANCION DISCIPLINARIA
+## GRUPO GASTRONOMICO AURORA S.A.C.
+
+**Fecha de implementacion:** 27 de agosto de 2026
+**Conversacion de referencia Antigravity:** 9c3ed0a8-b7ec-40f1-a8eb-25457e6c1794
+
+---
+
+## EMPRESA
+- Razon Social: GRUPO GASTRONOMICO AURORA S.A.C.
+- RUC: 20615117111
+- Direccion: Av. Victor Larco Herrera N. 2164, Urb. San Andres V Etapa, Trujillo, La Libertad
+
+## AUTORIDADES FIRMANTES (datos fijos en todos los memos)
+- ADMINISTRACION:  WILMER BRINNER CASTRO VASQUEZ   | DNI: 44031290
+- SUPERVISION:     BILLY ANDRES SILVA CERNA          | DNI: 43341525
+- GERENCIA GENERAL: GLADYS VERONICA CARBAJAL URQUIZO | DNI: 42892738
+
+## REGLAMENTO INTERNO DE TRABAJO — ARTICULOS CLAVE
+- Art. 6:  Definicion de Tardanza (falta laboral por reincidencia)
+- Art. 22: Obligacion de registro de asistencia
+- Art. 25: Tolerancia 5 min | 3 tardanzas en un mes = sancion
+- Art. 32: Inasistencia injustificada = medidas disciplinarias + descuento de haberes
+- Art. 33: Obligacion de avisar al jefe inmediato por inasistencia
+- Art. 50: Clasificacion de faltas (leves, considerables, graves)
+- Art. 51: Faltas leves (tardanzas ocasionales, error involuntario)
+- Art. 52: Faltas considerables (ausentarse sin autorizacion, reincidencia en leves)
+- Art. 53: Faltas graves (reincidencia en considerables, dano a empresa, apropiacion)
+- Art. 55: Sanciones (verbal, escrita/memo, suspension sin goce, despido)
+- Art. 56: Toda sancion se notifica por escrito y se archiva en legajo del colaborador
+
+## TIPOS DE MEMORANDUM DISPONIBLES
+1. TARDANZAS REITERATIVAS         (Art. 6, 25, 51, 55)
+2. FALTAS INJUSTIFICADAS          (Art. 32, 33, 52, 55)
+3. CONDUCTA INDEBIDA/INCONDUCTA   (Art. 52, 53, 55)
+4. ABANDONO DE PUESTO             (Art. 32, 52, 53 + D.Leg.728 Art.25-g)
+5. INCUMPLIMIENTO DE FUNCIONES    (Art. 50, 52, 55 + D.Leg.728 Art.25-a)
+6. DANO A BIENES DE LA EMPRESA    (Art. 53, 55 + D.Leg.728 Art.25-b)
+
+## RUTAS DE ARCHIVOS
+- Templates HTML:    MEMORANDUMS_RRHH\TEMPLATES\TEMPLATE_MEMORANDUM_AURORA.html
+- Memos emitidos:    MEMORANDUMS_RRHH\
+- Reglamento Interno: C:\Users\brinn\OneDrive\AURORA 2025 - 2026\REGLAMENTO INT Y MANUAL FUNCIONES\REGLAMENTO INTERNO DE TRABAJO - AURORA.docx
+- Data Personal:     C:\Users\brinn\OneDrive\Documentos\00. DATA PERSONAL_AURORA SAC V.1.xlsx
+- Google Sheets Personal: https://docs.google.com/spreadsheets/d/1Wrelu9FcxOF7g82u2n5sw8LegBMeI1wecNIUfh1EwWM/edit
+
+## NUMERACION CORRELATIVA DE MEMORANDUMS 2026
+001-RRHH-2026 | MINCHON ALVAREZ DIEGO LEONARDO | TARDANZAS REITERATIVAS   | 27/08/2026
+002-RRHH-2026 | MINCHON ALVAREZ DIEGO LEONARDO | FALTAS INJUSTIFICADAS    | 27/08/2026
+[Siguientes memos se registran aqui en orden]
+
+## COLABORADORES CON DNI VERIFICADO
+73709422 | MINCHON ALVAREZ DIEGO LEONARDO      | Jefe de Cocina
+44031290 | CASTRO VASQUEZ WILMER BRINNER       | Administrador
+43341525 | SILVA CERNA BILLY ANDRES            | Supervisor
+42892738 | CARBAJAL URQUIZO GLADYS VERONICA    | Gerente General
+74968621 | CERNA ALVITES BRAYAN SEBASTIAN      | Personal Operativo
+48306117 | ABAD ALVAREZ XIOMARA SOLANGE        | Cajera
+73576771 | ESQUIVEL RODRIGUEZ KARLA DAYAN      | Ensaladero
+
+## INSTRUCCION RAPIDA PARA ANTIGRAVITY
+Para generar un nuevo memo decir:
+"Generar memorandum por [TIPO DE FALTA] para [NOMBRE COLABORADOR], [CARGO], DNI [NUMERO], 
+suspension del [FECHA INICIO] al [FECHA FIN], reincorporacion [FECHA]"

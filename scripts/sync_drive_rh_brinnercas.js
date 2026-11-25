@@ -131,12 +131,19 @@ function normalizeStr(s) {
 
 function matchWorkerToFile(workerName, fileName) {
   const fn = normalizeStr(fileName);
-  const tokens = normalizeStr(workerName).split(/\s+/).filter(t => t.length >= 3);
+  const wn = normalizeStr(workerName);
+  if (fn.includes(wn)) return true;
+  const tokens = wn.split(/\s+/).filter(t => t.length >= 3);
   if (tokens.length === 0) return false;
-  // Requerir coincidencia de al menos 2 tokens clave (e.g. primer apellido y nombre) o el primer apellido completo si es único
   let matches = 0;
   for (const t of tokens) {
     if (fn.includes(t)) matches++;
+  }
+  if (tokens.length >= 3) {
+    // Requerir primer apellido (tokens[0]) + al menos un nombre propio (tokens[2+]) para no confundir hermanos
+    const firstSurnameMatch = fn.includes(tokens[0]);
+    const givenNameMatch = tokens.slice(2).some(t => fn.includes(t));
+    return (firstSurnameMatch && givenNameMatch) || matches >= 3;
   }
   return matches >= 2 || (tokens.length === 1 && matches === 1);
 }

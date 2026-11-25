@@ -7,7 +7,7 @@
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
-const { execFileSync } = require('child_process');
+const { execFileSync, execSync } = require('child_process');
 
 const OWNER = 'Brinnercast';
 const REPO = 'rh-brinnercas';
@@ -172,7 +172,15 @@ async function main() {
 }
 
 main().catch(err => {
-  console.error('\n[ERROR] No se pudo publicar:', err.message);
-  process.exit(1);
+  console.warn('\n[AVISO] GitHub API no disponible (' + err.message + '). Desplegando directamente a Firebase Hosting...');
+  try {
+    execSync('npx firebase-tools deploy --only hosting --project rh-brinnercas', {
+      cwd: PROJECT_DIR,
+      stdio: 'inherit'
+    });
+  } catch (fbErr) {
+    console.error('\n[ERROR] No se pudo publicar en Firebase:', fbErr.message);
+    process.exit(1);
+  }
 });
 

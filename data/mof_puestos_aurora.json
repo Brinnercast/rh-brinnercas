@@ -1,5 +1,87 @@
 {
   "empresa": "GRUPO GASTRONÓMICO AURORA S.A.C.",
+  "proyectoOrigen": "DOCUMENTACION GNRL RH",
+  "updatedAt": "2026-11-25T18:18:38.325Z",
+  "bibliotecaGeneral": [
+    {
+      "id": "mof_master_2026",
+      "categoria": "02 • MANUALES MOF 2026",
+      "titulo": "MOF Master Consolidado Aurora 2026 (Todas las Áreas)",
+      "descripcion": "Manual general de Organización y Funciones con los perfiles completos de Cocina, Salón, Caja y Logística.",
+      "htmlUrl": "docs/normativa/mof/MOF_MASTER_CONSOLIDADO_AURORA_2026.html",
+      "pdfUrl": "docs/normativa/mof/MOF_MASTER_CONSOLIDADO_AURORA_2026.pdf"
+    },
+    {
+      "id": "mof_area_cocina",
+      "categoria": "02 • MANUALES MOF 2026",
+      "titulo": "MOF Consolidado — Área de Cocina (6 Puestos)",
+      "descripcion": "Chef Corporativo, Jefe de Cocina, Sous Chef Criollo, Parrillero, Lanzador(a) y Ayudante de Cocina.",
+      "htmlUrl": "docs/normativa/mof/MOF_CONSOLIDADO_AREA_COCINA.html",
+      "pdfUrl": "docs/normativa/mof/MOF_CONSOLIDADO_AREA_COCINA.pdf"
+    },
+    {
+      "id": "mof_area_salon",
+      "categoria": "02 • MANUALES MOF 2026",
+      "titulo": "MOF Consolidado — Área de Salón (4 Puestos)",
+      "descripcion": "Jefe de Mozos, Mozo de Salón, Anfitriona y Ayudante Operario.",
+      "htmlUrl": "docs/normativa/mof/MOF_CONSOLIDADO_2_AREA_SALON.html",
+      "pdfUrl": "docs/normativa/mof/MOF_CONSOLIDADO_2_AREA_SALON.pdf"
+    },
+    {
+      "id": "mof_area_caja",
+      "categoria": "02 • MANUALES MOF 2026",
+      "titulo": "MOF Consolidado — Área de Caja",
+      "descripcion": "Perfil oficial, arqueo, facturación electrónica y custodia de valores de Caja.",
+      "htmlUrl": "docs/normativa/mof/MOF_CONSOLIDADO_3_AREA_CAJA.html",
+      "pdfUrl": "docs/normativa/mof/MOF_CONSOLIDADO_3_AREA_CAJA.pdf"
+    },
+    {
+      "id": "mof_area_logistica",
+      "categoria": "02 • MANUALES MOF 2026",
+      "titulo": "MOF Consolidado — Área de Logística y Almacén",
+      "descripcion": "Jefe(a) de Logística y Almacenero (códigos MOF-FOG-ALM-001 y 002).",
+      "htmlUrl": "docs/normativa/mof/MOF_CONSOLIDADO_4_AREA_LOGISTICA.html",
+      "pdfUrl": "docs/normativa/mof/MOF_CONSOLIDADO_4_AREA_LOGISTICA.pdf"
+    },
+    {
+      "id": "protocolo_higiene_bpm",
+      "categoria": "03 • PROTOCOLOS HIGIENE & BPM",
+      "titulo": "Protocolo Oficial de Higiene y Buenas Prácticas de Manufactura (BPM)",
+      "descripcion": "Normativa sanitaria R.M. 822-2018/MINSA para manipuladores de alimentos, cadena de frío, PEPS y sanitización en Aurora Restaurant.",
+      "htmlUrl": "docs/normativa/bpm/PROTOCOLO_HIGIENE_BPM_AURORA.html",
+      "pdfUrl": "docs/normativa/bpm/PROTOCOLO_HIGIENE_BPM_AURORA.pdf",
+      "docxUrl": "docs/normativa/bpm/Protocolo_Higiene_BPM_Aurora_V2.docx",
+      "pptxUrl": "docs/normativa/bpm/Presentacion_Protocolo_BPM_Aurora_V2.pptx"
+    },
+    {
+      "id": "acta_entrega_rit",
+      "categoria": "04 • MEMORÁNDUMS & ACTAS RIT",
+      "titulo": "Acta Oficial de Entrega — Reglamento Interno de Trabajo (RIT)",
+      "descripcion": "Cargo oficial auditable ante SUNAFIL para la recepción del Reglamento Interno de Trabajo por el personal.",
+      "htmlUrl": "docs/normativa/actas/ACTA_RECIBIDO_PERSONAL_AURORA_2026.html",
+      "pdfUrl": "docs/normativa/actas/ACTA_DE_ENTREGA_RIT_AURORA_SAC.pdf"
+    },
+    {
+      "id": "acta_entrega_general",
+      "categoria": "04 • MEMORÁNDUMS & ACTAS RIT",
+      "titulo": "Acta de Entrega Corporativa — Grupo Gastronómico Aurora S.A.C.",
+      "descripcion": "Formato oficial en PDF de entrega de documentos normativos y recepción de cargo.",
+      "pdfUrl": "docs/normativa/actas/ACTA_DE_ENTREGA_GRUPO_GASTRONOMICO_AURORA_SAC.pdf",
+      "htmlUrl": "docs/normativa/actas/TEMPLATE_MEMORANDUM_AURORA.html"
+    }
+  ],
+  "memorandumsEmitidos": [
+    {
+      "fileName": "MEMORANDUM_001_TARDANZAS_REITERATIVAS_DIEGO_MINCHON.html",
+      "title": "MEMORANDUM 001 TARDANZAS REITERATIVAS DIEGO MINCHON",
+      "url": "docs/memos/MEMORANDUM_001_TARDANZAS_REITERATIVAS_DIEGO_MINCHON.html"
+    },
+    {
+      "fileName": "MEMORANDUM_002_FALTAS_INJUSTIFICADAS_DIEGO_MINCHON.html",
+      "title": "MEMORANDUM 002 FALTAS INJUSTIFICADAS DIEGO MINCHON",
+      "url": "docs/memos/MEMORANDUM_002_FALTAS_INJUSTIFICADAS_DIEGO_MINCHON.html"
+    }
+  ],
   "puestos": [
     {
       "id": "admin_general",
@@ -13,48 +95,6 @@
         "Aprobar requerimientos de compras y controlar los costos de insumos y mermas.",
         "Supervisar el cuadre diario de caja, ingresos, egresos y pagos a proveedores.",
         "Representar a la empresa ante fiscalizaciones laborales, sanitarias y municipales."
-      ]
-    },
-    {
-      "id": "sub_jefe_cocina",
-      "puesto": "Sub Jefe de Cocina",
-      "area": "Cocina",
-      "superiorInmediato": "Chef Corporativo / Administrador",
-      "mision": "Liderar la brigada de cocina durante los turnos operativos, garantizando la consistencia en sabor, gramajes, tiempos de despacho y protocolos BPM.",
-      "funciones": [
-        "Asegurar la correcta mise en place de cada estación (calientes, fríos, parrilla).",
-        "Controlar la rotación PEPS de los alimentos y el correcto etiquetado y fechado.",
-        "Supervisar las temperaturas de refrigeración y cocción segura de carnes y mariscos.",
-        "Gestionar los pedidos diarios de reposición de insumos al área de Logística.",
-        "Capacitar a los ayudantes operarios y freidores en técnicas culinarias estandarizadas."
-      ]
-    },
-    {
-      "id": "jefe_mozos",
-      "puesto": "Jefe de Mozos",
-      "area": "Salón",
-      "superiorInmediato": "Administrador General",
-      "mision": "Organizar, dirigir y supervisar el servicio en salón, asegurando una experiencia gastronómica memorable para cada comensal bajo los estándares de elegancia de Aurora.",
-      "funciones": [
-        "Distribuir las estaciones de salón y asignar mesas al equipo de mozos antes del servicio.",
-        "Realizar el briefing diario repasando platos del día, sugerencias del sommelier y alérgenos.",
-        "Atender reclamos y situaciones especiales de clientes con diplomacia y resolución inmediata.",
-        "Verificar la correcta presentación personal, uniformes impecables y pulcritud de cubiertos/copas.",
-        "Coordinar con caja y cocina la fluidez en la comanda y tiempos de servicio."
-      ]
-    },
-    {
-      "id": "jefe_logistica",
-      "puesto": "Jefa de Logística",
-      "area": "Logística y Almacén",
-      "superiorInmediato": "Administrador General",
-      "mision": "Administrar el abastecimiento oportuno, almacenamiento seguro y custodia de insumos, bebidas y menaje, manteniendo los niveles óptimos de stock.",
-      "funciones": [
-        "Consolidar las hojas de requerimientos de Bar, Cocina, Salón y Carnes.",
-        "Negociar precios, plazos y condiciones con proveedores homologados.",
-        "Inspeccionar organolépticamente la frescura y calidad de productos perecibles al ingreso.",
-        "Registrar entradas y salidas en el sistema AuroraSync y realizar inventarios físicos semanales.",
-        "Monitorear alertas de stock mínimo para evitar roturas de abastecimiento."
       ]
     },
     {
@@ -72,54 +112,302 @@
       ]
     },
     {
-      "id": "cajera",
-      "puesto": "Cajera",
-      "area": "Caja",
-      "superiorInmediato": "Administrador General",
-      "mision": "Gestionar con exactitud y seguridad el cobro de cuentas, facturación electrónica, medios de pago y cuadre de caja chica.",
+      "id": "chef_corporativo",
+      "codigo": "COCINA - CCCO - 09",
+      "puesto": "Chef Corporativo",
+      "area": "Cocina",
+      "superiorInmediato": "Supervisor de Restaurante / Administración",
+      "supervisionDirecta": "Jefe de Cocina, Criollero, Parrillero, Lanzador, Cocineros en línea, Ayudantes de Cocina",
+      "mision": "Conducir y supervisar integralmente las actividades operativas, gastronómicas y de control de calidad de las cocinas a su cargo, garantizando la rentabilidad, innovación culinaria y los estándares de excelencia del restaurante.",
       "funciones": [
-        "Emitir boletas, facturas y notas de crédito verificando comensales y propinas.",
-        "Controlar el flujo de efectivo, cobros POS (Visa, Mastercard, etc.) y billeteras digitales (Yape, Plin).",
-        "Efectuar el arqueo y cuadre de caja al cierre de turno con entrega de voucher y reporte.",
-        "Custodiar el fondo de sencillo y validar la autenticidad de billetes recibidos."
-      ]
+        "Planificar, diseñar y estandarizar la carta gastronómica y recetas maestras de Aurora Restaurant.",
+        "Supervisar integralmente las estaciones de cocina caliente, fría y parrilla garantizando calidad y tiempos.",
+        "Controlar el food cost, rendimiento de cortes cárnicos y reducción de mermas junto con Logística.",
+        "Garantizar el cumplimiento estricto del Protocolo de Higiene y Buenas Prácticas de Manufactura (BPM)."
+      ],
+      "responsabilidades": [
+        "Mantener confidencialidad y reserva absoluta de las recetas estandarizadas, fichas técnicas y actividades de la Corporación.",
+        "Promover el desarrollo efectivo de la cocina, optimizando insumos y materiales para la reducción de mermas.",
+        "Cumplir estrictamente con el Reglamento Interno de Trabajo (RIT) y las Buenas Prácticas de Manipulación de Alimentos (BPM).",
+        "Garantizar el correcto uso, limpieza y mantenimiento preventivo de los equipos utensilios a su cargo."
+      ],
+      "htmlUrl": "docs/normativa/mof/COCINA_CCCO_09_CHEF_CORPORATIVO.html",
+      "pdfUrl": "docs/normativa/mof/COCINA_CCCO_09_CHEF_CORPORATIVO.pdf"
+    },
+    {
+      "id": "sub_jefe_cocina",
+      "codigo": "COCINA - JCO - 09",
+      "puesto": "Jefe de Cocina / Sub Jefe de Cocina",
+      "area": "Cocina",
+      "superiorInmediato": "Supervisor de Restaurante (Funcional: Chef Ejecutivo / Corporativo)",
+      "supervisionDirecta": "Parrillero, Criollero, Lanzador, Cocinero en línea, Ayudante de Cocina",
+      "mision": "Conducir, supervisar y controlar diariamente las actividades operativas de la cocina a su cargo, garantizando la calidad, sazón, gramaje, tiempos de salida e higiene en la preparación de los platillos.",
+      "funciones": [
+        "Asegurar la correcta mise en place de cada estación (calientes, fríos, parrilla).",
+        "Controlar la rotación PEPS de los alimentos y el correcto etiquetado y fechado.",
+        "Supervisar las temperaturas de refrigeración y cocción segura de carnes y mariscos.",
+        "Gestionar los pedidos diarios de reposición de insumos al área de Logística.",
+        "Capacitar a los ayudantes operarios y freidores en técnicas culinarias estandarizadas."
+      ],
+      "responsabilidades": [
+        "Mantener confidencialidad y reserva absoluta de las recetas estandarizadas, fichas técnicas y actividades de la Corporación.",
+        "Promover el desarrollo efectivo de la cocina, optimizando insumos y materiales para la reducción de mermas.",
+        "Cumplir estrictamente con el Reglamento Interno de Trabajo (RIT) y las Buenas Prácticas de Manipulación de Alimentos (BPM).",
+        "Garantizar el correcto uso, limpieza y mantenimiento preventivo de los equipos utensilios a su cargo."
+      ],
+      "htmlUrl": "docs/normativa/mof/COCINA_JCO_09_JEFE_DE_COCINA.html",
+      "pdfUrl": "docs/normativa/mof/COCINA_JCO_09_JEFE_DE_COCINA.pdf"
+    },
+    {
+      "id": "sous_chef_criollo",
+      "codigo": "COCINA - SCH - 11",
+      "puesto": "Sous Chef (Criollo)",
+      "area": "Cocina",
+      "superiorInmediato": "Jefe de Cocina / Chef Corporativo",
+      "supervisionDirecta": "Cocinero en línea, Ayudante de Cocina",
+      "mision": "Ejecutar y supervisar la preparación optima de salsas base, entradas y platillos de la estación criolla, apoyando en la creación de recetas y asegurando la calidad gastronómica.",
+      "funciones": [
+        "Elaborar los fondos, salsas madres, aderezos y platos criollos de autor respetando la ficha técnica.",
+        "Reemplazar al Jefe de Cocina en su ausencia liderando el pase y control de comandas.",
+        "Verificar la frescura de insumos y mantener su estación impecable bajo normas BPM."
+      ],
+      "responsabilidades": [
+        "Mantener confidencialidad y reserva absoluta de las recetas estandarizadas, fichas técnicas y actividades de la Corporación.",
+        "Promover el desarrollo efectivo de la cocina, optimizando insumos y materiales para la reducción de mermas.",
+        "Cumplir estrictamente con el Reglamento Interno de Trabajo (RIT) y las Buenas Prácticas de Manipulación de Alimentos (BPM).",
+        "Garantizar el correcto uso, limpieza y mantenimiento preventivo de los equipos utensilios a su cargo."
+      ],
+      "htmlUrl": "docs/normativa/mof/COCINA_SCH_11_SOUS_CHEF_CRIOLLO.html",
+      "pdfUrl": "docs/normativa/mof/COCINA_SCH_11_SOUS_CHEF_CRIOLLO.pdf"
+    },
+    {
+      "id": "parrillero",
+      "codigo": "COCINA - PA - 10",
+      "puesto": "Parrillero",
+      "area": "Cocina / Parrilla",
+      "superiorInmediato": "Jefe de Cocina",
+      "supervisionDirecta": "Ninguna",
+      "mision": "Realizar la recepción, preparación, sellado y cocción experta de las carnes y cortes finos a la parrilla, garantizando el término exacto solicitado por el cliente y el cumplimiento de las BPM.",
+      "funciones": [
+        "Dominar los términos de cocción de cortes americanos, argentinos y nacionales premium en parrilla.",
+        "Controlar el encendido, temperatura de brasas, limpieza de rejillas y reposo de proteínas.",
+        "Verificar el gramaje y porcionamiento exacto de cada corte antes de su ingreso a parrilla."
+      ],
+      "responsabilidades": [
+        "Mantener confidencialidad y reserva absoluta de las recetas estandarizadas, fichas técnicas y actividades de la Corporación.",
+        "Promover el desarrollo efectivo de la cocina, optimizando insumos y materiales para la reducción de mermas.",
+        "Cumplir estrictamente con el Reglamento Interno de Trabajo (RIT) y las Buenas Prácticas de Manipulación de Alimentos (BPM).",
+        "Garantizar el correcto uso, limpieza y mantenimiento preventivo de los equipos utensilios a su cargo."
+      ],
+      "htmlUrl": "docs/normativa/mof/COCINA_PA_10_PARRILLERO.html",
+      "pdfUrl": "docs/normativa/mof/COCINA_PA_10_PARRILLERO.pdf"
+    },
+    {
+      "id": "lanzador_cocina",
+      "codigo": "COCINA - LAZ - 12",
+      "puesto": "Lanzador(a) de Cocina",
+      "area": "Cocina",
+      "superiorInmediato": "Jefe de Cocina",
+      "supervisionDirecta": "Ninguna",
+      "mision": "Garantizar el correcto flujo de comandas, recepción y verificación de carnes cárnicas al vacío, control de inventario/arqueo de cárnicos y coordinación del despacho oportuno hacia salón.",
+      "funciones": [
+        "Coordinar y cantar las comandas entrantes sincronizando los tiempos entre parrilla, cocina caliente y fría.",
+        "Inspeccionar la presentación estética, temperatura y guarniciones de cada plato antes del despacho a salón.",
+        "Mantener la mesa de pase limpia, abastecida de vajilla caliente y libre de demoras."
+      ],
+      "responsabilidades": [
+        "Mantener confidencialidad y reserva absoluta de las recetas estandarizadas, fichas técnicas y actividades de la Corporación.",
+        "Promover el desarrollo efectivo de la cocina, optimizando insumos y materiales para la reducción de mermas.",
+        "Cumplir estrictamente con el Reglamento Interno de Trabajo (RIT) y las Buenas Prácticas de Manipulación de Alimentos (BPM).",
+        "Garantizar el correcto uso, limpieza y mantenimiento preventivo de los equipos utensilios a su cargo."
+      ],
+      "htmlUrl": "docs/normativa/mof/COCINA_LAZ_12_LANZADOR.html",
+      "pdfUrl": "docs/normativa/mof/COCINA_LAZ_12_LANZADOR.pdf"
+    },
+    {
+      "id": "ayudante_cocina",
+      "codigo": "COCINA - AYC - 13",
+      "puesto": "Ayudante de Cocina / Ensaladero",
+      "area": "Cocina",
+      "superiorInmediato": "Jefe de Cocina / Parrillero / Sous Chef",
+      "supervisionDirecta": "Ninguna",
+      "mision": "Asistir en el mise en place diario, habilitado de insumos y verduras, sanitización, apoyo en frituras/ensaladas y lavado/mantenimiento de vajilla e higiene del área de trabajo.",
+      "funciones": [
+        "Lavar, desinfectar y porcionar vegetales, hojas verdes e insumos para la mise en place.",
+        "Apoyar en el emplatado de entradas frías, ensaladas y guarniciones bajo supervisión.",
+        "Mantener el orden, limpieza profunda y sanitización de cámaras de frío, mesas y utensilios."
+      ],
+      "responsabilidades": [
+        "Mantener confidencialidad y reserva absoluta de las recetas estandarizadas, fichas técnicas y actividades de la Corporación.",
+        "Promover el desarrollo efectivo de la cocina, optimizando insumos y materiales para la reducción de mermas.",
+        "Cumplir estrictamente con el Reglamento Interno de Trabajo (RIT) y las Buenas Prácticas de Manipulación de Alimentos (BPM).",
+        "Garantizar el correcto uso, limpieza y mantenimiento preventivo de los equipos utensilios a su cargo."
+      ],
+      "htmlUrl": "docs/normativa/mof/COCINA_AYC_13_AYUDANTE_DE_COCINA.html",
+      "pdfUrl": "docs/normativa/mof/COCINA_AYC_13_AYUDANTE_DE_COCINA.pdf"
+    },
+    {
+      "id": "jefe_mozos",
+      "codigo": "SALON - JMZ - 06",
+      "puesto": "Jefe de Mozos",
+      "area": "Salón",
+      "superiorInmediato": "Administrador de Restaurante / Supervisor",
+      "supervisionDirecta": "Mozos, Ayudante Operario",
+      "mision": "Liderar, supervisar y controlar al equipo de mozos y personal de servicio en salón, asegurando el cumplimiento estricto del protocolo de atención, velocidad de servicio y máxima satisfacción del comensal.",
+      "funciones": [
+        "TIPO DE RESPONSABILIDAD",
+        "PERFIL DEL PUESTO"
+      ],
+      "responsabilidades": [
+        "Velar por el cumplimiento del Reglamento Interno de Trabajo (RIT) y normativas vigentes de la Corporación.",
+        "Promover el trabajo en equipo, la excelencia en el servicio al cliente y el resguardo de los bienes de la empresa.",
+        "Mantener reserva y confidencialidad respecto a la información comercial, administrativa e insumos de la Corporación.",
+        "Participar activamente en los briefings, capacitaciones y reuniones de coordinación convocadas por la jefatura."
+      ],
+      "htmlUrl": "docs/normativa/mof/SALON_JMZ_06_JEFE_DE_MOZOS.html",
+      "pdfUrl": "docs/normativa/mof/SALON_JMZ_06_JEFE_DE_MOZOS.pdf"
     },
     {
       "id": "mozo",
-      "puesto": "Mozo",
+      "codigo": "SALON - MZ - 06",
+      "puesto": "Mozo de Salón",
       "area": "Salón",
-      "superiorInmediato": "Jefe de Mozos",
-      "mision": "Brindar una atención cordial, técnica y eficiente al comensal, dominando la carta, alérgenos y tiempos del servicio.",
+      "superiorInmediato": "Administrador de Restaurante / Jefe de Mozos",
+      "supervisionDirecta": "Ninguno",
+      "mision": "Brindar una atención amable, ágil, personalizada y de alta calidad a los clientes, aplicando la venta sugestiva, conociendo la carta al detalle y manteniendo la excelencia en el servicio.",
       "funciones": [
-        "Acondicionar mesas, montaje de vajilla y cristalería antes de la apertura.",
-        "Presentar la carta física o Flipbook 3D, sugiriendo platos de autor y maridajes.",
-        "Tomar comandas con precisión en sistema y retransmitir especificaciones de comensales a cocina.",
-        "Despejar platos vacíos y mantener la mesa limpia en todo momento sin invadir el espacio del cliente."
-      ]
-    },
-    {
-      "id": "ensaladero_atencion",
-      "puesto": "Ensaladero / Atención",
-      "area": "Cocina / Apoyo",
-      "superiorInmediato": "Sub Jefe de Cocina",
-      "mision": "Preparar y montar ensaladas, entradas frías y guarniciones con frescura y estética, apoyando en la limpieza de estaciones.",
-      "funciones": [
-        "Lavar, desinfectar y trozar vegetales y hojas verdes siguiendo la cadena de frío.",
-        "Emplatar entradas frías respetando el gramaje y la decoración aprobada en ficha técnica.",
-        "Mantener refrigeradores de insumos fríos limpios y ordenados."
-      ]
+        "TIPO DE RESPONSABILIDAD",
+        "PERFIL DEL PUESTO"
+      ],
+      "responsabilidades": [
+        "Velar por el cumplimiento del Reglamento Interno de Trabajo (RIT) y normativas vigentes de la Corporación.",
+        "Promover el trabajo en equipo, la excelencia en el servicio al cliente y el resguardo de los bienes de la empresa.",
+        "Mantener reserva y confidencialidad respecto a la información comercial, administrativa e insumos de la Corporación.",
+        "Participar activamente en los briefings, capacitaciones y reuniones de coordinación convocadas por la jefatura."
+      ],
+      "htmlUrl": "docs/normativa/mof/SALON_MZ_06_MOZO.html",
+      "pdfUrl": "docs/normativa/mof/SALON_MZ_06_MOZO.pdf"
     },
     {
       "id": "anfitriona",
+      "codigo": "OPERACIONES - ANF - 05",
       "puesto": "Anfitriona",
       "area": "Recepción / Salón",
-      "superiorInmediato": "Administrador General",
-      "mision": "Recibir y despedir a los clientes con calidez, gestionar el flujo de reservas y coordinar la asignación de mesas.",
+      "superiorInmediato": "Administrador de Restaurante / Supervisor",
+      "supervisionDirecta": "Ninguno",
+      "mision": "Dar la bienvenida cálida y protocolar a los comensales, gestionar eficientemente la asignación de mesas y lista de espera, e impulsar la venta sugestiva de postres y experiencia gastronómica.",
       "funciones": [
-        "Saludar al comensal, verificar reservaciones y acompañarlo elegantemente a su mesa.",
-        "Gestionar la lista de espera en horarios pico manteniendo informados a los clientes.",
-        "Entregar cartas de bienvenida y orientar a los visitantes sobre servicios adicionales."
-      ]
+        "TIPO DE RESPONSABILIDAD",
+        "PERFIL DEL PUESTO (ESPECIFICACIONES)"
+      ],
+      "responsabilidades": [
+        "Velar por el cumplimiento del Reglamento Interno de Trabajo (RIT) y normativas vigentes de la Corporación.",
+        "Promover el trabajo en equipo, la excelencia en el servicio al cliente y el resguardo de los bienes de la empresa.",
+        "Mantener reserva y confidencialidad respecto a la información comercial, administrativa e insumos de la Corporación.",
+        "Participar activamente en los briefings, capacitaciones y reuniones de coordinación convocadas por la jefatura."
+      ],
+      "htmlUrl": "docs/normativa/mof/OPERACIONES_ANF_05_ANFITRIONA.html",
+      "pdfUrl": "docs/normativa/mof/OPERACIONES_ANF_05_ANFITRIONA.pdf"
+    },
+    {
+      "id": "ayudante_operario_salon",
+      "codigo": "SALON - AOP - 08",
+      "puesto": "Ayudante Operario de Salón (Runner)",
+      "area": "Salón",
+      "superiorInmediato": "Jefe de Mozos / Supervisor",
+      "supervisionDirecta": "Ninguno",
+      "mision": "Apoyar activamente en la puesta del mise en place, desbarase rápido de mesas, pulido de vajilla y cristalería, y mantenimiento del orden y pulcritud permanente en el salón.",
+      "funciones": [
+        "TIPO DE RESPONSABILIDAD",
+        "PERFIL DEL PUESTO"
+      ],
+      "responsabilidades": [
+        "Velar por el cumplimiento del Reglamento Interno de Trabajo (RIT) y normativas vigentes de la Corporación.",
+        "Promover el trabajo en equipo, la excelencia en el servicio al cliente y el resguardo de los bienes de la empresa.",
+        "Mantener reserva y confidencialidad respecto a la información comercial, administrativa e insumos de la Corporación.",
+        "Participar activamente en los briefings, capacitaciones y reuniones de coordinación convocadas por la jefatura."
+      ],
+      "htmlUrl": "docs/normativa/mof/SALON_AOP_08_AYUDANTE_OPERARIO.html",
+      "pdfUrl": "docs/normativa/mof/SALON_AOP_08_AYUDANTE_OPERARIO.pdf"
+    },
+    {
+      "id": "cajera",
+      "codigo": "OPERACIONES - CAJ - 04",
+      "puesto": "Cajera",
+      "area": "Caja",
+      "superiorInmediato": "Supervisor de Restaurante / Administrador",
+      "supervisionDirecta": "Ninguno",
+      "mision": "Garantizar las operaciones de caja, efectuando actividades de recepción, custodia y arqueo de dinero en efectivo y tarjetas, emisión impecable de comprobantes de pago y soporte administrativo.",
+      "funciones": [
+        "TIPO DE RESPONSABILIDAD",
+        "PERFIL DEL PUESTO"
+      ],
+      "responsabilidades": [
+        "Velar por el cumplimiento del Reglamento Interno de Trabajo (RIT) y normativas vigentes de la Corporación.",
+        "Promover el trabajo en equipo, la excelencia en el servicio al cliente y el resguardo de los bienes de la empresa.",
+        "Mantener reserva y confidencialidad respecto a la información comercial, administrativa e insumos de la Corporación.",
+        "Participar activamente en los briefings, capacitaciones y reuniones de coordinación convocadas por la jefatura."
+      ],
+      "htmlUrl": "docs/normativa/mof/OPERACIONES_CAJ_04_CAJERA.html",
+      "pdfUrl": "docs/normativa/mof/OPERACIONES_CAJ_04_CAJERA.pdf"
+    },
+    {
+      "id": "jefe_logistica",
+      "codigo": "MOF-FOG-ALM-001",
+      "puesto": "Jefe(a) de Logística",
+      "area": "Logística y Almacén",
+      "superiorInmediato": "Administrador General / Gerencia General",
+      "supervisionDirecta": "Almacenero",
+      "mision": "Organizar, planificar, dirigir y supervisar la cadena logística del restaurante (compras, almacenamiento, negociación con proveedores y control de inventarios), asegurando abastecimiento y costos óptimos.",
+      "funciones": [
+        "Asegurar la eficiencia, rentabilidad y cumplimiento de las operaciones logísticas.",
+        "Gestionar el almacenamiento, la recepción, el despacho y la distribución de los insumos, suministros y otros articulos.",
+        "Colaborar con otras areas para asegurar una logística integrada a fin del cumplimiento de objetivos.",
+        "Identificar proveedores; negociar precios y condiciones; realizar pedidos; y verificar la calidad de los productos recibidos.",
+        "Utiliza software especializado para mejorar la precisión y eficiencia en el manejo de inventarios.",
+        "Supervisa las operaciones de los almacenes, asegurando que los procesos de recepción, almacenamiento y despacho se realicen de manera eficiente.",
+        "Controlar, registrar y tramitar los reportes, formatos y documentos propios de almacén.",
+        "Remitir al administrador general y/o gerencia, de forma quincenal y mensual de las entradas y salidas de insumos.",
+        "Entregar oportunamente los comprobantes de pagos al area de Contabilidad y Finanzas.",
+        "Otras funciones que le asigne el administrador general y/o gerencia."
+      ],
+      "responsabilidades": [
+        "Velar por el cumplimiento del Reglamento Interno de Trabajo (RIT) y normativas vigentes de la Corporación.",
+        "Promover el trabajo en equipo, la excelencia en el servicio al cliente y el resguardo de los bienes de la empresa.",
+        "Mantener reserva y confidencialidad respecto a la información comercial, administrativa e insumos de la Corporación.",
+        "Participar activamente en los briefings, capacitaciones y reuniones de coordinación convocadas por la jefatura."
+      ],
+      "htmlUrl": "docs/normativa/mof/MOF_FOG_ALM_001_JEFE_DE_LOGISTICA.html",
+      "pdfUrl": "docs/normativa/mof/MOF_FOG_ALM_001_JEFE_DE_LOGISTICA.pdf"
+    },
+    {
+      "id": "almacenero",
+      "codigo": "MOF-FOG-ALM-002",
+      "puesto": "Almacenero",
+      "area": "Logística y Almacén",
+      "superiorInmediato": "Jefe de Logística",
+      "supervisionDirecta": "Ninguna",
+      "mision": "Ejecutar la recepción, clasificación, rotación (PEPS), custodia, control físico diario y despacho racional de insumos, cárnicos, bebidas y suministros de almacén.",
+      "funciones": [
+        "Suministra en forma racional, sistemática y oportuna los insumos, suministros y otros artículos que se necesitan para el funcionamiento del establecimiento.",
+        "Recibir todos los insumos, suministros y otros artículos que lleguen a almacén y ubicarlos en zonas seguras y establecidas para el almacenamiento.",
+        "Identificar y señalar de acuerdo a los procedimientos la rotatividad de todos los insumos tales como carnes, bebidas (vinos, licores, destilados y otros), suministros y otros articulos en stock, según corresponda.",
+        "Controlar, registrar y tramitar los reportes, formatos y documentos propios de almacén.",
+        "Realizar un control periódico del almacén (cada día) y de los insumos sobrantes.",
+        "Coordinar el despacho diario con el mínimo de los insumos a las areas correspondientes.",
+        "Proteger los materiales, equipos y bienes de almacén ante posibles accidentes que causen su deterioro y desuso.",
+        "Revisar y verificar diariamente que los insumos, suministros y otros articulos, esten siendo usando de manera correcta, evitando la merma y/o desperdicios y deteriorio, si fuera el caso, informar al jefe de area.",
+        "Remitir al jefe(a) de area, de forma diaria, semanal y mensual de las entradas y salidas de insumos.",
+        "Otras funciones que le asigne el responsable del área."
+      ],
+      "responsabilidades": [
+        "Velar por el cumplimiento del Reglamento Interno de Trabajo (RIT) y normativas vigentes de la Corporación.",
+        "Promover el trabajo en equipo, la excelencia en el servicio al cliente y el resguardo de los bienes de la empresa.",
+        "Mantener reserva y confidencialidad respecto a la información comercial, administrativa e insumos de la Corporación.",
+        "Participar activamente en los briefings, capacitaciones y reuniones de coordinación convocadas por la jefatura."
+      ],
+      "htmlUrl": "docs/normativa/mof/MOF_FOG_ALM_002_ALMACENERO.html",
+      "pdfUrl": "docs/normativa/mof/MOF_FOG_ALM_002_ALMACENERO.pdf"
     }
   ]
 }

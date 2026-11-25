@@ -1729,27 +1729,87 @@ function initAdendaBatch() {
 }
 
 // ==========================================================================
-// 5. MEMORÁNDUMS, ACTAS, LIQUIDACIONES & MOF (CON "LEER MÁS")
+// 5. MEMORÁNDUMS, ACTAS, LIQUIDACIONES & MOF (CON "LEER MÁS" + DOCUMENTACION GNRL RH)
 // ==========================================================================
 function renderDocsAndMof() {
   const mofGrid = document.getElementById('mof-grid');
-  if (!mofGrid || !state.mof) return;
+  const normGrid = document.getElementById('normativa-general-grid');
+  if (!state.mof) return;
 
+  if (normGrid) {
+    const bib = state.mof.bibliotecaGeneral || [];
+    const memosEmitidos = state.mof.memorandumsEmitidos || [];
+    const bibCards = bib.map(item => `
+      <div class="glass-card-subtle" style="display:flex; flex-direction:column; justify-content:space-between; gap:10px;">
+        <div>
+          <div style="font-size:0.68rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--aurora-gold-foil); font-weight:700;">
+            ${escapeHtml(item.categoria || 'DOCUMENTACION GNRL RH')}
+          </div>
+          <h4 style="font-family:var(--font-sans); font-size:0.98rem; font-weight:800; margin:4px 0 6px; color:var(--hs-text-primary);">
+            ${escapeHtml(item.titulo)}
+          </h4>
+          <p style="font-size:0.78rem; color:var(--hs-text-secondary); margin:0;">
+            ${renderExpandableText(item.descripcion || '', 90)}
+          </p>
+        </div>
+        <div style="display:flex; gap:6px; flex-wrap:wrap; margin-top:4px;">
+          ${item.pdfUrl ? `<a href="${escapeHtml(item.pdfUrl)}" target="_blank" rel="noopener" class="bw-btn-sm is-gold">VER / DESCARGAR PDF</a>` : ''}
+          ${item.htmlUrl ? `<a href="${escapeHtml(item.htmlUrl)}" target="_blank" rel="noopener" class="bw-btn-sm is-primary">ABRIR HTML</a>` : ''}
+          ${item.docxUrl ? `<a href="${escapeHtml(item.docxUrl)}" download class="bw-btn-sm">WORD DOCX</a>` : ''}
+          ${item.pptxUrl ? `<a href="${escapeHtml(item.pptxUrl)}" download class="bw-btn-sm">PPTX</a>` : ''}
+        </div>
+      </div>
+    `);
+
+    const memoCards = memosEmitidos.map(m => `
+      <div class="glass-card-subtle" style="display:flex; flex-direction:column; justify-content:space-between; gap:10px;">
+        <div>
+          <div style="font-size:0.68rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--accent-orange); font-weight:700;">
+            04 • MEMORÁNDUM DISCIPLINARIO EMITIDO
+          </div>
+          <h4 style="font-family:var(--font-sans); font-size:0.95rem; font-weight:800; margin:4px 0 6px; color:var(--hs-text-primary);">
+            ${escapeHtml(m.title)}
+          </h4>
+          <p style="font-size:0.76rem; color:var(--hs-text-secondary); margin:0;">
+            Archivo oficial sincronizado desde DOCUMENTACION GNRL RH.
+          </p>
+        </div>
+        <div style="display:flex; gap:6px; flex-wrap:wrap;">
+          <a href="${escapeHtml(m.url)}" target="_blank" rel="noopener" class="bw-btn-sm is-primary">VER MEMORÁNDUM</a>
+        </div>
+      </div>
+    `);
+
+    normGrid.innerHTML = [...bibCards, ...memoCards].join('');
+  }
+
+  if (!mofGrid) return;
   const puestos = state.mof.puestos || state.mof;
   if (!Array.isArray(puestos)) return;
 
   mofGrid.innerHTML = puestos.map(p => `
-    <div class="glass-card-subtle">
-      <div style="font-size:0.7rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--accent-orange); font-weight:700;">
-        ${escapeHtml(p.area || 'Operaciones')}
+    <div class="glass-card-subtle" style="display:flex; flex-direction:column; justify-content:space-between; gap:10px;">
+      <div>
+        <div style="display:flex; justify-content:space-between; align-items:center; gap:6px;">
+          <div style="font-size:0.7rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--accent-orange); font-weight:700;">
+            ${escapeHtml(p.area || 'Operaciones')}
+          </div>
+          ${p.codigo ? `<span style="font-family:var(--font-mono); font-size:0.66rem; opacity:0.72;">${escapeHtml(p.codigo)}</span>` : ''}
+        </div>
+        <h4 style="font-family:var(--font-sans); font-size:1.05rem; font-weight:800; margin:4px 0 8px; color:var(--hs-text-primary);">${escapeHtml(p.puesto || p.cargo)}</h4>
+        <div style="font-size:0.8rem; color:var(--hs-text-secondary); margin-bottom:8px;">
+          <strong>Misión / Objetivo:</strong> ${renderExpandableText(p.mision || p.objetivo || '', 75)}
+        </div>
+        <div style="font-size:0.78rem; color:var(--hs-text-primary);">
+          <strong>Funciones:</strong> ${renderExpandableText(Array.isArray(p.funciones) ? p.funciones.join(' • ') : (p.funciones || ''), 85)}
+        </div>
       </div>
-      <h4 style="font-family:var(--font-sans); font-size:1.05rem; font-weight:800; margin:4px 0 8px; color:var(--hs-text-primary);">${escapeHtml(p.puesto || p.cargo)}</h4>
-      <div style="font-size:0.8rem; color:var(--hs-text-secondary); margin-bottom:8px;">
-        <strong>Misión / Objetivo:</strong> ${renderExpandableText(p.mision || p.objetivo || '', 75)}
-      </div>
-      <div style="font-size:0.78rem; color:var(--hs-text-primary);">
-        <strong>Funciones:</strong> ${renderExpandableText(Array.isArray(p.funciones) ? p.funciones.join(' • ') : (p.funciones || ''), 85)}
-      </div>
+      ${(p.pdfUrl || p.htmlUrl) ? `
+        <div style="display:flex; gap:6px; flex-wrap:wrap; padding-top:6px; border-top:1px solid rgba(197,160,89,0.18);">
+          ${p.pdfUrl ? `<a href="${escapeHtml(p.pdfUrl)}" target="_blank" rel="noopener" class="bw-btn-sm is-gold">DESCARGAR MOF (PDF)</a>` : ''}
+          ${p.htmlUrl ? `<a href="${escapeHtml(p.htmlUrl)}" target="_blank" rel="noopener" class="bw-btn-sm is-primary">VER FICHA HTML</a>` : ''}
+        </div>
+      ` : ''}
     </div>
   `).join('');
 }

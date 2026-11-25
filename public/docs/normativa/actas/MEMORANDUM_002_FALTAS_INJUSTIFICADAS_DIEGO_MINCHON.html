@@ -1,0 +1,320 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>MEMORANDUM 002 - FALTAS INJUSTIFICADAS - DIEGO MINCHON ALVAREZ</title>
+  <style>
+    @page { size: A4; margin: 18mm 18mm 22mm 18mm; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: #1a1a1a;
+      background: #fff;
+      padding: 28px 38px;
+      font-size: 10.5pt;
+      line-height: 1.55;
+    }
+
+    .header-table { width: 100%; border-collapse: collapse; margin-bottom: 16px; }
+    .header-table td { border: 1.5px solid #8C1D18; padding: 10px 13px; vertical-align: middle; }
+    .logo-cell {
+      width: 22%;
+      text-align: center;
+      background: linear-gradient(145deg, #8C1D18 0%, #6b1512 100%);
+    }
+    .company-name { font-size: 18pt; font-weight: 900; color: #fff; letter-spacing: 2px; display: block; }
+    .company-sub { font-size: 7.5pt; color: #f5c8c6; margin-top: 2px; letter-spacing: 0.8px; display: block; }
+    .company-ruc { font-size: 7pt; color: #f5c8c6; margin-top: 1px; display: block; }
+    .doc-title-cell { width: 52%; text-align: center; background: #FAFAFA; }
+    .doc-main-title { font-size: 11.5pt; font-weight: bold; color: #1A1A1A; text-transform: uppercase; letter-spacing: 0.4px; }
+    .doc-subtitle { font-size: 10pt; font-weight: bold; color: #8C1D18; margin-top: 5px; }
+    .meta-cell { width: 26%; font-size: 8.5pt; color: #444; line-height: 1.7; background: #FAFAFA; }
+    .meta-cell .meta-label { color: #8C1D18; font-weight: bold; }
+
+    .memo-numero-bar {
+      background: #8C1D18;
+      color: #fff;
+      text-align: center;
+      font-size: 11pt;
+      font-weight: bold;
+      padding: 5px 12px;
+      margin-bottom: 14px;
+      letter-spacing: 1px;
+      border-radius: 1px;
+    }
+
+    .section-bar {
+      font-size: 9.5pt;
+      font-weight: bold;
+      color: #fff;
+      background: #8C1D18;
+      padding: 5px 12px;
+      margin-top: 16px;
+      margin-bottom: 7px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-radius: 1px;
+    }
+
+    .data-table { width: 100%; border-collapse: collapse; margin-bottom: 8px; font-size: 10pt; }
+    .data-table th, .data-table td { border: 1px solid #D0D0D0; padding: 6px 11px; text-align: left; vertical-align: top; }
+    .data-table th { background: #F3ECEC; color: #8C1D18; font-weight: bold; width: 30%; white-space: nowrap; }
+
+    .body-box {
+      border: 1.5px solid #C9A8A6;
+      border-radius: 3px;
+      background: #FDFBFB;
+      padding: 13px 16px;
+      font-size: 10pt;
+      line-height: 1.75;
+      text-align: justify;
+      margin-bottom: 10px;
+    }
+    .body-box p { margin-bottom: 9px; }
+    .body-box p:last-child { margin-bottom: 0; }
+
+    .aviso-box {
+      border-left: 5px solid #8C1D18;
+      background: #FFF5F5;
+      padding: 9px 13px;
+      font-size: 9.5pt;
+      margin: 12px 0;
+      border-radius: 0 3px 3px 0;
+      line-height: 1.65;
+    }
+    .aviso-box strong { color: #8C1D18; }
+
+    .suspension-box {
+      border: 2px solid #8C1D18;
+      border-radius: 4px;
+      background: #FFF0F0;
+      padding: 12px 16px;
+      text-align: center;
+      margin: 12px 0;
+    }
+    .suspension-box .sus-title { font-size: 11pt; font-weight: bold; color: #8C1D18; text-transform: uppercase; }
+    .suspension-box .sus-dias { font-size: 13pt; font-weight: 900; color: #1a1a1a; margin: 5px 0; }
+    .suspension-box .sus-detalle { font-size: 9.5pt; color: #444; }
+
+    .firmas-table { width: 100%; border-collapse: collapse; margin-top: 28px; font-size: 9pt; }
+    .firmas-table td { border: 1px solid #D0D0D0; padding: 50px 8px 8px 8px; text-align: center; width: 33.33%; vertical-align: bottom; }
+    .firma-line { border-top: 1.5px solid #8C1D18; padding-top: 4px; margin-bottom: 3px; }
+    .firma-rol { font-weight: bold; color: #8C1D18; font-size: 8.5pt; text-transform: uppercase; }
+    .firma-nombre { font-weight: bold; font-size: 9.5pt; color: #1A1A1A; }
+    .firma-cargo { font-size: 8pt; color: #555; }
+    .firma-dni { font-size: 8pt; color: #777; }
+    .firma-linea-firma { font-size: 8pt; color: #999; margin-top: 6px; }
+
+    .footer {
+      margin-top: 24px;
+      border-top: 1.5px solid #8C1D18;
+      padding-top: 7px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 7.5pt;
+      color: #888;
+    }
+
+    .highlight { color: #8C1D18; font-weight: bold; }
+    ul.compromisos { margin: 7px 0 4px 0; padding-left: 20px; line-height: 1.8; }
+    ul.compromisos li { margin-bottom: 2px; }
+    .articulo-ref { font-style: italic; color: #666; font-size: 9pt; }
+  </style>
+</head>
+<body>
+
+  <!-- ENCABEZADO -->
+  <table class="header-table">
+    <tr>
+      <td class="logo-cell">
+        <span class="company-name">AURORA</span>
+        <span class="company-sub">GRUPO GASTRONOMICO</span>
+        <span class="company-ruc">RUC: 20615117111</span>
+      </td>
+      <td class="doc-title-cell">
+        <div class="doc-main-title">MEMORANDUM DE SANCION DISCIPLINARIA</div>
+        <div class="doc-subtitle">FALTAS INJUSTIFICADAS</div>
+      </td>
+      <td class="meta-cell">
+        <span class="meta-label">Codigo: </span> RRHH-MEM-002-2026<br>
+        <span class="meta-label">Version: </span> 01<br>
+        <span class="meta-label">Vigencia: </span> 2026<br>
+        <span class="meta-label">Pagina: </span> 1 de 1<br>
+        <span class="meta-label">Clasificacion: </span> CONFIDENCIAL
+      </td>
+    </tr>
+  </table>
+
+  <div class="memo-numero-bar">MEMORANDUM N. 002-RRHH-2026</div>
+
+  <!-- DATOS -->
+  <div class="section-bar">I. DATOS DEL DOCUMENTO</div>
+  <table class="data-table">
+    <tr>
+      <th>PARA:</th>
+      <td><strong>MINCHON ALVAREZ DIEGO LEONARDO</strong> &nbsp;|&nbsp; DNI: 73709422</td>
+    </tr>
+    <tr>
+      <th>CARGO:</th>
+      <td>Jefe de Cocina &mdash; Grupo Gastronomico Aurora S.A.C.</td>
+    </tr>
+    <tr>
+      <th>DE:</th>
+      <td>Administracion y Recursos Humanos &mdash; Grupo Gastronomico Aurora S.A.C.</td>
+    </tr>
+    <tr>
+      <th>ASUNTO:</th>
+      <td><strong>Sancion disciplinaria por faltas injustificadas al centro de trabajo</strong></td>
+    </tr>
+    <tr>
+      <th>FECHA:</th>
+      <td>Trujillo, 27 de agosto de 2026</td>
+    </tr>
+    <tr>
+      <th>BASE LEGAL:</th>
+      <td>
+        Reglamento Interno de Trabajo (RIT) &mdash; Grupo Gastronomico Aurora S.A.C.: Art. 32 (inasistencia injustificada), Art. 33 (obligacion de aviso), Art. 50, Art. 52, Art. 55 (suspension) &nbsp;|&nbsp;
+        D. Leg. N. 728, Art. 25 &mdash; Ley de Productividad y Competitividad Laboral
+      </td>
+    </tr>
+  </table>
+
+  <!-- ANTECEDENTES -->
+  <div class="section-bar">II. ANTECEDENTES Y FUNDAMENTOS</div>
+  <div class="body-box">
+    <p>
+      Mediante el presente documento, el Area de <strong>Administracion del Grupo Gastronomico Aurora S.A.C.</strong>
+      se dirige al colaborador <span class="highlight">Sr. Diego Leonardo Minchon Alvarez</span>, con DNI N. 73709422,
+      quien se desempena en el cargo de <strong>Jefe de Cocina</strong>, a fin de comunicarle formalmente la sancion
+      disciplinaria por haber incurrido en <strong>faltas injustificadas</strong> al centro de trabajo, contraviniendo
+      las disposiciones del Reglamento Interno de Trabajo vigente.
+    </p>
+    <p>
+      El <strong>Articulo 32 del RIT</strong> establece expresamente que: <span class="articulo-ref">"El trabajador
+      que no tuviera autorizacion para hacer uso de permiso o licencia e incurriera en inasistencia, sera considerado
+      como ausencia injustificada y sera acreedor a las medidas disciplinarias correspondientes y descuentos de
+      haberes respectivo."</span> Del mismo modo, el <strong>Articulo 33 del RIT</strong> senala que:
+      <span class="articulo-ref">"Todos los trabajadores estan obligados a dar el aviso correspondiente a su jefe
+      inmediato o superior jerarquico si no les es posible asistir al trabajo, indicando el motivo de su falta."</span>
+    </p>
+    <p>
+      Del control de asistencia llevado por el Area de Administracion y Supervision, se ha verificado que el
+      colaborador se ausento del centro de trabajo en dias laborables sin presentar comunicacion previa, certificado
+      medico, ni ningun documento habilitante que justifique su inasistencia, incurriendo en la falta tipificada
+      en el <strong>Articulo 52 del RIT</strong> como falta <strong>CONSIDERABLE</strong>.
+    </p>
+    <p>
+      Esta conducta genera perjuicio operativo directo al area de cocina, sobrecarga de funciones en los demas
+      colaboradores, afecta la calidad del servicio brindado a los clientes y constituye un incumplimiento
+      grave de las obligaciones laborales establecidas en el contrato de trabajo suscrito entre las partes.
+    </p>
+  </div>
+
+  <div class="aviso-box">
+    <strong>ARTICULO 52 RIT &mdash; FALTA CONSIDERABLE:</strong>
+    <span class="articulo-ref">"Son aquellas de mayor importancia que las leves y que demuestran voluntad de
+    quebrantar las normas vigentes, tanto legales como convencionales. Entre otras, se encuentran las siguientes:
+    Ausentarse del centro de trabajo o abandonar su puesto en horas de labor sin autorizacion alguna."</span>
+    De reiterarse, se configurara <strong>FALTA GRAVE (Art. 53 RIT)</strong> habilitando la disolucion del vinculo laboral.
+  </div>
+
+  <!-- SANCION -->
+  <div class="section-bar">III. SANCION DISCIPLINARIA APLICADA</div>
+  <div class="body-box">
+    <p>
+      En virtud de lo expuesto, en ejercicio de las facultades sancionadoras reconocidas en el
+      <strong>Articulo 37 y Articulo 55 del Reglamento Interno de Trabajo</strong>, el Area de
+      Administracion aplica al colaborador <span class="highlight">Sr. Diego Leonardo Minchon Alvarez</span>
+      la siguiente sancion disciplinaria:
+    </p>
+  </div>
+
+  <div class="suspension-box">
+    <div class="sus-title">SUSPENSION DE LABORES SIN GOCE DE HABER</div>
+    <div class="sus-dias">DOS (02) DIAS CALENDARIO</div>
+    <div class="sus-detalle">
+      Inicio de suspension: <strong>Jueves 27 de agosto de 2026</strong><br>
+      Fin de suspension: <strong>Viernes 28 de agosto de 2026</strong><br>
+      Fecha de reincorporacion: <strong>Sabado 29 de agosto de 2026</strong><br><br>
+      <em>Conforme al Art. 55 del RIT: "La suspension imposibilita al trabajador acudir a su centro laboral,
+      no percibiendo remuneracion mientras dure la medida disciplinaria (sin goce de haber).
+      Su aplicacion se considera por dias calendarios."</em>
+    </div>
+  </div>
+
+  <div class="body-box">
+    <p>
+      Se advierte expresamente al colaborador que, de configurarse faltas graves en los terminos del
+      <strong>Articulo 53 del RIT</strong> en concordancia con el <strong>Articulo 25 del Decreto Legislativo
+      N. 728</strong>, la empresa procedera con la resolucion justificada del vinculo laboral, previa
+      observancia del procedimiento legal correspondiente.
+    </p>
+  </div>
+
+  <!-- COMPROMISOS -->
+  <div class="section-bar">IV. DISPOSICIONES Y COMPROMISOS EXIGIDOS</div>
+  <div class="body-box">
+    <p>Se requiere al colaborador el cumplimiento inmediato y estricto de las siguientes disposiciones:</p>
+    <ul class="compromisos">
+      <li>Asistir puntual y regularmente al centro de trabajo en los dias y horarios establecidos en su contrato de trabajo.</li>
+      <li>En caso de enfermedad u otro impedimento, comunicarlo de forma inmediata a su supervisor directo y al Area de Administracion, adjuntando el sustento correspondiente (certificado medico, declaracion jurada u otro), conforme al <strong>Art. 29 y Art. 33 del RIT</strong>.</li>
+      <li>Presentar descargo escrito ante el Area de Administracion en un plazo maximo de <strong>24 horas</strong> desde la recepcion del presente memorandum, explicando las razones de sus inasistencias.</li>
+      <li>Los dias de suspension (27 y 28 de agosto de 2026) NO seran remunerados y seran descontados de sus haberes del mes en curso, conforme a ley.</li>
+      <li>Mantener asistencia regular durante los proximos <strong>90 dias calendario</strong>, periodo bajo seguimiento estricto del Area de Administracion y Supervision.</li>
+    </ul>
+  </div>
+
+  <!-- FIRMAS -->
+  <div class="section-bar">V. FIRMAS Y CONFORMIDAD</div>
+  <table class="firmas-table">
+    <tr>
+      <td>
+        <div class="firma-line"></div>
+        <div class="firma-rol">Administracion</div>
+        <div class="firma-nombre">WILMER BRINNER CASTRO VASQUEZ</div>
+        <div class="firma-cargo">Administrador</div>
+        <div class="firma-dni">DNI: 44031290</div>
+        <div class="firma-linea-firma">Fecha: _______________</div>
+      </td>
+      <td>
+        <div class="firma-line"></div>
+        <div class="firma-rol">Supervision</div>
+        <div class="firma-nombre">BILLY ANDRES SILVA CERNA</div>
+        <div class="firma-cargo">Supervisor</div>
+        <div class="firma-dni">DNI: 43341525</div>
+        <div class="firma-linea-firma">Fecha: _______________</div>
+      </td>
+      <td>
+        <div class="firma-line"></div>
+        <div class="firma-rol">Gerencia General</div>
+        <div class="firma-nombre">GLADYS VERONICA CARBAJAL URQUIZO</div>
+        <div class="firma-cargo">Gerente General</div>
+        <div class="firma-dni">DNI: 42892738</div>
+        <div class="firma-linea-firma">Fecha: _______________</div>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3" style="padding: 8px 12px; border-top: 2px solid #8C1D18; background: #FFF5F5;">
+        <div style="text-align:center;">
+          <div class="firma-line" style="width:60%; margin: 30px auto 4px auto;"></div>
+          <div class="firma-rol">RECIBE Y NOTIFICADO / COLABORADOR SANCIONADO</div>
+          <div class="firma-nombre">MINCHON ALVAREZ DIEGO LEONARDO</div>
+          <div class="firma-cargo">Jefe de Cocina &mdash; DNI: 73709422</div>
+          <div class="firma-linea-firma">Fecha de recepcion: _______________</div>
+          <div style="font-size:8pt; color:#c00; margin-top:5px; font-style:italic;">
+            La firma del colaborador en este documento NO implica conformidad con la sancion, unicamente acredita la recepcion y notificacion del mismo.
+          </div>
+        </div>
+      </td>
+    </tr>
+  </table>
+
+  <!-- PIE -->
+  <div class="footer">
+    <div>Grupo Gastronomico Aurora S.A.C. &nbsp;|&nbsp; RUC: 20615117111 &nbsp;|&nbsp; Documento Interno Confidencial</div>
+    <div>RRHH-MEM-002-2026 &nbsp;|&nbsp; Agosto 2026</div>
+  </div>
+
+</body>
+</html>
+
