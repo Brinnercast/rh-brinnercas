@@ -2421,7 +2421,7 @@ window.RH_EMBEDDED_DATA = {
   "mof": {
     "empresa": "GRUPO GASTRONÓMICO AURORA S.A.C.",
     "proyectoOrigen": "DOCUMENTACION GNRL RH",
-    "updatedAt": "2026-11-25T18:18:38.325Z",
+    "updatedAt": "2026-11-25T20:34:22.253Z",
     "bibliotecaGeneral": [
       {
         "id": "mof_master_2026",
