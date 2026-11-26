@@ -1085,9 +1085,9 @@ function renderDashboard() {
     const porCL = rawSum > 0 ? rawCL : computedCL;
     const totalCL = Math.max(1, (porCL.CONTRATO || 0) + (porCL.RXH || 0) + (porCL.OTROS || 0));
     const clItems = [
-      { key: 'CONTRATO', label: 'CONTRATO', desc: 'Planilla / Modal D.Leg. 728', color: '#10B981', badge: 'badge-verde' },
-      { key: 'RXH', label: 'RXH', desc: 'Recibo por Honorarios', color: '#FF6008', badge: 'badge-naranja' },
-      { key: 'OTROS', label: 'OTROS', desc: 'Apoyo / Otros Vínculos', color: '#3B82F6', badge: 'badge-amarillo' }
+      { key: 'CONTRATO', label: 'CONTRATO', desc: 'Planilla / Modal D.Leg. 728', color: '#6049E7', badge: 'badge-verde' },
+      { key: 'RXH', label: 'RXH', desc: 'Recibo por Honorarios', color: '#007DFC', badge: 'badge-naranja' },
+      { key: 'OTROS', label: 'OTROS', desc: 'Apoyo / Otros Vínculos', color: '#FF630B', badge: 'badge-amarillo' }
     ];
     condGrid.innerHTML = clItems.map(item => {
       const cnt = porCL[item.key] || 0;

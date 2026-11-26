@@ -1895,6 +1895,510 @@ html.session-unlocked #login-screen {
 }
 
 /* ==========================================================================
+   TASKGO SAAS VISUAL SYSTEM (OLYNEX AGENCY) — ADAPTACIÓN INTEGRAL RH BRINNERCAS
+   Tokens Oficiales: Inter Tight | #6049E7 | #0D062D | #FAFAFF | #F1F2F4 | #B7D1EA
+   ========================================================================== */
+:root,
+html[data-theme="light"] {
+  --font-sans: 'Inter Tight', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-serif: 'Inter Tight', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --tg-primary: #6049E7;
+  --tg-primary-hover: #4E37D8;
+  --tg-primary-soft: rgba(96, 73, 231, 0.10);
+  --tg-primary-glow: inset 0 4px 24px #8383FE;
+  --tg-indigo: #0D062D;
+  --tg-gray: #4E4D53;
+  --tg-menu-bg: rgba(250, 250, 255, 0.94);
+  --tg-light-gray: #F1F2F4;
+  --tg-border: #B7D1EA;
+  --tg-border-subtle: rgba(183, 209, 234, 0.58);
+  --tg-sky: #93D3FA;
+  --tg-blue: #007DFC;
+  --tg-orange: #FF630B;
+  --tg-violet: #7F57F1;
+
+  --hs-bg-primary: #FAFAFF;
+  --hs-bg-secondary: #F1F2F4;
+  --hs-text-primary: #0D062D;
+  --hs-text-secondary: #4E4D53;
+  --hs-border: rgba(183, 209, 234, 0.65);
+  --hs-border-dark: #B7D1EA;
+  --hs-black: #0D062D;
+  --hs-white: #FFFFFF;
+  --accent-orange: #6049E7;
+  --aurora-gold-bright: #6049E7;
+  --aurora-gold-foil: #6049E7;
+  --aurora-alabaster: #0D062D;
+  --aurora-bone: #4E4D53;
+  --emerald-ok: #059669;
+
+  --glass-surface: rgba(255, 255, 255, 0.88);
+  --glass-surface-subtle: rgba(241, 242, 244, 0.78);
+  --glass-highlight: 0 10px 34px rgba(13, 6, 45, 0.055), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  --dock-bg: rgba(250, 250, 255, 0.94);
+  --dock-text: #0D062D;
+  --dock-muted: #4E4D53;
+  --dock-border: rgba(183, 209, 234, 0.65);
+}
+
+html[data-theme="dark"] {
+  --font-sans: 'Inter Tight', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-serif: 'Inter Tight', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --tg-primary: #7F57F1;
+  --tg-primary-hover: #6049E7;
+  --tg-primary-soft: rgba(127, 87, 241, 0.18);
+  --tg-primary-glow: inset 0 4px 24px #8383FE;
+  --tg-indigo: #FFFFFF;
+  --tg-gray: #B8C0D9;
+  --tg-menu-bg: rgba(13, 6, 45, 0.95);
+  --tg-light-gray: rgba(255, 255, 255, 0.05);
+  --tg-border: rgba(183, 209, 234, 0.18);
+  --tg-border-subtle: rgba(131, 131, 254, 0.16);
+
+  --hs-bg-primary: #0D062D;
+  --hs-bg-secondary: #171717;
+  --hs-text-primary: #FFFFFF;
+  --hs-text-secondary: #B8C0D9;
+  --hs-border: rgba(183, 209, 234, 0.16);
+  --hs-border-dark: rgba(131, 131, 254, 0.30);
+  --hs-black: #17123B;
+  --hs-white: #FFFFFF;
+  --accent-orange: #8383FE;
+  --aurora-gold-bright: #93D3FA;
+  --aurora-gold-foil: #93D3FA;
+  --aurora-alabaster: #FFFFFF;
+  --aurora-bone: #B8C0D9;
+  --emerald-ok: #34D399;
+
+  --glass-surface: rgba(21, 16, 56, 0.84);
+  --glass-surface-subtle: rgba(255, 255, 255, 0.055);
+  --glass-highlight: 0 14px 36px rgba(0, 0, 0, 0.38), inset 0 1px 0 rgba(131, 131, 254, 0.14);
+  --dock-bg: rgba(13, 6, 45, 0.96);
+  --dock-text: #FFFFFF;
+  --dock-muted: #A6B0CE;
+  --dock-border: rgba(131, 131, 254, 0.22);
+}
+
+/* Tipografía Inter Tight global + tracking editorial TaskGo */
+body,
+body.hs-body,
+button,
+input,
+select,
+textarea {
+  font-family: 'Inter Tight', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+}
+
+body.hs-body {
+  background: var(--hs-bg-primary) !important;
+  color: var(--hs-text-primary) !important;
+}
+
+/* Orbes ambientales estilo TaskGo (Lavanda, Violeta #6049E7 y Cielo #93D3FA) */
+.ambient-canvas .orb-1 {
+  background: radial-gradient(circle, rgba(96, 73, 231, 0.18) 0%, transparent 70%) !important;
+}
+.ambient-canvas .orb-2 {
+  background: radial-gradient(circle, rgba(147, 211, 250, 0.24) 0%, transparent 70%) !important;
+}
+.ambient-canvas .orb-3 {
+  background: radial-gradient(circle, rgba(127, 87, 241, 0.14) 0%, transparent 70%) !important;
+}
+
+/* ==========================================================================
+   PANEL DE LOGIN ADAPTADO AL ESTILO TASKGO (ÍNDIGO #0D062D + VIOLETA #6049E7)
+   ========================================================================== */
+.login-overlay {
+  background:
+    radial-gradient(circle at 18% 18%, rgba(147, 211, 250, 0.28) 0%, transparent 42%),
+    radial-gradient(circle at 82% 80%, rgba(96, 73, 231, 0.42) 0%, transparent 48%),
+    linear-gradient(135deg, #0D062D 0%, #19104B 52%, #2B1F74 100%) !important;
+}
+
+.login-card {
+  background: linear-gradient(155deg, rgba(255, 255, 255, 0.16) 0%, rgba(250, 250, 255, 0.08) 100%) !important;
+  border: 1px solid rgba(183, 209, 234, 0.34) !important;
+  border-radius: 28px !important;
+  box-shadow: 0 28px 70px rgba(13, 6, 45, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.32) !important;
+  backdrop-filter: blur(26px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(26px) saturate(150%) !important;
+}
+
+.login-clean-title {
+  font-family: 'Inter Tight', sans-serif !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.03em !important;
+  color: #FFFFFF !important;
+}
+
+.login-clean-sub {
+  color: rgba(250, 250, 255, 0.82) !important;
+}
+
+.login-glass-field {
+  border-radius: 14px !important;
+  border: 1px solid rgba(183, 209, 234, 0.38) !important;
+  background: rgba(13, 6, 45, 0.32) !important;
+}
+
+.login-glass-field:focus-within {
+  border-color: #93D3FA !important;
+  box-shadow: 0 0 0 3px rgba(147, 211, 250, 0.25) !important;
+}
+
+.login-green-btn {
+  background: linear-gradient(135deg, #6049E7 0%, #7F57F1 100%) !important;
+  box-shadow: inset 0 4px 24px #8383FE, 0 12px 28px rgba(96, 73, 231, 0.45) !important;
+  border-radius: 90px !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.01em !important;
+  color: #FFFFFF !important;
+}
+
+.login-green-btn:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: inset 0 4px 28px #A5A5FF, 0 16px 34px rgba(96, 73, 231, 0.58) !important;
+}
+
+.login-remember-row input:checked + .login-check-box {
+  background: #6049E7 !important;
+  border-color: #8383FE !important;
+}
+
+.login-footer-link {
+  color: #93D3FA !important;
+}
+
+/* ==========================================================================
+   DOCK LATERAL IZQUIERDO ESTILO TASKGO
+   ========================================================================== */
+.left-dock-rail {
+  background: var(--dock-bg) !important;
+  border-right: 1px solid var(--dock-border) !important;
+  box-shadow: 6px 0 32px rgba(13, 6, 45, 0.05) !important;
+}
+
+.dock-brand-box {
+  border-bottom: 1px solid var(--dock-border) !important;
+}
+
+.dock-live-dot {
+  background: #6049E7 !important;
+  box-shadow: 0 0 0 4px rgba(96, 73, 231, 0.22) !important;
+}
+
+.dock-item {
+  border-radius: 14px !important;
+  border: 1px solid transparent !important;
+  font-weight: 500 !important;
+  transition: background 0.18s ease, color 0.18s ease, transform 0.15s ease, box-shadow 0.18s ease !important;
+}
+
+.dock-item:hover {
+  background: var(--tg-primary-soft) !important;
+  color: var(--tg-primary) !important;
+}
+
+.dock-item.active {
+  background: #6049E7 !important;
+  color: #FFFFFF !important;
+  box-shadow: inset 0 4px 20px rgba(131, 131, 254, 0.8), 0 8px 20px rgba(96, 73, 231, 0.28) !important;
+}
+
+.dock-item.active .dock-index,
+.dock-item.active .dock-label,
+.dock-item.active .dock-icon {
+  color: #FFFFFF !important;
+}
+
+.dock-submenu {
+  border-left: 2px solid rgba(96, 73, 231, 0.30) !important;
+}
+
+.dock-sub-link {
+  border-radius: 10px !important;
+  font-weight: 500 !important;
+}
+
+.dock-sub-link:hover {
+  background: var(--tg-primary-soft) !important;
+  color: var(--tg-primary) !important;
+}
+
+.dock-cloud-vault {
+  border-radius: 18px !important;
+  border: 1px solid var(--dock-border) !important;
+  background: var(--glass-surface-subtle) !important;
+  padding: 14px !important;
+}
+
+.dock-cloud-eyebrow {
+  color: var(--tg-primary) !important;
+}
+
+.dock-cloud-open-btn {
+  background: #6049E7 !important;
+  box-shadow: inset 0 3px 14px rgba(131, 131, 254, 0.7) !important;
+  border-radius: 90px !important;
+  font-weight: 600 !important;
+}
+
+.dock-cloud-link {
+  border-radius: 12px !important;
+  border: 1px solid var(--dock-border) !important;
+}
+
+.dock-cloud-link:hover {
+  border-color: #6049E7 !important;
+  background: var(--tg-primary-soft) !important;
+}
+
+/* ==========================================================================
+   TARJETAS BENTO, HEADERS, KPIs Y CONTENEDORES TASKGO (RADIUS 20PX)
+   ========================================================================== */
+.hs-section-banner,
+.section-header.hs-section-banner {
+  background: var(--glass-surface) !important;
+  border: 1px solid var(--tg-border-subtle) !important;
+  border-radius: 20px !important;
+  padding: 22px 26px !important;
+  box-shadow: var(--glass-highlight) !important;
+}
+
+.section-eyebrow {
+  color: var(--tg-primary) !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.08em !important;
+}
+
+.section-title {
+  font-family: 'Inter Tight', sans-serif !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.025em !important;
+  color: var(--hs-text-primary) !important;
+}
+
+.glass-card,
+.hs-grid-block,
+.kpi-glass,
+.doc-vault-card,
+.expediente-spotlight,
+.glass-card-subtle,
+.info-chip,
+.condicion-stat-card {
+  border-radius: 20px !important;
+  border: 1px solid var(--tg-border-subtle) !important;
+  box-shadow: var(--glass-highlight) !important;
+}
+
+.glass-card-subtle,
+.info-chip,
+.condicion-stat-card {
+  border-radius: 16px !important;
+  background: var(--glass-surface-subtle) !important;
+}
+
+.gold-accent-border {
+  border: 1px solid rgba(96, 73, 231, 0.35) !important;
+}
+
+.hs-grid-block-title {
+  font-family: 'Inter Tight', sans-serif !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.02em !important;
+  color: var(--hs-text-primary) !important;
+}
+
+.hs-archive-tag,
+.status-pill {
+  border-radius: 90px !important;
+  border: 1px solid var(--tg-border) !important;
+  background: var(--tg-primary-soft) !important;
+  color: var(--tg-primary) !important;
+  font-weight: 600 !important;
+  padding: 5px 14px !important;
+}
+
+.kpi-glass .kpi-value {
+  font-family: 'Inter Tight', sans-serif !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.03em !important;
+  color: var(--hs-text-primary) !important;
+}
+
+.kpi-glass:hover,
+.doc-vault-card:hover,
+.condicion-stat-card:hover {
+  border-color: #6049E7 !important;
+  transform: translateY(-2px) !important;
+}
+
+/* ==========================================================================
+   BOTONES PÍLDORA TASKGO (#6049E7 + GLOW INTERIOR #8383FE)
+   ========================================================================== */
+.bw-btn,
+.bw-btn-4,
+.bw-btn-2,
+.bw-btn-1,
+.bw-btn-sm,
+.bw-combo-btn {
+  border-radius: 90px !important;
+  font-family: 'Inter Tight', sans-serif !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.01em !important;
+  transition: transform 0.16s ease, box-shadow 0.18s ease, background 0.18s ease !important;
+}
+
+.bw-btn-4,
+.bw-btn-sm.is-primary,
+.bw-combo-btn {
+  background: #6049E7 !important;
+  color: #FFFFFF !important;
+  border: 1px solid #6049E7 !important;
+  box-shadow: inset 0 4px 20px rgba(131, 131, 254, 0.85), 0 6px 18px rgba(96, 73, 231, 0.25) !important;
+}
+
+.bw-btn-4:hover,
+.bw-btn-sm.is-primary:hover,
+.bw-combo-btn:hover {
+  background: #4E37D8 !important;
+  transform: translateY(-1px) !important;
+  box-shadow: inset 0 4px 24px #A5A5FF, 0 10px 24px rgba(96, 73, 231, 0.36) !important;
+}
+
+.bw-btn-2,
+.bw-btn-sm.is-gold {
+  background: var(--tg-indigo) !important;
+  color: #FFFFFF !important;
+  border: 1px solid var(--tg-indigo) !important;
+}
+
+html[data-theme="dark"] .bw-btn-2,
+html[data-theme="dark"] .bw-btn-sm.is-gold {
+  background: rgba(147, 211, 250, 0.16) !important;
+  color: #93D3FA !important;
+  border: 1px solid rgba(147, 211, 250, 0.38) !important;
+}
+
+.bw-btn-1,
+.bw-btn-sm:not(.is-primary):not(.is-gold) {
+  background: var(--glass-surface-subtle) !important;
+  color: var(--hs-text-primary) !important;
+  border: 1px solid var(--tg-border) !important;
+}
+
+.bw-btn-1:hover,
+.bw-btn-sm:not(.is-primary):not(.is-gold):hover {
+  border-color: #6049E7 !important;
+  color: var(--tg-primary) !important;
+}
+
+/* ==========================================================================
+   INPUTS, SELECTS, BUSCADORES Y TABLAS TASKGO
+   ========================================================================== */
+.glass-input,
+.glass-select,
+.glass-textarea {
+  border-radius: 12px !important;
+  border: 1px solid var(--tg-border) !important;
+  background: var(--glass-surface) !important;
+  color: var(--hs-text-primary) !important;
+  padding: 10px 14px !important;
+}
+
+.glass-input:focus,
+.glass-select:focus,
+.glass-textarea:focus {
+  border-color: #6049E7 !important;
+  box-shadow: 0 0 0 3px rgba(96, 73, 231, 0.16) !important;
+  outline: none !important;
+}
+
+.bw-combo-pill.aurora-search {
+  border-radius: 90px !important;
+  border: 1px solid var(--tg-border) !important;
+  background: var(--glass-surface) !important;
+  padding: 4px !important;
+}
+
+.table-wrapper {
+  border-radius: 20px !important;
+  border: 1px solid var(--tg-border-subtle) !important;
+  box-shadow: var(--glass-highlight) !important;
+}
+
+.aurora-table thead th {
+  background: #0D062D !important;
+  color: #FFFFFF !important;
+  border-bottom: 2px solid #6049E7 !important;
+  font-family: 'Inter Tight', sans-serif !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.04em !important;
+}
+
+html[data-theme="dark"] .aurora-table thead th {
+  background: #17123B !important;
+  border-bottom: 2px solid #8383FE !important;
+}
+
+.aurora-table tbody tr:hover {
+  background: var(--tg-primary-soft) !important;
+}
+
+/* Badges píldora suaves TaskGo */
+.status-badge {
+  border-radius: 90px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.02em !important;
+}
+
+.badge-naranja {
+  background: rgba(255, 99, 11, 0.14) !important;
+  color: #D94E00 !important;
+  border: 1px solid rgba(255, 99, 11, 0.35) !important;
+}
+
+html[data-theme="dark"] .badge-naranja {
+  color: #FF9457 !important;
+}
+
+.badge-verde {
+  background: rgba(96, 73, 231, 0.14) !important;
+  color: #6049E7 !important;
+  border: 1px solid rgba(96, 73, 231, 0.32) !important;
+}
+
+html[data-theme="dark"] .badge-verde {
+  color: #B4A7FF !important;
+}
+
+/* Modales nativos <dialog> estilo TaskGo */
+.glass-dialog,
+.planilla-modal-dialog {
+  border-radius: 24px !important;
+  border: 1px solid var(--tg-border) !important;
+  background: var(--glass-surface) !important;
+  box-shadow: 0 28px 80px rgba(13, 6, 45, 0.32) !important;
+}
+
+.gemini-copilot-fab {
+  background: #6049E7 !important;
+  box-shadow: inset 0 4px 20px #8383FE, 0 12px 28px rgba(96, 73, 231, 0.42) !important;
+  border-radius: 90px !important;
+}
+
+.gemini-drawer {
+  border-radius: 22px !important;
+  border: 1px solid var(--tg-border) !important;
+}
+
+.dni-dropzone {
+  border-radius: 16px !important;
+  border: 1.5px dashed #6049E7 !important;
+  background: var(--tg-primary-soft) !important;
+}
+
+/* ==========================================================================
    RESPONSIVE: PANTALLAS MÓVILES Y TABLETS
    ========================================================================== */
 @media (max-width: 920px) {
