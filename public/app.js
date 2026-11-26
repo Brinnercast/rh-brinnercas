@@ -1303,26 +1303,14 @@ function renderLegajos() {
 
   const tbody = document.getElementById('legajos-tbody');
   if (filtered.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="9" style="text-align:center; padding:28px;">No se encontraron colaboradores con el filtro actual.</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding:28px;">No se encontraron colaboradores con el filtro actual.</td></tr>';
     return;
   }
 
   tbody.innerHTML = filtered.map(c => {
     const isSel = spotlightColab && c.id === spotlightColab.id;
-    const docs = c.documentos || {};
-    const adendas = docs.adendas || [];
-    const lastAdenda = adendas.length ? adendas[adendas.length - 1] : null;
-    const hasDni = Boolean(docs.fotoDni);
     const cl = c.condicionLaboral || (c.estado === 'RXH' ? 'RXH' : (c.estado === 'APOYO' ? 'OTROS' : 'CONTRATO'));
     const clBadge = cl === 'CONTRATO' ? 'badge-verde' : (cl === 'RXH' ? 'badge-naranja' : 'badge-amarillo');
-
-    const contratoHref = relDocUrl(docs.contrato?.localUrl, `/api/docs/contrato/${c.id}`, docs.contrato?.driveUrl);
-    const adendaHref = lastAdenda
-      ? relDocUrl(lastAdenda.localUrl, `/api/docs/adenda/${c.id}?index=${adendas.length - 1}`, lastAdenda.driveUrl)
-      : apiUrl(`/api/docs/adenda/${c.id}`);
-    const memoHref = apiUrl(`/api/docs/memo/${c.id}`);
-    const liqHref = relDocUrl(docs.liquidacion?.localUrl, `/api/docs/liquidacion/${c.id}`, docs.liquidacion?.driveUrl);
-    const dniHref = hasDni ? relDocUrl(docs.fotoDni.localUrl, `/api/docs/dni/${c.id}`, docs.fotoDni.driveUrl) : '';
 
     return `
       <tr onclick="handleLegajoRowClick(event, ${c.id})" style="cursor:pointer; ${isSel ? 'background:rgba(96,73,231,0.08);' : ''}">
@@ -1334,26 +1322,15 @@ function renderLegajos() {
             <span style="font-size:0.72rem; color:var(--hs-text-secondary); font-weight:600;">${escapeHtml(c.condicionLaborable)}</span>
           </div>
         </th>
-        <td data-label="DNI / Edad"><strong>${escapeHtml(c.dni)}</strong><br><span style="font-size:0.74rem; opacity:0.75;">Edad: ${escapeHtml(c.edad)}</span></td>
-        <td data-label="Área / Puesto">${escapeHtml(c.area)}<br><span style="font-size:0.75rem; color:var(--aurora-gold-bright);">${escapeHtml(c.cargo)}</span></td>
+        <td data-label="DNI" style="white-space:nowrap;"><strong>${escapeHtml(c.dni)}</strong></td>
+        <td data-label="Área y Puesto">${escapeHtml(c.area)}<br><span style="font-size:0.76rem; color:var(--aurora-gold-bright); font-weight:600;">${escapeHtml(c.cargo)}</span></td>
         <td data-label="Condición Laboral"><span class="status-badge ${clBadge}">${escapeHtml(cl)}</span></td>
         <td data-label="Estado"><span class="status-badge ${badgeClassForSemaforo(c.semaforo)}">${escapeHtml(c.estadoTexto)}</span></td>
-        <td data-label="Sueldo">${formatMoney(c.sueldo)}</td>
-        <td data-label="Vigencia / Cese">Ingreso: ${escapeHtml(c.fechaIngreso)}<br><span style="font-size:0.74rem; opacity:0.8;">Hasta: ${escapeHtml(c.vigenciaHasta)}</span></td>
-        <td data-label="Domicilio & Detalle">
-          <div style="font-size:0.78rem;">${renderExpandableText(c.domicilio, 40)}</div>
-          <div style="font-size:0.73rem; opacity:0.75; margin-top:3px;">${renderExpandableText(c.observaciones, 46)}</div>
-        </td>
-        <td data-label="5 Descargas">
-          <div style="display:flex; flex-wrap:wrap; gap:5px;">
-            <button type="button" class="bw-btn-sm is-gold" onclick="selectSpotlight(${c.id})" title="Abrir Bóveda Individual de 5 Documentos">Bóveda</button>
-            <a href="${escapeHtml(contratoHref)}" target="_blank" rel="noopener" class="bw-btn-sm" title="Descargar Contrato">Contrato</a>
-            <a href="${escapeHtml(adendaHref)}" target="_blank" rel="noopener" class="bw-btn-sm" title="Descargar Adenda">Adenda</a>
-            <a href="${escapeHtml(memoHref)}" target="_blank" rel="noopener" class="bw-btn-sm" title="Descargar Memorándum">Memo</a>
-            <a href="${escapeHtml(liqHref)}" target="_blank" rel="noopener" class="bw-btn-sm" title="Descargar Liquidación BBSS">Liq.</a>
-            ${hasDni ? `<a href="${escapeHtml(dniHref)}" target="_blank" rel="noopener" class="bw-btn-sm is-primary" title="Descargar Foto DNI">DNI</a>` : ''}
-            <button type="button" class="bw-btn-sm" onclick="openEmailComposer('ADENDA', ${c.id})" title="Enviar documentación por correo">Correo</button>
-          </div>
+        <td data-label="Sueldo" style="white-space:nowrap;"><strong>${formatMoney(c.sueldo)}</strong></td>
+        <td data-label="Detalle" style="white-space:nowrap;">
+          <button type="button" class="bw-btn-sm is-primary" onclick="event.stopPropagation(); selectSpotlight(${c.id})" title="Ver toda la información y los 5 documentos del personal">
+            MOSTRAR MÁS
+          </button>
         </td>
       </tr>
     `;
