@@ -2413,6 +2413,65 @@ html[data-theme="dark"] .badge-verde {
 }
 
 /* ==========================================================================
+   CONTRASTE ESTRICTO DE TEXTO AL ESCRIBIR (MODO DÍA = NEGRO / MODO NOCHE = BLANCO)
+   ========================================================================== */
+html[data-theme="light"] .app-shell input,
+html[data-theme="light"] .app-shell textarea,
+html[data-theme="light"] .app-shell select,
+html[data-theme="light"] .glass-dialog input,
+html[data-theme="light"] .glass-dialog textarea,
+html[data-theme="light"] .glass-dialog select,
+html[data-theme="light"] .gemini-drawer input,
+html[data-theme="light"] .gemini-drawer textarea {
+  color: #000000 !important;
+  caret-color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+}
+
+html[data-theme="light"] .app-shell input::placeholder,
+html[data-theme="light"] .app-shell textarea::placeholder,
+html[data-theme="light"] .glass-dialog input::placeholder,
+html[data-theme="light"] .glass-dialog textarea::placeholder,
+html[data-theme="light"] .gemini-drawer input::placeholder {
+  color: rgba(0, 0, 0, 0.48) !important;
+  -webkit-text-fill-color: rgba(0, 0, 0, 0.48) !important;
+}
+
+html[data-theme="light"] .app-shell select option,
+html[data-theme="light"] .glass-dialog select option {
+  color: #000000 !important;
+  background-color: #FFFFFF !important;
+}
+
+html[data-theme="dark"] .app-shell input,
+html[data-theme="dark"] .app-shell textarea,
+html[data-theme="dark"] .app-shell select,
+html[data-theme="dark"] .glass-dialog input,
+html[data-theme="dark"] .glass-dialog textarea,
+html[data-theme="dark"] .glass-dialog select,
+html[data-theme="dark"] .gemini-drawer input,
+html[data-theme="dark"] .gemini-drawer textarea {
+  color: #FFFFFF !important;
+  caret-color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+}
+
+html[data-theme="dark"] .app-shell input::placeholder,
+html[data-theme="dark"] .app-shell textarea::placeholder,
+html[data-theme="dark"] .glass-dialog input::placeholder,
+html[data-theme="dark"] .glass-dialog textarea::placeholder,
+html[data-theme="dark"] .gemini-drawer input::placeholder {
+  color: rgba(255, 255, 255, 0.56) !important;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0.56) !important;
+}
+
+html[data-theme="dark"] .app-shell select option,
+html[data-theme="dark"] .glass-dialog select option {
+  color: #FFFFFF !important;
+  background-color: #17123B !important;
+}
+
+/* ==========================================================================
    RESPONSIVE: PANTALLAS MÓVILES Y TABLETS
    ========================================================================== */
 @media (max-width: 920px) {
