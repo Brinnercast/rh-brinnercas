@@ -326,6 +326,52 @@ function initDialogLightDismiss() {
       if (dlg && dlg.open) dlg.close();
     });
   });
+
+  // Tecla ESC global: cierra cualquier ventana emergente abierta (y si no hay modal, limpia el buscador activo)
+  document.addEventListener('keydown', e => {
+    if (e.key !== 'Escape') return;
+
+    const openDialogs = Array.from(document.querySelectorAll('dialog[open]'));
+    if (openDialogs.length > 0) {
+      e.preventDefault();
+      openDialogs[openDialogs.length - 1].close();
+      return;
+    }
+
+    const active = document.activeElement;
+    if (active && (active.id === 'search-input' || active.id === 'planilla-search')) {
+      e.preventDefault();
+      active.value = '';
+      if (active.id === 'search-input') {
+        state.filters.search = '';
+        renderLegajos();
+      } else {
+        state.planillaFilter.search = '';
+        renderPlanillaEditor();
+      }
+      return;
+    }
+
+    // Si hay texto escrito en algún buscador aunque no tenga foco, ESC lo limpia
+    const sLeg = document.getElementById('search-input');
+    if (sLeg && sLeg.value && document.getElementById('view-legajos')?.classList.contains('active')) {
+      sLeg.value = '';
+      state.filters.search = '';
+      renderLegajos();
+      return;
+    }
+    const sPlan = document.getElementById('planilla-search');
+    if (sPlan && sPlan.value && document.getElementById('view-planilla')?.classList.contains('active')) {
+      sPlan.value = '';
+      state.planillaFilter.search = '';
+      renderPlanillaEditor();
+      return;
+    }
+
+    if (typeof window.closeMobileDrawer === 'function') {
+      window.closeMobileDrawer();
+    }
+  });
 }
 
 // ==========================================================================
@@ -1198,14 +1244,24 @@ window.focusEmployeeVault = function (id) {
 };
 
 window.openSpotlightModal = function (id) {
-  const c = state.audit?.colaboradores?.find(x => x.id === Number(id));
+  const c = state.audit?.colaboradores?.find(x => Number(x.id) === Number(id) || String(x.id) === String(id));
   if (!c) return;
   state.selectedColabId = c.id;
   const titleEl = document.getElementById('spotlight-dialog-title');
   if (titleEl) titleEl.textContent = `${c.nombre} — DNI ${c.dni}`;
   renderSpotlight(c);
   const dlg = document.getElementById('spotlight-dialog');
-  if (dlg && !dlg.open) dlg.showModal();
+  if (dlg) {
+    if (!dlg.open) dlg.showModal();
+    dlg.focus();
+  }
+};
+
+window.handleLegajoRowClick = function (event, id) {
+  if (event && event.target && event.target.closest('a, button:not(.legajo-name-btn)')) {
+    return;
+  }
+  selectSpotlight(id);
 };
 
 // ==========================================================================
@@ -1269,10 +1325,10 @@ function renderLegajos() {
     const dniHref = hasDni ? relDocUrl(docs.fotoDni.localUrl, `/api/docs/dni/${c.id}`, docs.fotoDni.driveUrl) : '';
 
     return `
-      <tr style="${isSel ? 'background:rgba(255,96,8,0.10);' : ''}">
+      <tr onclick="handleLegajoRowClick(event, ${c.id})" style="cursor:pointer; ${isSel ? 'background:rgba(96,73,231,0.08);' : ''}">
         <th scope="row">
           <div style="display:flex; flex-direction:column; gap:2px;">
-            <button type="button" onclick="selectSpotlight(${c.id})" style="background:none; border:none; color:var(--hs-text-primary); font-weight:800; text-align:left; cursor:pointer; padding:0; font-size:0.86rem;">
+            <button type="button" class="legajo-name-btn" onclick="selectSpotlight(${c.id})" style="background:none; border:none; color:var(--hs-text-primary); font-weight:800; text-align:left; cursor:pointer; padding:0; font-size:0.86rem;">
               ${escapeHtml(c.nombre)}
             </button>
             <span style="font-size:0.72rem; color:var(--hs-text-secondary); font-weight:600;">${escapeHtml(c.condicionLaborable)}</span>
@@ -1524,6 +1580,17 @@ function initFilters() {
     state.filters.condicionLaboral = fCondLab?.value || '';
     renderLegajos();
   };
+
+  // Mantener siempre limpios los buscadores al cargar (evita autocompletado residual del navegador)
+  const cleanSearchInputs = () => {
+    if (searchIn) searchIn.value = '';
+    const pSearch = document.getElementById('planilla-search');
+    if (pSearch) pSearch.value = '';
+    state.filters.search = '';
+    state.planillaFilter.search = '';
+  };
+  cleanSearchInputs();
+  setTimeout(cleanSearchInputs, 120);
 
   searchIn?.addEventListener('input', apply);
   btnBuscar?.addEventListener('click', apply);
