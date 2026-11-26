@@ -30,7 +30,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/the-handsome/the-handsome-tokens.css" />
   <link rel="stylesheet" href="assets/button-web/button-web-tokens.css" />
-  <link rel="stylesheet" href="styles.css?v=20261126txt" />
+  <link rel="stylesheet" href="styles.css?v=20261126menu" />
 </head>
 <body class="hs-body">
   <!-- Anunciador único ARIA Live para errores de formulario -->
@@ -379,10 +379,31 @@
       </nav>
     </aside>
 
+    <!-- Backdrop para menú lateral deslizable en Tablet y Celular -->
+    <div id="mobile-dock-backdrop" class="mobile-dock-backdrop" hidden></div>
+
     <!-- ====================================================================
-         COLUMNA PRINCIPAL DERECHA (SIN ICONOS — TIPOGRAFÍA MONTSERRAT + GLASS)
+         COLUMNA PRINCIPAL DERECHA (ESTILO TASKGO • INTER TIGHT • RESPONSIVE)
          ==================================================================== -->
     <div class="app-main-column">
+      <!-- Barra Superior Responsive (visible solo en Tablet <= 1024px y Celular) -->
+      <header id="mobile-topbar" class="mobile-topbar" aria-label="Navegación móvil RH BRINNERCAS">
+        <div class="mobile-topbar-left">
+          <button type="button" id="btn-mobile-menu" class="mobile-menu-btn" aria-expanded="false" aria-controls="left-dock-aside">
+            MENÚ
+          </button>
+          <span class="mobile-brand-title">RH BRINNERCAS</span>
+        </div>
+        <div class="mobile-topbar-actions">
+          <button type="button" id="btn-mobile-sync" class="bw-btn-sm is-primary" onclick="sincronizarAhora(this)">
+            SYNC
+          </button>
+          <button type="button" id="btn-mobile-theme" class="bw-btn-sm" aria-label="Cambiar modo día o noche">
+            TEMA
+          </button>
+        </div>
+      </header>
+
       <main class="workspace-container">
 
         <!-- 1. DASHBOARD EJECUTIVO -->
@@ -480,7 +501,7 @@
             <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
               <span id="legajos-count-pill" class="status-pill">Cargando padrón...</span>
             </div>
-          </div>33
+          </div>
 
           <!-- Barra de Búsqueda Button-Web + Filtros -->
           <div class="glass-card hs-grid-block" style="margin-bottom:22px;">
@@ -532,10 +553,7 @@
             </div>
           </div>
 
-          <!-- BÓVEDA INDIVIDUAL SPOTLIGHT: 5 OPCIONES DE DESCARGA + ENVIAR POR CORREO -->
-          <article id="expediente-spotlight" class="glass-card hs-grid-block expediente-spotlight" aria-live="polite"></article>
-
-          <!-- TABLA MAESTRA RESPONSIVA -->
+          <!-- TABLA MAESTRA RESPONSIVA (AL SELECCIONAR CUALQUIER TRABAJADOR SE ABRE SU BÓVEDA EN VENTANA EMERGENTE) -->
           <article class="glass-card hs-grid-block">
             <div class="hs-grid-block-header">
               <h3 class="hs-grid-block-title">PADRÓN GENERAL AUDITADO (CLIC EN CUALQUIER TRABAJADOR PARA SUS 5 DESCARGAS)</h3>
@@ -1390,6 +1408,22 @@
     <div id="doc-viewer-body" class="dialog-body"></div>
   </dialog>
 
+  <!-- VENTANA EMERGENTE: BÓVEDA INDIVIDUAL DE 5 DOCUMENTOS (AL SELECCIONAR DEL PADRÓN GENERAL) -->
+  <dialog id="spotlight-dialog" class="glass-dialog hs-grid-block planilla-modal-dialog" closedby="any" aria-labelledby="spotlight-dialog-title">
+    <div class="dialog-head">
+      <div>
+        <p class="section-eyebrow" style="margin-bottom:2px;">BÓVEDA INDIVIDUAL DE 5 DOCUMENTOS • GOOGLE DRIVE &amp; SHEETS</p>
+        <h3 id="spotlight-dialog-title" class="hs-grid-block-title">Expediente del Colaborador</h3>
+      </div>
+      <button type="button" class="bw-btn-sm" data-close-dialog="spotlight-dialog" aria-label="Cerrar bóveda">
+        CERRAR
+      </button>
+    </div>
+    <div class="dialog-body planilla-modal-body">
+      <div id="expediente-spotlight" class="expediente-spotlight" aria-live="polite" style="border:none !important; box-shadow:none !important; background:transparent !important; padding:0 !important; margin:0 !important;"></div>
+    </div>
+  </dialog>
+
   <dialog id="colab-dialog" class="glass-dialog hs-grid-block" closedby="any" aria-labelledby="colab-dialog-title">
     <div class="dialog-head">
       <div>
@@ -1646,7 +1680,7 @@
 
   <script src="assets/the-handsome/the-handsome-icons.js"></script>
   <script src="assets/button-web/button-web-icons.js"></script>
-  <script src="data-bundle.js?v=20261126taskgo"></script>
-  <script src="app.js?v=20261126taskgo"></script>
+  <script src="data-bundle.js?v=20261126spot"></script>
+  <script src="app.js?v=20261126spot"></script>
 </body>
 </html>

@@ -669,11 +669,53 @@ function initDock() {
     });
   });
 
-  // Colapsar / expandir el Dock vertical izquierdo
+  // Colapsar / expandir el Dock vertical izquierdo (Desktop) + Drawer móvil/tablet (<= 1024px)
   const leftDock = document.getElementById('left-dock-aside');
   const toggleDockBtn = document.getElementById('btn-toggle-dock');
+  const mobileMenuBtn = document.getElementById('btn-mobile-menu');
+  const mobileBackdrop = document.getElementById('mobile-dock-backdrop');
+  const mobileThemeBtn = document.getElementById('btn-mobile-theme');
+
+  function setMobileDrawer(open) {
+    if (!leftDock) return;
+    leftDock.classList.toggle('is-mobile-open', open);
+    if (mobileBackdrop) mobileBackdrop.hidden = !open;
+    if (mobileMenuBtn) {
+      mobileMenuBtn.setAttribute('aria-expanded', String(open));
+      mobileMenuBtn.textContent = open ? 'CERRAR' : 'MENÚ';
+    }
+    document.body.classList.toggle('mobile-drawer-open', open);
+  }
+  window.closeMobileDrawer = () => setMobileDrawer(false);
+
   toggleDockBtn?.addEventListener('click', () => {
-    leftDock?.classList.toggle('is-collapsed');
+    if (window.innerWidth <= 1024) {
+      setMobileDrawer(false);
+    } else {
+      leftDock?.classList.toggle('is-collapsed');
+    }
+  });
+
+  mobileMenuBtn?.addEventListener('click', () => {
+    const isOpen = leftDock?.classList.contains('is-mobile-open');
+    setMobileDrawer(!isOpen);
+  });
+
+  mobileBackdrop?.addEventListener('click', () => setMobileDrawer(false));
+
+  // Cerrar el drawer automáticamente en tablet/móvil al elegir un submenú o link del Dock
+  leftDock?.querySelectorAll('.dock-sub-link, .dock-cloud-open-btn, .dock-logout-btn').forEach(el => {
+    el.addEventListener('click', () => {
+      if (window.innerWidth <= 1024) setMobileDrawer(false);
+    });
+  });
+
+  mobileThemeBtn?.addEventListener('click', () => {
+    document.getElementById('btn-theme-toggle')?.click();
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 1024) setMobileDrawer(false);
   });
 
   // Conmutador general Modo Día / Modo Noche (incluyendo el Dock) siguiendo dark-mode-toggle
@@ -1152,6 +1194,18 @@ window.focusEmployeeVault = function (id) {
   if (sel) sel.value = String(id);
   switchView('legajos');
   renderLegajos();
+  openSpotlightModal(id);
+};
+
+window.openSpotlightModal = function (id) {
+  const c = state.audit?.colaboradores?.find(x => x.id === Number(id));
+  if (!c) return;
+  state.selectedColabId = c.id;
+  const titleEl = document.getElementById('spotlight-dialog-title');
+  if (titleEl) titleEl.textContent = `${c.nombre} — DNI ${c.dni}`;
+  renderSpotlight(c);
+  const dlg = document.getElementById('spotlight-dialog');
+  if (dlg && !dlg.open) dlg.showModal();
 };
 
 // ==========================================================================
@@ -1184,14 +1238,12 @@ function renderLegajos() {
   const countPill = document.getElementById('legajos-count-pill');
   if (countPill) countPill.textContent = `${filtered.length} de ${state.audit.colaboradores.length} colaboradores mostrados`;
 
-  // Determinar colaborador en el Spotlight
+  // Si la ventana emergente de bóveda está abierta, mantenerla sincronizada
   let spotlightColab = filtered.find(c => c.id === Number(state.selectedColabId));
-  if (!spotlightColab && filtered.length > 0) {
-    spotlightColab = filtered[0];
-    state.selectedColabId = spotlightColab.id;
+  const spotDlg = document.getElementById('spotlight-dialog');
+  if (spotDlg && spotDlg.open && spotlightColab) {
+    renderSpotlight(spotlightColab);
   }
-
-  renderSpotlight(spotlightColab);
 
   const tbody = document.getElementById('legajos-tbody');
   if (filtered.length === 0) {
@@ -1257,7 +1309,7 @@ window.selectSpotlight = function (id) {
   const sel = document.getElementById('select-colaborador-ficha');
   if (sel) sel.value = String(id);
   renderLegajos();
-  document.getElementById('expediente-spotlight')?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  openSpotlightModal(id);
 };
 
 function renderSpotlight(c) {
@@ -1313,8 +1365,8 @@ function renderSpotlight(c) {
       </div>
 
       <div style="display:flex; gap:8px; flex-wrap:wrap;">
-        <button type="button" class="bw-btn-sm is-primary" onclick="openPlanillaEditor(${c.id})">Editar Ficha (Sheets)</button>
-        <button type="button" class="bw-btn-sm" onclick="openEmailComposer('CONTRATO', ${c.id})">Enviar Docs por Correo</button>
+        <button type="button" class="bw-btn-sm is-primary" onclick="document.getElementById('spotlight-dialog')?.close(); openPlanillaEditor(${c.id})">Editar Ficha (Sheets)</button>
+        <button type="button" class="bw-btn-sm" onclick="document.getElementById('spotlight-dialog')?.close(); openEmailComposer('CONTRATO', ${c.id})">Enviar Docs por Correo</button>
         <button type="button" class="bw-btn-sm is-gold" onclick="openColabDetailDialog(${c.id})">Ver Ficha Completa</button>
         ${driveInfo.rootFolder?.url ? `<a href="${escapeHtml(driveInfo.rootFolder.url)}" target="_blank" rel="noopener" class="bw-btn-sm">Carpeta Drive</a>` : ''}
       </div>
@@ -1483,6 +1535,7 @@ function initFilters() {
     if (selColab.value) {
       state.selectedColabId = Number(selColab.value);
       renderLegajos();
+      openSpotlightModal(Number(selColab.value));
     }
   });
 
