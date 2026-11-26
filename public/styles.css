@@ -2091,7 +2091,21 @@ body.hs-body {
   border-radius: 14px !important;
   border: 1px solid transparent !important;
   font-weight: 500 !important;
+  padding: 11px 16px !important;
+  gap: 0 !important;
   transition: background 0.18s ease, color 0.18s ease, transform 0.15s ease, box-shadow 0.18s ease !important;
+}
+
+/* Dock minimalista sin iconos ni números */
+.left-dock-rail .dock-icon,
+.left-dock-rail .dock-index {
+  display: none !important;
+}
+
+.left-dock-rail .dock-label {
+  font-size: 0.9rem !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.01em !important;
 }
 
 .dock-item:hover {
