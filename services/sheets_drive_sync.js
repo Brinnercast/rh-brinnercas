@@ -20,8 +20,10 @@ function runCliSafe(bin, args) {
   if (!ALLOWED_CLI_BINS.has(bin)) {
     throw new Error('Binario CLI no autorizado.');
   }
-  const safeArgs = (args || []).map(a => String(a ?? ''));
-  const out = execFileSync(bin, safeArgs, { encoding: 'utf8', maxBuffer: 15 * 1024 * 1024, shell: false }).trim();
+  const safeArgs = (args || []).map(a => String(a ?? '').replace(/[\r\n]/g, ' '));
+  const out = process.platform === 'win32'
+    ? execFileSync('cmd.exe', ['/d', '/c', bin, ...safeArgs], { encoding: 'utf8', maxBuffer: 15 * 1024 * 1024, shell: false }).trim()
+    : execFileSync(bin, safeArgs, { encoding: 'utf8', maxBuffer: 15 * 1024 * 1024, shell: false }).trim();
   const idxObj = out.indexOf('{');
   const idxArr = out.indexOf('[');
   let start = -1;
@@ -124,7 +126,9 @@ async function registrarNuevoIngreso(payload) {
         : payload.fotoDniBase64;
       const ext = path.extname(payload.fotoDniName) || '.pdf';
       const localDniName = `DNI_${dni}_${nombre.replace(/[^A-Z0-9]/g, '_')}${ext}`;
-      const localDniPath = path.join(DOCS_DIR, 'dni', localDniName);
+      const dniDir = path.join(DOCS_DIR, 'dni');
+      if (!fs.existsSync(dniDir)) fs.mkdirSync(dniDir, { recursive: true });
+      const localDniPath = path.join(dniDir, localDniName);
       fs.writeFileSync(localDniPath, Buffer.from(base64Body, 'base64'));
 
       let driveDni = null;
@@ -376,7 +380,9 @@ async function actualizarPersonalExistente(idOrPayload, maybePayload) {
         : payload.fotoDniBase64;
       const ext = path.extname(payload.fotoDniName) || '.pdf';
       const localDniName = `DNI_${newDni}_${newNombre.replace(/[^A-Z0-9]/g, '_')}${ext}`;
-      const localDniPath = path.join(DOCS_DIR, 'dni', localDniName);
+      const dniDir = path.join(DOCS_DIR, 'dni');
+      if (!fs.existsSync(dniDir)) fs.mkdirSync(dniDir, { recursive: true });
+      const localDniPath = path.join(dniDir, localDniName);
       fs.writeFileSync(localDniPath, Buffer.from(base64Body, 'base64'));
 
       let driveDni = null;

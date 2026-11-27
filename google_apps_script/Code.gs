@@ -34,11 +34,11 @@ function setupInicialPropiedades() {
   }
   props.setProperty('MASTER_SHEET_ID', '1SUJymC5eFiNERhbm-fg5KeCDWcLLTOiSV8NC9SYSwVk');
   props.setProperty('HIST_SHEET_ID', '1Wrelu9FcxOF7g82u2n5sw8LegBMeI1wecNIUfh1EwWM');
-  props.setProperty('DNI_FOLDER_ID', '1X5mE0M8y7mX4Y4W5V0fK0Z4vW1v2n3m4'); // Opcional: se autodetecta si existe carpeta 05_FOTOS_DNI_PERSONAL
+  props.setProperty('DNI_FOLDER_ID', '18iMe_-p5JAyd1HE3ToMvmkwp0O8B73qp'); // 03_FOTOS_DNI_IDENTIDAD_PDF
 
-  // Buscar automáticamente la carpeta 05_FOTOS_DNI_PERSONAL en Drive
+  // Verificar carpeta real 03_FOTOS_DNI_IDENTIDAD_PDF en Drive
   try {
-    const folders = DriveApp.getFoldersByName('05_FOTOS_DNI_PERSONAL');
+    const folders = DriveApp.getFoldersByName('03_FOTOS_DNI_IDENTIDAD_PDF');
     if (folders.hasNext()) {
       props.setProperty('DNI_FOLDER_ID', folders.next().getId());
     }
@@ -319,21 +319,50 @@ function validatePersonalInput_(body) {
 
 function uploadDniToDrive_(base64Data, fileName, dni, nombre) {
   if (!base64Data || !fileName) return null;
+  const DEFAULT_DNI_FOLDER_ID = '18iMe_-p5JAyd1HE3ToMvmkwp0O8B73qp'; // 03_FOTOS_DNI_IDENTIDAD_PDF
   try {
-    const folderId = PropertiesService.getScriptProperties().getProperty('DNI_FOLDER_ID');
-    const folder = folderId ? DriveApp.getFolderById(folderId) : DriveApp.getRootFolder();
-    const parts = String(base64Data).split('base64,');
+    let folder = null;
+    const savedId = PropertiesService.getScriptProperties().getProperty('DNI_FOLDER_ID');
+    const candidateIds = [savedId, DEFAULT_DNI_FOLDER_ID].filter(Boolean);
+    for (let i = 0; i < candidateIds.length; i++) {
+      try {
+        folder = DriveApp.getFolderById(candidateIds[i]);
+        if (folder) break;
+      } catch (eFolder) {}
+    }
+    if (!folder) {
+      const byName = DriveApp.getFoldersByName('03_FOTOS_DNI_IDENTIDAD_PDF');
+      folder = byName.hasNext() ? byName.next() : DriveApp.getRootFolder();
+    }
+
+    const rawStr = String(base64Data);
+    const parts = rawStr.split('base64,');
+    const ext = fileName.indexOf('.') !== -1 ? fileName.slice(fileName.lastIndexOf('.')).toLowerCase() : '.pdf';
+    const mimeByExt = {
+      '.pdf': 'application/pdf',
+      '.jpg': 'image/jpeg',
+      '.jpeg': 'image/jpeg',
+      '.png': 'image/png',
+      '.webp': 'image/webp'
+    };
     const mimeMatch = parts[0].match(/data:([^;]+);/);
-    const mime = mimeMatch ? mimeMatch[1] : 'application/pdf';
-    const rawB64 = parts.length > 1 ? parts[1] : parts[0];
-    const ext = fileName.indexOf('.') !== -1 ? fileName.slice(fileName.lastIndexOf('.')) : '.pdf';
+    const mime = (mimeMatch && mimeMatch[1] && mimeMatch[1] !== 'application/octet-stream')
+      ? mimeMatch[1]
+      : (mimeByExt[ext] || 'application/pdf');
+    const rawB64 = (parts.length > 1 ? parts[1] : parts[0]).replace(/\s+/g, '');
+
     const safeFileName = `DNI_${dni}_${nombre.replace(/[^A-Z0-9]/g, '_')}${ext}`;
     const blob = Utilities.newBlob(Utilities.base64Decode(rawB64), mime, safeFileName);
     const created = folder.createFile(blob);
-    return { fileName: safeFileName, driveId: created.getId(), driveUrl: created.getUrl() };
+    return {
+      fileName: safeFileName,
+      originalName: fileName,
+      driveId: created.getId(),
+      driveUrl: `https://drive.google.com/file/d/${created.getId()}/view`
+    };
   } catch (e) {
-    console.warn('[GAS_DRIVE_WARN]', e.message);
-    return null;
+    console.error('[GAS_DRIVE_ERR]', e.message);
+    return { error: e.message };
   }
 }
 
@@ -371,7 +400,8 @@ function createPersonalInSheets_(body, user) {
   const nowStr = Utilities.formatDate(new Date(), 'America/Lima', 'dd/MM/yyyy HH:mm:ss');
 
   const dniUpload = uploadDniToDrive_(body.fotoDniBase64, body.fotoDniName, dni, nombre);
-  const dniUrl = dniUpload ? dniUpload.driveUrl : '';
+  const dniUrl = (dniUpload && dniUpload.driveUrl) ? dniUpload.driveUrl : '';
+  const dniError = (dniUpload && dniUpload.error) ? dniUpload.error : null;
   const nextId = shPadron.getLastRow();
 
   shPadron.appendRow([
@@ -452,7 +482,9 @@ function createPersonalInSheets_(body, user) {
   }
 
   return {
-    colaborador: { id: nextId, nombre, dni, condicionLaboral: cl, estado, remuneracionActual: Number(body.sueldo || 0), documentos: { fotoDni: dniUpload } },
+    colaborador: { id: nextId, nombre, dni, condicionLaboral: cl, estado, remuneracionActual: Number(body.sueldo || 0), documentos: { fotoDni: dniUrl ? dniUpload : null } },
+    dniUpdated: Boolean(dniUrl),
+    dniError,
     sheetSyncResult: { masterSynced: true, historicalSynced },
     masterSheetUrl: `https://docs.google.com/spreadsheets/d/${masterId}/edit`,
     historicalSheetUrl: `https://docs.google.com/spreadsheets/d/${histId}/edit`
@@ -484,7 +516,8 @@ function updatePersonalInSheets_(body, user) {
   if (rowIdx === -1) throw new Error('Colaborador no encontrado.');
 
   const cur = data[rowIdx - 1];
-  const dniUrl = dniUpload ? dniUpload.driveUrl : cur[14];
+  const dniUrl = (dniUpload && dniUpload.driveUrl) ? dniUpload.driveUrl : cur[14];
+  const dniError = (dniUpload && dniUpload.error) ? dniUpload.error : null;
   const safeRow = [
     cur[0],
     sanitizeSheetCell_(newDni, 16),
@@ -548,8 +581,9 @@ function updatePersonalInSheets_(body, user) {
   }
 
   return {
-    colaborador: { id: Number(cur[0]), nombre: newNombre, dni: newDni, condicionLaboral: cl, estado, remuneracionActual: Number(body.sueldo || 0), documentos: { fotoDni: dniUpload } },
-    dniUpdated: Boolean(dniUpload),
+    colaborador: { id: Number(cur[0]), nombre: newNombre, dni: newDni, condicionLaboral: cl, estado, remuneracionActual: Number(body.sueldo || 0), documentos: { fotoDni: (dniUpload && dniUpload.driveUrl) ? dniUpload : null } },
+    dniUpdated: Boolean(dniUpload && dniUpload.driveUrl),
+    dniError,
     sheetSyncResult: { masterSynced: true, masterRow: rowIdx, historicalSynced: Boolean(historicalRow), historicalRow },
     masterSheetUrl: `https://docs.google.com/spreadsheets/d/${masterId}/edit`,
     historicalSheetUrl: `https://docs.google.com/spreadsheets/d/${histId}/edit`

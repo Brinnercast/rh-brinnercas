@@ -1622,10 +1622,20 @@ function initOnboardingForm() {
 
   function handleFile(file) {
     if (!file) return;
+    if (file.size > 8 * 1024 * 1024) {
+      statusEl.innerHTML = `<strong style="color:#EF4444;">Archivo muy pesado (${(file.size / (1024 * 1024)).toFixed(1)} MB):</strong> El máximo permitido es 8 MB. Comprime el PDF e intenta nuevamente.`;
+      state.dniAttachment = null;
+      return;
+    }
+    statusEl.innerHTML = `Leyendo archivo <strong>${escapeHtml(file.name)}</strong>...`;
     const reader = new FileReader();
     reader.onload = () => {
       state.dniAttachment = { name: file.name, base64: reader.result };
       statusEl.innerHTML = `<strong style="color:var(--emerald-ok);">Archivo listo para Drive:</strong> ${escapeHtml(file.name)} (${Math.round(file.size / 1024)} KB)`;
+    };
+    reader.onerror = () => {
+      state.dniAttachment = null;
+      statusEl.innerHTML = `<strong style="color:#EF4444;">Error leyendo el archivo PDF/imagen.</strong> Vuelve a seleccionarlo.`;
     };
     reader.readAsDataURL(file);
   }
@@ -3110,12 +3120,35 @@ function initPlanillaEditor() {
 
   function handleEditDniFile(file) {
     if (!file) return;
+    if (file.size > 8 * 1024 * 1024) {
+      if (editDniNewStatus) {
+        editDniNewStatus.style.display = 'block';
+        editDniNewStatus.style.color = '#EF4444';
+        editDniNewStatus.innerHTML = `<strong>Archivo muy pesado (${(file.size / (1024 * 1024)).toFixed(1)} MB):</strong> El máximo permitido es 8 MB.`;
+      }
+      state.editDniAttachment = null;
+      return;
+    }
+    if (editDniNewStatus) {
+      editDniNewStatus.style.display = 'block';
+      editDniNewStatus.style.color = 'var(--tg-primary)';
+      editDniNewStatus.innerHTML = `Leyendo <strong>${escapeHtml(file.name)}</strong>...`;
+    }
     const reader = new FileReader();
     reader.onload = () => {
       state.editDniAttachment = { name: file.name, base64: reader.result };
       if (editDniNewStatus) {
         editDniNewStatus.style.display = 'block';
+        editDniNewStatus.style.color = 'var(--emerald-ok)';
         editDniNewStatus.innerHTML = `<strong>Nuevo archivo listo para subir a Drive y Sheets:</strong> ${escapeHtml(file.name)} (${Math.round(file.size / 1024)} KB)`;
+      }
+    };
+    reader.onerror = () => {
+      state.editDniAttachment = null;
+      if (editDniNewStatus) {
+        editDniNewStatus.style.display = 'block';
+        editDniNewStatus.style.color = '#EF4444';
+        editDniNewStatus.textContent = 'No se pudo leer el archivo seleccionado. Intenta nuevamente.';
       }
     };
     reader.readAsDataURL(file);
@@ -3210,6 +3243,7 @@ function initPlanillaEditor() {
           <li>Google Sheet Maestro (1_PADRON_GENERAL): <strong>${sync.masterSynced ? `FILA ${sync.masterRow} ACTUALIZADA EN VIVO` : 'Guardado local'}</strong></li>
           <li>Google Sheet Histórico (Respuestas de formulario 1): <strong>${sync.historicalSynced ? `FILA ${sync.historicalRow} ACTUALIZADA EN VIVO` : 'Sin fila previa / local'}</strong></li>
           ${data.dniUpdated ? `<li>Foto / PDF de DNI: <strong>ACTUALIZADO Y SUBIDO A DRIVE (${escapeHtml(c.documentos?.fotoDni?.fileName || 'OK')})</strong></li>` : ''}
+          ${data.dniError ? `<li style="color:#EF4444;">Aviso Drive DNI: ${escapeHtml(data.dniError)}</li>` : ''}
           ${sync.errors?.length ? `<li style="color:#F59E0B;">Aviso Sync: ${escapeHtml(sync.errors.join(' | '))}</li>` : ''}
         </ul>
         <div style="display:flex; gap:8px; flex-wrap:wrap;">
