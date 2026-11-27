@@ -359,17 +359,17 @@ const CSP_HEADER = [
   "img-src 'self' data: blob: https://drive.google.com https://lh3.googleusercontent.com",
   "connect-src 'self' http://localhost:3005 http://127.0.0.1:3005 https://script.google.com https://script.googleusercontent.com",
   "frame-src 'self' blob: https://drive.google.com https://docs.google.com",
-  "object-src 'none'",
+  "object-src 'self'",
   "base-uri 'self'",
   "form-action 'self'",
-  "frame-ancestors 'none'"
+  "frame-ancestors 'self'"
 ].join('; ');
 
 function getSecurityHeaders(req, isApi = false) {
   const origin = req?.headers?.origin || '';
   const headers = {
     'X-Content-Type-Options': 'nosniff',
-    'X-Frame-Options': 'DENY',
+    'X-Frame-Options': 'SAMEORIGIN',
     'Referrer-Policy': 'strict-origin-when-cross-origin',
     'Permissions-Policy': 'camera=(), microphone=(), geolocation=(), payment=()',
     'Content-Security-Policy': CSP_HEADER

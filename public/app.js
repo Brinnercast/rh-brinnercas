@@ -2853,7 +2853,12 @@ window.openDocPreview = function (title, inlineUrl, downloadUrl, _unused, isImag
   } else if (isImage && inlineUrl) {
     bodyEl.innerHTML = `<div style="text-align:center;"><img src="${escapeHtml(inlineUrl)}" alt="${escapeHtml(title)}" style="max-width:100%; max-height:62vh; border-radius:12px; border:1px solid var(--glass-border-gold);" /></div>`;
   } else if (inlineUrl) {
-    bodyEl.innerHTML = `<iframe src="${escapeHtml(inlineUrl)}" class="doc-preview-frame" title="${escapeHtml(title)}"></iframe>`;
+    let embedUrl = safeUrl(inlineUrl);
+    const driveMatch = embedUrl.match(/^https:\/\/drive\.google\.com\/file\/d\/([^/]+)\/view/i);
+    if (driveMatch) {
+      embedUrl = `https://drive.google.com/file/d/${driveMatch[1]}/preview`;
+    }
+    bodyEl.innerHTML = `<iframe src="${escapeHtml(embedUrl)}" class="doc-preview-frame" title="${escapeHtml(title)}"></iframe>`;
   } else {
     bodyEl.innerHTML = '<p>Vista previa lista.</p>';
   }
