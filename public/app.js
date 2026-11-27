@@ -856,6 +856,37 @@ function formatSheetDate(val) {
   return s;
 }
 
+function toIsoDate(val) {
+  const s = String(val || '').trim();
+  if (!s) return '';
+  if (/^\d{4}-\d{2}-\d{2}$/.test(s)) return s;
+  const isoT = s.match(/^(\d{4}-\d{2}-\d{2})T/);
+  if (isoT) return isoT[1];
+  const dmy = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+  if (dmy) return `${dmy[3]}-${dmy[2].padStart(2, '0')}-${dmy[1].padStart(2, '0')}`;
+  return '';
+}
+
+function toDmyDate(val) {
+  const s = String(val || '').trim();
+  if (!s) return '';
+  const iso = s.match(/^(\d{4})-(\d{2})-(\d{2})/);
+  if (iso) return `${iso[3]}/${iso[2]}/${iso[1]}`;
+  return s;
+}
+
+function calcularEdadPorAnio(dateStr) {
+  const s = String(dateStr || '').trim();
+  if (!s) return '';
+  let birthYear = NaN;
+  const iso = s.match(/^(\d{4})-\d{2}-\d{2}/);
+  const dmy = s.match(/^\d{1,2}\/\d{1,2}\/(\d{4})$/);
+  if (iso) birthYear = parseInt(iso[1], 10);
+  else if (dmy) birthYear = parseInt(dmy[1], 10);
+  if (isNaN(birthYear) || birthYear < 1920 || birthYear > new Date().getFullYear()) return '';
+  return String(new Date().getFullYear() - birthYear);
+}
+
 function mergeGasPadronIntoAudit(gasRows, baseAudit) {
   const existing = Array.isArray(baseAudit?.colaboradores) ? baseAudit.colaboradores : [];
   const byDni = new Map(existing.map(c => [String(c.dni || '').trim(), c]));
@@ -1606,19 +1637,29 @@ function initOnboardingForm() {
   const fFin = document.getElementById('ing-fecha-fin');
   const resBox = document.getElementById('ingreso-result-box');
 
-  // Cálculo automático de vigencia +3 meses
+  // Cálculo automático de vigencia +3 meses desde calendario (YYYY-MM-DD)
   fInicio?.addEventListener('change', () => {
-    const parts = fInicio.value.trim().split('/');
-    if (parts.length === 3 && fFin) {
-      const d = parseInt(parts[0], 10);
-      const m = parseInt(parts[1], 10) - 1;
-      const y = parseInt(parts[2], 10);
+    const val = fInicio.value.trim();
+    const iso = val.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+    if (iso && fFin) {
+      const y = parseInt(iso[1], 10);
+      const m = parseInt(iso[2], 10) - 1;
+      const d = parseInt(iso[3], 10);
       const dt = new Date(y, m + 3, d - 1);
       if (!isNaN(dt.getTime())) {
-        fFin.value = `${String(dt.getDate()).padStart(2, '0')}/${String(dt.getMonth() + 1).padStart(2, '0')}/${dt.getFullYear()}`;
+        fFin.value = `${dt.getFullYear()}-${String(dt.getMonth() + 1).padStart(2, '0')}-${String(dt.getDate()).padStart(2, '0')}`;
       }
     }
   });
+
+  // Cálculo automático de edad = año actual - año de nacimiento
+  const ingNac = document.getElementById('ing-nacimiento');
+  const ingEdad = document.getElementById('ing-edad');
+  const syncIngEdad = () => {
+    if (ingEdad && ingNac) ingEdad.value = calcularEdadPorAnio(ingNac.value);
+  };
+  ingNac?.addEventListener('change', syncIngEdad);
+  ingNac?.addEventListener('input', syncIngEdad);
 
   function handleFile(file) {
     if (!file) return;
@@ -1671,8 +1712,8 @@ function initOnboardingForm() {
       cargo: (p.cargo || 'COLABORADOR').toUpperCase(),
       area: p.area || 'Salón',
       sueldo: Number(p.sueldo || 1500),
-      fechaIngreso: p.fechaInicio || '01/11/2026',
-      vigenciaHasta: p.fechaFin || '31/01/2027'
+      fechaIngreso: toDmyDate(p.fechaInicio) || '01/11/2026',
+      vigenciaHasta: toDmyDate(p.fechaFin) || '31/01/2027'
     };
     const html = buildContratoOficialHtml(tempColab);
     openDocPreview(`Contrato Oficial (Anexo N° 001) — ${tempColab.nombre}`, null, null, false, false, html);
@@ -1690,6 +1731,12 @@ function initOnboardingForm() {
 
     const fd = new FormData(form);
     const payload = Object.fromEntries(fd.entries());
+    payload.fechaInicio = toDmyDate(payload.fechaInicio);
+    payload.fechaFin = toDmyDate(payload.fechaFin);
+    payload.fechaNacimiento = toDmyDate(payload.fechaNacimiento);
+    if (payload.fechaNacimiento) {
+      payload.edad = calcularEdadPorAnio(payload.fechaNacimiento) || payload.edad;
+    }
     if (state.dniAttachment) {
       payload.fotoDniBase64 = state.dniAttachment.base64;
       payload.fotoDniName = state.dniAttachment.name;
@@ -2996,12 +3043,13 @@ window.loadPlanillaForm = function (id) {
   setSelectOrAddOption(document.getElementById('edit-condicion'), cleanVal(c.condicionLaborable) || 'FULL TIME');
   setSelectOrAddOption(document.getElementById('edit-estado'), cleanVal(c.estado) || 'ACTIVO');
   setVal('edit-sueldo', c.sueldo != null ? c.sueldo : 0);
-  setVal('edit-fecha-inicio', cleanVal(c.fechaIngreso));
-  setVal('edit-fecha-fin', c.estado === 'CESADO' ? cleanVal(c.finContratoBase) : cleanVal(c.vigenciaHasta));
-  setVal('edit-fecha-cese', cleanVal(c.fechaCese));
+  setVal('edit-fecha-inicio', toIsoDate(cleanVal(c.fechaIngreso)));
+  setVal('edit-fecha-fin', toIsoDate(c.estado === 'CESADO' ? cleanVal(c.finContratoBase) : cleanVal(c.vigenciaHasta)));
+  setVal('edit-fecha-cese', toIsoDate(cleanVal(c.fechaCese)));
   setVal('edit-domicilio', cleanVal(c.domicilio));
-  setVal('edit-nacimiento', cleanVal(c.fechaNacimiento));
-  setVal('edit-edad', cleanVal(c.edad));
+  const nacIso = toIsoDate(cleanVal(c.fechaNacimiento));
+  setVal('edit-nacimiento', nacIso);
+  setVal('edit-edad', nacIso ? calcularEdadPorAnio(nacIso) : cleanVal(c.edad));
   setVal('edit-celular', cleanVal(c.celular));
   setVal('edit-correo', cleanVal(c.correo));
   setVal('edit-banco', cleanVal(c.banco));
@@ -3122,6 +3170,15 @@ function initPlanillaEditor() {
     loadPlanillaForm(state.editPlanillaId);
   });
 
+  // Cálculo automático de edad = año actual - año de nacimiento en Editar Planilla
+  const editNac = document.getElementById('edit-nacimiento');
+  const editEdad = document.getElementById('edit-edad');
+  const syncEditEdad = () => {
+    if (editEdad && editNac) editEdad.value = calcularEdadPorAnio(editNac.value);
+  };
+  editNac?.addEventListener('change', syncEditEdad);
+  editNac?.addEventListener('input', syncEditEdad);
+
   // Manejo de archivo PDF / Foto de DNI dentro del modal de edición de planilla
   const editDniInput = document.getElementById('edit-dni-file-input');
   const editDniDropzone = document.getElementById('edit-dni-dropzone');
@@ -3193,8 +3250,8 @@ function initPlanillaEditor() {
       cargo: (p.cargo || 'COLABORADOR').toUpperCase(),
       area: p.area || 'Salón',
       sueldo: Number(p.sueldo || 0),
-      fechaIngreso: p.fechaInicio || '01/02/2026',
-      vigenciaHasta: p.fechaFin || '31/10/2026'
+      fechaIngreso: toDmyDate(p.fechaInicio) || '01/02/2026',
+      vigenciaHasta: toDmyDate(p.fechaFin) || '31/10/2026'
     };
     const html = buildContratoOficialHtml(tempColab);
     openDocPreview(`Contrato Oficial (Anexo N° 001) — ${tempColab.nombre}`, null, null, false, false, html);
@@ -3212,6 +3269,13 @@ function initPlanillaEditor() {
 
     const fd = new FormData(form);
     const payload = Object.fromEntries(fd.entries());
+    payload.fechaInicio = toDmyDate(payload.fechaInicio);
+    payload.fechaFin = toDmyDate(payload.fechaFin);
+    payload.fechaCese = toDmyDate(payload.fechaCese);
+    payload.fechaNacimiento = toDmyDate(payload.fechaNacimiento);
+    if (payload.fechaNacimiento) {
+      payload.edad = calcularEdadPorAnio(payload.fechaNacimiento) || payload.edad;
+    }
     if (state.editDniAttachment) {
       payload.fotoDniBase64 = state.editDniAttachment.base64;
       payload.fotoDniName = state.editDniAttachment.name;

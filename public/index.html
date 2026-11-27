@@ -724,20 +724,19 @@
               </div>
 
               <div class="field-group">
-                <label for="ing-fecha-inicio">Fecha de Inicio de Contrato (DD/MM/YYYY) *</label>
+                <label for="ing-fecha-inicio">Fecha de Inicio de Contrato *</label>
                 <span id="ing-fecha-inicio-hint" class="field-hint">Al cambiarla se calcula automáticamente el fin a 3 meses</span>
                 <input
                   id="ing-fecha-inicio"
                   name="fechaInicio"
-                  type="text"
+                  type="date"
                   class="glass-input"
                   required
-                  pattern="^\d{2}/\d{2}/\d{4}$"
-                  value="01/11/2026"
+                  value="2026-11-01"
                   aria-describedby="ing-fecha-inicio-hint"
                   data-error="ing-fecha-inicio-err"
                 />
-                <p id="ing-fecha-inicio-err" class="error-msg">Usa formato DD/MM/AAAA (ej: 01/11/2026).</p>
+                <p id="ing-fecha-inicio-err" class="error-msg">Selecciona una fecha de inicio válida.</p>
               </div>
 
               <div class="field-group">
@@ -746,15 +745,14 @@
                 <input
                   id="ing-fecha-fin"
                   name="fechaFin"
-                  type="text"
+                  type="date"
                   class="glass-input"
                   required
-                  pattern="^\d{2}/\d{2}/\d{4}$"
-                  value="31/01/2027"
+                  value="2027-01-31"
                   aria-describedby="ing-fecha-fin-hint"
                   data-error="ing-fecha-fin-err"
                 />
-                <p id="ing-fecha-fin-err" class="error-msg">Usa formato DD/MM/AAAA (ej: 31/01/2027).</p>
+                <p id="ing-fecha-fin-err" class="error-msg">Selecciona una fecha de fin válida.</p>
               </div>
 
               <div class="field-group">
@@ -775,14 +773,14 @@
 
               <div class="field-group">
                 <label for="ing-nacimiento">Fecha de Nacimiento</label>
-                <span id="ing-nacimiento-hint" class="field-hint">Formato DD/MM/AAAA (opcional)</span>
-                <input id="ing-nacimiento" name="fechaNacimiento" type="text" class="glass-input" aria-describedby="ing-nacimiento-hint" placeholder="Ej: 15/05/1998" />
+                <span id="ing-nacimiento-hint" class="field-hint">Selecciona en el calendario</span>
+                <input id="ing-nacimiento" name="fechaNacimiento" type="date" class="glass-input" aria-describedby="ing-nacimiento-hint" />
               </div>
 
               <div class="field-group">
-                <label for="ing-edad">Edad Actual</label>
-                <span id="ing-edad-hint" class="field-hint">Años cumplidos</span>
-                <input id="ing-edad" name="edad" type="number" min="18" max="85" class="glass-input" aria-describedby="ing-edad-hint" placeholder="Ej: 28" />
+                <label for="ing-edad">Edad Actual (Automática)</label>
+                <span id="ing-edad-hint" class="field-hint">Calculada según año de nacimiento y año actual</span>
+                <input id="ing-edad" name="edad" type="number" min="15" max="90" readonly class="glass-input" aria-describedby="ing-edad-hint" placeholder="Se calcula automático" />
               </div>
 
               <div class="field-group">
@@ -1551,21 +1549,21 @@
           </div>
 
           <div class="field-group">
-            <label for="edit-fecha-inicio">Fecha de Inicio de Contrato (DD/MM/YYYY)</label>
+            <label for="edit-fecha-inicio">Fecha de Inicio de Contrato</label>
             <span class="field-hint">Inicio de vínculo laboral</span>
-            <input id="edit-fecha-inicio" name="fechaInicio" type="text" class="glass-input" placeholder="Ej: 01/02/2026" />
+            <input id="edit-fecha-inicio" name="fechaInicio" type="date" class="glass-input" />
           </div>
 
           <div class="field-group">
             <label for="edit-fecha-fin">Fecha de Fin / Vigencia Actual</label>
             <span class="field-hint">Vencimiento vigente de contrato o adenda</span>
-            <input id="edit-fecha-fin" name="fechaFin" type="text" class="glass-input" placeholder="Ej: 31/10/2026" />
+            <input id="edit-fecha-fin" name="fechaFin" type="date" class="glass-input" />
           </div>
 
           <div class="field-group">
             <label for="edit-fecha-cese">Fecha de Cese (si aplica)</label>
             <span class="field-hint">Dejar vacío si el colaborador sigue activo</span>
-            <input id="edit-fecha-cese" name="fechaCese" type="text" class="glass-input" placeholder="Ej: 31/10/2026" />
+            <input id="edit-fecha-cese" name="fechaCese" type="date" class="glass-input" />
           </div>
 
           <div class="field-group">
@@ -1577,14 +1575,14 @@
 
           <div class="field-group">
             <label for="edit-nacimiento">Fecha de Nacimiento</label>
-            <span class="field-hint">Formato DD/MM/AAAA</span>
-            <input id="edit-nacimiento" name="fechaNacimiento" type="text" class="glass-input" placeholder="Ej: 15/05/1998" />
+            <span class="field-hint">Selecciona en el calendario</span>
+            <input id="edit-nacimiento" name="fechaNacimiento" type="date" class="glass-input" />
           </div>
 
           <div class="field-group">
-            <label for="edit-edad">Edad Actual</label>
-            <span class="field-hint">Años cumplidos</span>
-            <input id="edit-edad" name="edad" type="text" class="glass-input" placeholder="Ej: 28" />
+            <label for="edit-edad">Edad Actual (Automática)</label>
+            <span class="field-hint">Calculada según año de nacimiento y año actual</span>
+            <input id="edit-edad" name="edad" type="number" readonly class="glass-input" placeholder="Se calcula automático" />
           </div>
 
           <div class="field-group">
@@ -1682,7 +1680,7 @@
 
   <script src="assets/the-handsome/the-handsome-icons.js"></script>
   <script src="assets/button-web/button-web-icons.js"></script>
-  <script src="data-bundle.js?v=20261127dni"></script>
-  <script src="app.js?v=20261127dni"></script>
+  <script src="data-bundle.js?v=20261127cal"></script>
+  <script src="app.js?v=20261127cal"></script>
 </body>
 </html>
