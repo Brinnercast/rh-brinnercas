@@ -778,9 +778,9 @@
               </div>
 
               <div class="field-group">
-                <label for="ing-edad">Edad Actual (Automática)</label>
-                <span id="ing-edad-hint" class="field-hint">Calculada según año de nacimiento y año actual</span>
-                <input id="ing-edad" name="edad" type="number" min="15" max="90" readonly class="glass-input" aria-describedby="ing-edad-hint" placeholder="Se calcula automático" />
+                <label for="ing-edad">Edad Actual</label>
+                <span id="ing-edad-hint" class="field-hint">Años cumplidos</span>
+                <input id="ing-edad" name="edad" type="number" min="15" max="90" class="glass-input" aria-describedby="ing-edad-hint" placeholder="Ej: 28" />
               </div>
 
               <div class="field-group">
@@ -964,15 +964,15 @@
             <div class="onboarding-grid">
               <div class="field-group">
                 <label for="adenda-fecha-inicio">Nueva Vigencia Desde</label>
-                <input id="adenda-fecha-inicio" type="text" class="glass-input" value="01 de noviembre de 2026" />
+                <input id="adenda-fecha-inicio" type="date" class="glass-input" value="2026-11-01" />
               </div>
               <div class="field-group">
                 <label for="adenda-fecha-fin">Nueva Vigencia Hasta (3 Meses)</label>
-                <input id="adenda-fecha-fin" type="text" class="glass-input" value="31 de enero de 2027" />
+                <input id="adenda-fecha-fin" type="date" class="glass-input" value="2027-01-31" />
               </div>
               <div class="field-group">
                 <label for="adenda-fecha-firma">Fecha de Firma del Documento</label>
-                <input id="adenda-fecha-firma" type="text" class="glass-input" value="31 días del mes de octubre de 2026" />
+                <input id="adenda-fecha-firma" type="date" class="glass-input" value="2026-10-31" />
               </div>
             </div>
             <div style="margin-top:16px; display:flex; align-items:center; gap:14px; flex-wrap:wrap;">
@@ -1113,7 +1113,7 @@
                 </div>
                 <div class="field-group">
                   <label for="liq-fecha-cese">Fecha de Cese Simulada / Real (Opcional)</label>
-                  <input id="liq-fecha-cese" type="text" class="glass-input" placeholder="DD/MM/AAAA (vacío = usa cese/vigencia)" />
+                  <input id="liq-fecha-cese" type="date" class="glass-input" />
                 </div>
                 <div class="bw-scope" style="margin-top:4px;">
                   <button type="submit" class="bw-btn bw-btn-4" style="width:100%;">
@@ -1580,9 +1580,9 @@
           </div>
 
           <div class="field-group">
-            <label for="edit-edad">Edad Actual (Automática)</label>
-            <span class="field-hint">Calculada según año de nacimiento y año actual</span>
-            <input id="edit-edad" name="edad" type="number" readonly class="glass-input" placeholder="Se calcula automático" />
+            <label for="edit-edad">Edad Actual</label>
+            <span class="field-hint">Años cumplidos</span>
+            <input id="edit-edad" name="edad" type="number" class="glass-input" placeholder="Ej: 28" />
           </div>
 
           <div class="field-group">
@@ -1680,7 +1680,7 @@
 
   <script src="assets/the-handsome/the-handsome-icons.js"></script>
   <script src="assets/button-web/button-web-icons.js"></script>
-  <script src="data-bundle.js?v=20261127cal"></script>
-  <script src="app.js?v=20261127cal"></script>
+  <script src="data-bundle.js?v=20261127cal2"></script>
+  <script src="app.js?v=20261127cal2"></script>
 </body>
 </html>

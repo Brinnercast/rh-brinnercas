@@ -887,6 +887,17 @@ function calcularEdadPorAnio(dateStr) {
   return String(new Date().getFullYear() - birthYear);
 }
 
+function toLegalSpanishDate(val, isFirma = false) {
+  const s = String(val || '').trim();
+  const iso = s.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if (!iso) return s;
+  const meses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+  const y = iso[1];
+  const mName = meses[parseInt(iso[2], 10) - 1] || '';
+  const d = iso[3];
+  return isFirma ? `${d} días del mes de ${mName} de ${y}` : `${d} de ${mName} de ${y}`;
+}
+
 function mergeGasPadronIntoAudit(gasRows, baseAudit) {
   const existing = Array.isArray(baseAudit?.colaboradores) ? baseAudit.colaboradores : [];
   const byDni = new Map(existing.map(c => [String(c.dni || '').trim(), c]));
@@ -1833,9 +1844,9 @@ function renderAdendasView() {
 }
 
 window.generarAdendaIndividual = async function (id, btn) {
-  const fechaInicioNueva = document.getElementById('adenda-fecha-inicio')?.value || '01 de noviembre de 2026';
-  const fechaFinNueva = document.getElementById('adenda-fecha-fin')?.value || '31 de enero de 2027';
-  const firmaTexto = document.getElementById('adenda-fecha-firma')?.value || '31 días del mes de octubre de 2026';
+  const fechaInicioNueva = toLegalSpanishDate(document.getElementById('adenda-fecha-inicio')?.value || '2026-11-01', false);
+  const fechaFinNueva = toLegalSpanishDate(document.getElementById('adenda-fecha-fin')?.value || '2027-01-31', false);
+  const firmaTexto = toLegalSpanishDate(document.getElementById('adenda-fecha-firma')?.value || '2026-10-31', true);
 
   const orig = btn.textContent;
   btn.disabled = true;
@@ -1860,9 +1871,9 @@ function initAdendaBatch() {
   document.getElementById('btn-gen-all-adendas')?.addEventListener('click', async () => {
     const status = document.getElementById('adenda-batch-status');
     const linksBox = document.getElementById('adenda-batch-links');
-    const fechaInicioNueva = document.getElementById('adenda-fecha-inicio')?.value || '01 de noviembre de 2026';
-    const fechaFinNueva = document.getElementById('adenda-fecha-fin')?.value || '31 de enero de 2027';
-    const firmaTexto = document.getElementById('adenda-fecha-firma')?.value || '31 días del mes de octubre de 2026';
+    const fechaInicioNueva = toLegalSpanishDate(document.getElementById('adenda-fecha-inicio')?.value || '2026-11-01', false);
+    const fechaFinNueva = toLegalSpanishDate(document.getElementById('adenda-fecha-fin')?.value || '2027-01-31', false);
+    const firmaTexto = toLegalSpanishDate(document.getElementById('adenda-fecha-firma')?.value || '2026-10-31', true);
 
     status.textContent = 'Compilando adendas en Aptos 11pt...';
     linksBox.innerHTML = '';
@@ -2012,7 +2023,7 @@ function initDocsForms() {
     e.preventDefault();
     const id = document.getElementById('liq-colab').value;
     const regimen = document.getElementById('liq-regimen').value;
-    const fechaCese = document.getElementById('liq-fecha-cese').value.trim();
+    const fechaCese = toDmyDate(document.getElementById('liq-fecha-cese').value.trim());
     await openLiquidacionModal(id, regimen, fechaCese);
   });
 }
@@ -2211,8 +2222,8 @@ function buildEmailDraft(tipo, colabId) {
   if (docs.fotoDni?.driveUrl) links.push({ label: 'Documento DNI', url: docs.fotoDni.driveUrl });
 
   if (tipo === 'ADENDA') {
-    const fIni = document.getElementById('adenda-fecha-inicio')?.value || '01 de noviembre de 2026';
-    const fFin = document.getElementById('adenda-fecha-fin')?.value || '31 de enero de 2027';
+    const fIni = toLegalSpanishDate(document.getElementById('adenda-fecha-inicio')?.value || '2026-11-01', false);
+    const fFin = toLegalSpanishDate(document.getElementById('adenda-fecha-fin')?.value || '2027-01-31', false);
     const lastAdendaUrl = docs.adendas?.length ? (docs.adendas[docs.adendas.length - 1].driveUrl || rootDrive) : rootDrive;
     return {
       to: destEmail,
