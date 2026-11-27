@@ -1663,6 +1663,33 @@ function initOnboardingForm() {
     }
   });
 
+  // Bloquear fechas de contrato y vista previa de contrato cuando Condición Laboral = RXH
+  const ingCondLab = document.getElementById('ing-condicion-laboral');
+  const btnPrevIng = document.getElementById('btn-preview-contrato-ingreso');
+  const syncIngRxhLock = () => {
+    const isRxh = (ingCondLab?.value || '').toUpperCase() === 'RXH';
+    [fInicio, fFin].forEach(el => {
+      if (!el) return;
+      el.disabled = isRxh;
+      el.required = !isRxh;
+      if (isRxh) {
+        el.dataset.prevVal = el.value || el.dataset.prevVal || '';
+        el.value = '';
+        el.removeAttribute('aria-invalid');
+        const errId = el.getAttribute('data-error');
+        if (errId) document.getElementById(errId)?.classList.remove('is-visible');
+      } else if (!el.value) {
+        el.value = el.dataset.prevVal || (el.id === 'ing-fecha-inicio' ? '2026-11-01' : '2027-01-31');
+      }
+    });
+    if (btnPrevIng) {
+      btnPrevIng.disabled = isRxh;
+      btnPrevIng.title = isRxh ? 'No aplica contrato para condición laboral RXH' : '';
+    }
+  };
+  ingCondLab?.addEventListener('change', syncIngRxhLock);
+  syncIngRxhLock();
+
   // Cálculo automático de edad = año actual - año de nacimiento
   const ingNac = document.getElementById('ing-nacimiento');
   const ingEdad = document.getElementById('ing-edad');
@@ -1706,6 +1733,7 @@ function initOnboardingForm() {
     state.dniAttachment = null;
     statusEl.textContent = 'Ningún archivo adjunto aún (opcional si se cargará luego).';
     resBox.style.display = 'none';
+    syncIngRxhLock();
   });
 
   // Previsualizar en vivo el Contrato Oficial (Anexo N° 001 + 18 Cláusulas de 01_CONTRATOS_PERSONAL_PDF)
@@ -1742,8 +1770,9 @@ function initOnboardingForm() {
 
     const fd = new FormData(form);
     const payload = Object.fromEntries(fd.entries());
-    payload.fechaInicio = toDmyDate(payload.fechaInicio);
-    payload.fechaFin = toDmyDate(payload.fechaFin);
+    const isRxhIng = String(payload.condicionLaboral || '').toUpperCase() === 'RXH';
+    payload.fechaInicio = isRxhIng ? '' : toDmyDate(payload.fechaInicio);
+    payload.fechaFin = isRxhIng ? '' : toDmyDate(payload.fechaFin);
     payload.fechaNacimiento = toDmyDate(payload.fechaNacimiento);
     if (payload.fechaNacimiento) {
       payload.edad = calcularEdadPorAnio(payload.fechaNacimiento) || payload.edad;
@@ -3061,6 +3090,7 @@ window.loadPlanillaForm = function (id) {
   const nacIso = toIsoDate(cleanVal(c.fechaNacimiento));
   setVal('edit-nacimiento', nacIso);
   setVal('edit-edad', nacIso ? calcularEdadPorAnio(nacIso) : cleanVal(c.edad));
+  if (typeof window.syncEditRxhLock === 'function') window.syncEditRxhLock();
   setVal('edit-celular', cleanVal(c.celular));
   setVal('edit-correo', cleanVal(c.correo));
   setVal('edit-banco', cleanVal(c.banco));
@@ -3181,6 +3211,30 @@ function initPlanillaEditor() {
     loadPlanillaForm(state.editPlanillaId);
   });
 
+  // Bloquear fechas de contrato en Editar Planilla cuando Condición Laboral = RXH
+  const editCondLab = document.getElementById('edit-condicion-laboral');
+  const editFIni = document.getElementById('edit-fecha-inicio');
+  const editFFin = document.getElementById('edit-fecha-fin');
+  const btnPrevEdit = document.getElementById('btn-preview-contrato-edit');
+  window.syncEditRxhLock = () => {
+    const isRxh = (editCondLab?.value || '').toUpperCase() === 'RXH';
+    [editFIni, editFFin].forEach(el => {
+      if (!el) return;
+      el.disabled = isRxh;
+      if (isRxh) {
+        if (el.value) el.dataset.prevVal = el.value;
+        el.value = '';
+      } else if (!el.value && el.dataset.prevVal) {
+        el.value = el.dataset.prevVal;
+      }
+    });
+    if (btnPrevEdit) {
+      btnPrevEdit.disabled = isRxh;
+      btnPrevEdit.title = isRxh ? 'No aplica contrato para condición laboral RXH' : '';
+    }
+  };
+  editCondLab?.addEventListener('change', window.syncEditRxhLock);
+
   // Cálculo automático de edad = año actual - año de nacimiento en Editar Planilla
   const editNac = document.getElementById('edit-nacimiento');
   const editEdad = document.getElementById('edit-edad');
@@ -3280,8 +3334,9 @@ function initPlanillaEditor() {
 
     const fd = new FormData(form);
     const payload = Object.fromEntries(fd.entries());
-    payload.fechaInicio = toDmyDate(payload.fechaInicio);
-    payload.fechaFin = toDmyDate(payload.fechaFin);
+    const isRxhEdit = String(payload.condicionLaboral || '').toUpperCase() === 'RXH';
+    payload.fechaInicio = isRxhEdit ? '' : toDmyDate(payload.fechaInicio);
+    payload.fechaFin = isRxhEdit ? '' : toDmyDate(payload.fechaFin);
     payload.fechaCese = toDmyDate(payload.fechaCese);
     payload.fechaNacimiento = toDmyDate(payload.fechaNacimiento);
     if (payload.fechaNacimiento) {

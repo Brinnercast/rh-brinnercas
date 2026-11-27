@@ -2328,6 +2328,14 @@ html[data-theme="dark"] .bw-btn-sm.is-gold {
   outline: none !important;
 }
 
+.glass-input:disabled,
+.glass-select:disabled,
+button:disabled {
+  opacity: 0.48 !important;
+  cursor: not-allowed !important;
+  background: var(--tg-light-gray) !important;
+}
+
 .bw-combo-pill.aurora-search {
   border-radius: 90px !important;
   border: 1px solid var(--tg-border) !important;

@@ -147,24 +147,26 @@ async function registrarNuevoIngreso(payload) {
     }
   }
 
-  // 2. Generar Contrato Inicial .docx local y subir a Drive
-  try {
-    const contratoDoc = await generarContratoBuffer(nuevoColab);
-    const localContratoPath = path.join(DOCS_DIR, 'contratos', contratoDoc.fileName);
-    fs.writeFileSync(localContratoPath, contratoDoc.buffer);
+  // 2. Generar Contrato Inicial .docx local y subir a Drive (no aplica si Condición Laboral = RXH)
+  if (condicionLaboral !== 'RXH') {
+    try {
+      const contratoDoc = await generarContratoBuffer(nuevoColab);
+      const localContratoPath = path.join(DOCS_DIR, 'contratos', contratoDoc.fileName);
+      fs.writeFileSync(localContratoPath, contratoDoc.buffer);
 
-    let driveContrato = null;
-    if (manifest?.drive?.subfolders?.contratos?.id) {
-      driveContrato = runCliSafe('gdrive', ['mutate', 'upload', localContratoPath, '--parent', manifest.drive.subfolders.contratos.id, '--json']);
+      let driveContrato = null;
+      if (manifest?.drive?.subfolders?.contratos?.id) {
+        driveContrato = runCliSafe('gdrive', ['mutate', 'upload', localContratoPath, '--parent', manifest.drive.subfolders.contratos.id, '--json']);
+      }
+      nuevoColab.documentos.contrato = {
+        fileName: contratoDoc.fileName,
+        localUrl: `/docs/contratos/${encodeURIComponent(contratoDoc.fileName)}`,
+        driveId: driveContrato?.id || null,
+        driveUrl: driveContrato?.id ? `https://drive.google.com/file/d/${driveContrato.id}/view` : null
+      };
+    } catch (e) {
+      console.warn('[WARN] Error generando/subiendo contrato inicial:', e.message);
     }
-    nuevoColab.documentos.contrato = {
-      fileName: contratoDoc.fileName,
-      localUrl: `/docs/contratos/${encodeURIComponent(contratoDoc.fileName)}`,
-      driveId: driveContrato?.id || null,
-      driveUrl: driveContrato?.id ? `https://drive.google.com/file/d/${driveContrato.id}/view` : null
-    };
-  } catch (e) {
-    console.warn('[WARN] Error generando/subiendo contrato inicial:', e.message);
   }
 
   // 3. Guardar en Padrón JSON local y copia de skill
