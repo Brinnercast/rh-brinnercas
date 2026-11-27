@@ -103,11 +103,11 @@ async function authFetch(url, options = {}) {
 }
 
 function relDocUrl(localUrl, apiPath, driveUrl) {
+  if (driveUrl && (useGasBackend() || window.location.protocol === 'https:' || window.location.protocol === 'file:' || !localUrl)) {
+    return safeUrl(driveUrl);
+  }
   if (localUrl) {
     return safeUrl(String(localUrl).replace(/^\//, ''));
-  }
-  if (window.location.protocol === 'file:' && driveUrl) {
-    return safeUrl(driveUrl);
   }
   const base = apiUrl(apiPath);
   const tok = getAuthToken();
@@ -2840,10 +2840,13 @@ window.openDocPreview = function (title, inlineUrl, downloadUrl, _unused, isImag
   actionsEl.innerHTML = '';
 
   if (downloadUrl) {
-    actionsEl.innerHTML += `<a href="${escapeHtml(downloadUrl)}" class="bw-btn-sm is-primary">Descargar Archivo</a>`;
+    let dlUrl = safeUrl(downloadUrl);
+    const dlDrive = dlUrl.match(/^https:\/\/drive\.google\.com\/file\/d\/([^/]+)/i) || dlUrl.match(/^https:\/\/drive\.google\.com\/open\?id=([^&]+)/i);
+    if (dlDrive) dlUrl = `https://drive.google.com/uc?export=download&id=${dlDrive[1]}`;
+    actionsEl.innerHTML += `<a href="${escapeHtml(dlUrl)}" target="_blank" rel="noopener" class="bw-btn-sm is-primary">Descargar Archivo</a>`;
   }
   if (inlineUrl) {
-    actionsEl.innerHTML += `<a href="${escapeHtml(inlineUrl)}" target="_blank" rel="noopener" class="bw-btn-sm is-gold">Abrir Pestaña</a>`;
+    actionsEl.innerHTML += `<a href="${escapeHtml(safeUrl(inlineUrl))}" target="_blank" rel="noopener" class="bw-btn-sm is-gold">Abrir Pestaña</a>`;
   }
 
   if (rawHtml) {
@@ -2851,14 +2854,15 @@ window.openDocPreview = function (title, inlineUrl, downloadUrl, _unused, isImag
     const iframe = bodyEl.querySelector('iframe');
     iframe.srcdoc = rawHtml;
   } else if (isImage && inlineUrl) {
-    bodyEl.innerHTML = `<div style="text-align:center;"><img src="${escapeHtml(inlineUrl)}" alt="${escapeHtml(title)}" style="max-width:100%; max-height:62vh; border-radius:12px; border:1px solid var(--glass-border-gold);" /></div>`;
+    bodyEl.innerHTML = `<div style="text-align:center;"><img src="${escapeHtml(safeUrl(inlineUrl))}" alt="${escapeHtml(title)}" style="max-width:100%; max-height:62vh; border-radius:12px; border:1px solid var(--glass-border-gold);" /></div>`;
   } else if (inlineUrl) {
     let embedUrl = safeUrl(inlineUrl);
-    const driveMatch = embedUrl.match(/^https:\/\/drive\.google\.com\/file\/d\/([^/]+)\/view/i);
+    const driveMatch = embedUrl.match(/^https:\/\/drive\.google\.com\/file\/d\/([^/]+)/i)
+      || embedUrl.match(/^https:\/\/drive\.google\.com\/open\?id=([^&]+)/i);
     if (driveMatch) {
       embedUrl = `https://drive.google.com/file/d/${driveMatch[1]}/preview`;
     }
-    bodyEl.innerHTML = `<iframe src="${escapeHtml(embedUrl)}" class="doc-preview-frame" title="${escapeHtml(title)}"></iframe>`;
+    bodyEl.innerHTML = `<iframe src="${escapeHtml(embedUrl)}" class="doc-preview-frame" title="${escapeHtml(title)}" allow="autoplay"></iframe>`;
   } else {
     bodyEl.innerHTML = '<p>Vista previa lista.</p>';
   }
