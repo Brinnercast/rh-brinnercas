@@ -19,6 +19,9 @@ const { registrarNuevoIngreso, actualizarPersonalExistente } = require('./servic
 const { responderConsulta } = require('./services/assistant_ai');
 const {
   authenticateCredentials,
+  createResetOtp,
+  verifyAndResetPasswordWithOtp,
+  changeUserPassword,
   issueSessionToken,
   verifySessionToken,
   revokeSessionToken,
@@ -196,7 +199,7 @@ const server = http.createServer(async (req, res) => {
           status: 'FAILED',
           detail: `Intento fallido #${failInfo.count}`
         });
-        return sendJson(req, res, 401, { success: false, error: 'Credenciales o PIN incorrectos.' });
+        return sendJson(req, res, 401, { success: false, error: 'Usuario, correo o contraseña inválidos.' });
       }
 
       clearLoginFailures(ip);
@@ -232,6 +235,84 @@ const server = http.createServer(async (req, res) => {
         detail: 'Sesión revocada en servidor'
       });
       return sendJson(req, res, 200, { success: true });
+    }
+
+    // 1B. Recuperar contraseña por código OTP (Correo o WhatsApp)
+    if (req.method === 'POST' && pathname === '/api/auth/recover-request') {
+      const rate = checkLoginRateLimit(ip);
+      if (!rate.allowed) {
+        return sendJson(req, res, 429, { success: false, error: 'Demasiados intentos. Intenta nuevamente en 15 minutos.' });
+      }
+      const body = await parseBody(req, 16 * 1024);
+      const identifier = String(body.email || '').trim();
+      const channel = String(body.channel || 'email').toLowerCase();
+      const created = createResetOtp(identifier);
+      if (!created) {
+        writeAuditLog({ ip, user: identifier.slice(0, 80), role: 'NONE', action: 'PASSWORD_RECOVER_REQ', status: 'FAILED', detail: 'Usuario no encontrado' });
+        return sendJson(req, res, 404, { success: false, error: 'Usuario o correo inválido.' });
+      }
+
+      let emailSent = false;
+      let whatsappUrl = null;
+      const maskedEmail = created.user.recoveryEmail.replace(/(.{2}).+(@.+)/, '$1***$2');
+
+      if (channel === 'whatsapp') {
+        const msg = `RH BRINNERCAS - Código de recuperación de contraseña: ${created.code} (Válido por 10 minutos).`;
+        whatsappUrl = `https://wa.me/${created.user.whatsapp}?text=${encodeURIComponent(msg)}`;
+      } else {
+        try {
+          const { execFileSync } = require('child_process');
+          const tmpOtp = path.join(DATA_DIR, `tmp_otp_${Date.now()}.md`);
+          fs.writeFileSync(tmpOtp, `Hola ${created.user.name},\n\nTu código de recuperación para RH BRINNERCAS es:\n\n**${created.code}**\n\nEste código expira en 10 minutos. Si no solicitaste este cambio, ignora este mensaje.`, 'utf8');
+          const args = ['mutate', 'send', '--to', created.user.recoveryEmail, '--subject', 'RH BRINNERCAS — Código de recuperación de contraseña', '--body-file', tmpOtp];
+          if (process.platform === 'win32') {
+            execFileSync('cmd.exe', ['/d', '/c', 'gmail', ...args], { encoding: 'utf8', timeout: 15000, shell: false });
+          } else {
+            execFileSync('gmail', args, { encoding: 'utf8', timeout: 15000, shell: false });
+          }
+          if (fs.existsSync(tmpOtp)) fs.unlinkSync(tmpOtp);
+          emailSent = true;
+        } catch (e) {
+          emailSent = false;
+        }
+      }
+
+      writeAuditLog({ ip, user: created.user.email, role: created.user.role, department: created.user.department, action: 'PASSWORD_RECOVER_REQ', status: 'SUCCESS', detail: `Canal=${channel}` });
+      return sendJson(req, res, 200, {
+        success: true,
+        channel,
+        maskedEmail,
+        emailSent,
+        whatsappUrl,
+        message: channel === 'whatsapp'
+          ? 'Código generado. Abre WhatsApp para enviarlo a tu número registrado e ingrésalo abajo.'
+          : (emailSent ? `Código de 6 dígitos enviado a ${maskedEmail}.` : `Código generado para ${maskedEmail}.`)
+      });
+    }
+
+    if (req.method === 'POST' && pathname === '/api/auth/recover-reset') {
+      const body = await parseBody(req, 16 * 1024);
+      const result = verifyAndResetPasswordWithOtp(body.email, body.code, body.newPassword);
+      if (!result.ok) {
+        writeAuditLog({ ip, user: String(body.email || '').slice(0, 80), role: 'NONE', action: 'PASSWORD_RESET', status: 'FAILED', detail: result.error });
+        return sendJson(req, res, 400, { success: false, error: result.error });
+      }
+      writeAuditLog({ ip, user: result.user.email, role: result.user.role, department: result.user.department, action: 'PASSWORD_RESET', status: 'SUCCESS', detail: 'Contraseña restablecida vía OTP' });
+      return sendJson(req, res, 200, { success: true, message: 'Contraseña restablecida correctamente. Ya puedes iniciar sesión.' });
+    }
+
+    // 1C. Cambiar contraseña desde dentro de la web (Zero-Trust autenticado)
+    if (req.method === 'POST' && pathname === '/api/auth/change-password') {
+      const session = requireAuth(req, res, parsedUrl, 'audit:read', 'PASSWORD_CHANGE');
+      if (!session) return;
+      const body = await parseBody(req, 16 * 1024);
+      const result = changeUserPassword(session.email, body.currentPassword, body.newPassword);
+      if (!result.ok) {
+        writeAuditLog({ ip, user: session.email, role: session.role, department: session.department, action: 'PASSWORD_CHANGE', status: 'FAILED', detail: result.error });
+        return sendJson(req, res, 400, { success: false, error: result.error });
+      }
+      writeAuditLog({ ip, user: session.email, role: session.role, department: session.department, action: 'PASSWORD_CHANGE', status: 'SUCCESS', detail: 'Contraseña actualizada desde Dock' });
+      return sendJson(req, res, 200, { success: true, message: 'Contraseña actualizada correctamente.' });
     }
 
     if (req.method === 'GET' && pathname === '/api/auth/session') {

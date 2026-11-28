@@ -11,6 +11,7 @@ const path = require('path');
 const DATA_DIR = path.join(__dirname, '..', 'data');
 const AUDIT_LOG_PATH = path.join(DATA_DIR, 'audit_security_log.jsonl');
 const SECRET_FILE_PATH = path.join(DATA_DIR, '.session_hmac_secret');
+const AUTH_OVERRIDES_PATH = path.join(DATA_DIR, '.auth_password_overrides.json');
 
 // ============================================================================
 // 1. GESTIÓN DE SECRETO HMAC (NUNCA HARDCODED EN FRONTEND NI EN REPO)
@@ -81,6 +82,8 @@ const USERS_DB = [
   {
     id: 'usr-brinnercas',
     email: 'brinnercas',
+    recoveryEmail: 'admr.brinnercas@gmail.com',
+    whatsapp: '51959756385',
     aliases: ['admr.brinnercas@gmail.com', 'brinnercas@gmail.com'],
     name: 'Wilmer Brinner Castro Vásquez',
     role: 'ADMIN_GENERAL',
@@ -92,6 +95,8 @@ const USERS_DB = [
   {
     id: 'usr-gerencia',
     email: 'gerencia@aurora.pe',
+    recoveryEmail: 'admr.brinnercas@gmail.com',
+    whatsapp: '51959756385',
     aliases: [],
     name: 'Gladys Verónica Carbajal Urquizo',
     role: 'GERENCIA',
@@ -102,6 +107,33 @@ const USERS_DB = [
   }
 ];
 
+function loadPasswordOverrides() {
+  try {
+    if (fs.existsSync(AUTH_OVERRIDES_PATH)) {
+      return JSON.parse(fs.readFileSync(AUTH_OVERRIDES_PATH, 'utf8'));
+    }
+  } catch (e) {}
+  return {};
+}
+
+function savePasswordOverride(userId, newPlainPassword) {
+  const overrides = loadPasswordOverrides();
+  overrides[userId] = hashPasswordPBKDF2(newPlainPassword, USER_SALT);
+  fs.writeFileSync(AUTH_OVERRIDES_PATH, JSON.stringify(overrides, null, 2), { mode: 0o600, encoding: 'utf8' });
+}
+
+function getEffectivePassHashes(user) {
+  const overrides = loadPasswordOverrides();
+  if (overrides[user.id]) return [overrides[user.id]];
+  return user.passHashes;
+}
+
+function findUserByIdentifier(identifier) {
+  const clean = String(identifier || '').trim().toLowerCase();
+  if (!clean) return null;
+  return USERS_DB.find(u => u.email === clean || u.aliases.includes(clean)) || null;
+}
+
 function authenticateCredentials({ email, password, pin }) {
   const cleanEmail = String(email || '').trim().toLowerCase();
   if (pin) {
@@ -110,10 +142,68 @@ function authenticateCredentials({ email, password, pin }) {
     return matched || null;
   }
   if (!cleanEmail || !password) return null;
-  const user = USERS_DB.find(u => u.email === cleanEmail || u.aliases.includes(cleanEmail));
+  const user = findUserByIdentifier(cleanEmail);
   if (!user) return null;
-  const ok = user.passHashes.some(h => verifySecretConstantTime(String(password).trim(), h, USER_SALT));
+  const hashes = getEffectivePassHashes(user);
+  const ok = hashes.some(h => verifySecretConstantTime(String(password).trim(), h, USER_SALT));
   return ok ? user : null;
+}
+
+// ============================================================================
+// 2B. RECUPERACIÓN POR CÓDIGO OTP (10 MIN) Y CAMBIO DE CONTRASEÑA
+// ============================================================================
+const otpStore = new Map(); // userId -> { codeHash, expiresAt, attempts }
+
+function createResetOtp(identifier) {
+  const user = findUserByIdentifier(identifier);
+  if (!user) return null;
+  const code = String(crypto.randomInt(100000, 1000000));
+  const codeHash = crypto.createHash('sha256').update(`${USER_SALT}:${code}`).digest('hex');
+  otpStore.set(user.id, { codeHash, expiresAt: Date.now() + 10 * 60 * 1000, attempts: 0 });
+  return { user, code };
+}
+
+function verifyAndResetPasswordWithOtp(identifier, code, newPassword) {
+  const user = findUserByIdentifier(identifier);
+  if (!user) return { ok: false, error: 'Usuario o correo inválido.' };
+  const rec = otpStore.get(user.id);
+  if (!rec || Date.now() > rec.expiresAt) {
+    otpStore.delete(user.id);
+    return { ok: false, error: 'El código expiró o no existe. Solicita uno nuevo.' };
+  }
+  rec.attempts += 1;
+  if (rec.attempts > 5) {
+    otpStore.delete(user.id);
+    return { ok: false, error: 'Demasiados intentos con el código. Solicita uno nuevo.' };
+  }
+  const expected = Buffer.from(rec.codeHash, 'hex');
+  const got = Buffer.from(crypto.createHash('sha256').update(`${USER_SALT}:${String(code || '').trim()}`).digest('hex'), 'hex');
+  if (expected.length !== got.length || !crypto.timingSafeEqual(expected, got)) {
+    return { ok: false, error: 'Código de verificación incorrecto.' };
+  }
+  const cleanPass = String(newPassword || '').trim();
+  if (cleanPass.length < 4 || cleanPass.length > 64) {
+    return { ok: false, error: 'La nueva contraseña debe tener entre 4 y 64 caracteres.' };
+  }
+  savePasswordOverride(user.id, cleanPass);
+  otpStore.delete(user.id);
+  return { ok: true, user };
+}
+
+function changeUserPassword(userEmail, currentPassword, newPassword) {
+  const user = findUserByIdentifier(userEmail);
+  if (!user) return { ok: false, error: 'Usuario no encontrado.' };
+  const hashes = getEffectivePassHashes(user);
+  const validCurrent = hashes.some(h => verifySecretConstantTime(String(currentPassword || '').trim(), h, USER_SALT));
+  if (!validCurrent) {
+    return { ok: false, error: 'La contraseña actual es incorrecta.' };
+  }
+  const cleanNew = String(newPassword || '').trim();
+  if (cleanNew.length < 4 || cleanNew.length > 64) {
+    return { ok: false, error: 'La nueva contraseña debe tener entre 4 y 64 caracteres.' };
+  }
+  savePasswordOverride(user.id, cleanNew);
+  return { ok: true, user };
 }
 
 // ============================================================================
@@ -400,6 +490,9 @@ function resolveSafePath(baseDir, unsafeRelPath) {
 
 module.exports = {
   authenticateCredentials,
+  createResetOtp,
+  verifyAndResetPasswordWithOtp,
+  changeUserPassword,
   issueSessionToken,
   verifySessionToken,
   revokeSessionToken,

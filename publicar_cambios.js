@@ -24,6 +24,7 @@ const IGNORE_PATTERNS = [
   /^append_.*\.json$/i,
   /^update_.*\.json$/i,
   /^\.session_hmac_secret$/i,
+  /^\.auth_password_overrides\.json$/i,
   /^audit_security_log\.jsonl$/i,
   /\.log$/i,
   /^Thumbs\.db$/i,

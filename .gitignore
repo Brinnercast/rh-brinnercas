@@ -5,6 +5,7 @@ data/tmp_*.md
 data/append_*.json
 data/update_*.json
 data/.session_hmac_secret
+data/.auth_password_overrides.json
 data/audit_security_log.jsonl
 *.log
 .DS_Store

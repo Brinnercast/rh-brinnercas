@@ -25,7 +25,8 @@ async function gasPost(action, payload = {}) {
     body: JSON.stringify({ action, token, ...payload })
   });
   const json = await res.json();
-  if (json && !json.success && /expirada|inválida/i.test(json.error || '') && action !== 'login' && typeof window.forceLockPortal === 'function') {
+  const isPublicAuthAction = ['login', 'recover_request', 'recover_reset'].includes(action);
+  if (json && !json.success && !isPublicAuthAction && /sesi[oó]n.*(expirada|inv[aá]lida)/i.test(json.error || '') && typeof window.forceLockPortal === 'function') {
     window.forceLockPortal('Tu sesión ha expirado. Inicia sesión nuevamente.');
   }
   return json;
@@ -411,11 +412,10 @@ async function verifyStaticFallback({ email, password, pin }) {
 function initLoginControl() {
   const overlay = document.getElementById('login-screen');
   const formCred = document.getElementById('login-form-cred');
-  const formPin = document.getElementById('login-form-pin');
+  const formRecover = document.getElementById('login-form-recover');
   const tabBtns = document.querySelectorAll('[data-login-tab]');
   const togglePassBtn = document.getElementById('toggle-pass-btn');
   const passInput = document.getElementById('login-pass');
-  const pinInput = document.getElementById('login-pin-input');
 
   // Restaurar sesión activa solo si no ha expirado
   const savedSess = getStoredSession();
@@ -424,17 +424,25 @@ function initLoginControl() {
     unlockPortal(savedSess.user);
   }
 
+  function showLoginMode(mode) {
+    if (formCred) formCred.style.display = mode === 'cred' ? 'flex' : 'none';
+    if (formRecover) formRecover.style.display = mode === 'recover' ? 'flex' : 'none';
+    if (mode === 'recover') {
+      const loginEmailVal = document.getElementById('login-email')?.value?.trim();
+      const recInput = document.getElementById('recover-email');
+      if (recInput && !recInput.value && loginEmailVal) recInput.value = loginEmailVal;
+      const recFb = document.getElementById('login-recover-feedback');
+      if (recFb) recFb.style.display = 'none';
+    } else {
+      const authFb = document.getElementById('login-auth-feedback');
+      if (authFb) authFb.style.display = 'none';
+    }
+  }
+
   tabBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-      tabBtns.forEach(b => {
-        b.classList.remove('is-active');
-        b.setAttribute('aria-selected', 'false');
-      });
-      btn.classList.add('is-active');
-      btn.setAttribute('aria-selected', 'true');
       const mode = btn.getAttribute('data-login-tab');
-      formCred.style.display = mode === 'cred' ? 'flex' : 'none';
-      formPin.style.display = mode === 'pin' ? 'flex' : 'none';
+      showLoginMode(mode === 'recover' ? 'recover' : 'cred');
     });
   });
 
@@ -450,19 +458,7 @@ function initLoginControl() {
     });
   }
 
-  document.querySelectorAll('.pin-key[data-pin-val]').forEach(key => {
-    key.addEventListener('click', () => {
-      const val = key.getAttribute('data-pin-val');
-      if (val === 'C') {
-        pinInput.value = '';
-      } else if (pinInput.value.length < 4) {
-        pinInput.value += val;
-      }
-      pinInput.focus();
-    });
-  });
-
-  formCred.addEventListener('submit', async e => {
+  formCred?.addEventListener('submit', async e => {
     e.preventDefault();
     const feedback = document.getElementById('login-auth-feedback');
     feedback.style.display = 'none';
@@ -486,7 +482,7 @@ function initLoginControl() {
         data = await res.json();
       }
       if (!res.ok || !data.success) {
-        feedback.textContent = data.error || 'Credenciales incorrectas.';
+        feedback.textContent = data?.error || 'Usuario, correo o contraseña inválidos.';
         feedback.style.display = 'block';
         return;
       }
@@ -504,53 +500,208 @@ function initLoginControl() {
         unlockPortal(sess.user);
         return;
       }
-      feedback.textContent = 'Usuario o clave incorrectos.';
+      feedback.textContent = 'Usuario, correo o contraseña inválidos.';
       feedback.style.display = 'block';
     }
   });
 
-  formPin.addEventListener('submit', async e => {
-    e.preventDefault();
-    const feedback = document.getElementById('login-pin-feedback');
-    feedback.style.display = 'none';
-    if (!window.validateFormOnSubmit(formPin)) return;
+  // ── RECUPERACIÓN Y RESTABLECIMIENTO DE CONTRASEÑA (OTP EMAIL / WHATSAPP) ──
+  const recFeedback = document.getElementById('login-recover-feedback');
+  const recStep2 = document.getElementById('recover-step-2');
+  const btnRecEmail = document.getElementById('btn-recover-email');
+  const btnRecWa = document.getElementById('btn-recover-whatsapp');
+  const btnRecConfirm = document.getElementById('btn-recover-confirm');
 
-    const pinVal = pinInput.value.trim();
+  function setRecoverFeedback(msg, isError = false, waUrl = '') {
+    if (!recFeedback) return;
+    recFeedback.className = `bw-status-box ${isError ? 'bw-status-error' : 'bw-status-success'}`;
+    recFeedback.innerHTML = '';
+    const span = document.createElement('span');
+    span.textContent = msg;
+    recFeedback.appendChild(span);
+    if (waUrl && /^https:\/\/wa\.me\//i.test(waUrl)) {
+      const br = document.createElement('br');
+      const link = document.createElement('a');
+      link.href = waUrl;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      link.textContent = 'Abrir WhatsApp con el código OTP';
+      link.style.cssText = 'display:inline-block;margin-top:6px;color:#FFFFFF;font-weight:700;text-decoration:underline;';
+      recFeedback.appendChild(br);
+      recFeedback.appendChild(link);
+    }
+    recFeedback.style.display = 'block';
+  }
+
+  async function requestRecoveryOtp(channel) {
+    const emailVal = document.getElementById('recover-email')?.value?.trim().toLowerCase() || '';
+    if (!emailVal) {
+      setRecoverFeedback('Ingresa tu usuario o correo electrónico registrado.', true);
+      return;
+    }
+    if (btnRecEmail) btnRecEmail.disabled = true;
+    if (btnRecWa) btnRecWa.disabled = true;
+    setRecoverFeedback(channel === 'whatsapp' ? 'Generando código para WhatsApp...' : 'Enviando código a tu correo electrónico...', false);
 
     try {
-      let res = null;
       let data = null;
       if (useGasBackend()) {
-        data = await gasPost('login', { pin: pinVal });
-        res = { ok: Boolean(data && data.success) };
+        data = await gasPost('recover_request', { email: emailVal, channel });
       } else {
-        res = await fetch(apiUrl('/api/auth/login'), {
+        const res = await fetch(apiUrl('/api/auth/recover-request'), {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ pin: pinVal })
+          body: JSON.stringify({ email: emailVal, channel })
         });
         data = await res.json();
       }
-      if (!res.ok || !data.success) {
-        feedback.textContent = data.error || 'PIN inválido.';
-        feedback.style.display = 'block';
+      if (!data || !data.success) {
+        setRecoverFeedback(data?.error || 'Usuario o correo inválido.', true);
         return;
       }
-      const sess = saveSession({ user: data.user, token: data.token, expiresAt: data.expiresAt });
-      pinInput.value = '';
-      state.user = sess.user;
-      unlockPortal(sess.user);
+      if (recStep2) recStep2.style.display = 'flex';
+      const extraDev = data.devCode ? ` (Código local: ${data.devCode})` : '';
+      setRecoverFeedback(`${data.message || 'Código enviado.'}${extraDev}`, false, data.whatsappUrl || '');
+      if (channel === 'whatsapp' && data.whatsappUrl && /^https:\/\/wa\.me\//i.test(data.whatsappUrl)) {
+        window.open(data.whatsappUrl, '_blank', 'noopener,noreferrer');
+      }
+      document.getElementById('recover-code')?.focus();
     } catch (err) {
-      const fallbackUser = await verifyStaticFallback({ pin: pinVal });
-      if (fallbackUser) {
-        const sess = saveSession({ user: fallbackUser, token: '', expiresAt: Date.now() + 8 * 60 * 60 * 1000 });
-        pinInput.value = '';
-        state.user = sess.user;
-        unlockPortal(sess.user);
+      setRecoverFeedback('No se pudo conectar con el servicio de recuperación. Intenta nuevamente.', true);
+    } finally {
+      if (btnRecEmail) btnRecEmail.disabled = false;
+      if (btnRecWa) btnRecWa.disabled = false;
+    }
+  }
+
+  btnRecEmail?.addEventListener('click', () => requestRecoveryOtp('email'));
+  btnRecWa?.addEventListener('click', () => requestRecoveryOtp('whatsapp'));
+
+  btnRecConfirm?.addEventListener('click', async () => {
+    const emailVal = document.getElementById('recover-email')?.value?.trim().toLowerCase() || '';
+    const code = document.getElementById('recover-code')?.value?.trim() || '';
+    const newPassword = document.getElementById('recover-new-pass')?.value || '';
+    const confirmPassword = document.getElementById('recover-confirm-pass')?.value || '';
+
+    if (!/^\d{6}$/.test(code)) {
+      setRecoverFeedback('Ingresa el código de verificación de 6 dígitos.', true);
+      return;
+    }
+    if (newPassword.length < 4) {
+      setRecoverFeedback('La nueva contraseña debe tener al menos 4 caracteres.', true);
+      return;
+    }
+    if (newPassword !== confirmPassword) {
+      setRecoverFeedback('Las contraseñas nuevas no coinciden.', true);
+      return;
+    }
+
+    btnRecConfirm.disabled = true;
+    try {
+      let data = null;
+      if (useGasBackend()) {
+        data = await gasPost('recover_reset', { email: emailVal, code, newPassword });
+      } else {
+        const res = await fetch(apiUrl('/api/auth/recover-reset'), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: emailVal, code, newPassword })
+        });
+        data = await res.json();
+      }
+      if (!data || !data.success) {
+        setRecoverFeedback(data?.error || 'Código inválido o expirado.', true);
         return;
       }
-      feedback.textContent = 'PIN inválido.';
-      feedback.style.display = 'block';
+      if (recStep2) recStep2.style.display = 'none';
+      document.getElementById('recover-code').value = '';
+      document.getElementById('recover-new-pass').value = '';
+      document.getElementById('recover-confirm-pass').value = '';
+      showLoginMode('cred');
+      const authFb = document.getElementById('login-auth-feedback');
+      if (authFb) {
+        authFb.className = 'bw-status-box bw-status-success';
+        authFb.textContent = data.message || 'Contraseña restablecida. Inicia sesión con tu nueva clave.';
+        authFb.style.display = 'block';
+      }
+      passInput?.focus();
+    } catch (err) {
+      setRecoverFeedback('Error al restablecer la contraseña. Intenta nuevamente.', true);
+    } finally {
+      btnRecConfirm.disabled = false;
+    }
+  });
+
+  // ── CAMBIAR CONTRASEÑA DESDE EL DOCK (SESIÓN ACTIVA) ──
+  const btnChangePassDock = document.getElementById('btn-change-pass-dock');
+  const changePassDialog = document.getElementById('change-pass-dialog');
+  const formChangePass = document.getElementById('form-change-password');
+  const cpFeedback = document.getElementById('cp-feedback');
+
+  btnChangePassDock?.addEventListener('click', () => {
+    // Cerrar drawer móvil si estuviera abierto
+    document.getElementById('left-dock-aside')?.classList.remove('is-mobile-open');
+    document.getElementById('mobile-drawer-backdrop')?.classList.remove('is-open');
+    document.getElementById('btn-mobile-menu')?.setAttribute('aria-expanded', 'false');
+    if (formChangePass) formChangePass.reset();
+    if (cpFeedback) cpFeedback.style.display = 'none';
+    changePassDialog?.showModal();
+    document.getElementById('cp-current')?.focus();
+  });
+
+  formChangePass?.addEventListener('submit', async e => {
+    e.preventDefault();
+    const currentPassword = document.getElementById('cp-current')?.value || '';
+    const newPassword = document.getElementById('cp-new')?.value || '';
+    const confirmPassword = document.getElementById('cp-confirm')?.value || '';
+    const submitBtn = document.getElementById('btn-submit-change-pass');
+
+    function showCpMsg(msg, isErr = false) {
+      if (!cpFeedback) return;
+      cpFeedback.className = `bw-status-box ${isErr ? 'bw-status-error' : 'bw-status-success'}`;
+      cpFeedback.textContent = msg;
+      cpFeedback.style.display = 'block';
+    }
+
+    if (!currentPassword) {
+      showCpMsg('Ingresa tu contraseña actual.', true);
+      return;
+    }
+    if (newPassword.length < 4) {
+      showCpMsg('La nueva contraseña debe tener al menos 4 caracteres.', true);
+      return;
+    }
+    if (newPassword !== confirmPassword) {
+      showCpMsg('La confirmación de la nueva contraseña no coincide.', true);
+      return;
+    }
+
+    if (submitBtn) submitBtn.disabled = true;
+    try {
+      let data = null;
+      if (useGasBackend()) {
+        data = await gasPost('change_password', { currentPassword, newPassword });
+      } else {
+        const res = await authFetch(apiUrl('/api/auth/change-password'), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ currentPassword, newPassword })
+        });
+        data = await res.json();
+      }
+      if (!data || !data.success) {
+        showCpMsg(data?.error || 'No se pudo cambiar la contraseña.', true);
+        return;
+      }
+      showCpMsg(data.message || 'Contraseña actualizada correctamente.', false);
+      formChangePass.reset();
+      setTimeout(() => {
+        if (changePassDialog?.open) changePassDialog.close();
+      }, 1400);
+    } catch (err) {
+      showCpMsg('No se pudo conectar con el servidor para cambiar la contraseña.', true);
+    } finally {
+      if (submitBtn) submitBtn.disabled = false;
     }
   });
 
@@ -571,10 +722,15 @@ function initLoginControl() {
     clearSessionStorage();
     document.documentElement.classList.remove('session-unlocked');
     state.user = null;
+    showLoginMode('cred');
     overlay.classList.remove('is-hidden');
     if (reasonMsg) {
       const fb = document.getElementById('login-auth-feedback');
-      if (fb) { fb.textContent = reasonMsg; fb.style.display = 'block'; }
+      if (fb) {
+        fb.className = 'bw-status-box bw-status-error';
+        fb.textContent = reasonMsg;
+        fb.style.display = 'block';
+      }
     }
   }
 

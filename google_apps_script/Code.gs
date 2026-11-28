@@ -128,6 +128,20 @@ function doPost(e) {
       return jsonResponse({ success: true });
     }
 
+    if (action === 'recover_request') {
+      return handleRecoverRequest_(body);
+    }
+
+    if (action === 'recover_reset') {
+      return handleRecoverReset_(body);
+    }
+
+    if (action === 'change_password') {
+      const auth = requireSession_(body.token, 'padron:read', 'PASSWORD_CHANGE');
+      if (!auth.ok) return jsonResponse({ success: false, error: auth.error });
+      return handleChangePassword_(body, auth.user);
+    }
+
     if (action === 'create_personal') {
       const targetDept = sanitizeText_(body.area, 60);
       const auth = requireSession_(body.token, 'personal:create', 'PERSONAL_CREATE', targetDept);
@@ -201,7 +215,7 @@ function handleLogin_(body) {
     cache.put(rateKey, String(attempts), LOCKOUT_SECONDS);
     if (attempts >= MAX_LOGIN_ATTEMPTS) cache.put(`${rateKey}_lock`, '1', LOCKOUT_SECONDS);
     logAudit_({ email: email || 'PIN', role: 'NONE', department: 'N/A' }, 'LOGIN', 'FAILED', `Intento #${attempts}`);
-    return jsonResponse({ success: false, error: 'Credenciales inválidas.' });
+    return jsonResponse({ success: false, error: 'Usuario, correo o contraseña inválidos.' });
   }
 
   cache.remove(rateKey);
@@ -619,6 +633,117 @@ function logAudit_(userObj, action, status, detail) {
 // ============================================================================
 // 5. UTILIDADES CRIPTOGRÁFICAS Y RESPUESTA JSON
 // ============================================================================
+function sha256HexGas_(salt, plain) {
+  const digest = Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256, `${salt}:${plain}`);
+  return digest.map(b => ('0' + ((b < 0 ? b + 256 : b).toString(16))).slice(-2)).join('');
+}
+
+function handleRecoverRequest_(body) {
+  const identifier = sanitizeText_(body.email, 100).toLowerCase();
+  const channel = String(body.channel || 'email').toLowerCase();
+  const props = PropertiesService.getScriptProperties();
+  const usersJson = props.getProperty('USERS_JSON');
+  if (!usersJson) return jsonResponse({ success: false, error: 'Configuración pendiente en Apps Script.' });
+
+  const users = JSON.parse(usersJson);
+  const user = users.find(u => u.email === identifier || (Array.isArray(u.aliases) && u.aliases.includes(identifier)));
+  if (!user) {
+    logAudit_({ email: identifier || 'anonymous', role: 'NONE', department: 'N/A' }, 'PASSWORD_RECOVER_REQ', 'FAILED', 'Usuario no encontrado');
+    return jsonResponse({ success: false, error: 'Usuario o correo inválido.' });
+  }
+
+  const code = String(Math.floor(100000 + Math.random() * 900000));
+  const codeHash = sha256HexGas_(user.salt || 'aurora_web_v2', code);
+  CacheService.getScriptCache().put(`otp_${user.email}`, codeHash, 600); // 10 minutos
+
+  const recoveryEmail = user.recoveryEmail || 'admr.brinnercas@gmail.com';
+  const whatsappNum = user.whatsapp || '51959756385';
+  const maskedEmail = recoveryEmail.replace(/(.{2}).+(@.+)/, '$1***$2');
+  let emailSent = false;
+  let whatsappUrl = null;
+
+  if (channel === 'whatsapp') {
+    const msg = `RH BRINNERCAS - Código de recuperación de contraseña: ${code} (Válido por 10 minutos).`;
+    whatsappUrl = `https://wa.me/${whatsappNum}?text=${encodeURIComponent(msg)}`;
+  } else {
+    try {
+      MailApp.sendEmail({
+        to: recoveryEmail,
+        subject: 'RH BRINNERCAS — Código de recuperación de contraseña',
+        body: `Hola ${user.name},\n\nTu código de recuperación de contraseña para RH BRINNERCAS es: ${code}\n\nEste código vence en 10 minutos. Si no solicitaste este cambio, ignora este mensaje.`
+      });
+      emailSent = true;
+    } catch (e) {
+      emailSent = false;
+    }
+  }
+
+  logAudit_(user, 'PASSWORD_RECOVER_REQ', 'SUCCESS', `Canal=${channel}`);
+  return jsonResponse({
+    success: true,
+    channel,
+    maskedEmail,
+    emailSent,
+    whatsappUrl,
+    message: channel === 'whatsapp'
+      ? 'Código generado. Abre WhatsApp para enviarlo e ingrésalo abajo.'
+      : (emailSent ? `Código de 6 dígitos enviado a ${maskedEmail}.` : `No se pudo enviar correo automático. Intenta vía WhatsApp.`)
+  });
+}
+
+function handleRecoverReset_(body) {
+  const identifier = sanitizeText_(body.email, 100).toLowerCase();
+  const code = String(body.code || '').trim();
+  const newPassword = String(body.newPassword || '').trim();
+  if (newPassword.length < 4 || newPassword.length > 64) {
+    return jsonResponse({ success: false, error: 'La nueva contraseña debe tener entre 4 y 64 caracteres.' });
+  }
+
+  const props = PropertiesService.getScriptProperties();
+  const users = JSON.parse(props.getProperty('USERS_JSON') || '[]');
+  const idx = users.findIndex(u => u.email === identifier || (Array.isArray(u.aliases) && u.aliases.includes(identifier)));
+  if (idx === -1) return jsonResponse({ success: false, error: 'Usuario o correo inválido.' });
+
+  const user = users[idx];
+  const expectedHash = CacheService.getScriptCache().get(`otp_${user.email}`);
+  if (!expectedHash) return jsonResponse({ success: false, error: 'El código expiró. Solicita uno nuevo.' });
+
+  const gotHash = sha256HexGas_(user.salt || 'aurora_web_v2', code);
+  if (!constantTimeEquals_(gotHash, expectedHash)) {
+    return jsonResponse({ success: false, error: 'Código de verificación incorrecto.' });
+  }
+
+  users[idx].passHashes = [sha256HexGas_(user.salt || 'aurora_web_v2', newPassword)];
+  props.setProperty('USERS_JSON', JSON.stringify(users));
+  CacheService.getScriptCache().remove(`otp_${user.email}`);
+  logAudit_(user, 'PASSWORD_RESET', 'SUCCESS', 'Contraseña restablecida vía OTP');
+  return jsonResponse({ success: true, message: 'Contraseña restablecida correctamente. Ya puedes iniciar sesión.' });
+}
+
+function handleChangePassword_(body, sessionUser) {
+  const currentPassword = String(body.currentPassword || '').trim();
+  const newPassword = String(body.newPassword || '').trim();
+  if (newPassword.length < 4 || newPassword.length > 64) {
+    return jsonResponse({ success: false, error: 'La nueva contraseña debe tener entre 4 y 64 caracteres.' });
+  }
+  const props = PropertiesService.getScriptProperties();
+  const users = JSON.parse(props.getProperty('USERS_JSON') || '[]');
+  const idx = users.findIndex(u => u.email === sessionUser.email);
+  if (idx === -1) return jsonResponse({ success: false, error: 'Usuario no encontrado.' });
+
+  const user = users[idx];
+  const validCur = Array.isArray(user.passHashes) && user.passHashes.some(h => verifySha256ConstantTime_(currentPassword, user.salt, h));
+  if (!validCur) {
+    logAudit_(sessionUser, 'PASSWORD_CHANGE', 'FAILED', 'Contraseña actual incorrecta');
+    return jsonResponse({ success: false, error: 'La contraseña actual es incorrecta.' });
+  }
+
+  users[idx].passHashes = [sha256HexGas_(user.salt || 'aurora_web_v2', newPassword)];
+  props.setProperty('USERS_JSON', JSON.stringify(users));
+  logAudit_(sessionUser, 'PASSWORD_CHANGE', 'SUCCESS', 'Contraseña cambiada desde el Dock');
+  return jsonResponse({ success: true, message: 'Contraseña actualizada correctamente.' });
+}
+
 function verifySha256ConstantTime_(plain, salt, expectedHex) {
   if (!plain || !salt || !expectedHex) return false;
   const digest = Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256, `${salt}:${plain}`);

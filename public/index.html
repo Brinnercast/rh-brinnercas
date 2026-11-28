@@ -30,7 +30,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/the-handsome/the-handsome-tokens.css" />
   <link rel="stylesheet" href="assets/button-web/button-web-tokens.css" />
-  <link rel="stylesheet" href="styles.css?v=20261127rxh" />
+  <link rel="stylesheet" href="styles.css?v=20261128auth" />
 </head>
 <body class="hs-body">
   <!-- Anunciador único ARIA Live para errores de formulario -->
@@ -128,55 +128,54 @@
         <button type="submit" class="login-green-btn">Login</button>
 
         <p class="login-bottom-text">
-          ¿Acceso rápido gerencial?
-          <button type="button" class="login-footer-link" data-login-tab="pin">Usar PIN 1234</button>
+          ¿Olvidaste tu contraseña?
+          <button type="button" class="login-footer-link" data-login-tab="recover">Recuperar acceso</button>
         </p>
       </form>
 
-      <!-- Formulario PIN Rápido (Opcional al pulsar "Usar PIN 1234") -->
-      <form id="login-form-pin" class="login-form" style="display:none;" novalidate>
+      <!-- Recuperar y Restablecer Contraseña (Código OTP por Correo o WhatsApp) -->
+      <div id="login-form-recover" class="login-form" style="display:none;">
         <div class="login-field-wrap">
-          <label for="login-pin-input" class="visually-hidden">PIN de 4 dígitos</label>
+          <label for="recover-email" class="visually-hidden">Usuario o correo</label>
           <div class="login-glass-field">
             <input
-              id="login-pin-input"
-              name="pin"
-              type="password"
-              inputmode="numeric"
-              maxlength="4"
-              pattern="^[0-9]{4}$"
+              id="recover-email"
+              type="text"
               class="login-clean-input"
-              required
-              data-error="login-pin-err"
-              placeholder="PIN (1234)"
-              style="text-align:center; font-size:1.25rem; letter-spacing:0.4em;"
+              autocomplete="username"
+              placeholder="Usuario o correo electrónico"
             />
           </div>
-          <p id="login-pin-err" class="error-msg">Ingresa el PIN de 4 dígitos.</p>
         </div>
 
-        <div class="pin-keypad" aria-label="Teclado numérico de PIN">
-          <button type="button" class="pin-key" data-pin-val="1">1</button>
-          <button type="button" class="pin-key" data-pin-val="2">2</button>
-          <button type="button" class="pin-key" data-pin-val="3">3</button>
-          <button type="button" class="pin-key" data-pin-val="4">4</button>
-          <button type="button" class="pin-key" data-pin-val="5">5</button>
-          <button type="button" class="pin-key" data-pin-val="6">6</button>
-          <button type="button" class="pin-key" data-pin-val="7">7</button>
-          <button type="button" class="pin-key" data-pin-val="8">8</button>
-          <button type="button" class="pin-key" data-pin-val="9">9</button>
-          <button type="button" class="pin-key is-clear" data-pin-val="C">C</button>
-          <button type="button" class="pin-key" data-pin-val="0">0</button>
-          <button type="submit" class="pin-key is-ok">OK</button>
+        <div class="login-channel-row">
+          <button type="button" id="btn-recover-email" class="login-channel-btn">
+            Código por Correo
+          </button>
+          <button type="button" id="btn-recover-whatsapp" class="login-channel-btn is-wa">
+            Código por WhatsApp
+          </button>
         </div>
 
-        <div id="login-pin-feedback" class="bw-status-box bw-status-error" style="display:none; width:100%;"></div>
+        <div id="recover-step-2" style="display:none; width:100%; flex-direction:column; gap:12px;">
+          <div class="login-glass-field">
+            <input id="recover-code" type="text" inputmode="numeric" maxlength="6" class="login-clean-input" placeholder="Código de 6 dígitos" style="text-align:center; letter-spacing:0.28em; font-weight:700;" />
+          </div>
+          <div class="login-glass-field">
+            <input id="recover-new-pass" type="password" class="login-clean-input" autocomplete="new-password" placeholder="Nueva contraseña (mín. 4 caracteres)" />
+          </div>
+          <div class="login-glass-field">
+            <input id="recover-confirm-pass" type="password" class="login-clean-input" autocomplete="new-password" placeholder="Confirmar nueva contraseña" />
+          </div>
+          <button type="button" id="btn-recover-confirm" class="login-green-btn">Restablecer contraseña</button>
+        </div>
+
+        <div id="login-recover-feedback" class="bw-status-box" style="display:none; width:100%;"></div>
 
         <p class="login-bottom-text">
-          ¿Volver a usuario y clave?
-          <button type="button" class="login-footer-link" data-login-tab="cred">Login normal</button>
+          <button type="button" class="login-footer-link" data-login-tab="cred">Volver al Login</button>
         </p>
-      </form>
+      </div>
     </div>
   </section>
 
@@ -368,6 +367,12 @@
             <span class="dock-index" id="theme-toggle-badge">DÍA</span>
             <span class="dock-icon" data-hs-icon="aline" data-hs-size="19"></span>
             <span class="dock-label" id="theme-toggle-label">Modo Noche</span>
+          </button>
+
+          <button type="button" id="btn-change-pass-dock" class="dock-item" title="Cambiar contraseña de acceso">
+            <span class="dock-index">CLAVE</span>
+            <span class="dock-icon" data-hs-icon="lock" data-hs-size="19"></span>
+            <span class="dock-label">Cambiar Contraseña</span>
           </button>
 
           <button type="button" id="btn-logout-dock" class="dock-item dock-logout-btn" title="Cerrar o bloquear sesión">
@@ -1424,6 +1429,39 @@
     </div>
   </dialog>
 
+  <!-- VENTANA EMERGENTE: CAMBIAR CONTRASEÑA (DESDE EL DOCK) -->
+  <dialog id="change-pass-dialog" class="glass-dialog hs-grid-block" closedby="any" aria-labelledby="change-pass-title" style="max-width:500px !important;">
+    <div class="dialog-head">
+      <div>
+        <p class="section-eyebrow" style="margin-bottom:2px;">SEGURIDAD DE CUENTA • ZERO-TRUST</p>
+        <h3 id="change-pass-title" class="hs-grid-block-title">Cambiar Contraseña</h3>
+      </div>
+      <button type="button" class="bw-btn-sm" data-close-dialog="change-pass-dialog" aria-label="Cerrar">
+        CERRAR
+      </button>
+    </div>
+    <div class="dialog-body">
+      <form id="form-change-password" style="display:flex; flex-direction:column; gap:14px;" novalidate>
+        <div class="field-group">
+          <label for="cp-current">Contraseña Actual *</label>
+          <input id="cp-current" name="currentPassword" type="password" class="glass-input" required autocomplete="current-password" placeholder="Ingresa tu contraseña actual" />
+        </div>
+        <div class="field-group">
+          <label for="cp-new">Nueva Contraseña *</label>
+          <input id="cp-new" name="newPassword" type="password" class="glass-input" required minlength="4" autocomplete="new-password" placeholder="Mínimo 4 caracteres" />
+        </div>
+        <div class="field-group">
+          <label for="cp-confirm">Confirmar Nueva Contraseña *</label>
+          <input id="cp-confirm" name="confirmPassword" type="password" class="glass-input" required minlength="4" autocomplete="new-password" placeholder="Repite tu nueva contraseña" />
+        </div>
+        <div id="cp-feedback" class="bw-status-box" style="display:none;"></div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:4px;">
+          <button type="submit" id="btn-submit-change-pass" class="bw-btn bw-btn-4">GUARDAR NUEVA CONTRASEÑA</button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
   <dialog id="colab-dialog" class="glass-dialog hs-grid-block" closedby="any" aria-labelledby="colab-dialog-title">
     <div class="dialog-head">
       <div>
@@ -1680,7 +1718,7 @@
 
   <script src="assets/the-handsome/the-handsome-icons.js"></script>
   <script src="assets/button-web/button-web-icons.js"></script>
-  <script src="data-bundle.js?v=20261127rxh"></script>
-  <script src="app.js?v=20261127rxh"></script>
+  <script src="data-bundle.js?v=20261128auth"></script>
+  <script src="app.js?v=20261128auth"></script>
 </body>
 </html>
